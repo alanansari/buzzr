@@ -41,13 +41,14 @@ model Session {
 }
 
 model User {
-  id                    String           @id @default(cuid())
-  name                  String?
-  email                 String?          @unique
-  emailVerified         DateTime?        @map("email_verified")
-  image                 String?
-  accounts              Account[]
-  sessions              Session[]
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime? @map("email_verified")
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  quizzes       Quiz[]
 
   @@map("users")
 }
@@ -59,4 +60,34 @@ model VerificationToken {
 
   @@unique([identifier, token])
   @@map("verificationtokens")
+}
+
+model Quiz {
+  id          String     @id @default(cuid())
+  title       String
+  description String?
+  thumbnail   String?
+  questions   Question[]
+  user        User       @relation(fields: [userId], references: [id])
+  userId      String
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model Question {
+  id        String   @id @default(cuid())
+  title     String
+  options   Option[]
+  quiz      Quiz     @relation(fields: [quizId], references: [id])
+  quizId    String
+  createdAt DateTime @default(now())
+}
+
+model Option {
+  id         String   @id @default(cuid())
+  title      String
+  isCorrect  Boolean
+  question   Question @relation(fields: [questionId], references: [id])
+  questionId String
+  createdAt  DateTime @default(now())
 }
