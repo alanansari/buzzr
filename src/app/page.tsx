@@ -1,12 +1,12 @@
 "use client"
 import Counter from "@/components/Counter";
-import Navbar from "@/components/Navbar";
+import Buzzrs from "@/components/Home/Buzzrs";
 
 export default function Home() {
   return (
     <>
-        <Navbar />
-        <Counter />
+      <Buzzrs />
+      <Counter />
     </>
   );
 }
