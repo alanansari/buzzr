@@ -1,5 +1,5 @@
 "use client";
-import { signOut, useSession } from "next-auth/react";
+import { useSession,signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -8,7 +8,7 @@ const NavLinks = [
   { href: "/", label: "Home" },
   { href: "/library", label: "Library" },
   { href: "/reports", label: "Reports" },
-  { href: "/discovery", label: "Disccovery" },
+  { href: "/discovery", label: "Discovery" },
 ];
 
 export default function Navbar() {
@@ -23,7 +23,7 @@ export default function Navbar() {
             key={link.href}
             href={link.href}
             className={`py-2 px-4 border-[1.5px] border-white rounded-full text-sm flex items-center mr-5 ${
-              pathname != link.href
+              (pathname != link.href)
                 ? "hover:bg-white hover:text-slate-950 transition-colors duration-200 ease-in-out"
                 : "bg-white text-slate-950"
             }`}

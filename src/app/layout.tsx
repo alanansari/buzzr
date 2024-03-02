@@ -1,11 +1,11 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { getServerSession } from "next-auth";
 import SessionProvider from "../components/SessionProvider";
-import { authOptions } from "./api/auth/[...nextauth]/auth";
 import { redirect } from "next/navigation";
 import ReduxProvider from "@/state/ReduxProvider";
 import Navbar from "@/components/Navbar";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,8 +23,8 @@ export default async function RootLayout({
       <body className={inter.className}>
           <SessionProvider>
             <ReduxProvider>
-            <Navbar />
-            {children}
+              <Navbar />
+              {children}
             </ReduxProvider>
           </SessionProvider>
       </body>
