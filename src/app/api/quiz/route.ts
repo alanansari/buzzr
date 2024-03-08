@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/utils/prisma";
 import { getServerSession } from "next-auth";
-// import { authOptions } from "../auth/[...nextauth]/auth";
+import { authOptions } from "../auth/[...nextauth]/auth";
 
 // export const GET = async (req: NextRequest, res: NextResponse) => {
 //     return NextResponse.json({ success: true, message: "Hello" });
