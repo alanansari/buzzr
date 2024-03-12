@@ -1,4 +1,4 @@
-import addBuzzr from "./AddBuzzrAction";
+import addBuzzr from "../../actions/AddBuzzrAction";
 import SubmitButton from "../SubmitButton";
 import InputField from "../InputField";
 
