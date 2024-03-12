@@ -17,8 +17,8 @@ export default function AddQuesSection() {
             <button onClick={handleOpen} className="w-28 py-2 bg-gray-900 text-white hover:bg-gray-800 transition-all rounded shadow top-6 absolute right-0 ">+ Add</button>
         </div>
 
-        <AddModal btnTitle="Add Question" open={open} setOpen={setOpen}>
+        {/* <AddModal btnTitle="Add Question" open={open} setOpen={setOpen}>
             <AddQuesForm />
-        </AddModal>
+        </AddModal> */}
     </>
 }
