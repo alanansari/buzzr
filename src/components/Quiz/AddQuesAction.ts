@@ -2,9 +2,10 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
 import { redirect } from "next/navigation";
 import { prisma } from "@/utils/prisma";
+import { revalidatePath } from "next/cache";
 
 async function addQues(formData: FormData) {
-  // "use server";
+  "use server";
   const title = formData.get("title") as string;
   // const filetype = formData.get("file") as string
   const option1 = formData.get("option1") as string;
@@ -24,26 +25,28 @@ async function addQues(formData: FormData) {
     { title: option4, isCorrect: check_option4 ? true : false },
   ];
 
-  console.log(title, options);
+//   console.log(title, options);
 
-  //   const session = await getServerSession(authOptions);
-  //   if (!session || !session.user) redirect("/api/auth/signin");
+    const session = await getServerSession(authOptions);
+    if (!session || !session.user) redirect("/api/auth/signin");
 
-  //   const user = await prisma.user.findUnique({
-  //     where: {
-  //       email: session.user.email as string,
-  //     },
-  //   });
+    const user = await prisma.user.findUnique({
+      where: {
+        email: session.user.email as string,
+      },
+    });
 
-  //   await prisma.question.create({
-  //     data: {
-  //       title,
-  //       options: {
-  //         create: options,
-  //       },
-  //       quizId: "123",
-  //     },
-  //   });
+    await prisma.question.create({
+      data: {
+        title,
+        options: {
+          create: options,
+        },
+        quizId: "cltixyqqo000113a2d44t9buq",
+      },
+    });
+
+    revalidatePath("/quiz/[quizId]")
 }
 
 export default addQues;

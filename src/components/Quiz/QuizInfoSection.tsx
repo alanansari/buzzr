@@ -12,13 +12,16 @@ async function QuizInfoSection(props: { quizId: string }) {
         where: {
             id: props.quizId as string,
         },
+        include: {
+            questions: true
+        }
     });
     return <>
         <div className="flex flex-row justify-between pb-12 border-dashed border-b">
             <div className="flex flex-col w-full">
                 <h2 className="text-3xl mb-4 font-bold">{quiz?.title}</h2>
                 <p className="capitalize mb-4">{quiz?.description}</p>
-                <p className="text-xl text-gray-200">Number of Questions : <span className="font-semibold text-gray-50">10</span></p>
+                <p className="text-xl text-gray-200">Number of Questions : <span className="font-semibold text-gray-50">{quiz?.questions?.length}</span></p>
             </div>
             <div className="w-full">
                 <Image src={`${quiz?.thumbnail ? quiz.thumbnail : "/card_placeholder.png"}`}
