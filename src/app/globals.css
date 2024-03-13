@@ -24,10 +24,15 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+  text-transform: capitalize;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+* {
+  overflow-x: hidden;
 }

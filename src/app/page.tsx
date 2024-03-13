@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div>
       <Buzzrs />
-      <Modal btnTitle="Crate Buzzr">
+      <Modal btnTitle="Create Buzzr">
         <CreateBuzzrForm />
       </Modal>
       <Counter />
