@@ -37,7 +37,7 @@ const Buzzrs = async () => {
           <Link
             href={`/quiz/${quiz.id}`}
             key={quiz.id}
-            className="m-2 p-2 bg-slate-100 text-slate-950 rounded-md shadow-md"
+            className="m-2 p-2 bg-slate-100 text-slate-950 rounded-lg shadow-md"
           >
             <Image
               src={quiz.thumbnail ? quiz.thumbnail : "/card_placeholder.png"}
