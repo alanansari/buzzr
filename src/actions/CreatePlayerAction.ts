@@ -12,7 +12,6 @@ const createPlayer = async (formData: FormData) => {
         data:{
             id,
             name,
-            // gameId:"12",
             profilePic
         }
     });
