@@ -16,6 +16,8 @@ const createPlayer = async (formData: FormData) => {
         }
     });
 
+    console.log("yes")
+
 };
 
 export default createPlayer;

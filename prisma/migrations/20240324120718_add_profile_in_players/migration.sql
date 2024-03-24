@@ -5,4 +5,4 @@
 
 */
 -- AlterTable
-ALTER TABLE "Player" ADD COLUMN     "profilePic" TEXT NOT NULL;
+ALTER TABLE "Player" ADD COLUMN "profilePic" TEXT NOT NULL;

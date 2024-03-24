@@ -17,7 +17,7 @@ function CreatePlayer() {
                 <InputField
                     type="text"
                     name="username"
-                    placeholder="enter your username"
+                    placeholder="Enter your username"
                     className=" w-full border-2 border-slate-800 p-2 capitalize mb-6 focus:shadow-md"
                     required
                     autoComplete="off"
