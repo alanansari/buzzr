@@ -32,7 +32,7 @@ const BuzzrsList = async () => {
     <div className="flex flex-wrap justify-evenly p-4 w-full">
         {quizzes.map((quiz) => (
           <Link
-            href={`/quiz/${quiz.id}`}
+            href={`/admin/quiz/${quiz.id}`}
             key={quiz.id}
             className="m-2 p-2 bg-slate-100 text-slate-950 rounded-md shadow-md"
           >
@@ -48,7 +48,7 @@ const BuzzrsList = async () => {
           </Link>
         ))}
         <Link
-          href="/library"
+          href="/admin/library"
           className="h-[24vh] w-[18vh] border-2 border-blue-600 text-blue-600 text-sm m-2 p-2 rounded-md flex justify-center items-center"
         >
           <u>{`See All(${total})`}</u>

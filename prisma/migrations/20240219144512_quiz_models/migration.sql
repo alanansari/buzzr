@@ -2,7 +2,7 @@
 CREATE TABLE "Player" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
-    "gameId" TEXT NOT NULL,
+        "gameId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Player_pkey" PRIMARY KEY ("id")

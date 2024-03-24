@@ -4,8 +4,8 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
 import { redirect } from "next/navigation";
 import { prisma } from "@/utils/prisma";
 import { revalidatePath } from "next/cache";
-import SubmitButton from "../SubmitButton";
-import InputField from "../InputField";
+import SubmitButton from "../../SubmitButton";
+import InputField from "../../InputField";
 import { FormLabel, Switch } from '@mui/material';
 
 const AddQuesForm = (props: { quizId: string }) => {

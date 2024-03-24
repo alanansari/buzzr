@@ -1,0 +1,22 @@
+/* body{
+    background-color: white;
+} */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  background-color: white;
+  color: black;
+}
+
+body {
+  /* background: linear-gradient(to bottom, white, rgb(188, 180, 180)); */
+  height: 100%;
+  /* background-color: white !important; */
+}
+
+.profileName {
+  width: 100% !important;
+}
