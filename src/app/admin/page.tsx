@@ -14,7 +14,3 @@ export default function Home() {
     </div>
   );
 }
-
-
-// choose correct - compulsory
-// landing screen -> show players joining

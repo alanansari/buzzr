@@ -12,7 +12,6 @@ const AddQuesForm = (props: { quizId: string }) => {
 
     async function addQues(formData: FormData) {
         "use server";
-        // console.log(props.quizId)
         const title = formData.get("title") as string;
         // const filetype = formData.get("file") as string
         const option1 = formData.get("option1") as string;
@@ -31,8 +30,6 @@ const AddQuesForm = (props: { quizId: string }) => {
             { title: option3, isCorrect: check_option3 ? true : false },
             { title: option4, isCorrect: check_option4 ? true : false },
         ];
-
-        //   console.log(title, options);
 
         const session = await getServerSession(authOptions);
         if (!session || !session.user) redirect("/api/auth/signin");

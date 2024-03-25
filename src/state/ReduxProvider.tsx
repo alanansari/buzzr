@@ -8,5 +8,6 @@ export default function ReduxProvider({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  store.subscribe(() => console.log(store.getState()))
   return <Provider store={store}>{children}</Provider>;
 }

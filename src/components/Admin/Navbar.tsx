@@ -6,10 +6,10 @@ import { usePathname } from "next/navigation";
 
 const NavLinks = [
   { href: "/", label: "Home" },
+  { href: "/admin", label: "Admin" },
   { href: "/admin/library", label: "Library" },
   { href: "/admin/reports", label: "Reports" },
-  { href: "/admin/discovery", label: "Discovery" },
-  { href: "/admin/room", label: "Room" },
+  { href: "/admin/discovery", label: "Discovery" }
 ];
 
 export default function Navbar() {
@@ -24,8 +24,8 @@ export default function Navbar() {
             key={link.href}
             href={link.href}
             className={`py-2 px-4 border-[1.5px] border-white rounded-full text-sm flex items-center mr-5 ${(pathname != link.href)
-                ? "hover:bg-white hover:text-slate-950 transition-colors duration-200 ease-in-out"
-                : "bg-white text-slate-950"
+              ? "hover:bg-white hover:text-slate-950 transition-colors duration-200 ease-in-out"
+              : "bg-white text-slate-950"
               }`}
           >
             {link.label}
