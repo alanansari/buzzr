@@ -10,16 +10,30 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-//   const session = await getServerSession(authOptions);
-//   if(!session||!session.user){
-//     redirect('/api/auth/signin');
-//   }
+  //   const session = await getServerSession(authOptions);
+  //   if(!session||!session.user){
+  //     redirect('/api/auth/signin');
+  //   }
   return (
     <html lang="en">
       <body className={inter.className}>
-            <ReduxProvider>
-              {children}
-            </ReduxProvider>
+        <ReduxProvider>
+          {children}
+        </ReduxProvider>
+        <div className="area">
+          <ul className="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+        </div>
       </body>
     </html>
   );

@@ -1,6 +1,5 @@
 import { prisma } from "@/utils/prisma";
-import { connectSocket } from "./ConnectSktAction";
-import { io } from "socket.io-client";
+import { redirect } from "next/navigation";
 
 const createPlayer = async (formData: FormData) => {
   "use server";
@@ -10,15 +9,12 @@ const createPlayer = async (formData: FormData) => {
   const player = await prisma.player.create({
     data: {
       name,
-      profilePic
+      profilePic,
     },
   });
 
-  // connectSocket(player?.id)
-  const socket = io(
-    `http://localhost:8080?userType=player&playerId=${player?.id}`
-  );
-  console.log(socket);
+  redirect(`/player/joinRoom/${player?.id}`)
+
 };
 
 export default createPlayer;

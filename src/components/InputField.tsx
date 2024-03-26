@@ -28,7 +28,7 @@ const InputField = (props: {
       placeholder={props.placeholder}
       autoComplete={props.autoComplete}
       required={props.required || false}
-      className={`${props.style === "playerName" && "w-full"} text-slate-900 my-2 rounded-full p-2`}
+      className={`${props.style === "playerName" && "w-full border-black border-2 focus:border-blue-600 rounded-lg outline-none md:w-4/5"} text-slate-900 my-2 rounded-full p-2`}
     />
   )
 }
