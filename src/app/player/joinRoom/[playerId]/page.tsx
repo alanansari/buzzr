@@ -15,7 +15,7 @@ function JoinRoom({ params }: { params: { playerId: string } }) {
     const dispatch = useDispatch();
     useEffect(() => {
         // establish a socket connection using io function
-        const socket = io("http://localhost:8080");
+        const socket = io(`http://localhost:8080?userType=player&playerId=${params.playerId}`);
         socket.on("connect", () => {
             dispatch(createConnection(socket));
         });
@@ -23,7 +23,7 @@ function JoinRoom({ params }: { params: { playerId: string } }) {
         return () => {
             socket.disconnect();
         };
-    }, []);
+    }, [dispatch, params.playerId]);
 
     const socket = useSelector((state: any) => state.socket.socket)
     console.log("30", socket)
