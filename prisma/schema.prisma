@@ -105,6 +105,7 @@ model Player {
 
 model GameSession {
   id             String   @id @default(cuid())
+  gameCode       String   @unique
   quiz           Quiz     @relation(fields: [quizId], references: [id])
   cuurentQuetion Int      @default(0)
   quizId         String
