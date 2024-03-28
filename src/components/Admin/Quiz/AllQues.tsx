@@ -17,7 +17,6 @@ export default async function AllQues(props: { quizId: string }) {
         }
     });
 
-    console.log(questions)
     return <>
         <div className="flex flex-col justify-between pb-12 pt-4">
             <h2 className="text-2xl mb-4 text-blue-300">All Questions : </h2>

@@ -1,8 +1,8 @@
 import BasicModal from "@/components/Modal"
-import AddQuesForm from "@/components/Quiz/AddQuesForm"
-import AddQuesSection from "@/components/Quiz/AddQuesSection"
-import AllQues from "@/components/Quiz/AllQues"
-import QuizInfoSection from "@/components/Quiz/QuizInfoSection"
+import AddQuesForm from "@/components/Admin/Quiz/AddQuesForm"
+import AddQuesSection from "@/components/Admin/Quiz/AddQuesSection"
+import AllQues from "@/components/Admin/Quiz/AllQues"
+import QuizInfoSection from "@/components/Admin/Quiz/QuizInfoSection"
 
 function Quiz({ params }: { params: { quizId: string } }) {
 
@@ -24,7 +24,3 @@ function Quiz({ params }: { params: { quizId: string } }) {
 
 export default Quiz
 
-
-// styling of modal
-// get quizId ?
-// pending status after server action

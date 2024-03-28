@@ -95,11 +95,12 @@ model Option {
 }
 
 model Player {
-  id        String      @id @default(cuid())
-  name      String
-  game      GameSession @relation(fields: [gameId], references: [id])
-  gameId    String
-  createdAt DateTime    @default(now())
+  id         String      @id @default(cuid())
+  name       String
+  profilePic String?
+  game       GameSession? @relation(fields: [gameId], references: [id])
+  gameId     String?
+  createdAt  DateTime    @default(now())
 }
 
 model GameSession {

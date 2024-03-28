@@ -2,8 +2,8 @@
 "use client"
 
 import * as React from "react"
-import AddModal from "@/components/Quiz/AddModal"
-import AddQuesForm from "@/components/Quiz/AddQuesForm"
+import AddModal from "@/components/Admin/Quiz/AddModal"
+import AddQuesForm from "@/components/Admin/Quiz/AddQuesForm"
 
 export default function AddQuesSection() {
     const [open, setOpen] = React.useState(false)

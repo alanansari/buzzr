@@ -1,6 +1,6 @@
-import addBuzzr from "../../actions/AddBuzzrAction";
-import SubmitButton from "../SubmitButton";
-import InputField from "../InputField";
+import addBuzzr from "../../../actions/AddBuzzrAction";
+import SubmitButton from "../../SubmitButton";
+import InputField from "../../InputField";
 
 const CreateBuzzrForm = () => {
 
