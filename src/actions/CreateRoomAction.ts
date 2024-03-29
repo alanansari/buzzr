@@ -26,7 +26,7 @@ const createRoom = async (formData: FormData) => {
     },
   });
 
-  redirect(`/admin/play/${room?.id}/${gameCode}`)
+  redirect(`/admin/play/${room?.id}`)
 };
 
 export default createRoom;
