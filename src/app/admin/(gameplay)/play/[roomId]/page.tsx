@@ -35,7 +35,7 @@ async function Play ({ params }: { params: { roomId: string } }) {
           <span className="text-3xl">{room?.gameCode}</span>
         </div>
       </div>
-      <Lobby roomId={params.roomId} />
+      <Lobby roomId={params.roomId} userId={user.id} />
     </>
   )
 }
