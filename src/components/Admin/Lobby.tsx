@@ -49,7 +49,7 @@ const Lobby = (params: {
         }
 
     }, [socket])
-    
+
     return (
         <div className="h-fit w-[100%] flex justify-center items-center">
             {(players.length === 0) ? <div className="p-2 mx-auto w-fit bg-slate-200 rounded-md text-sm">Waiting for players to join...</div> : ''}
@@ -58,7 +58,6 @@ const Lobby = (params: {
 }
 
 export default Lobby
-
 
 // presenter -> room join
 // show total players
