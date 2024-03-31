@@ -4,6 +4,7 @@ import { io, Socket } from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/state/store";
 import { createConnection } from "@/state/socket/socketSlice";
+import { addPlayer } from "@/state/admin/playersSlice";
 import Image from "next/image";
 
 const Lobby = (params: {
@@ -12,15 +13,9 @@ const Lobby = (params: {
     gameCode: string
 }) => {
     const dispatch = useDispatch();
-    const [players, setPlayers] = useState<any>([]);
+    // const [players, setPlayers] = useState<any>([]);
+    const players = useSelector((state: RootState) => state.player.players);
 
-    const updatePlayerState = (newPlayer: any) => {
-        const existingPlayer = players.find((player: any) => player.id === newPlayer.id);
-        if (existingPlayer) {
-            return;
-        }
-        setPlayers([...players, newPlayer]);
-    }
 
     useEffect(() => {
         // establish a socket connection using io function
@@ -31,9 +26,17 @@ const Lobby = (params: {
                 dispatch(createConnection(socket));
             });
 
+            // const updatePlayerState = (newPlayer: any) => {
+            //     const existingPlayer = players.find((player: any) => player.id === newPlayer.id);
+            //     if (existingPlayer) {
+            //         return;
+            //     }
+            //     setPlayers([...players, newPlayer]);
+            // }
+
             socket.on("player-joined", (player: any) => {
                 console.log(`Player ${player.id} Joined`);
-                updatePlayerState(player);
+                dispatch(addPlayer(player));
             });
 
             return () => {
@@ -46,7 +49,6 @@ const Lobby = (params: {
         <div className="h-fit w-[100%] flex justify-center items-center">
             {(players.length === 0) ? <div className="p-2 mx-auto w-fit bg-slate-200 rounded-md text-sm">Waiting for players to join...</div> : players.map((player: any) => {
                 return (
-                    
                     <div key={player.id} className="p-1 mx-auto w-fit bg-slate-200 rounded-md text-md flex justify-center items-center">
                         <Image className="rounded-sm" src={player.profilePic} alt="player-avtr" width={30} height={30} />
                         <div className="mx-1 font-bold">{player.name}</div>

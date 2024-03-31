@@ -22,12 +22,19 @@ const page = async ({params}:{ params: { playerId: string } }) => {
 
     return (
         <div>
-            <h1>Player Page</h1>
+            {/* <h1>Player Page</h1>
             <p>Player Name: {player.name}</p>
             <Image src={player.profilePic as string} alt='player-avatar' width='100' height='100' />
             <p>Player ID: {player.id}</p>
-            <p>Game Code: {game?.gameCode}</p>
-            <GamePage playerId={player.id} gameCode={game?.gameCode as string}/>
+            <p>Game Code: {game?.gameCode}</p> */}
+            <div className='flex items-center justify-between bg-transparent border-b w-[100vw]'>
+                <div className='text-md mx-2 font-bold text-slate-200'>Game Code: {game?.gameCode}</div>
+                <div className='p-1 flex justify-center items-center'>
+                <Image className='rounded-full border border-b-slate-200' src={player.profilePic as string} alt='player-avatar' width='50' height='50' />
+                <div className='text-md text-slate-200 mx-2 font-bold'>Player: {player.name}</div>
+                </div>
+            </div>
+            <GamePage player={player} gameCode={game?.gameCode as string}/>
         </div>
     )
 }
