@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import counterReducer from "./counter/counterSlice";
-import socketReducer from "./socket/socketSlice"
+import socketReducer from "./socket/socketSlice";
 
 export const store = configureStore({
     reducer: {

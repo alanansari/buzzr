@@ -1,9 +1,5 @@
-import { Inter } from "next/font/google";
 import "../globals.css";
 import "./styles.css"
-import ReduxProvider from "@/state/ReduxProvider";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export default async function RootLayout({
   children,
@@ -15,11 +11,8 @@ export default async function RootLayout({
   //     redirect('/api/auth/signin');
   //   }
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <ReduxProvider>
-          {children}
-        </ReduxProvider>
+      <>
+        {children}
         <div className="area">
           <ul className="circles">
             <li></li>
@@ -34,7 +27,6 @@ export default async function RootLayout({
             <li></li>
           </ul>
         </div>
-      </body>
-    </html>
+      </>
   );
 }
