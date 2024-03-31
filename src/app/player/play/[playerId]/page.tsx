@@ -1,5 +1,6 @@
 import { prisma } from '@/utils/prisma';
 import Image from 'next/image';
+import GamePage from '@/components/Player/GamePage';
 
 const page = async ({params}:{ params: { playerId: string } }) => {
 
@@ -26,6 +27,7 @@ const page = async ({params}:{ params: { playerId: string } }) => {
             <Image src={player.profilePic as string} alt='player-avatar' width='100' height='100' />
             <p>Player ID: {player.id}</p>
             <p>Game Code: {game?.gameCode}</p>
+            <GamePage playerId={player.id} gameCode={game?.gameCode as string}/>
         </div>
     )
 }
