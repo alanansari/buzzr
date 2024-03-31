@@ -1,15 +1,13 @@
-import "../globals.css";
 import "./styles.css"
+import ReduxProvider from "@/state/ReduxProvider";
+import SessionProvider from "@/components/SessionProvider";
 
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  //   const session = await getServerSession(authOptions);
-  //   if(!session||!session.user){
-  //     redirect('/api/auth/signin');
-  //   }
+
   return (
       <>
         {children}

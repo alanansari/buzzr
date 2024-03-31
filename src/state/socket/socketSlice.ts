@@ -1,8 +1,13 @@
 
 import { createSlice } from "@reduxjs/toolkit";
+import { Socket } from "socket.io-client";
 
-const initialState = {
-    socket: null
+interface SocketState {
+    socket: Socket
+}
+
+const initialState:SocketState = {
+    socket: {} as Socket
 }
 
 const socketSlice = createSlice({
