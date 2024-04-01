@@ -36,6 +36,3 @@ function Player() {
 }
 
 export default Player
-
-
-// issues -> after signup redirect to admin page

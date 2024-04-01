@@ -6,12 +6,15 @@ import { RootState } from "@/state/store";
 import { createConnection } from "@/state/socket/socketSlice";
 import { removePlayer } from "@/state/admin/playersSlice";
 import Counter from "../Counter";
+import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
-const GamePage = (params:{
-        player: any,
-        gameCode: string
+const GamePage = (params: {
+    player: any,
+    gameCode: string
 }) => {
     const dispatch = useDispatch();
+    const router = useRouter()
     useEffect(() => {
         // establish a socket connection using io function
         if (window !== undefined) {
@@ -21,8 +24,17 @@ const GamePage = (params:{
                 dispatch(createConnection(socket));
             });
 
+            socket.on("player-removed", () => {
+                console.log("player removed")
+                // window.history.pushState(null, "", "/player");
+                router.push("/player");
+            })
+
             return () => {
                 socket.disconnect();
+                // socket.emit("remove-player", params.player.id, params.gameCode, (response: any) => {
+                //     console.log("player disconnected")
+                // })
             };
         }
     }, [dispatch, params.gameCode, params.player]);
