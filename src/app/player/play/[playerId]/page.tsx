@@ -1,6 +1,7 @@
 import { prisma } from '@/utils/prisma';
 import Image from 'next/image';
 import GamePage from '@/components/Player/GamePage';
+import { GameSession } from '@prisma/client';
 
 const page = async ({params}:{ params: { playerId: string } }) => {
 
@@ -34,7 +35,7 @@ const page = async ({params}:{ params: { playerId: string } }) => {
                 <div className='text-md text-slate-200 mx-2 font-bold'>Player: {player.name}</div>
                 </div>
             </div>
-            <GamePage player={player} gameCode={game?.gameCode as string} />
+            <GamePage player={player} game={game as GameSession} />
         </div>
     )
 }

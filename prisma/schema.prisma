@@ -95,21 +95,29 @@ model Option {
 }
 
 model Player {
-  id         String      @id @default(cuid())
+  id         String       @id @default(cuid())
   name       String
   profilePic String?
   game       GameSession? @relation(fields: [gameId], references: [id])
   gameId     String?
-  createdAt  DateTime    @default(now())
+  createdAt  DateTime     @default(now())
 }
 
 model GameSession {
-  id             String   @id @default(cuid())
-  gameCode       String   @unique
-  quiz           Quiz     @relation(fields: [quizId], references: [id])
-  cuurentQuetion Int      @default(0)
+  id             String     @id @default(cuid())
+  gameCode       String     @unique
+  quiz           Quiz       @relation(fields: [quizId], references: [id])
+  isPlaying      Boolean    @default(false)
+  gameState      GameStates @default(question)
+  cuurentQuetion Int        @default(0)
   quizId         String
   players        Player[]
-  creator        User     @relation(fields: [creatorId], references: [id])
+  creator        User       @relation(fields: [creatorId], references: [id])
   creatorId      String
+}
+
+enum GameStates {
+  question
+  answer
+  leaderboard
 }

@@ -6,6 +6,7 @@ import { RootState } from "@/state/store";
 import { createConnection } from "@/state/socket/socketSlice";
 import { addPlayer, removePlayer, setPlayers } from "@/state/admin/playersSlice";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const Lobby = (params: {
     roomId: string,
@@ -15,12 +16,13 @@ const Lobby = (params: {
 }) => {
     const dispatch = useDispatch();
     const players: any[] = useSelector((state: RootState) => state.player.players);
-    const socket = useSelector((state: RootState) => state.socket.socket)
+    const socket = useSelector((state: RootState) => state.socket.socket);
+    const router = useRouter();
 
     useEffect(() => {
         // fetch all players
         dispatch(setPlayers(params.players))
-    }, [])
+    }, [dispatch,params.players])
 
     useEffect(() => {
         // establish a socket connection using io function
@@ -31,14 +33,6 @@ const Lobby = (params: {
                 dispatch(createConnection(socket));
             });
 
-            // const updatePlayerState = (newPlayer: any) => {
-            //     const existingPlayer = players.find((player: any) => player.id === newPlayer.id);
-            //     if (existingPlayer) {
-            //         return;
-            //     }
-            //     setPlayers([...players, newPlayer]);
-            // }
-
             socket.on("player-joined", (player: any) => {
                 console.log(`Player ${player.id} Joined`);
                 dispatch(addPlayer(player));
@@ -48,7 +42,7 @@ const Lobby = (params: {
                 socket.disconnect();
             };
         }
-    }, [params.gameCode, params.userId, players]);
+    }, [dispatch, params.gameCode, params.userId, players]);
 
     function handlePlayerRemove(player: any) {
         socket.emit("remove-player", player.id, params.gameCode)
@@ -76,7 +70,7 @@ const Lobby = (params: {
         </div>
         <div className="absolute bottom-4 w-full left-[45%]">
             <div className="flex justify-between pr-4 w-[55%]">
-                <button className="w-24 py-2 shadow hover:bg-slate-200 transition-all bg-white border rounded-full disabled:bg-slate-300" disabled={players.length === 0} >Start</button>
+                <button className="w-24 py-2 shadow hover:bg-slate-200 transition-all bg-white border rounded-full disabled:bg-slate-300" disabled={players.length === 0} onClick={()=>router.push(`/admin/game/${params.roomId}`)}>Start</button>
                 <p className="text-white bg-black opacity-60 px-2 py-1 flex items-center rounded">Active Players : {players.length}</p>
             </div>
         </div>
