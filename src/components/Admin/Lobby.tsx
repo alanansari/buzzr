@@ -8,7 +8,6 @@ import { addPlayer, removePlayer, setPlayers, startGame, stopGame } from "@/stat
 import Image from "next/image";
 import StartQuiz from "./Game/StartQuiz";
 import QuestionScreen from "./Game/QuestionScreen";
-import axios from "axios"
 
 const Lobby = (params: {
     roomId: string,
@@ -71,13 +70,6 @@ const Lobby = (params: {
             setLoad(false)
             dispatch(startGame(true))
         })
-        // await axios.post("http://localhost:3000/api/admin/startgame", { gameCode: params.gameCode }).then((res) => {
-        //     setLoad(false)
-        //     dispatch(startGame(true))
-        // }).catch((err) => {
-        //     setLoad(false)
-        //     dispatch(stopGame(false))
-        // })
     }
 
     return <>
