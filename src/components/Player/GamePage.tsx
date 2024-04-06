@@ -1,6 +1,11 @@
 "use client"
 import { useEffect, useState } from "react";
-import { io } from "socket.io-client";
+import { io, Socket } from "socket.io-client";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/state/store";
+import { createConnection } from "@/state/socket/socketSlice";
+import { removePlayer } from "@/state/admin/playersSlice";
+import Counter from "../Counter";
 import { useRouter } from "next/navigation";
 import { GameSession } from "@prisma/client";
 import { WaitGameStart, Question, Loader, Result } from "./GameScreens";
@@ -14,9 +19,10 @@ const GamePage = (params: {
     const [result,setResult] = useState('timeout');
     const router = useRouter()
     useEffect(() => {
-        // establish a socket connection using io function
+
         if (window !== undefined) {
             const socket = io(`http://localhost:8080?userType=player&playerId=${params.player.id}&gameCode=${params.game.gameCode}`);
+
             socket.on("connect", () => {
                 console.log("Connected to socket server");
             });
@@ -26,11 +32,19 @@ const GamePage = (params: {
                 router.push("/player");
             })
 
+            // const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+            //     socket.emit("remove-player", params.player, params.gameCode);
+            //     socket.disconnect();
+            //     // Cancel the default behavior to prompt the user before closing
+            //     event.preventDefault();
+            //     // Chrome requires returnValue to be set
+            //     event.returnValue = '';
+            // };
+
+            // window.addEventListener("beforeunload", handleBeforeUnload);
             return () => {
+                // socket.emit("remove-player", params.player, params.gameCode);
                 socket.disconnect();
-                // socket.emit("remove-player", params.player.id, params.gameCode, (response: any) => {
-                //     console.log("player disconnected")
-                // })
             };
         }
     }, [params.game.gameCode, params.player, router]);
