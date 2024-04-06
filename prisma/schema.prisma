@@ -15,15 +15,11 @@ model Account {
   providerAccountId String  @map("provider_account_id")
   refresh_token     String?
   access_token      String?
-  refresh_token     String?
-  access_token      String?
   expires_at        Int?
   token_type        String?
   scope             String?
   id_token          String?
-  id_token          String?
   session_state     String?
-  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
@@ -48,8 +44,6 @@ model User {
   image         String?
   GameSessions  GameSession[]
   quizzes       Quiz[]
-  GameSessions  GameSession[]
-  quizzes       Quiz[]
   accounts      Account[]
   sessions      Session[]
 
@@ -72,11 +66,7 @@ model Quiz {
   userId       String
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
-  userId       String
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
   thumbnail    String?
-  gameSessions GameSession[]
   gameSessions GameSession[]
   questions    Question[]
   user         User          @relation(fields: [userId], references: [id])
@@ -99,15 +89,11 @@ model Option {
   questionId String
   createdAt  DateTime @default(now())
   question   Question @relation(fields: [questionId], references: [id])
-  question   Question @relation(fields: [questionId], references: [id])
 }
 
 model Player {
   id         String       @id @default(cuid())
-  id         String       @id @default(cuid())
   name       String
-  gameId     String?
-  createdAt  DateTime     @default(now())
   gameId     String?
   createdAt  DateTime     @default(now())
   profilePic String?
@@ -115,22 +101,6 @@ model Player {
 }
 
 model GameSession {
-  id              String     @id @default(cuid())
-  quizId          String
-  creatorId       String
-  gameCode        String     @unique
-  gameState       GameStates @default(question)
-  isPlaying       Boolean    @default(false)
-  currentQuestion Int        @default(0)
-  creator         User       @relation(fields: [creatorId], references: [id])
-  quiz            Quiz       @relation(fields: [quizId], references: [id])
-  players         Player[]
-}
-
-enum GameStates {
-  question
-  answer
-  leaderboard
   id              String     @id @default(cuid())
   quizId          String
   creatorId       String
