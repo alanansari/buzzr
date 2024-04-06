@@ -2,10 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface InitialState {
   players: any[];
+  gameStarted: boolean;
 }
 
 const initialState: InitialState = {
   players: [],
+  gameStarted: false,
 };
 
 const playerSlice = createSlice({
@@ -30,9 +32,16 @@ const playerSlice = createSlice({
     setPlayers: (state, action) => {
       state.players = action.payload;
     },
+    startGame: (state, action) => {
+      state.gameStarted = action.payload;
+    },
+    stopGame: (state, action) => {
+      state.gameStarted = action.payload;
+    },
   },
 });
 
-export const { addPlayer, removePlayer, setPlayers } = playerSlice.actions;
+export const { addPlayer, removePlayer, setPlayers, startGame, stopGame } =
+  playerSlice.actions;
 
 export default playerSlice.reducer;

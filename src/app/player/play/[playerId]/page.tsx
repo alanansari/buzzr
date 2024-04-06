@@ -1,6 +1,7 @@
 import { prisma } from '@/utils/prisma';
 import Image from 'next/image';
 import GamePage from '@/components/Player/GamePage';
+import { redirect } from 'next/navigation';
 
 const page = async ({params}:{ params: { playerId: string } }) => {
 

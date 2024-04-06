@@ -6,6 +6,10 @@
   color: black;
 }
 
+#correct {
+  color: white !important;
+}
+
 .profileName {
   width: 100% !important;
 }
@@ -62,7 +66,7 @@
   height: 100vh;
   position: absolute;
   z-index: -1;
-  top:0;
+  top: 0;
 }
 
 .circles {

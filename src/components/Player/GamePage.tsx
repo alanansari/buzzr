@@ -6,7 +6,6 @@ import { RootState } from "@/state/store";
 import { createConnection } from "@/state/socket/socketSlice";
 import { removePlayer } from "@/state/admin/playersSlice";
 import Counter from "../Counter";
-import { redirect } from "next/navigation";
 import { useRouter } from "next/navigation";
 
 const GamePage = (params: {
@@ -16,9 +15,10 @@ const GamePage = (params: {
     const dispatch = useDispatch();
     const router = useRouter()
     useEffect(() => {
-        // establish a socket connection using io function
+
         if (window !== undefined) {
             const socket = io(`http://localhost:8080?userType=player&playerId=${params.player.id}&gameCode=${params.gameCode}`);
+
             socket.on("connect", () => {
                 console.log("Connected to socket server");
                 dispatch(createConnection(socket));
@@ -26,15 +26,22 @@ const GamePage = (params: {
 
             socket.on("player-removed", () => {
                 console.log("player removed")
-                // window.history.pushState(null, "", "/player");
                 router.push("/player");
             })
 
+            // const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+            //     socket.emit("remove-player", params.player, params.gameCode);
+            //     socket.disconnect();
+            //     // Cancel the default behavior to prompt the user before closing
+            //     event.preventDefault();
+            //     // Chrome requires returnValue to be set
+            //     event.returnValue = '';
+            // };
+
+            // window.addEventListener("beforeunload", handleBeforeUnload);
             return () => {
+                // socket.emit("remove-player", params.player, params.gameCode);
                 socket.disconnect();
-                // socket.emit("remove-player", params.player.id, params.gameCode, (response: any) => {
-                //     console.log("player disconnected")
-                // })
             };
         }
     }, [dispatch, params.gameCode, params.player]);

@@ -4,18 +4,25 @@ import { io, Socket } from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/state/store";
 import { createConnection } from "@/state/socket/socketSlice";
-import { addPlayer, removePlayer, setPlayers } from "@/state/admin/playersSlice";
+import { addPlayer, removePlayer, setPlayers, startGame, stopGame } from "@/state/admin/playersSlice";
 import Image from "next/image";
+import StartQuiz from "./Game/StartQuiz";
+import QuestionScreen from "./Game/QuestionScreen";
+import axios from "axios"
 
 const Lobby = (params: {
     roomId: string,
     userId: string,
     gameCode: string,
-    players: any[]
+    players: any[],
+    quizQuestions: any,
+    currentQues: number
 }) => {
     const dispatch = useDispatch();
     const players: any[] = useSelector((state: RootState) => state.player.players);
     const socket = useSelector((state: RootState) => state.socket.socket)
+    const gameStarted = useSelector((state: RootState) => state.player.gameStarted)
+    const [load, setLoad] = useState(false)
 
     useEffect(() => {
         // fetch all players
@@ -44,6 +51,11 @@ const Lobby = (params: {
                 dispatch(addPlayer(player));
             });
 
+            socket.on("player-removed", (player: any) => {
+                console.log(`Player ${player.id} removed`);
+                dispatch(removePlayer(player));
+            });
+
             return () => {
                 socket.disconnect();
             };
@@ -51,39 +63,57 @@ const Lobby = (params: {
     }, [params.gameCode, params.userId, players]);
 
     function handlePlayerRemove(player: any) {
-        socket.emit("remove-player", player.id, params.gameCode)
-        socket.on("player-removed", (playerId: string) => {
-            console.log(`Player ${playerId} removed`);
+        socket.emit("remove-player", player, params.gameCode)
+        socket.on("player-removed", (player: any) => {
+            console.log(`Player ${player.id} removed`);
             dispatch(removePlayer(player));
         });
-        console.log("player deleted")
     }
 
-    console.log(players)
+    function handleGameStart() {
+        setLoad(true)
+        socket.emit("start-game", params.gameCode)
+
+        socket.on("game-started", (gameCode: string) => {
+            console.log("Game started")
+            setLoad(false)
+            dispatch(startGame(true))
+        })
+        // await axios.post("http://localhost:3000/api/admin/startgame", { gameCode: params.gameCode }).then((res) => {
+        //     setLoad(false)
+        //     dispatch(startGame(true))
+        // }).catch((err) => {
+        //     setLoad(false)
+        //     dispatch(stopGame(false))
+        // })
+    }
 
     return <>
-        <div className="h-fit w-[100%] flex justify-center items-center">
-            {(players.length === 0) ? <div className="p-2 mx-auto w-fit bg-slate-200 rounded-md text-sm">Waiting for players to join...</div> : players.map((player: any) => {
-                return (
-                    <div key={player.id} className="p-1 mx-auto w-fit bg-slate-200 rounded-md text-md flex justify-center items-center">
-                        <Image className="rounded-sm" src={player.profilePic} alt="player-avtr" width={30} height={30} />
-                        <div className="mx-1 font-bold">{player.name}</div>
-                        <div className="text-red-600 font-bold cursor-pointer px-1" title="Remove" onClick={() => handlePlayerRemove(player)}>X</div>
-                    </div>
-                )
-            })
-            }
-        </div>
-        <div className="absolute bottom-4 w-full left-[45%]">
-            <div className="flex justify-between pr-4 w-[55%]">
-                <button className="w-24 py-2 shadow hover:bg-slate-200 transition-all bg-white border rounded-full disabled:bg-slate-300" disabled={players.length === 0} >Start</button>
-                <p className="text-white bg-black opacity-60 px-2 py-1 flex items-center rounded">Active Players : {players.length}</p>
+        {!gameStarted ? <div>
+            <div className="h-fit w-[100%] flex justify-center items-center">
+                {(players.length === 0) ? <div className="p-2 mx-auto w-fit bg-slate-200 rounded-md text-sm">Waiting for players to join...</div> : players.map((player: any) => {
+                    return (
+                        <div key={player.id} className="p-1 mx-auto w-fit bg-slate-200 rounded-md text-md flex justify-center items-center">
+                            <Image className="rounded-sm" src={player.profilePic} alt="player-avtr" width={30} height={30} />
+                            <div className="mx-1 font-bold">{player.name}</div>
+                            <div className="text-red-600 font-bold cursor-pointer px-1" title="Remove" onClick={() => handlePlayerRemove(player)}>X</div>
+                        </div>
+                    )
+                })
+                }
             </div>
-        </div>
+            <div className="absolute bottom-4 w-full left-[45%]">
+                <div className="flex justify-between pr-4 w-[55%]">
+                    <button className="w-24 py-2 shadow hover:bg-slate-200 transition-all bg-white border rounded-full disabled:bg-slate-300" disabled={players.length === 0 || load} onClick={handleGameStart} >{load === true ? "Loading..." : "Start"}</button>
+                    <p className="text-white bg-black opacity-60 px-2 py-1 flex items-center rounded">Active Players : {players.length}</p>
+                </div>
+            </div>
+        </div> :
+            <StartQuiz {...params} quizQuestions={params.quizQuestions} socket={socket} />}
     </>
 }
 
 export default Lobby
 
 
-// real time issue
+//  -> start game socket

@@ -4,39 +4,17 @@ import { prisma } from "@/utils/prisma"
 
 async function JoinRoom({ params }: { params: { playerId: string } }) {
 
-    // const dispatch = useDispatch();
-    // useEffect(() => {
-    //     // establish a socket connection using io function
-    //     const socket = io(`http://localhost:8080?userType=player&playerId=${params.playerId}`);
-    //     socket.on("connect", () => {
-    //         dispatch(createConnection(socket));
-    //     });
-
-    //     return () => {
-    //         socket.disconnect();
-    //     };
-    // }, [dispatch, params.playerId]);
-
-    // const socket = useSelector((state: any) => state?.socket?.socket)
-
-    // player joins room
-    // function handleSubmit(e: any) {
-    //     e.preventDefault()
-    //     socket.emit("join room", code, 'player', params.playerId);
-    //     console.log("yes")
-    // }
-
     const player = await prisma.player.findUnique({
         where: {
             id: params.playerId
         }
     })
 
-    if(!player){
+    if (!player) {
         throw new Error('Player not found')
     }
 
-    if(player.gameId){
+    if (player.gameId) {
         await prisma.player.update({
             where: { id: params.playerId },
             data: {
@@ -44,7 +22,9 @@ async function JoinRoom({ params }: { params: { playerId: string } }) {
             }
         })
     }
-    
+
+    console.log(player)
+
     return <>
         <div className="flex flex-col justify-center items-center">
             <h1 className="text-3xl font-semibold uppercase mt-12 text-white">Buzzr !</h1>

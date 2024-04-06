@@ -33,6 +33,18 @@ async function Play({ params }: { params: { roomId: string } }) {
   if (room.creatorId !== user?.id)
     throw new Error("Unauthorized");
 
+  // fetch quiz
+  const quizQuestions = await prisma.quiz.findUnique({
+    where: { id: room?.quizId },
+    include: {
+      questions: {
+        include: {
+          options: true
+        }
+      }
+    }
+  });
+
   return (
     <>
       <div className="mx-auto my-4 bg-slate-200 p-2 border rounded-md w-fit flex flex-row">
@@ -41,7 +53,7 @@ async function Play({ params }: { params: { roomId: string } }) {
           <span className="text-3xl">{room?.gameCode}</span>
         </div>
       </div>
-      <Lobby roomId={params.roomId} userId={user.id} gameCode={room?.gameCode} players={players} />
+      <Lobby roomId={params.roomId} userId={user.id} gameCode={room?.gameCode} players={players} quizQuestions={quizQuestions} currentQues={room?.currentQuestion} />
     </>
   )
 }
