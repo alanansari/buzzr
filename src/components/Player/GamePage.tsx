@@ -1,18 +1,17 @@
 "use client"
 import { useEffect, useState } from "react";
-import { io, Socket } from "socket.io-client";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/state/store";
-import { createConnection } from "@/state/socket/socketSlice";
-import Counter from "../Counter";
+import { io } from "socket.io-client";
 import { useRouter } from "next/navigation";
 import { GameSession } from "@prisma/client";
+import { WaitGameStart, Question, Loader, Result } from "./GameScreens";
 
 const GamePage = (params: {
     player: any,
     game: GameSession,
 }) => {
-    const dispatch = useDispatch();
+    const game = params.game as any;
+    const [question, setQuestion] = useState(game.quiz.questions[game.currentQuestion]);
+    const [result,setResult] = useState('timeout');
     const router = useRouter()
     useEffect(() => {
         // establish a socket connection using io function
@@ -20,12 +19,10 @@ const GamePage = (params: {
             const socket = io(`http://localhost:8080?userType=player&playerId=${params.player.id}&gameCode=${params.game.gameCode}`);
             socket.on("connect", () => {
                 console.log("Connected to socket server");
-                dispatch(createConnection(socket));
             });
 
             socket.on("player-removed", () => {
                 console.log("player removed")
-                // window.history.pushState(null, "", "/player");
                 router.push("/player");
             })
 
@@ -36,11 +33,14 @@ const GamePage = (params: {
                 // })
             };
         }
-    }, [dispatch, params.game.gameCode, params.player, router]);
+    }, [params.game.gameCode, params.player, router]);
     return (
-        <div className="flex flex-col justify-center items-center h-full rounded-md w-fit p-4 mx-auto my-4">
-            <h1 className="text-lg font-semibold my-4">Wait for the Host to Start the game...</h1>
-            <Counter />
+        <div className="flex flex-col justify-center items-center h-full w-fit p-4 mx-auto my-4">
+            {/* Screens */}
+            <WaitGameStart />
+            {/* <Question question={question} /> */}
+            {/* <Loader /> */}
+            {/* <Result result={result} /> */}
         </div>
     )
 }

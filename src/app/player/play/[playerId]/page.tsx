@@ -18,7 +18,23 @@ const page = async ({params}:{ params: { playerId: string } }) => {
     }
 
     const game = await prisma.gameSession.findUnique({
-        where: { id: player.gameId }
+        where: { id: player.gameId },
+        include:{
+            quiz: {
+                include: {
+                    questions: {
+                        include: {
+                            options: {
+                                select: {
+                                    id: true,
+                                    title: true
+                                }
+                            }
+                        }
+                    }
+                }
+            } 
+        }
     });
 
     return (
