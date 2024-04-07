@@ -1,9 +1,13 @@
 "use client"
 import { optionColors } from "@/utils/optionColors";
 import { useEffect } from "react";
+import { Socket } from "socket.io-client";
 
 const Question = (params:{
-    question: any
+    question: any,
+    gameCode: string,
+    playerId: string,
+    socket: Socket
 }) => {
     const options = params.question.options;
     const colors = optionColors;
@@ -15,8 +19,9 @@ const Question = (params:{
     }, [params.question.timeOut])
 
     const submitAnswer = (optionId: string) => {
-        console.log(optionId)
+        console.log("submitting answer", optionId);
         // Socket submit Answer
+        params.socket.emit("submit-answer", params.gameCode, params.playerId, optionId);
     }
 
     return (

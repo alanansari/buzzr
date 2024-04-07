@@ -2,10 +2,8 @@
 import { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
+import { ScreenStatus,setScreenStatus } from "@/state/player/screenSlice";
 import { RootState } from "@/state/store";
-import { createConnection } from "@/state/socket/socketSlice";
-import { removePlayer } from "@/state/admin/playersSlice";
-import Counter from "../Counter";
 import { useRouter } from "next/navigation";
 import { GameSession } from "@prisma/client";
 import { WaitGameStart, Question, Loader, Result } from "./GameScreens";
@@ -17,6 +15,11 @@ const GamePage = (params: {
     const game = params.game as any;
     const [question, setQuestion] = useState(game.quiz.questions[game.currentQuestion]);
     const [result,setResult] = useState('timeout');
+    const [socketState, setSocketState] = useState<Socket>({} as Socket);
+
+    const screen = useSelector((state: RootState) => state.screen.screenStatus);
+    const dispatch = useDispatch();
+
     const router = useRouter()
     useEffect(() => {
 
@@ -25,6 +28,7 @@ const GamePage = (params: {
 
             socket.on("connect", () => {
                 console.log("Connected to socket server");
+                setSocketState(socket);
             });
 
             socket.on("player-removed", () => {
@@ -32,29 +36,31 @@ const GamePage = (params: {
                 router.push("/player");
             })
 
-            // const handleBeforeUnload = (event: BeforeUnloadEvent) => {
-            //     socket.emit("remove-player", params.player, params.gameCode);
-            //     socket.disconnect();
-            //     // Cancel the default behavior to prompt the user before closing
-            //     event.preventDefault();
-            //     // Chrome requires returnValue to be set
-            //     event.returnValue = '';
-            // };
+            socket.on("game-start", () => {
+                console.log("Game started");
+                dispatch(setScreenStatus(ScreenStatus.wait));
+            });
 
-            // window.addEventListener("beforeunload", handleBeforeUnload);
+            socket.on("get-question-index", (index: number) => {
+                console.log("Question index", index);
+                setQuestion(game.quiz.questions[index]);
+                dispatch(setScreenStatus(ScreenStatus.question));
+            });
+
             return () => {
-                // socket.emit("remove-player", params.player, params.gameCode);
                 socket.disconnect();
             };
         }
-    }, [params.game.gameCode, params.player, router]);
+    }, [dispatch, params.game.gameCode, params.player, game.quiz.questions, router]);
     return (
         <div className="flex flex-col justify-center items-center h-full w-fit p-4 mx-auto my-4">
             {/* Screens */}
-            <WaitGameStart />
-            {/* <Question question={question} /> */}
-            {/* <Loader /> */}
-            {/* <Result result={result} /> */}
+            {
+                (screen === ScreenStatus.lobby) ? <WaitGameStart />
+                : (screen === ScreenStatus.question) ? <Question question={question} gameCode={params.game.gameCode} playerId={params.player.id} socket={socketState} />
+                : (screen === ScreenStatus.result) ? <Result result={result} />
+                : <Loader />
+            }
         </div>
     )
 }
