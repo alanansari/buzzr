@@ -2,16 +2,15 @@
 import { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
-import { ScreenStatus, setScreenStatus } from "@/state/player/screenSlice";
 import { RootState } from "@/state/store";
-import { createConnection } from "@/state/socket/socketSlice";
-import { removePlayer } from "@/state/admin/playersSlice";
-import Counter from "../Counter";
 import { useRouter } from "next/navigation";
+import { GameSession } from "@prisma/client";
+import { WaitGameStart, Question, Loader, Result } from "./GameScreens";
+import { ScreenStatus, setScreenStatus } from "@/state/player/screenSlice";
 
 const GamePage = (params: {
     player: any,
-    gameCode: string
+    game: GameSession,
 }) => {
     const game = params.game as any;
     const [question, setQuestion] = useState(game.quiz.questions[game.currentQuestion]);
@@ -20,15 +19,16 @@ const GamePage = (params: {
 
     const screen = useSelector((state: RootState) => state.screen.screenStatus);
     const dispatch = useDispatch();
+
     const router = useRouter()
     useEffect(() => {
 
         if (window !== undefined) {
-            const socket = io(`http://localhost:8080?userType=player&playerId=${params.player.id}&gameCode=${params.gameCode}`);
+            const socket = io(`http://localhost:8080?userType=player&playerId=${params.player.id}&gameCode=${params.game.gameCode}`);
 
             socket.on("connect", () => {
                 console.log("Connected to socket server");
-                dispatch(createConnection(socket));
+                setSocketState(socket);
             });
 
             socket.on("player-removed", () => {
@@ -36,22 +36,22 @@ const GamePage = (params: {
                 router.push("/player");
             })
 
-            // const handleBeforeUnload = (event: BeforeUnloadEvent) => {
-            //     socket.emit("remove-player", params.player, params.gameCode);
-            //     socket.disconnect();
-            //     // Cancel the default behavior to prompt the user before closing
-            //     event.preventDefault();
-            //     // Chrome requires returnValue to be set
-            //     event.returnValue = '';
-            // };
+            socket.on("game-start", () => {
+                console.log("Game started");
+                dispatch(setScreenStatus(ScreenStatus.wait));
+            });
 
-            // window.addEventListener("beforeunload", handleBeforeUnload);
+            socket.on("get-question-index", (index: number) => {
+                console.log("Question index", index);
+                setQuestion(game.quiz.questions[index]);
+                dispatch(setScreenStatus(ScreenStatus.question));
+            });
+
             return () => {
-                // socket.emit("remove-player", params.player, params.gameCode);
                 socket.disconnect();
             };
         }
-    }, [dispatch, params.gameCode, params.player]);
+    }, [dispatch, params.game.gameCode, params.player, game.quiz.questions, router]);
     return (
         <div className="flex flex-col justify-center items-center h-full w-fit p-4 mx-auto my-4">
             {/* Screens */}

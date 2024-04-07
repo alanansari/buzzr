@@ -59,10 +59,9 @@ const page = async ({ params }: { params: { roomId: string } }) => {
 export default page
 
 
-
-// bar chart
-// next button
+// emit socket -> time up
+// data -> bar chart
+// next button -> result
 // leaderboard
 
 // reset redux
-// issue - how to start timer

@@ -41,14 +41,6 @@ const Lobby = (params: {
                 dispatch(createConnection(socket));
             });
 
-            // const updatePlayerState = (newPlayer: any) => {
-            //     const existingPlayer = players.find((player: any) => player.id === newPlayer.id);
-            //     if (existingPlayer) {
-            //         return;
-            //     }
-            //     setPlayers([...players, newPlayer]);
-            // }
-
             socket.on("player-joined", (player: any) => {
                 console.log(`Player ${player.id} Joined`);
                 dispatch(addPlayer(player));
@@ -63,7 +55,7 @@ const Lobby = (params: {
                 socket.disconnect();
             };
         }
-    }, [params.gameCode, params.userId, players]);
+    }, [dispatch, params.gameCode, params.userId, players]);
 
     function handlePlayerRemove(player: any) {
         socket.emit("remove-player", player, params.gameCode)
