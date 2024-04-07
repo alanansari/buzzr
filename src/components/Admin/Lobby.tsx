@@ -4,11 +4,9 @@ import { io, Socket } from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/state/store";
 import { createConnection } from "@/state/socket/socketSlice";
-import { addPlayer, removePlayer, setPlayers, startGame, stopGame } from "@/state/admin/playersSlice";
+import { addPlayer, removePlayer, setPlayers } from "@/state/admin/playersSlice";
 import Image from "next/image";
-import StartQuiz from "./Game/StartQuiz";
-import QuestionScreen from "./Game/QuestionScreen";
-import axios from "axios"
+import { useRouter } from "next/navigation";
 
 const Lobby = (params: {
     roomId: string,
@@ -16,18 +14,23 @@ const Lobby = (params: {
     gameCode: string,
     players: any[],
     quizQuestions: any,
-    currentQues: number
+    currentQues: number,
+    gameStarted: boolean
 }) => {
     const dispatch = useDispatch();
     const players: any[] = useSelector((state: RootState) => state.player.players);
     const socket = useSelector((state: RootState) => state.socket.socket)
-    const gameStarted = useSelector((state: RootState) => state.player.gameStarted)
     const [load, setLoad] = useState(false)
+    const router = useRouter()
 
     useEffect(() => {
+
+        if (params?.gameStarted)
+            router.push(`/admin/game/${params.roomId}`);
+
         // fetch all players
         dispatch(setPlayers(params.players))
-    }, [])
+    }, [dispatch, params.players, params.gameStarted])
 
     useEffect(() => {
         // establish a socket connection using io function
@@ -73,23 +76,16 @@ const Lobby = (params: {
     function handleGameStart() {
         setLoad(true)
         socket.emit("start-game", params.gameCode)
-
         socket.on("game-started", (gameCode: string) => {
             console.log("Game started")
+            // start timer
+            socket.emit("start-timer");
             setLoad(false)
-            dispatch(startGame(true))
         })
-        // await axios.post("http://localhost:3000/api/admin/startgame", { gameCode: params.gameCode }).then((res) => {
-        //     setLoad(false)
-        //     dispatch(startGame(true))
-        // }).catch((err) => {
-        //     setLoad(false)
-        //     dispatch(stopGame(false))
-        // })
     }
 
     return <>
-        {!gameStarted ? <div>
+        <div>
             <div className="h-fit w-[100%] flex justify-center items-center">
                 {(players.length === 0) ? <div className="p-2 mx-auto w-fit bg-slate-200 rounded-md text-sm">Waiting for players to join...</div> : players.map((player: any) => {
                     return (
@@ -108,12 +104,9 @@ const Lobby = (params: {
                     <p className="text-white bg-black opacity-60 px-2 py-1 flex items-center rounded">Active Players : {players.length}</p>
                 </div>
             </div>
-        </div> :
-            <StartQuiz {...params} quizQuestions={params.quizQuestions} socket={socket} />}
+        </div>
     </>
 }
 
 export default Lobby
 
-
-//  -> start game socket

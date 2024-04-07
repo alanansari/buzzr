@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
+import { ScreenStatus, setScreenStatus } from "@/state/player/screenSlice";
 import { RootState } from "@/state/store";
 import { createConnection } from "@/state/socket/socketSlice";
 import { removePlayer } from "@/state/admin/playersSlice";
@@ -12,6 +13,12 @@ const GamePage = (params: {
     player: any,
     gameCode: string
 }) => {
+    const game = params.game as any;
+    const [question, setQuestion] = useState(game.quiz.questions[game.currentQuestion]);
+    const [result, setResult] = useState('timeout');
+    const [socketState, setSocketState] = useState<Socket>({} as Socket);
+
+    const screen = useSelector((state: RootState) => state.screen.screenStatus);
     const dispatch = useDispatch();
     const router = useRouter()
     useEffect(() => {
@@ -46,9 +53,14 @@ const GamePage = (params: {
         }
     }, [dispatch, params.gameCode, params.player]);
     return (
-        <div className="flex flex-col justify-center items-center h-full rounded-md w-fit p-4 mx-auto my-4">
-            <h1 className="text-lg font-semibold my-4">Wait for the Host to Start the game...</h1>
-            <Counter />
+        <div className="flex flex-col justify-center items-center h-full w-fit p-4 mx-auto my-4">
+            {/* Screens */}
+            {
+                (screen === ScreenStatus.lobby) ? <WaitGameStart />
+                    : (screen === ScreenStatus.question) ? <Question question={question} gameCode={params.game.gameCode} playerId={params.player.id} socket={socketState} />
+                        : (screen === ScreenStatus.result) ? <Result result={result} />
+                            : <Loader />
+            }
         </div>
     )
 }

@@ -53,7 +53,7 @@ async function Play({ params }: { params: { roomId: string } }) {
           <span className="text-3xl">{room?.gameCode}</span>
         </div>
       </div>
-      <Lobby roomId={params.roomId} userId={user.id} gameCode={room?.gameCode} players={players} quizQuestions={quizQuestions} currentQues={room?.currentQuestion} />
+      <Lobby roomId={params.roomId} userId={user.id} gameCode={room?.gameCode} players={players} quizQuestions={quizQuestions} gameStarted={room?.isPlaying} currentQues={room?.currentQuestion} />
     </>
   )
 }

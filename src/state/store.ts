@@ -3,6 +3,8 @@ import counterReducer from "./counter/counterSlice";
 import socketReducer from "./socket/socketSlice";
 import playerReducer from "./admin/playersSlice";
 import timerReducer from "./timer/timerSlice";
+import screenReducer from "./player/screenSlice";
+import adminScreenReducer from "./admin/screenSlice";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import persistStore from "redux-persist/es/persistStore";
@@ -12,6 +14,8 @@ const rootReducer = combineReducers({
   socket: socketReducer,
   player: playerReducer,
   timer: timerReducer,
+  screen: screenReducer,
+  adminscreen: adminScreenReducer,
 });
 
 const persistConfig = {
