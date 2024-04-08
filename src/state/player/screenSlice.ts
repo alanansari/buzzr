@@ -1,28 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface InitialState {
-    screenStatus: ScreenStatus;
+  screenStatus: ScreenStatus;
 }
 
 export enum ScreenStatus {
-    question,
-    result,
-    wait,
-    lobby,
+  question,
+  result,
+  wait,
+  lobby,
 }
 
 const initialState: InitialState = {
-    screenStatus: ScreenStatus.lobby,
+  screenStatus: ScreenStatus.lobby,
 };
 
 const screenSlice = createSlice({
-    name: "screen",
-    initialState,
-    reducers: {
-        setScreenStatus: (state, action) => {
-            state.screenStatus = action.payload;
-        },
+  name: "screen",
+  initialState,
+  reducers: {
+    setScreenStatus: (state, action) => {
+      state.screenStatus = action.payload;
     },
+  },
 });
 
 export const { setScreenStatus } = screenSlice.actions;

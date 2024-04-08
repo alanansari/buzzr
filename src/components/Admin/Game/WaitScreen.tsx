@@ -12,7 +12,7 @@ export default function WaitScreen(params: { currentQues: number, socket: Socket
     const time = useSelector((state: RootState) => state.timer.value)
     const [start, setStart] = useState(false)
     const currIndex = useSelector((state: RootState) => state.player.currentIndex)
-    console.log(currIndex)
+    // console.log(currIndex)
     useEffect(() => {
         if (start || currIndex != 0) {
             const timer = setInterval(() => {

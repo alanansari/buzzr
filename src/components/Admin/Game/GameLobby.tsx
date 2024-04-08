@@ -24,7 +24,7 @@ const GameLobby = (params: {
     const players: any[] = useSelector((state: RootState) => state.player.players);
     const socket = useSelector((state: RootState) => state.socket.socket)
     const screen = useSelector((state: RootState) => state.adminscreen.screenStatus);
-    const time = useSelector((state: RootState) => state.timer.value)
+    const currIndex = useSelector((state: RootState) => state.player.currentIndex)
 
     useEffect(() => {
         // fetch all players
@@ -56,8 +56,11 @@ const GameLobby = (params: {
                 dispatch(setScreenStatus(ScreenStatus.wait))
 
                 setTimeout(() => {
-                    dispatch(setScreenStatus(ScreenStatus.question))
-                    socket.emit("set-question-index", params.gameCode, params.currentQues);
+                    // console.log(currIndex)
+                    socket.emit("set-question-index", params.gameCode, currIndex);
+                    socket.on("get-question-index", () => {
+                        dispatch(setScreenStatus(ScreenStatus.question))
+                    })
                 }, 4000);
             });
 
@@ -65,7 +68,7 @@ const GameLobby = (params: {
                 socket.disconnect();
             };
         }
-    }, [dispatch, params.gameCode, params.userId, params.currentQues, players]);
+    }, [dispatch, params.gameCode, params.userId, params.currentQues, players, currIndex]);
 
     return <>
         <div className="flex flex-col justify-center items-center h-full w-full p-4 mx-auto my-4">
@@ -79,8 +82,3 @@ const GameLobby = (params: {
 }
 
 export default GameLobby
-
-
-
-// issues -> when restart game after closing
-// isplaying should be falsed when one close the quiz

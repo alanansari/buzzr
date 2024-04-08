@@ -22,9 +22,6 @@ async function JoinRoom({ params }: { params: { playerId: string } }) {
             }
         })
     }
-
-    console.log(player)
-
     return <>
         <div className="flex flex-col justify-center items-center">
             <h1 className="text-3xl font-semibold uppercase mt-12 text-white">Buzzr !</h1>

@@ -4,11 +4,13 @@ import { ScreenStatus, setScreenStatus } from "@/state/admin/screenSlice";
 import { BarPlot, ChartContainer } from "@mui/x-charts";
 import { useEffect } from "react";
 import { FcCheckmark, FcApproval } from "react-icons/fc";
+import { RxCross2 } from "react-icons/rx";
 import { TiTick } from "react-icons/ti";
 import { useDispatch, useSelector } from "react-redux";
 import { optionColors } from "@/utils/optionColors"
 import { Option } from "@prisma/client";
 import { RootState } from "@/state/store";
+import { setLeaderboard } from "@/state/admin/playersSlice";
 
 export default function QuesResult(props: any) {
     const { currentQues, quizQuestions, gameCode } = props
@@ -24,7 +26,9 @@ export default function QuesResult(props: any) {
 
         // socket event to leaderboard screen 
         socket.emit("display-leaderboard", gameCode)
-        socket.on("displaying-leaderboard", () => {
+        socket.on("displaying-leaderboard", (leaderboard:any[]) => {
+            console.log("Leaderboard")
+            dispatch(setLeaderboard(leaderboard))
             dispatch(setScreenStatus(ScreenStatus.leaderboard))
         })
     }
@@ -74,7 +78,9 @@ function Barchart(params: { result: number[], options: Option[] }) {
 
             <div className="flex flex-row justify-around w-[450px] text-lg ml-12">
                 {params.result.length > 0 && params.result.map((opt: any, index: number) => {
-                    return <p className={`text-black text-sm p-2 rounded shadow flex flex-row items-center ${optionColors[index]}`}>{opt} <TiTick size={20} id="correct" color="#fff" className="text-white font-extrabold m-auto ml-2" /></p>
+                    const isCorrect = params.options[index].isCorrect === true;
+                    return <p className={`text-black text-sm p-2 rounded shadow flex flex-row items-center ${optionColors[index]}`}>{opt}
+                        {isCorrect ? <TiTick size={20} color="#fff" className="text-white font-extrabold m-auto ml-2" /> : <RxCross2 size={20} color="#fff" className="text-white font-extrabold m-auto ml-2" />}</p>
                 })}
             </div>
         </div>

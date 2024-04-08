@@ -27,11 +27,11 @@ export default function QuestionScreen(props: any) {
             dispatch(setScreenStatus(ScreenStatus.result))
         })
     }
-    // useEffect(() => {
-    //     if (time == 0) {
-    //         handleNext()
-    //     }
-    // }, [time])
+    useEffect(() => {
+        if (time == 0) {
+            handleNext()
+        }
+    }, [time])
 
     return <>
         <div className="flex flex-col items-center m-auto w-full px-4">

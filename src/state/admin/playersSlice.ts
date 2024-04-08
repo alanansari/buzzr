@@ -3,13 +3,15 @@ import { createSlice } from "@reduxjs/toolkit";
 interface InitialState {
   players: any[];
   quesResult:number[];
-  currentIndex:number
+  currentIndex:number,
+  leaderboard:any[]
 }
 
 const initialState: InitialState = {
   players: [],
   quesResult:[],
-  currentIndex:0
+  currentIndex:0,
+  leaderboard:[]
 };
 
 const playerSlice = createSlice({
@@ -40,10 +42,13 @@ const playerSlice = createSlice({
     setCurrIndex: (state, action) => {
       state.currentIndex = action.payload;
     },
+    setLeaderboard: (state, action) => {
+      state.leaderboard = action.payload;
+    },
   },
 });
 
-export const { addPlayer, removePlayer, setPlayers, setResult, setCurrIndex } =
+export const { addPlayer, removePlayer, setPlayers, setResult, setCurrIndex, setLeaderboard } =
   playerSlice.actions;
 
 export default playerSlice.reducer;
