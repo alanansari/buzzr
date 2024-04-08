@@ -73,48 +73,48 @@ model Quiz {
 }
 
 model Question {
-  id           String         @id @default(cuid())
-  title        String
-  quizId       String
-  createdAt    DateTime       @default(now())
-  timeOut      Int            @default(15)
-  options      Option[]
-  PlayerAnswer PlayerAnswer[]
-  quiz         Quiz           @relation(fields: [quizId], references: [id])
+  id        String         @id @default(cuid())
+  title     String
+  quizId    String
+  createdAt DateTime       @default(now())
+  timeOut   Int            @default(15)
+  options   Option[]
+  answers   PlayerAnswer[]
+  quiz      Quiz           @relation(fields: [quizId], references: [id])
 }
 
 model Option {
-  id           String         @id @default(cuid())
-  title        String
-  isCorrect    Boolean
-  questionId   String
-  createdAt    DateTime       @default(now())
-  question     Question       @relation(fields: [questionId], references: [id])
-  PlayerAnswer PlayerAnswer[]
+  id         String         @id @default(cuid())
+  title      String
+  isCorrect  Boolean
+  questionId String
+  createdAt  DateTime       @default(now())
+  question   Question       @relation(fields: [questionId], references: [id])
+  answers    PlayerAnswer[]
 }
 
 model Player {
-  id              String            @id @default(cuid())
-  name            String
-  gameId          String?
-  createdAt       DateTime          @default(now())
-  profilePic      String?
-  GameLeaderboard GameLeaderboard[]
-  game            GameSession?      @relation(fields: [gameId], references: [id])
-  PlayerAnswer    PlayerAnswer[]
+  id          String            @id @default(cuid())
+  name        String
+  gameId      String?
+  createdAt   DateTime          @default(now())
+  profilePic  String?
+  leaderboard GameLeaderboard[]
+  game        GameSession?      @relation(fields: [gameId], references: [id])
+  answers     PlayerAnswer[]
 }
 
 model GameSession {
-  id              String           @id @default(cuid())
+  id              String            @id @default(cuid())
   quizId          String
   creatorId       String
-  gameCode        String           @unique
-  gameState       GameStates       @default(question)
-  isPlaying       Boolean          @default(false)
-  currentQuestion Int              @default(0)
-  GameLeaderboard GameLeaderboard?
-  creator         User             @relation(fields: [creatorId], references: [id])
-  quiz            Quiz             @relation(fields: [quizId], references: [id])
+  gameCode        String            @unique
+  gameState       GameStates        @default(question)
+  isPlaying       Boolean           @default(false)
+  currentQuestion Int               @default(0)
+  leaderboard     GameLeaderboard[]
+  creator         User              @relation(fields: [creatorId], references: [id])
+  quiz            Quiz              @relation(fields: [quizId], references: [id])
   players         Player[]
   PlayerAnswer    PlayerAnswer[]
 }

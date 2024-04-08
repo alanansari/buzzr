@@ -58,7 +58,4 @@ const page = async ({ params }: { params: { roomId: string } }) => {
 
 export default page
 
-
-// leaderboard
-
 // reset redux

@@ -65,7 +65,7 @@ const GameLobby = (params: {
                 socket.disconnect();
             };
         }
-    }, [dispatch, params.gameCode, params.userId, players]);
+    }, [dispatch, params.gameCode, params.userId, params.currentQues, players]);
 
     return <>
         <div className="flex flex-col justify-center items-center h-full w-full p-4 mx-auto my-4">
@@ -74,9 +74,13 @@ const GameLobby = (params: {
                     : (screen === ScreenStatus.question) ? <QuestionScreen {...params} socket={socket} />
                         : (screen === ScreenStatus.result) ? <QuesResult {...params} socket={socket} />
                             : (screen === ScreenStatus.leaderboard) && <LeaderBoard {...params} socket={socket} />}
-            {/* <button onClick={() => socket.emit("change-question", params.gameCode, 0)}>click me</button> */}
         </div>
     </>
 }
 
 export default GameLobby
+
+
+
+// issues -> when restart game after closing
+// isplaying should be falsed when one close the quiz

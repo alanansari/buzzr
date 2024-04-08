@@ -27,7 +27,7 @@ const Lobby = (params: {
     useEffect(() => {
 
         if (params?.gameStarted) {
-            // dispatch(setScreenStatus(ScreenStatus.wait))
+            dispatch(setScreenStatus(ScreenStatus.wait))
             router.push(`/admin/game/${params.roomId}`);
         }
 

@@ -21,8 +21,12 @@ export default function QuesResult(props: any) {
     const options = question.options
 
     function handleNext() {
-        dispatch(setScreenStatus(ScreenStatus.leaderboard))
+
         // socket event to leaderboard screen 
+        socket.emit("display-leaderboard", gameCode)
+        socket.on("displaying-leaderboard", () => {
+            dispatch(setScreenStatus(ScreenStatus.leaderboard))
+        })
     }
     return <>
         <div className="flex flex-col items-center m-auto w-full px-4">

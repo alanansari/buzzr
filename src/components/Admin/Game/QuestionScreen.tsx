@@ -19,14 +19,11 @@ export default function QuestionScreen(props: any) {
     const question = allQuestions[currIndex]
     const [time, setTime] = useState(question?.timeOut)
 
-    console.log(currIndex)
-    console.log(allQuestions)
-
     function handleNext() {
         socket.emit("display-result", gameCode, question?.id, question?.options);
-        socket.on("displaying-result", (playerCount: number[]) => {
-            console.log("Displaying result", JSON.stringify(playerCount))
-            dispatch(setResult(playerCount))
+        socket.on("displaying-result", (data: any) => {
+            console.log("Displaying result", JSON.stringify(data))
+            dispatch(setResult(data?.presenter))
             dispatch(setScreenStatus(ScreenStatus.result))
         })
     }
