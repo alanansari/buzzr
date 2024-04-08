@@ -49,9 +49,19 @@ const GamePage = (params: {
                 dispatch(setScreenStatus(ScreenStatus.question));
             });
 
-            socket.on("displaying-result", () => {
-                console.log("Displaying result");
+            socket.on("displaying-result", (data: any) => {
+                console.log("Displaying result",data);
+
                 // set result
+                const playerAnswers = data.player;
+
+                playerAnswers.forEach((player: any) => {
+                    if (player.playerId === params.player.id) {
+                        setResult((player.isCorrect) ? 'correct' : 'incorrect');
+                        return;
+                    }
+                });
+
                 dispatch(setScreenStatus(ScreenStatus.result));
             });
 
