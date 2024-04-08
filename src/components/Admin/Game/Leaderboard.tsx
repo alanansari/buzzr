@@ -13,25 +13,16 @@ export default function LeaderBoard(props: any) {
     const leaderboard = useSelector((state: RootState) => state.player.leaderboard)
     const { currentQues, gameCode } = props
     const socket = props.socket
-    // const [leaderboard, setLeaderboard] = useState([])
-    // useEffect(() => {
-    //     socket.on("displaying-leaderboard", (leaderboard: any) => {
-    //         console.log(leaderboard)
-    //         setLeaderboard(leaderboard)
-    //     })
-    // }, [socket])
+
     function handleNext() {
-        // console.log(currIndex, currentQues)
         dispatch(resetTimer(3))
         socket.emit("set-question-index", gameCode, currIndex + 1)
         socket.on("get-question-index", (index: number) => {
             dispatch(setCurrIndex(index))
-            // dispatch(setScreenStatus(ScreenStatus.wait))
+            dispatch(setScreenStatus(ScreenStatus.wait))
             socket.emit("start-timer")
         })
     }
-
-    // console.log(leaderboard)
 
     return <>
         <div className="flex flex-col items-center m-auto w-full px-4">

@@ -5,34 +5,52 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/state/store";
 import { resetTimer, setTimer } from "@/state/timer/timerSlice";
 import { Socket } from "socket.io-client";
+import { ScreenStatus, setScreenStatus } from "@/state/admin/screenSlice";
 
-export default function WaitScreen(params: { currentQues: number, socket: Socket }) {
+export default function WaitScreen(params: { currentQues: number, socket: Socket, gameCode: string }) {
 
     const dispatch = useDispatch()
     const time = useSelector((state: RootState) => state.timer.value)
-    const [start, setStart] = useState(false)
     const currIndex = useSelector((state: RootState) => state.player.currentIndex)
-    // console.log(currIndex)
+    const [start, setStart] = useState(false)
+    const socket = params.socket
+
     useEffect(() => {
-        if (start || currIndex != 0) {
+        if (currIndex != 0) {
             const timer = setInterval(() => {
                 if (time >= 0) {
                     dispatch(setTimer());
                 }
             }, 1000);
 
+            if (time < 0) {
+                socket.emit("set-question-index", params.gameCode, currIndex);
+                socket.on("get-question-index", () => {
+                    dispatch(setScreenStatus(ScreenStatus.question))
+                })
+            }
+
             return () => {
                 clearInterval(timer);
             };
         }
-    }, [time, params.socket, start]);
+    }, [time, params.socket]);
 
     function handleSocket() {
-        // dispatch(resetTimer(3))
-        params.socket.emit("start-timer")
-        params.socket.on("timer-starts", () => {
-            console.log("Timer started")
+        socket.emit("start-timer")
+        socket.on("timer-starts", () => {
+            console.log("Timer started");
             setStart(true)
+            const timer = setInterval(() => {
+                if (time >= 0) {
+                    dispatch(setTimer());
+                }
+            }, 1000);
+
+            setTimeout(() => {
+                socket.emit("set-question-index", params.gameCode, currIndex);
+                dispatch(setScreenStatus(ScreenStatus.question))
+            }, 4000);
         })
     }
 

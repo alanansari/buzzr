@@ -8,6 +8,7 @@ import { addPlayer, removePlayer, setPlayers } from "@/state/admin/playersSlice"
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ScreenStatus, setScreenStatus } from "@/state/admin/screenSlice";
+import { resetTimer } from "@/state/timer/timerSlice";
 
 const Lobby = (params: {
     roomId: string,
@@ -27,6 +28,7 @@ const Lobby = (params: {
     useEffect(() => {
 
         if (params?.gameStarted) {
+            dispatch(resetTimer(3))
             dispatch(setScreenStatus(ScreenStatus.wait))
             router.push(`/admin/game/${params.roomId}`);
         }
@@ -74,6 +76,7 @@ const Lobby = (params: {
         socket.on("game-started", (gameCode: string) => {
             console.log("Game started")
             setLoad(false)
+            dispatch(resetTimer(3))
             dispatch(setScreenStatus(ScreenStatus.wait))
             router.push(`/admin/game/${params.roomId}`);
         })

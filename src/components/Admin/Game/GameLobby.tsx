@@ -8,7 +8,6 @@ import { addPlayer, removePlayer, setPlayers } from "@/state/admin/playersSlice"
 import { ScreenStatus, setScreenStatus } from "@/state/admin/screenSlice";
 import WaitScreen from "./WaitScreen";
 import QuestionScreen from "./QuestionScreen";
-import { resetTimer } from "@/state/timer/timerSlice";
 import QuesResult from "./QuesResult";
 import LeaderBoard from "./Leaderboard";
 
@@ -51,18 +50,22 @@ const GameLobby = (params: {
             });
 
             // start timer
-            socket.on("timer-starts", () => {
-                console.log("Timer started");
-                dispatch(setScreenStatus(ScreenStatus.wait))
+            // socket.on("timer-starts", () => {
+            //     console.log("Timer started");
+            //     dispatch(setScreenStatus(ScreenStatus.wait))
 
-                setTimeout(() => {
-                    // console.log(currIndex)
-                    socket.emit("set-question-index", params.gameCode, currIndex);
-                    socket.on("get-question-index", () => {
-                        dispatch(setScreenStatus(ScreenStatus.question))
-                    })
-                }, 4000);
-            });
+            //     setTimeout(() => {
+            //         // console.log(currIndex)
+            //         socket.emit("set-question-index", params.gameCode, currIndex);
+            //         socket.on("get-question-index", () => {
+            //             dispatch(setScreenStatus(ScreenStatus.question))
+            //         })
+            //     }, 4000);
+            // });
+
+            // socket.on("get-question-index", () => {
+            //     dispatch(setScreenStatus(ScreenStatus.question))
+            // })
 
             return () => {
                 socket.disconnect();
@@ -73,7 +76,7 @@ const GameLobby = (params: {
     return <>
         <div className="flex flex-col justify-center items-center h-full w-full p-4 mx-auto my-4">
             {
-                (screen === ScreenStatus.wait) ? <WaitScreen currentQues={params.currentQues} socket={socket} />
+                (screen === ScreenStatus.wait) ? <WaitScreen currentQues={params.currentQues} socket={socket} gameCode={params.gameCode} />
                     : (screen === ScreenStatus.question) ? <QuestionScreen {...params} socket={socket} />
                         : (screen === ScreenStatus.result) ? <QuesResult {...params} socket={socket} />
                             : (screen === ScreenStatus.leaderboard) && <LeaderBoard {...params} socket={socket} />}
