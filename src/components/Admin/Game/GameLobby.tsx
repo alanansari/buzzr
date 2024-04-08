@@ -64,7 +64,7 @@ const GameLobby = (params: {
                 socket.disconnect();
             };
         }
-    }, [dispatch, params.gameCode, params.userId, players]);
+    }, [dispatch, params.gameCode, params.userId, params.currentQues, players]);
 
     return <>
         <div className="flex flex-col justify-center items-center h-full w-full p-4 mx-auto my-4">

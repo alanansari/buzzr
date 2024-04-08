@@ -73,44 +73,78 @@ model Quiz {
 }
 
 model Question {
-  id        String   @id @default(cuid())
+  id        String         @id @default(cuid())
   title     String
   quizId    String
-  createdAt DateTime @default(now())
-  timeOut   Int      @default(15)
+  createdAt DateTime       @default(now())
+  timeOut   Int            @default(15)
   options   Option[]
-  quiz      Quiz     @relation(fields: [quizId], references: [id])
+  answers   PlayerAnswer[]
+  quiz      Quiz           @relation(fields: [quizId], references: [id])
 }
 
 model Option {
-  id         String   @id @default(cuid())
+  id         String         @id @default(cuid())
   title      String
   isCorrect  Boolean
   questionId String
-  createdAt  DateTime @default(now())
-  question   Question @relation(fields: [questionId], references: [id])
+  createdAt  DateTime       @default(now())
+  question   Question       @relation(fields: [questionId], references: [id])
+  answers    PlayerAnswer[]
 }
 
 model Player {
-  id         String       @id @default(cuid())
-  name       String
-  gameId     String?
-  createdAt  DateTime     @default(now())
-  profilePic String?
-  game       GameSession? @relation(fields: [gameId], references: [id])
+  id          String            @id @default(cuid())
+  name        String
+  gameId      String?
+  createdAt   DateTime          @default(now())
+  profilePic  String?
+  leaderboard GameLeaderboard[]
+  game        GameSession?      @relation(fields: [gameId], references: [id])
+  answers     PlayerAnswer[]
 }
 
 model GameSession {
-  id              String     @id @default(cuid())
+  id              String            @id @default(cuid())
   quizId          String
   creatorId       String
-  gameCode        String     @unique
-  gameState       GameStates @default(question)
-  isPlaying       Boolean    @default(false)
-  currentQuestion Int        @default(0)
-  creator         User       @relation(fields: [creatorId], references: [id])
-  quiz            Quiz       @relation(fields: [quizId], references: [id])
+  gameCode        String            @unique
+  gameState       GameStates        @default(question)
+  isPlaying       Boolean           @default(false)
+  currentQuestion Int               @default(0)
+  leaderboard     GameLeaderboard[]
+  creator         User              @relation(fields: [creatorId], references: [id])
+  quiz            Quiz              @relation(fields: [quizId], references: [id])
   players         Player[]
+  answers         PlayerAnswer[]
+}
+
+model PlayerAnswer {
+  id            String      @id @default(cuid())
+  playerId      String
+  questionId    String
+  optionId      String
+  gameSessionId String
+  timeTaken     Int
+  isCorrect     Boolean
+  score         Int         @default(0)
+  gameSession   GameSession @relation(fields: [gameSessionId], references: [id])
+  option        Option      @relation(fields: [optionId], references: [id])
+  player        Player      @relation(fields: [playerId], references: [id])
+  question      Question    @relation(fields: [questionId], references: [id])
+
+  @@unique([playerId, questionId, gameSessionId])
+}
+
+model GameLeaderboard {
+  id            String      @id @default(cuid())
+  playerId      String
+  gameSessionId String
+  score         Int         @default(0)
+  gameSession   GameSession @relation(fields: [gameSessionId], references: [id])
+  player        Player      @relation(fields: [playerId], references: [id])
+
+  @@unique([playerId, gameSessionId])
 }
 
 enum GameStates {

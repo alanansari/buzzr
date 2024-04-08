@@ -1,27 +1,43 @@
 "use client"
 import { optionColors } from "@/utils/optionColors";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
+import { useDispatch } from "react-redux";
+import { setScreenStatus, ScreenStatus } from "@/state/player/screenSlice";
 
 const Question = (params:{
     question: any,
-    gameCode: string,
+    gameSessionId: string,
     playerId: string,
     socket: Socket
 }) => {
     const options = params.question.options;
     const colors = optionColors;
+    const dispatch = useDispatch();
+    const [timer, setTimer] = useState(0);
 
     useEffect(() => {
-        setTimeout(() => {
+        const timeout = setTimeout(() => {
             console.log("time up")
+            dispatch(setScreenStatus(ScreenStatus.result));
         }, params.question.timeOut * 1000);
-    }, [params.question.timeOut])
+
+        const interval = setInterval(() => {
+            setTimer(timer + 0.5);
+        }, 500);
+        
+        return () => {
+            clearTimeout(timeout);
+            clearInterval(interval);
+        }
+        
+    }, [dispatch, params.question.timeOut, timer])
 
     const submitAnswer = (optionId: string) => {
         console.log("submitting answer", optionId);
         // Socket submit Answer
-        params.socket.emit("submit-answer", params.gameCode, params.playerId, optionId);
+        params.socket.emit("submit-answer", params.gameSessionId, params.playerId, optionId, timer);
+        dispatch(setScreenStatus(ScreenStatus.wait));
     }
 
     return (

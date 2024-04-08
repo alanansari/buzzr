@@ -32,12 +32,14 @@ const GamePage = (params: {
             });
 
             socket.on("player-removed", () => {
-                console.log("player removed")
                 router.push("/player");
             })
 
-            socket.on("game-start", () => {
-                console.log("Game started");
+            socket.on("game-started", () => {
+                dispatch(setScreenStatus(ScreenStatus.wait));
+            });
+
+            socket.on("timer-starts", (time: number) => {
                 dispatch(setScreenStatus(ScreenStatus.wait));
             });
 
@@ -45,6 +47,12 @@ const GamePage = (params: {
                 console.log("Question index", index);
                 setQuestion(game.quiz.questions[index]);
                 dispatch(setScreenStatus(ScreenStatus.question));
+            });
+
+            socket.on("displaying-result", () => {
+                console.log("Displaying result");
+                // set result
+                dispatch(setScreenStatus(ScreenStatus.result));
             });
 
             return () => {
@@ -57,7 +65,7 @@ const GamePage = (params: {
             {/* Screens */}
             {
                 (screen === ScreenStatus.lobby) ? <WaitGameStart />
-                    : (screen === ScreenStatus.question) ? <Question question={question} gameCode={params.game.gameCode} playerId={params.player.id} socket={socketState} />
+                    : (screen === ScreenStatus.question) ? <Question question={question} gameSessionId={params.game.id} playerId={params.player.id} socket={socketState} />
                         : (screen === ScreenStatus.result) ? <Result result={result} />
                             : <Loader />
             }
