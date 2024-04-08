@@ -9,11 +9,11 @@ export enum ScreenStatus {
   result,
   wait,
   leaderboard,
-  loading,
+  lobby,
 }
 
 const initialState: InitialState = {
-  screenStatus: ScreenStatus.wait,
+  screenStatus: ScreenStatus.lobby,
 };
 
 const screenSlice = createSlice({

@@ -7,29 +7,38 @@ import { Socket } from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
 import { ScreenStatus, setScreenStatus } from "@/state/admin/screenSlice";
 import { optionColors } from "@/utils/optionColors";
+import { setResult } from '@/state/admin/playersSlice';
 
 export default function QuestionScreen(props: any) {
 
-    const screen = useSelector((state: RootState) => state.adminscreen.screenStatus);
-    const { currentQues, quizQuestions } = props
-    const allQuestions = quizQuestions?.questions
-    const question = allQuestions[currentQues]
-    const [time, setTime] = useState(question?.timeOut)
+    const { currentQues, quizQuestions, gameCode } = props
     const dispatch = useDispatch()
+    const currIndex = useSelector((state: RootState) => state.player.currentIndex)
+    const allQuestions = quizQuestions?.questions
+    const socket = props.socket
+    const question = allQuestions[currIndex]
+    const [time, setTime] = useState(question?.timeOut)
+
+    console.log(currIndex)
+    console.log(allQuestions)
 
     function handleNext() {
-        socket.emit("display-result");
-        socket.on("displaying-result", () => {
-            console.log("Displaying result")
+        socket.emit("display-result", gameCode, question?.id, question?.options);
+        socket.on("displaying-result", (playerCount: number[]) => {
+            console.log("Displaying result", JSON.stringify(playerCount))
+            dispatch(setResult(playerCount))
             dispatch(setScreenStatus(ScreenStatus.result))
         })
     }
-    const socket = props.socket
-    console.log(time)
+    // useEffect(() => {
+    //     if (time == 0) {
+    //         handleNext()
+    //     }
+    // }, [time])
 
     return <>
         <div className="flex flex-col items-center m-auto w-full px-4">
-            <p className="w-full py-2 px-3 text-2xl text-center bg-white font-semibold rounded max-w-fit capitalize">{allQuestions[currentQues]?.title}</p>
+            <p className="w-full py-2 px-3 text-2xl text-center bg-white font-semibold rounded max-w-fit capitalize">{allQuestions[currIndex]?.title}</p>
 
             <div className="absolute right-4 mt-1">
                 <button className="w-24 h-10 shadow hover:bg-slate-200 transition-all bg-white border rounded" onClick={handleNext} >Next</button>
@@ -44,7 +53,7 @@ export default function QuestionScreen(props: any) {
             <div className="absolute bottom-16 w-4/5">
                 <div className="grid grid-cols-2 w-full gap-5 h-full">
                     {question.options.length > 0 && question.options.map((opt: any, index: number) => {
-                        return <p className={`text-black p-6 rounded shadow ${optionColors[index]}`}>{opt.title}</p>
+                        return <p className={`text-black p-6 rounded shadow ${optionColors[index]} `}>{opt.title}</p>
                     })}
                     {/* <p className="text-black bg-red-500 p-6 rounded shadow flex justify-between items-center flex-row w-full"><span>Option 1</span>
                     <FcApproval size={32} className="font-bold" /> 
@@ -72,3 +81,4 @@ function Countdown(params: { timer: number, setTime: any }) {
 }
 
 // vertically align components
+// show answer count through socket

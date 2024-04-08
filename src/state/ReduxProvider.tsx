@@ -9,7 +9,7 @@ export default function ReduxProvider({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  store.subscribe(() => console.log(store.getState()))
+  // store.subscribe(() => console.log(store.getState()))
   return <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       {children}</PersistGate></Provider>;

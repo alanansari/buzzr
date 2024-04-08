@@ -10,6 +10,7 @@ import WaitScreen from "./WaitScreen";
 import QuestionScreen from "./QuestionScreen";
 import { resetTimer } from "@/state/timer/timerSlice";
 import QuesResult from "./QuesResult";
+import LeaderBoard from "./Leaderboard";
 
 const GameLobby = (params: {
     roomId: string,
@@ -69,12 +70,11 @@ const GameLobby = (params: {
     return <>
         <div className="flex flex-col justify-center items-center h-full w-full p-4 mx-auto my-4">
             {
-                (screen === ScreenStatus.wait) ? <WaitScreen socket={socket} />
+                (screen === ScreenStatus.wait) ? <WaitScreen currentQues={params.currentQues} socket={socket} />
                     : (screen === ScreenStatus.question) ? <QuestionScreen {...params} socket={socket} />
-                        : (screen === ScreenStatus.result) ? <QuesResult {...params} />
-                            : null
-            }
-            {/* <button onClick={() => handleSocket()}>click me</button> */}
+                        : (screen === ScreenStatus.result) ? <QuesResult {...params} socket={socket} />
+                            : (screen === ScreenStatus.leaderboard) && <LeaderBoard {...params} socket={socket} />}
+            {/* <button onClick={() => socket.emit("change-question", params.gameCode, 0)}>click me</button> */}
         </div>
     </>
 }

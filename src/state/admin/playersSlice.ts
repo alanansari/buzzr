@@ -2,10 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface InitialState {
   players: any[];
+  quesResult:number[];
+  currentIndex:number
 }
 
 const initialState: InitialState = {
   players: [],
+  quesResult:[],
+  currentIndex:0
 };
 
 const playerSlice = createSlice({
@@ -30,10 +34,16 @@ const playerSlice = createSlice({
     setPlayers: (state, action) => {
       state.players = action.payload;
     },
+    setResult: (state, action) => {
+      state.quesResult = action.payload;
+    },
+    setCurrIndex: (state, action) => {
+      state.currentIndex = action.payload;
+    },
   },
 });
 
-export const { addPlayer, removePlayer, setPlayers } =
+export const { addPlayer, removePlayer, setPlayers, setResult, setCurrIndex } =
   playerSlice.actions;
 
 export default playerSlice.reducer;
