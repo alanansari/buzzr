@@ -45,7 +45,7 @@ export default function LeaderBoard(props: any) {
 
             <div className="flex flex-col gap-4 my-6">
                 {leaderboard?.length > 0 ? leaderboard.map((lead, index) => {
-                    return <div className={`${index === 0 ? "bg-yellow-600 border-none" : index === 1 ? "bg-gray-600 border-none" : index === 2 ? "bg-orange-900 border-none" : "bg-white"} flex justify-between px-4 py-2 flex-row shadow rounded-md border w-96 items-center`}>
+                    return <div key={index} className={`${index === 0 ? "bg-yellow-600 border-none" : index === 1 ? "bg-gray-600 border-none" : index === 2 ? "bg-orange-900 border-none" : "bg-white"} flex justify-between px-4 py-2 flex-row shadow rounded-md border w-96 items-center`}>
                         <div className="flex flex-row items-center gap-x-2">
                             <Image src={lead.Player.profilePic} className="w-12 h-12 rounded-full" width={16} height={16} alt="profile pic" />
                             <p>{lead.Player.name}</p>

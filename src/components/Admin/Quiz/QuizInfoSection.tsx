@@ -43,7 +43,7 @@ async function QuizInfoSection(props: { quizId: string }) {
                         Previous Game Sessions :
                         <div className="grid grid-cols-2 my-2">
                             {allQuiz?.length > 0 ? allQuiz.map((quiz) => {
-                                return <Link href={`/admin/quiz/leaderboard/${quiz.id}`}><li className="cursor-pointer text-sm underline text-blue-300 hover:text-blue-400 transition-all mb-1" >{quiz.gameCode}</li>
+                                return <Link key={quiz.id} href={`/admin/quiz/leaderboard/${quiz.id}`}><li className="cursor-pointer text-sm underline text-blue-300 hover:text-blue-400 transition-all mb-1" >{quiz.gameCode}</li>
                                 </Link>
                             })
                                 : ""}

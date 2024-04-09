@@ -9,6 +9,7 @@ export enum ScreenStatus {
   result,
   wait,
   lobby,
+  leaderboard,
 }
 
 const initialState: InitialState = {

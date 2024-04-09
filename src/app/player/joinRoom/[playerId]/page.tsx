@@ -1,6 +1,7 @@
 import SubmitButton from "@/components/SubmitButton"
 import joinRoom from "@/actions/JoinRoomAction"
 import { prisma } from "@/utils/prisma"
+import SetLocalItem from "@/components/Player/setLocalItem"
 
 async function JoinRoom({ params }: { params: { playerId: string } }) {
 
@@ -26,6 +27,7 @@ async function JoinRoom({ params }: { params: { playerId: string } }) {
         <div className="flex flex-col justify-center items-center">
             <h1 className="text-3xl font-semibold uppercase mt-12 text-white">Buzzr !</h1>
             <div className="flex flex-col justify-center items-center px-4 py-6 mx-2 md:mx-0 w-11/12 md:w-2/5 my-6 bg-white rounded-lg">
+                <SetLocalItem mapKey='playerId' value={params.playerId} />
                 <form className="flex flex-col justify-center items-center px-2 py-4 w-full md:w-4/5"
                     action={joinRoom}
                 >

@@ -1,5 +1,5 @@
 "use client"
-import { optionColors } from "@/utils/optionColors";
+import { optionColors,cssOptionColors } from "@/utils/optionColors";
 import { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
 import { useDispatch } from "react-redux";
@@ -12,7 +12,7 @@ const Question = (params:{
     socket: Socket
 }) => {
     const options = params.question.options;
-    const colors = optionColors;
+    const colors = cssOptionColors;
     const dispatch = useDispatch();
     const [timer, setTimer] = useState(0);
 
@@ -43,10 +43,10 @@ const Question = (params:{
     return (
         <>
         <div className="bg-slate-200 p-4 rounded-md font-semibold text-xl">{params.question.title}</div>
-        <div className="mt-6 w-full">
+        <div className="mt-6 w-[100vw]">
             {options.map((option: any, index: number) => {
                 return (
-                    <div key={option.id} className={`${colors[index]} p-4 rounded-md font-semibold text-xl mt-1`} onClick={()=>{submitAnswer(option.id)}}>{option.title}</div>
+                    <div key={option.id} className="p-4 rounded-md font-semibold text-xl mt-1" style={{backgroundColor:colors[index]}} onClick={()=>{submitAnswer(option.id)}}>{option.title}</div>
                 )
             })}
         </div>

@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
 import { ScreenStatus, setScreenStatus } from "@/state/admin/screenSlice";
-import { optionColors } from "@/utils/optionColors";
+import { cssOptionColors } from "@/utils/optionColors";
 import { setResult } from '@/state/admin/playersSlice';
 
 export default function QuestionScreen(props: any) {
@@ -18,6 +18,7 @@ export default function QuestionScreen(props: any) {
     const socket = props.socket
     const question = allQuestions[currIndex]
     const [time, setTime] = useState(question?.timeOut)
+    const colors = cssOptionColors
 
     function handleNext() {
         socket.emit("display-result", gameCode, question?.id, question?.options);
@@ -50,7 +51,7 @@ export default function QuestionScreen(props: any) {
             <div className="absolute bottom-16 w-4/5">
                 <div className="grid grid-cols-2 w-full gap-5 h-full">
                     {question.options.length > 0 && question.options.map((opt: any, index: number) => {
-                        return <p className={`text-black p-6 rounded shadow ${optionColors[index]} `}>{opt.title}</p>
+                        return <p key={index} className="text-black p-6 rounded shadow" style={{backgroundColor:colors[index]}}>{opt.title}</p>
                     })}
                     {/* <p className="text-black bg-red-500 p-6 rounded shadow flex justify-between items-center flex-row w-full"><span>Option 1</span>
                     <FcApproval size={32} className="font-bold" /> 

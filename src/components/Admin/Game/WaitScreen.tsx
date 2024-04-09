@@ -35,7 +35,7 @@ export default function WaitScreen(params: { currentQues: number, socket: Socket
                 clearInterval(timer);
             };
         }
-    }, [time, params.socket]);
+    }, [time, params.socket,currIndex,dispatch,params.gameCode,socket]);
 
     function handleSocket() {
         socket.emit("start-timer")

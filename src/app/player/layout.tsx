@@ -1,15 +1,11 @@
 import "../globals.css";
-import "./styles.css"
+import "./styles.css";
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  //   const session = await getServerSession(authOptions);
-  //   if(!session||!session.user){
-  //     redirect('/api/auth/signin');
-  //   }
   return (
       <>
         {children}

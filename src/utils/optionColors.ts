@@ -8,3 +8,14 @@ export const optionColors = [
     "bg-indigo-500",
     "bg-gray-500",
 ];
+
+export const cssOptionColors = [
+    "tomato",
+    "dodgerblue",
+    "mediumseagreen",
+    "gold",
+    "slateblue",
+    "hotpink",
+    "rebeccapurple",
+    "gray",
+];

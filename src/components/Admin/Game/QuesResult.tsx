@@ -89,7 +89,7 @@ function Barchart(params: { result: number[], options: Option[] }) {
             <div className="flex flex-row justify-around w-[450px] text-lg ml-12">
                 {params.result.length > 0 && params.result.map((opt: any, index: number) => {
                     const isCorrect = params.options[index].isCorrect === true;
-                    return <p className={`text-black text-sm p-2 rounded shadow flex flex-row items-center ${optionColors[index]}`}>{opt}
+                    return <p key={index} className={`text-black text-sm p-2 rounded shadow flex flex-row items-center ${optionColors[index]}`}>{opt}
                         {isCorrect ? <TiTick size={20} color="#fff" className="text-white font-extrabold m-auto ml-2" /> : <RxCross2 size={20} color="#fff" className="text-white font-extrabold m-auto ml-2" />}</p>
                 })}
             </div>

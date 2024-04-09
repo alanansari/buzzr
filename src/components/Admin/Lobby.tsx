@@ -35,7 +35,7 @@ const Lobby = (params: {
 
         // fetch all players
         dispatch(setPlayers(params.players))
-    }, [dispatch, params.players, params.gameStarted])
+    }, [dispatch, params.players, params.gameStarted, params.roomId, router])
 
     useEffect(() => {
         // establish a socket connection using io function
