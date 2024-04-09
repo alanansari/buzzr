@@ -17,6 +17,7 @@ export default function WaitScreen(params: { currentQues: number, socket: Socket
 
     useEffect(() => {
         if (currIndex != 0) {
+            // socket.emit("start-timer")
             const timer = setInterval(() => {
                 if (time >= 0) {
                     dispatch(setTimer());

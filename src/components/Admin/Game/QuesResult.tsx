@@ -25,12 +25,22 @@ export default function QuesResult(props: any) {
     function handleNext() {
 
         // socket event to leaderboard screen 
-        socket.emit("display-leaderboard", gameCode)
-        socket.on("displaying-leaderboard", (leaderboard:any[]) => {
-            console.log("Leaderboard")
-            dispatch(setLeaderboard(leaderboard))
-            dispatch(setScreenStatus(ScreenStatus.leaderboard))
-        })
+        if (currIndex == allQuestions.length - 1) {
+            socket.emit("final-leaderboard", gameCode)
+            socket.on("displaying-final-leaderboard", (leaderboard: any[]) => {
+                console.log("Final Leaderboard")
+                dispatch(setLeaderboard(leaderboard))
+                dispatch(setScreenStatus(ScreenStatus.leaderboard))
+            })
+        }
+        else {
+            socket.emit("display-leaderboard", gameCode)
+            socket.on("displaying-leaderboard", (leaderboard: any[]) => {
+                console.log("Leaderboard")
+                dispatch(setLeaderboard(leaderboard))
+                dispatch(setScreenStatus(ScreenStatus.leaderboard))
+            })
+        }
     }
     return <>
         <div className="flex flex-col items-center m-auto w-full px-4">

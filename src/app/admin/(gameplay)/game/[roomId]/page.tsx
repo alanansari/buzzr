@@ -48,7 +48,10 @@ const page = async ({ params }: { params: { roomId: string } }) => {
 
     return (
         <div>
-            <p className="w-full flex flex-row justify-end px-4 py-2 font-semibold absolute bottom-0 bg-black opacity-70 text-white">Game Code: {room?.gameCode}</p>
+            <div className="absolute bottom-0 w-full flex flex-row justify-between bg-black opacity-70 px-4 z-10">
+                {/* <button className="w-24 h-10 shadow hover:bg-slate-200 transition-all bg-white border rounded z-20 opacity-100" >End Game</button> */}
+                <p className="w-full flex flex-row justify-end px-4 py-2 font-semibold text-white">Game Code: {room?.gameCode}</p>
+            </div>
 
             <GameLobby roomId={params.roomId} userId={user.id} gameCode={room?.gameCode} players={players} quizQuestions={quizQuestions} currentQues={room?.currentQuestion} />
 
