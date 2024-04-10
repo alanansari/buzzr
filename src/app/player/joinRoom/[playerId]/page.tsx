@@ -1,30 +1,9 @@
 import SubmitButton from "@/components/SubmitButton"
 import joinRoom from "@/actions/JoinRoomAction"
 import { prisma } from "@/utils/prisma"
+import SetLocalItem from "@/components/Player/setLocalItem"
 
 async function JoinRoom({ params }: { params: { playerId: string } }) {
-
-    // const dispatch = useDispatch();
-    // useEffect(() => {
-    //     // establish a socket connection using io function
-    //     const socket = io(`http://localhost:8080?userType=player&playerId=${params.playerId}`);
-    //     socket.on("connect", () => {
-    //         dispatch(createConnection(socket));
-    //     });
-
-    //     return () => {
-    //         socket.disconnect();
-    //     };
-    // }, [dispatch, params.playerId]);
-
-    // const socket = useSelector((state: any) => state?.socket?.socket)
-
-    // player joins room
-    // function handleSubmit(e: any) {
-    //     e.preventDefault()
-    //     socket.emit("join room", code, 'player', params.playerId);
-    //     console.log("yes")
-    // }
 
     const player = await prisma.player.findUnique({
         where: {
@@ -32,11 +11,11 @@ async function JoinRoom({ params }: { params: { playerId: string } }) {
         }
     })
 
-    if(!player){
+    if (!player) {
         throw new Error('Player not found')
     }
 
-    if(player.gameId){
+    if (player.gameId) {
         await prisma.player.update({
             where: { id: params.playerId },
             data: {
@@ -44,11 +23,11 @@ async function JoinRoom({ params }: { params: { playerId: string } }) {
             }
         })
     }
-    
     return <>
         <div className="flex flex-col justify-center items-center">
             <h1 className="text-3xl font-semibold uppercase mt-12 text-white">Buzzr !</h1>
             <div className="flex flex-col justify-center items-center px-4 py-6 mx-2 md:mx-0 w-11/12 md:w-2/5 my-6 bg-white rounded-lg">
+                <SetLocalItem mapKey='playerId' value={params.playerId} />
                 <form className="flex flex-col justify-center items-center px-2 py-4 w-full md:w-4/5"
                     action={joinRoom}
                 >

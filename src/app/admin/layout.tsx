@@ -16,12 +16,12 @@ export default async function RootLayout({
   }
   return (
       <>
-          <SessionProvider>
-            <ReduxProvider>
-              <Navbar />
-              {children}
-            </ReduxProvider>
-          </SessionProvider>
+        <SessionProvider>
+          <ReduxProvider>
+            <Navbar />
+            {children}
+          </ReduxProvider>
+        </SessionProvider>
       </>
   );
 }

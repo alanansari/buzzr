@@ -5,6 +5,7 @@ import { redirect } from "next/navigation"
 import createRoom from "@/actions/CreateRoomAction"
 import SubmitButton from "@/components/SubmitButton"
 import Image from "next/image";
+import Link from "next/link"
 
 async function QuizInfoSection(props: { quizId: string }) {
     const session = await getServerSession(authOptions);
@@ -18,6 +19,17 @@ async function QuizInfoSection(props: { quizId: string }) {
             questions: true
         }
     });
+
+    const user = await prisma.user.findUnique({
+        where: {
+            email: session.user.email as string,
+        },
+        include: {
+            GameSessions: true
+        }
+    });
+
+    const allQuiz = user?.GameSessions ? user?.GameSessions : [];
     return <>
         <form className="flex flex-row justify-between pb-12 border-dashed border-b" action={createRoom}>
             <div className="flex flex-col w-full">
@@ -25,7 +37,19 @@ async function QuizInfoSection(props: { quizId: string }) {
                 <p className="capitalize mb-4">{quiz?.description}</p>
                 <p className="text-xl text-gray-200">Number of Questions : <span className="font-semibold text-gray-50">{quiz?.questions?.length}</span></p>
                 <input type="hidden" name="quizId" value={props.quizId} />
-                <SubmitButton text="Host" />
+                <SubmitButton text="Host" isQuiz={true} />
+                {allQuiz.length > 0 &&
+                    <div className="my-2">
+                        Previous Game Sessions :
+                        <div className="grid grid-cols-2 my-2">
+                            {allQuiz?.length > 0 ? allQuiz.map((quiz) => {
+                                return <Link key={quiz.id} href={`/admin/quiz/leaderboard/${quiz.id}`}><li className="cursor-pointer text-sm underline text-blue-300 hover:text-blue-400 transition-all mb-1" >{quiz.gameCode}</li>
+                                </Link>
+                            })
+                                : ""}
+                        </div>
+                    </div>
+                }
             </div>
             <div className="w-full">
                 <Image src={`${quiz?.thumbnail ? quiz.thumbnail : "/card_placeholder.png"}`}
