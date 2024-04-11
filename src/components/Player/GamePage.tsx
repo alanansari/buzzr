@@ -25,7 +25,7 @@ const GamePage = (params: {
     useEffect(() => {
 
         if (window !== undefined) {
-            const socket = io(`http://localhost:8080?userType=player&playerId=${params.player.id}&gameCode=${params.game.gameCode}`);
+            const socket = io(`https://buzzr.devalan.tech/?userType=player&playerId=${params.player.id}&gameCode=${params.game.gameCode}`);
 
             socket.on("connect", () => {
                 console.log("Connected to socket server");
