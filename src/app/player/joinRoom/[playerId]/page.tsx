@@ -1,8 +1,8 @@
-import SubmitButton from "@/components/SubmitButton"
-import joinRoom from "@/actions/JoinRoomAction"
 import { prisma } from "@/utils/prisma"
 import SetLocalItem from "@/components/Player/setLocalItem"
 import ResetReduxStates from "@/components/Player/ResetReduxStates"
+import JoinRoomForm from "@/components/Player/Setup/JoinRoomForm"
+import { ToastContainer } from "react-toastify"
 
 async function JoinRoom({ params }: { params: { playerId: string } }) {
 
@@ -30,28 +30,10 @@ async function JoinRoom({ params }: { params: { playerId: string } }) {
             <div className="flex flex-col justify-center items-center px-4 py-6 mx-2 md:mx-0 w-11/12 md:w-2/5 my-6 bg-white rounded-lg">
                 <SetLocalItem mapKey='playerId' value={params.playerId} />
                 <ResetReduxStates />
-                <form className="flex flex-col justify-center items-center px-2 py-4 w-full md:w-4/5"
-                    action={joinRoom}
-                >
-                    <label className="text-lg text-center ">Enter the Code to join the quiz</label>
-                    <p className="text-sm text-slate-600 mt-2 mb-3 text-center">It is on the screen in front of you</p>
-                    <input
-                        type="hidden"
-                        name="playerId"
-                        value={params.playerId}
-                    />
-                    <input
-                        type="text"
-                        name="gameCode"
-                        placeholder="enter room code to join"
-                        className="w-full border-black border-2 focus:border-blue-600 outline-none text-slate-900 my-2 rounded p-2 capitalize mb-6 focus:shadow-md"
-                        autoComplete="off"
-                        required
-                    />
-                    <SubmitButton style='game' />
-                </form>
+                <JoinRoomForm playerId={params.playerId}/>
             </div>
         </div>
+        <ToastContainer />
     </>
 }
 
