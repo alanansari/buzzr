@@ -1,6 +1,5 @@
 import { prisma } from "@/utils/prisma";
 import { redirect } from "next/navigation";
-import { io } from "socket.io-client";
 
 export default async function joinRoom(formData: FormData){
     "use server"

@@ -44,7 +44,7 @@ const AddQuesForm = (props: { quizId: string }) => {
             },
         });
 
-        revalidatePath("/quiz/[quizId]");
+        revalidatePath("/quiz/[quizId]", "page");
     }
     return (
         <form
