@@ -32,9 +32,11 @@ const GamePage = (params: {
                 setSocketState(socket);
             });
 
-            socket.on("player-removed", () => {
-                window.localStorage.removeItem("playerId");
-                router.push("/player");
+            socket.on("player-removed", (player: any) => {
+                if(player.id === params.player.id){
+                    window.localStorage.removeItem("playerId");
+                    router.push("/player");
+                }
             })
 
             socket.on("game-started", () => {
