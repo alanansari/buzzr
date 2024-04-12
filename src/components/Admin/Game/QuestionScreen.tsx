@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ScreenStatus, setScreenStatus } from "@/state/admin/screenSlice";
 import { cssOptionColors } from "@/utils/optionColors";
 import { setResult } from '@/state/admin/playersSlice';
+import Image from 'next/image';
 
 export default function QuestionScreen(props: any) {
 
@@ -36,8 +37,9 @@ export default function QuestionScreen(props: any) {
 
     return <>
         <div className="flex flex-col items-center m-auto w-full px-4">
-            <p className="w-full py-2 px-3 text-2xl text-center bg-white font-semibold rounded max-w-fit capitalize">{allQuestions[currIndex]?.title}</p>
-
+            <p className="w-full py-2 px-3 text-2xl text-center bg-white font-semibold rounded max-w-fit capitalize">{question?.title}</p>
+            {question.mediaType === "image" && <Image src={question.media} className="w-full h-full" alt="media Image" height={24} width={24} />
+            }
             <div className="absolute right-4 mt-1">
                 <button className="w-24 h-10 shadow hover:bg-slate-200 transition-all bg-white border rounded" onClick={handleNext} >Next</button>
             </div>
@@ -51,7 +53,7 @@ export default function QuestionScreen(props: any) {
             <div className="absolute bottom-16 w-4/5">
                 <div className="grid grid-cols-2 w-full gap-5 h-full">
                     {question.options.length > 0 && question.options.map((opt: any, index: number) => {
-                        return <p key={index} className="text-black p-6 rounded shadow" style={{backgroundColor:colors[index]}}>{opt.title}</p>
+                        return <p key={index} className="text-black p-6 rounded shadow" style={{ backgroundColor: colors[index] }}>{opt.title}</p>
                     })}
                     {/* <p className="text-black bg-red-500 p-6 rounded shadow flex justify-between items-center flex-row w-full"><span>Option 1</span>
                     <FcApproval size={32} className="font-bold" /> 

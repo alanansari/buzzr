@@ -26,7 +26,7 @@ function AddModal(props: {
     btnTitle: string,
     children: React.ReactNode
     open: boolean
-    setOpen: any
+    setOpen?: any
 }) {
     function handleClose() {
         props.setOpen(false)
@@ -35,6 +35,7 @@ function AddModal(props: {
     return <>
         <div className="flex justify-center">
             <Modal
+                // open={}
                 open={props.open}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"

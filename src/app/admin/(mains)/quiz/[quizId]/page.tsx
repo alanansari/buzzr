@@ -2,6 +2,8 @@ import BasicModal from "@/components/Modal"
 import AddQuesForm from "@/components/Admin/Quiz/AddQuesForm"
 import AllQues from "@/components/Admin/Quiz/AllQues"
 import QuizInfoSection from "@/components/Admin/Quiz/QuizInfoSection"
+import AddModal from "@/components/Admin/Quiz/AddModal"
+import { ToastContainer } from "react-toastify"
 
 function Quiz({ params }: { params: { quizId: string } }) {
 
@@ -14,9 +16,13 @@ function Quiz({ params }: { params: { quizId: string } }) {
                 <BasicModal btnTitle="+Add Question">
                     <AddQuesForm quizId={params.quizId} />
                 </BasicModal>
+                {/* <AddModal btnTitle="+Add Question" open={true}>
+                    <AddQuesForm quizId={params.quizId} />
+                </AddModal> */}
             </div>
             <AllQues quizId={params.quizId} />
         </div>
+        <ToastContainer />
     </>
 }
 
