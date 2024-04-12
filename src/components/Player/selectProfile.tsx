@@ -36,7 +36,7 @@ export default function SelectProfile() {
                     <div className="" key={index}>
                         <input name="profile" id="profile" value={avatar.profile} className="hidden" />
                         <label htmlFor="profile" className="bg-transparent">
-                            <Image key={index} alt="image" width={32} height={32} src={pr} className={` ${avatar.index === index && "border-[5px] border-blue-500 ease-linear duration-150 scale-95 shadow-lg"} rounded-full w-24 h-24 border-black border-[1.4px] cursor-pointer`} onClick={() => { handleProfile(pr, index) }} />
+                            <Image key={index} alt="image" width={64} height={64} src={pr} className={` ${avatar.index === index && "border-[5px] border-blue-500 ease-linear duration-150 scale-95 shadow-lg"} rounded-full w-24 h-24 border-black border-[1.4px] cursor-pointer`} onClick={() => { handleProfile(pr, index) }} />
                         </label>
                     </div>
                 </>

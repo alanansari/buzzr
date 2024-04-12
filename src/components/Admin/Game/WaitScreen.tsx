@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/state/store";
-import { resetTimer, setTimer } from "@/state/timer/timerSlice";
+import { setTimer } from "@/state/timer/timerSlice";
 import { Socket } from "socket.io-client";
 import { ScreenStatus, setScreenStatus } from "@/state/admin/screenSlice";
 
@@ -17,7 +17,6 @@ export default function WaitScreen(params: { currentQues: number, socket: Socket
 
     useEffect(() => {
         if (currIndex != 0) {
-            // socket.emit("start-timer")
             const timer = setInterval(() => {
                 if (time >= 0) {
                     dispatch(setTimer());
@@ -26,7 +25,7 @@ export default function WaitScreen(params: { currentQues: number, socket: Socket
 
             if (time < 0) {
                 socket.emit("set-question-index", params.gameCode, currIndex);
-                socket.on("get-question-index", () => {
+                socket.on("get-question-index", (index: number) => {
                     dispatch(setScreenStatus(ScreenStatus.question))
                 })
             }
@@ -35,10 +34,10 @@ export default function WaitScreen(params: { currentQues: number, socket: Socket
                 clearInterval(timer);
             };
         }
-    }, [time, params.socket,currIndex,dispatch,params.gameCode,socket]);
+    }, [time, currIndex, dispatch, params.gameCode, socket]);
 
     function handleSocket() {
-        socket.emit("start-timer")
+        socket.emit("start-timer", params.gameCode)
         socket.on("timer-starts", () => {
             console.log("Timer started");
             setStart(true)
