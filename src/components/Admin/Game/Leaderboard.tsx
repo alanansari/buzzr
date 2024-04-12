@@ -16,22 +16,23 @@ export default function LeaderBoard(props: any) {
     const router = useRouter()
 
     function handleNext() {
+        console.log("next")
         dispatch(resetTimer(3))
-        socket.emit("set-question-index", gameCode, currIndex + 1)
-        socket.on("get-question-index", (index: number) => {
+        socket.emit("change-question", gameCode, currIndex + 1)
+        socket.on("question-changed", (index: number) => {
+            console.log("22")
             dispatch(setCurrIndex(index))
             dispatch(setScreenStatus(ScreenStatus.wait))
-            socket.emit("start-timer")
+            socket.emit("start-timer", gameCode)
         })
     }
 
     function handleEnd() {
         // emit socket to close quiz
-        socket.emit("end-game-session");
+        socket.emit("end-game-session", gameCode);
         router.push(`/admin/quiz/${quizQuestions?.id}`)
     }
 
-    console.log(props)
     return <>
         <div className="flex flex-col items-center m-auto w-full px-4">
             <p className="w-full py-2 px-3 text-2xl text-center bg-white font-semibold rounded max-w-fit capitalize">Leaderboard</p>

@@ -44,7 +44,7 @@ export default function QuestionScreen(props: any) {
             </div>
             <div className="flex w-full justify-between items-center flex-row my-8">
                 <Countdown timer={question?.timeOut} setTime={setTime} />
-                {question.mediaType === "image" && <Image src={question.media} className="w-1/4" alt="media Image" height={24} width={24} />
+                {question.mediaType === "image" && <Image src={question.media} className="w-1/4" alt="media Image" height={100} width={100} />
                 }
                 <span className="rounded-full bg-white w-12 h-12 flex flex-col justify-center items-center">
                     0 <span className="text-[10px] mt-[-5px]"> Ans</span>
