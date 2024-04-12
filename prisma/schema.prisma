@@ -78,6 +78,8 @@ model Question {
   quizId    String
   createdAt DateTime       @default(now())
   timeOut   Int            @default(15)
+  media     String?
+  mediaType String?
   options   Option[]
   answers   PlayerAnswer[]
   quiz      Quiz           @relation(fields: [quizId], references: [id])
@@ -122,10 +124,12 @@ model GameSession {
 model GameLeaderboard {
   id            String      @id
   playerId      String
-  gameSessionId String      @unique
+  gameSessionId String
   score         Int         @default(0)
   GameSession   GameSession @relation(fields: [gameSessionId], references: [id])
   Player        Player      @relation(fields: [playerId], references: [id])
+
+  @@unique([playerId, gameSessionId])
 }
 
 model PlayerAnswer {

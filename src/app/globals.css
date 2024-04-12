@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -34,4 +36,39 @@ body {
 
 * {
   overflow-x: hidden;
+}
+
+/* animated text */
+
+.text {
+  background: 50% 100% / 50% 50% no-repeat
+    radial-gradient(ellipse at bottom, #fff, transparent, transparent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 5em;
+  font-family: "Source Sans Pro", sans-serif;
+  animation: reveal 3000ms ease-in-out forwards 200ms,
+    glow 2500ms linear infinite 2000ms;
+}
+
+@keyframes reveal {
+  80% {
+    letter-spacing: 8px;
+  }
+  100% {
+    background-size: 300% 300%;
+  }
+}
+@keyframes glow {
+  40% {
+    text-shadow: 0 0 8px #fff;
+  }
+}
+
+@media (max-width: 600px) {
+  .text {
+    font-size: 4em;
+    margin-top: 40px;
+  }
 }

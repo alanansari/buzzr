@@ -1,11 +1,11 @@
 "use client"
-import { optionColors,cssOptionColors } from "@/utils/optionColors";
+import { optionColors, cssOptionColors } from "@/utils/optionColors";
 import { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
 import { useDispatch } from "react-redux";
 import { setScreenStatus, ScreenStatus } from "@/state/player/screenSlice";
 
-const Question = (params:{
+const Question = (params: {
     question: any,
     gameSessionId: string,
     playerId: string,
@@ -25,12 +25,12 @@ const Question = (params:{
         const interval = setInterval(() => {
             setTimer(timer + 0.5);
         }, 500);
-        
+
         return () => {
             clearTimeout(timeout);
             clearInterval(interval);
         }
-        
+
     }, [dispatch, params.question.timeOut, timer])
 
     const submitAnswer = (optionId: string) => {
@@ -42,14 +42,14 @@ const Question = (params:{
 
     return (
         <>
-        <div className="bg-slate-200 p-4 rounded-md font-semibold text-xl">{params.question.title}</div>
-        <div className="mt-6 w-[100vw]">
-            {options.map((option: any, index: number) => {
-                return (
-                    <div key={option.id} className="p-4 rounded-md font-semibold text-xl mt-1" style={{backgroundColor:colors[index]}} onClick={()=>{submitAnswer(option.id)}}>{option.title}</div>
-                )
-            })}
-        </div>
+            <div className="bg-slate-200 p-4 rounded-md font-semibold text-xl">{params.question.title}</div>
+            <div className="mt-6 w-[100vw]">
+                {options.map((option: any, index: number) => {
+                    return (
+                        <div key={option.id} className="p-4 rounded-md font-semibold text-xl mt-1" style={{ backgroundColor: colors[index] }} onClick={() => { submitAnswer(option.id) }}>{option.title}</div>
+                    )
+                })}
+            </div>
         </>
     )
 }
