@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
 import { useDispatch } from "react-redux";
 import { setScreenStatus, ScreenStatus } from "@/state/player/screenSlice";
+import Image from "next/image";
 
 const Question = (params: {
     question: any,
@@ -43,7 +44,9 @@ const Question = (params: {
     return (
         <>
             <div className="bg-slate-200 p-4 rounded-md font-semibold text-xl">{params.question.title}</div>
-            <div className="mt-6 w-[100vw]">
+            {params.question.mediaType === "image" && <Image src={params.question.media} className="w-4/5 md:w-1/2 mt-6 mb-0" alt="media Image" height={24} width={24} />
+            }
+            <div className="mt-6 w-[80vw]">
                 {options.map((option: any, index: number) => {
                     return (
                         <div key={option.id} className="p-4 rounded-md font-semibold text-xl mt-1" style={{ backgroundColor: colors[index] }} onClick={() => { submitAnswer(option.id) }}>{option.title}</div>
