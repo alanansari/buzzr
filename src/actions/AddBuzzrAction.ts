@@ -25,7 +25,7 @@ const addBuzzr = async (formData: FormData) => {
         },
     });
 
-    revalidatePath("/");
+    revalidatePath("/","page");
 };
 
 export default addBuzzr;

@@ -57,12 +57,17 @@ const GamePage = (params: {
                 // set result
                 const playerAnswers = data.player;
 
+                let playerAnswered = false;
+
                 playerAnswers.forEach((player: any) => {
                     if (player.playerId === params.player.id) {
                         setResult((player.isCorrect) ? 'correct' : 'incorrect');
+                        playerAnswered = true;
                         return;
                     }
                 });
+
+                if (!playerAnswered) setResult('timeout');
 
                 dispatch(setScreenStatus(ScreenStatus.result));
             });
