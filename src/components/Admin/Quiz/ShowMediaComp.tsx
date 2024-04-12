@@ -40,7 +40,7 @@ export default function ShowMedia(props: { media: string, mediaType: string }) {
         <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description">
             <Box sx={style} className="">
-                {mediaType === "image" && <Image src={props.media} className="w-full h-full object-cover" alt="media Image" height={100} width={100} />
+                {mediaType === "image" && <Image src={props.media} className="w-full h-full object-cover" alt="media Image" height={200} width={200} />
                 }
             </Box>
         </Modal>

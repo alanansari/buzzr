@@ -34,9 +34,10 @@ export default async function QuizLeaderboard({ params }: { params: { roomId: st
 
             <div className="flex flex-col gap-4 my-6">
                 {leaderboard?.length > 0 ? leaderboard.map((lead, index) => {
-                    return <div key={index} className={`${index === 0 ? "bg-yellow-600 border-none" : index === 1 ? "bg-gray-600 border-none" : index === 2 ? "bg-orange-900 border-none" : "bg-white"} flex justify-between px-4 py-2 flex-row shadow rounded-md border w-96 items-center`}>
+                    return <div key={index} className={`${index === 0 ? "bg-yellow-600 border-none" : index === 1 ? "bg-gray-600 border-none" : index === 2 ? "bg-orange-900 border-none" : "bg-white text-slate-900"} flex justify-between px-4 py-2 flex-row shadow rounded-md border w-[60vw] items-center`}>
+                        #{index + 1}
                         <div className="flex flex-row items-center gap-x-2">
-                            <Image src={lead.Player.profilePic || "/avatar-1577909_1280.webp"} className="w-12 h-12 rounded-full" width={16} height={16} alt="profile pic" />
+                            <Image src={lead.Player.profilePic || "/avatar-1577909_1280.webp"} className="w-12 h-12 rounded-full" width={50} height={50} alt="profile pic" />
                             <p>{lead.Player.name}</p>
                         </div>
                         <p>{lead.score}</p>

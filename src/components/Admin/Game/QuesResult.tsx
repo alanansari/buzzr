@@ -7,7 +7,7 @@ import { FcCheckmark, FcApproval } from "react-icons/fc";
 import { RxCross2 } from "react-icons/rx";
 import { TiTick } from "react-icons/ti";
 import { useDispatch, useSelector } from "react-redux";
-import { optionColors } from "@/utils/optionColors"
+import { optionColors,cssOptionColors } from "@/utils/optionColors"
 import { Option } from "@prisma/client";
 import { RootState } from "@/state/store";
 import { setLeaderboard } from "@/state/admin/playersSlice";
@@ -89,8 +89,10 @@ function Barchart(params: { result: number[], options: Option[] }) {
             <div className="flex flex-row justify-around w-[450px] text-lg ml-12">
                 {params.result.length > 0 && params.result.map((opt: any, index: number) => {
                     const isCorrect = params.options[index].isCorrect === true;
-                    return <p key={index} className={`text-black text-sm p-2 rounded shadow flex flex-row items-center ${optionColors[index]}`}>{opt}
+                    return <div key={index} className="w-20"><p  className={`text-black text-sm p-2 rounded shadow flex flex-row items-center`} style={{backgroundColor:cssOptionColors[index]}}>{opt}
                         {isCorrect ? <TiTick size={20} color="#fff" className="text-white font-extrabold m-auto ml-2" /> : <RxCross2 size={20} color="#fff" className="text-white font-extrabold m-auto ml-2" />}</p>
+                        <p className="text-sm">{params.options[index].title}</p>
+                        </div>
                 })}
             </div>
         </div>

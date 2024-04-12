@@ -114,6 +114,7 @@ model GameSession {
   gameState       GameStates        @default(question)
   isPlaying       Boolean           @default(false)
   currentQuestion Int               @default(0)
+  createdAt       DateTime         @default(now())
   leaderboard     GameLeaderboard[]
   creator         User              @relation(fields: [creatorId], references: [id])
   quiz            Quiz              @relation(fields: [quizId], references: [id])

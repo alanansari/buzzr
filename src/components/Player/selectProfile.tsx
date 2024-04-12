@@ -30,7 +30,7 @@ export default function SelectProfile() {
 
 
     return <>
-        <div className="flex flex-row flex-wrap w-full gap-4 items-center justify-center mt-2 bg-transparent mb-6">
+        <div className="flex flex-row flex-wrap w-full gap-4 items-center justify-center mt-2 bg-transparent mb-6 max-h-[30vh] overflow-y-scroll">
             {profiles.map((pr, index) => {
                 return <>
                     <div className="" key={index}>

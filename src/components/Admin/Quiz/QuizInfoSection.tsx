@@ -29,7 +29,8 @@ async function QuizInfoSection(props: { quizId: string }) {
         }
     });
 
-    const allQuiz = user?.GameSessions ? user?.GameSessions : [];
+    const allQuiz = user?.GameSessions ? user?.GameSessions.reverse() : [];
+    
     return <>
         <form className="flex flex-row justify-between pb-12 border-dashed border-b" action={createRoom}>
             <div className="flex flex-col w-full">
@@ -54,8 +55,8 @@ async function QuizInfoSection(props: { quizId: string }) {
             <div className="w-full">
                 <Image src={`${quiz?.thumbnail ? quiz.thumbnail : "/card_placeholder.png"}`}
                     alt="Quiz Thumbnail"
-                    width={100}
-                    height={100}
+                    width={300}
+                    height={300}
                     className="w-3/5 h-auto rounded-md mx-auto"
                 />
             </div>
