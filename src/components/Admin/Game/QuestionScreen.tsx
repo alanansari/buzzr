@@ -37,14 +37,15 @@ export default function QuestionScreen(props: any) {
 
     return <>
         <div className="flex flex-col items-center m-auto w-full px-4">
+            <div className=''></div>
             <p className="w-full py-2 px-3 text-2xl text-center bg-white font-semibold rounded max-w-fit capitalize">{question?.title}</p>
-            {question.mediaType === "image" && <Image src={question.media} className="w-full h-full" alt="media Image" height={24} width={24} />
-            }
             <div className="absolute right-4 mt-1">
                 <button className="w-24 h-10 shadow hover:bg-slate-200 transition-all bg-white border rounded" onClick={handleNext} >Next</button>
             </div>
             <div className="flex w-full justify-between items-center flex-row my-8">
                 <Countdown timer={question?.timeOut} setTime={setTime} />
+                {question.mediaType === "image" && <Image src={question.media} className="w-1/4" alt="media Image" height={24} width={24} />
+                }
                 <span className="rounded-full bg-white w-12 h-12 flex flex-col justify-center items-center">
                     0 <span className="text-[10px] mt-[-5px]"> Ans</span>
                 </span>
@@ -55,9 +56,6 @@ export default function QuestionScreen(props: any) {
                     {question.options.length > 0 && question.options.map((opt: any, index: number) => {
                         return <p key={index} className="text-black p-6 rounded shadow" style={{ backgroundColor: colors[index] }}>{opt.title}</p>
                     })}
-                    {/* <p className="text-black bg-red-500 p-6 rounded shadow flex justify-between items-center flex-row w-full"><span>Option 1</span>
-                    <FcApproval size={32} className="font-bold" /> 
-                </p> */}
                 </div>
             </div>
         </div>
