@@ -1,6 +1,4 @@
 import "./styles.css"
-import ReduxProvider from "@/state/ReduxProvider";
-import SessionProvider from "@/components/SessionProvider";
 
 export default async function RootLayout({
   children,

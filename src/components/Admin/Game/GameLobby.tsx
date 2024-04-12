@@ -33,7 +33,7 @@ const GameLobby = (params: {
     useEffect(() => {
         // establish a socket connection using io function
         if (window !== undefined) {
-            const socket = io(`http://localhost:8080?userType=admin&adminId=${params.userId}&gameCode=${params.gameCode}`);
+            const socket = io(`https://buzzr.devalan.tech/?userType=admin&adminId=${params.userId}&gameCode=${params.gameCode}`);
             socket.on("connect", () => {
                 console.log("Connected to socket server");
                 dispatch(createConnection(socket));
