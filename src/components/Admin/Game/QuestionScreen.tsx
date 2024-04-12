@@ -56,9 +56,6 @@ export default function QuestionScreen(props: any) {
                     {question.options.length > 0 && question.options.map((opt: any, index: number) => {
                         return <p key={index} className="text-black p-6 rounded shadow" style={{ backgroundColor: colors[index] }}>{opt.title}</p>
                     })}
-                    {/* <p className="text-black bg-red-500 p-6 rounded shadow flex justify-between items-center flex-row w-full"><span>Option 1</span>
-                    <FcApproval size={32} className="font-bold" /> 
-                </p> */}
                 </div>
             </div>
         </div>
