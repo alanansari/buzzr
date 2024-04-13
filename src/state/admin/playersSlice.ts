@@ -28,7 +28,6 @@ const playerSlice = createSlice({
       state.players = [action.payload, ...state.players];
     },
     removePlayer: (state, action) => {
-      console.log(action.payload);
       state.players = state.players.filter(
         (player) => player.id !== action.payload.id
       );

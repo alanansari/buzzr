@@ -62,7 +62,6 @@ export default async function addQues(formData: FormData) {
     });
     revalidatePath("/quiz/[quizId]");
   } catch (err:any) {
-    console.log("77", err);
     return {
       error: err.message,
     };

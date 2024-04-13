@@ -1,7 +1,7 @@
 "use client";
 import joinRoom from '@/actions/JoinRoomAction';
 import SubmitButton from '@/components/SubmitButton';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 import 'react-toastify/dist/ReactToastify.css';
 
