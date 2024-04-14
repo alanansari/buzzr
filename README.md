@@ -1,36 +1,113 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# BUZZR
 
-## Getting Started
+**Check the Website [here](https://buzzr-one.vercel.app/)**.
 
-First, run the development server:
+**Check the socket server repository [here](https://github.com/alanansari/buzzr-server)**.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## TABLE OF CONTENTS
+
+- [About the project](#About-the-project)
+- [Tech Stack Used](#Tech-Stack-Used)
+- [Key Features ✨](#Key-Features-✨)
+- [Screenshots](#Screenshots)
+
+# About the project
+
+Welcome to Buzzr, where learning meets excitement! Join live quiz battles, create personalized challenges, and connect with peers in real-time. With adaptive difficulty and interactive features, Buzzr offers an engaging learning experience for users of all levels. Create an account, customize your profile, and dive into the world of quizzes today. Get ready to buzz with excitement on Buzzr!
+
+# Tech Stack Used
+
+![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white) ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white) ![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white) ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white) ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+
+# Key Features ✨
+
+- **User Authentication:** Secure Google OAuth Sign In system using Next-Auth.
+
+- **Buzzr Creation:** Create new buzzrs(quizzes) and add questions to it.
+
+- **Host a Buzzr:** Host a new Game Session for the quiz.
+
+- **Real-time Updates:** Get Realtime player and presenter interations.
+
+- **Player Management:** Manage players in a game through presenter, system to kick unwanted players.
+
+- **Leaderboard:** See the leaderboard after each question round.
+
+# Running the Project
+
+1. Clone the repository:
+
+```CMD
+git clone https://github.com/alanansari/buzzr.git
+```
+To run the server, you need to have NodeJS installed on your machine. If you don't have it installed, you can follow the instructions [here](https://nodejs.org/en//) to install it.
+
+
+
+2. Install the dependencies: 
+
+```CMD
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+4. Setup .env file in base directory:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```
+NEXTAUTH_URL = "http://localhost:3000"
+NEXTAUTH_SECRET = "<random_string>"
 
-## Learn More
+GOOGLE_CLIENT_ID = ""
+GOOGLE_CLIENT_SECRET = ""
 
-To learn more about Next.js, take a look at the following resources:
+DATABASE_URL="<postgres_database_uri>"
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+NEXT_PUBLIC_SOCKET_URL="<websocket_server_url>"
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+5. Connect to the Server for websockets:
+    - Go through this: https://github.com/alanansari/buzzr-server
+    - Add the NEXT_PUBLIC_SOCKET_URL=http://localhost:\[PORT\] 
+    - PORT is where the socket server is running 
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+6. Run on localhost:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```CMD
+npm run dev
+```
+
+
+You can access the endpoints from your web browser following this url
+```url
+http://localhost:3000
+```
+
+# Screenshots
+
+## Landing Page
+
+![buzzr landing](https://res.cloudinary.com/dov6iolx4/image/upload/v1713007790/Buzzr/Screenshot_2024-04-13_165354_ylsdzw.png)
+
+## GamePlay (Presenter Side)
+
+![Game Lobby](https://res.cloudinary.com/dov6iolx4/image/upload/v1713007977/Buzzr/Screenshot_2024-04-13_170222_nds0th.png)
+
+![Question](https://res.cloudinary.com/dov6iolx4/image/upload/v1713009082/Buzzr/Screenshot_2024-04-13_171237_ttawxn.png)
+
+![Answer Graph](https://res.cloudinary.com/dov6iolx4/image/upload/v1713009081/Buzzr/Screenshot_2024-04-13_171429_rm4gns.png)
+
+![LeaderBoard](https://res.cloudinary.com/dov6iolx4/image/upload/v1713009080/Buzzr/Screenshot_2024-04-13_171509_wx4rif.png)
+
+## Gameplay (Player Side)
+<div>
+    <img src="https://res.cloudinary.com/dov6iolx4/image/upload/v1713009730/Buzzr/WhatsApp_Image_2024-04-13_at_17.19.56_7f8b8bbc_dlp73u.jpg" width="250px">
+    <img src="https://res.cloudinary.com/dov6iolx4/image/upload/v1713009730/Buzzr/WhatsApp_Image_2024-04-13_at_17.19.56_b1a3ed0f_ephkmh.jpg" width="250px">
+    <img src="https://res.cloudinary.com/dov6iolx4/image/upload/v1713009729/Buzzr/WhatsApp_Image_2024-04-13_at_17.19.55_39c71e75_buyhcm.jpg" width="250px" alt="lobby">
+    <img src="https://res.cloudinary.com/dov6iolx4/image/upload/v1713009734/Buzzr/WhatsApp_Image_2024-04-13_at_17.19.54_0ee899f5_joymlv.jpg" width="250px" alt="ready-for-next-event">
+    <img src="https://res.cloudinary.com/dov6iolx4/image/upload/v1713009735/Buzzr/WhatsApp_Image_2024-04-13_at_17.19.54_a6adcdbc_ol7kbe.jpg" width="250px" alt="question">
+    <img src="https://res.cloudinary.com/dov6iolx4/image/upload/v1713009736/Buzzr/WhatsApp_Image_2024-04-13_at_17.19.53_331fa9f5_wwk14h.jpg" width="250px" alt="result-correct">
+    <img src="https://res.cloudinary.com/dov6iolx4/image/upload/v1713009732/Buzzr/WhatsApp_Image_2024-04-13_at_17.19.53_81e762aa_e7usk5.jpg" width="250px" alt="result-timeout">
+</div>
+
+
