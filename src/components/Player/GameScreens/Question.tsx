@@ -1,9 +1,10 @@
 "use client"
-import { optionColors, cssOptionColors } from "@/utils/optionColors";
+import { cssOptionColors } from "@/utils/optionColors";
 import { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
 import { useDispatch } from "react-redux";
 import { setScreenStatus, ScreenStatus } from "@/state/player/screenSlice";
+import submitAnswerAction from "@/actions/SubmitAnswerAction";
 import Image from "next/image";
 
 const Question = (params: {
@@ -37,7 +38,8 @@ const Question = (params: {
     const submitAnswer = (optionId: string) => {
         console.log("submitting answer", optionId);
         // Socket submit Answer
-        params.socket.emit("submit-answer", params.gameSessionId, params.playerId, optionId, timer);
+        // params.socket.emit("submit-answer", params.gameSessionId, params.playerId, optionId, timer);
+        submitAnswerAction({ gameSessionId: params.gameSessionId, playerId: params.playerId, optionId: optionId, timeTaken: timer });
         dispatch(setScreenStatus(ScreenStatus.wait));
     }
 

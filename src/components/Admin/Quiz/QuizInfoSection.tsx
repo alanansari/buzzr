@@ -25,11 +25,15 @@ async function QuizInfoSection(props: { quizId: string }) {
             email: session.user.email as string,
         },
         include: {
-            GameSessions: true
+            GameSessions: {
+                orderBy: {
+                    createdAt: 'desc'
+                }
+            }
         }
     });
 
-    const allQuiz = user?.GameSessions ? user?.GameSessions.reverse() : [];
+    const allQuiz = user?.GameSessions ? user?.GameSessions : [];
     
     return <>
         <form className="flex flex-row justify-between pb-12 border-dashed border-b" action={createRoom}>
