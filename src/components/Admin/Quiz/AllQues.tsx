@@ -24,12 +24,6 @@ export default async function AllQues(props: { quizId: string }) {
         "use server"
         const quesId = formData.get("ques_id") as string;
 
-        await prisma.option.deleteMany({
-            where: {
-                questionId: quesId,
-            },
-        });
-
         await prisma.question.delete({
             where: {
                 id: quesId,
