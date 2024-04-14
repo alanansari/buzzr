@@ -3,7 +3,6 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div className="p-8 h-full">
-      {/* animated text */}
       <div className="flex justify-center items-center w-full">
         <div className="text">
           BUZZR

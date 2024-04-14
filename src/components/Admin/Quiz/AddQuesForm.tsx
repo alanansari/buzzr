@@ -2,10 +2,10 @@
 
 import SubmitButton from "../../SubmitButton";
 import InputField from "../../InputField";
-import { FormLabel, Radio, Switch } from '@mui/material';
+import { FormLabel } from '@mui/material';
 import { RadioField1, RadioField2, RadioField3, RadioField4 } from "@/components/RadioField";
 import addQues from "@/actions/AddQuesAction";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const AddQuesForm = (props: { quizId: string }) => {
@@ -99,7 +99,7 @@ const AddQuesForm = (props: { quizId: string }) => {
                 name="time"
                 placeholder="question time"
                 className="text-slate-900 my-2 rounded-full p-2 outline-none"
-                required
+                required={false}
                 autoComplete="off"
             />
 
@@ -111,6 +111,3 @@ const AddQuesForm = (props: { quizId: string }) => {
 };
 
 export default AddQuesForm;
-
-
-// future tasks : upload audio and video in question

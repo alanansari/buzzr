@@ -1,7 +1,5 @@
 "use client"
 import { setCurrIndex, setLeaderboard, setPlayers, setResult } from "@/state/admin/playersSlice"
-import { setScreenStatus } from "@/state/admin/screenSlice"
-import { resetTimer } from "@/state/timer/timerSlice"
 import { useFormStatus } from "react-dom"
 import { useDispatch } from "react-redux"
 

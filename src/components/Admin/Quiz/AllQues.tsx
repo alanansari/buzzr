@@ -14,7 +14,6 @@ export default async function AllQues(props: { quizId: string }) {
         where: {
             quizId: props.quizId as string,
         },
-        // populate the options array for each question 
         include: {
             options: true
         }

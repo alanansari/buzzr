@@ -3,11 +3,10 @@
 import { ScreenStatus, setScreenStatus } from "@/state/admin/screenSlice";
 import { BarPlot, ChartContainer } from "@mui/x-charts";
 import { useEffect } from "react";
-import { FcCheckmark, FcApproval } from "react-icons/fc";
 import { RxCross2 } from "react-icons/rx";
 import { TiTick } from "react-icons/ti";
 import { useDispatch, useSelector } from "react-redux";
-import { optionColors,cssOptionColors } from "@/utils/optionColors"
+import { cssOptionColors } from "@/utils/optionColors"
 import { Option } from "@prisma/client";
 import { RootState } from "@/state/store";
 import { setLeaderboard } from "@/state/admin/playersSlice";
@@ -24,7 +23,6 @@ export default function QuesResult(props: any) {
 
     function handleNext() {
 
-        // socket event to leaderboard screen 
         if (currIndex == allQuestions.length - 1) {
             socket.emit("final-leaderboard", gameCode)
             socket.on("displaying-final-leaderboard", (leaderboard: any[]) => {
@@ -78,7 +76,6 @@ function Barchart(params: { result: number[], options: Option[] }) {
                 <ChartContainer
                     width={550}
                     height={300}
-                    // series={seriesData as AllSeriesType[]}
                     series={[{ data: uData, label: '', type: 'bar' }]}
                     xAxis={[{ scaleType: 'band', data: xLabels }]}
                 >
@@ -98,5 +95,3 @@ function Barchart(params: { result: number[], options: Option[] }) {
         </div>
     </>
 }
-
-// modify css if needed as like in kahoot

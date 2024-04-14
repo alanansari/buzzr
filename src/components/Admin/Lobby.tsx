@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { io, Socket } from "socket.io-client";
+import { io} from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/state/store";
 import { createConnection } from "@/state/socket/socketSlice";
@@ -33,12 +33,10 @@ const Lobby = (params: {
             router.push(`/admin/game/${params.roomId}`);
         }
 
-        // fetch all players
         dispatch(setPlayers(params.players))
     }, [dispatch, params.players, params.gameStarted, params.roomId, router])
 
     useEffect(() => {
-        // establish a socket connection using io function
         if (window !== undefined) {
             const socket = io(`${process.env.NEXT_PUBLIC_SOCKET_URL}/?userType=admin&adminId=${params.userId}&gameCode=${params.gameCode}`);
             socket.on("connect", () => {
