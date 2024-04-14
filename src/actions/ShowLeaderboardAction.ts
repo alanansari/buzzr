@@ -24,6 +24,5 @@ export default async function ShowLeaderboard(gameCode: string) {
       score: "desc",
     },
   });
-
   return leaderboard;
 }
