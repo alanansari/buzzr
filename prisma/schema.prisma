@@ -69,7 +69,7 @@ model Quiz {
   thumbnail    String?
   gameSessions GameSession[]
   questions    Question[]
-  user         User          @relation(fields: [userId], references: [id])
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Question {
@@ -82,7 +82,7 @@ model Question {
   mediaType String?
   options   Option[]
   answers   PlayerAnswer[]
-  quiz      Quiz           @relation(fields: [quizId], references: [id])
+  quiz      Quiz           @relation(fields: [quizId], references: [id], onDelete: Cascade)
 }
 
 model Option {
@@ -91,7 +91,7 @@ model Option {
   isCorrect  Boolean
   questionId String
   createdAt  DateTime       @default(now())
-  question   Question       @relation(fields: [questionId], references: [id])
+  question   Question       @relation(fields: [questionId], references: [id], onDelete: Cascade)
   answers    PlayerAnswer[]
 }
 
@@ -115,8 +115,8 @@ model GameSession {
   isPlaying       Boolean           @default(false)
   currentQuestion Int               @default(0)
   leaderboard     GameLeaderboard[]
-  creator         User              @relation(fields: [creatorId], references: [id])
-  quiz            Quiz              @relation(fields: [quizId], references: [id])
+  creator         User              @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  quiz            Quiz              @relation(fields: [quizId], references: [id], onDelete: Cascade)
   players         Player[]
   PlayerAnswer    PlayerAnswer[]
 }
@@ -126,7 +126,7 @@ model GameLeaderboard {
   playerId      String
   gameSessionId String
   score         Int         @default(0)
-  GameSession   GameSession @relation(fields: [gameSessionId], references: [id])
+  GameSession   GameSession @relation(fields: [gameSessionId], references: [id], onDelete: Cascade)
   Player        Player      @relation(fields: [playerId], references: [id])
 
   @@unique([playerId, gameSessionId])
@@ -141,10 +141,10 @@ model PlayerAnswer {
   timeTaken     Int
   isCorrect     Boolean
   score         Int         @default(0)
-  GameSession   GameSession @relation(fields: [gameSessionId], references: [id])
-  Option        Option      @relation(fields: [optionId], references: [id])
-  Player        Player      @relation(fields: [playerId], references: [id])
-  Question      Question    @relation(fields: [questionId], references: [id])
+  GameSession   GameSession @relation(fields: [gameSessionId], references: [id], onDelete: Cascade)
+  Option        Option      @relation(fields: [optionId], references: [id], onDelete: Cascade)
+  Player        Player      @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  Question      Question    @relation(fields: [questionId], references: [id], onDelete: Cascade)
 
   @@unique([playerId, questionId, gameSessionId])
 }
