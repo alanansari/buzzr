@@ -1,9 +1,28 @@
 "use server";
 import { prisma } from "@/utils/prisma";
-import { redirect } from "next/navigation";
+import { Ratelimit } from "@upstash/ratelimit";
+import { redis } from "@/server/upstash";
+import { headers } from "next/headers";
+
+const rateLimit = new Ratelimit({
+    redis,
+    limiter: Ratelimit.slidingWindow(2,"60s"),
+});
 
 export default async function joinRoom(formData: FormData){
     try {
+
+        const ip = headers().get('x-forwarded-for');
+        console.log(ip);
+
+        const {remaining, limit, success} = await rateLimit.limit(ip as string);
+
+        console.log(remaining, limit, success);
+
+        if(!success) {
+            throw new Error("Rate limit reached wait for some time and try again.");
+        }
+
         const gameCode = formData.get('gameCode') as string;
         const playerId = formData.get('playerId') as string;
 
