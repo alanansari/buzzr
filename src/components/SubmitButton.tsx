@@ -6,7 +6,8 @@ import { useDispatch } from "react-redux"
 const SubmitButton = (params: {
   text?: string,
   style?: string,
-  isQuiz?: boolean
+  isQuiz?: boolean,
+  error?: boolean
 }) => {
   const { pending } = useFormStatus()
   const dispatch = useDispatch()
@@ -21,9 +22,9 @@ const SubmitButton = (params: {
   }
   return (
     <button
-      disabled={pending}
+      disabled={params.error || pending}
       value="submit"
-      className={`${params.style === "game" ? "rounded w-full" : "rounded-full w-[60%]"} text-slate-100 bg-blue-500 my-2 p-2 hover:cursor-pointer hover:bg-blue-600 transition-all duration-300 ease-in-out`}
+      className={`${params.style === "game" ? "rounded w-full" : "rounded-full w-[60%]"} text-slate-100 bg-blue-500 my-2 p-2 hover:cursor-pointer hover:bg-blue-600 transition-all duration-300 ease-in-out disabled:cursor-none disabled:bg-gray-500`}
       onClick={handleRedux}
     >
       {(pending) ? 'Loading...' : params.text || 'Submit'}

@@ -1,8 +1,9 @@
+"use server";
+
 import { prisma } from "@/utils/prisma";
 import { redirect } from "next/navigation";
 
 const createPlayer = async (formData: FormData) => {
-  "use server";
   const name = formData.get("username") as string;
   const profilePic = formData.get("profile") as string;
 
@@ -13,8 +14,7 @@ const createPlayer = async (formData: FormData) => {
     },
   });
 
-  redirect(`/player/joinRoom/${player?.id}`)
-
+  redirect(`/player/joinRoom/${player?.id}`);
 };
 
 export default createPlayer;
