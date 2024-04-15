@@ -6,7 +6,7 @@ import { headers } from "next/headers";
 
 const rateLimit = new Ratelimit({
   redis,
-  limiter: Ratelimit.slidingWindow(2,"60s"),
+  limiter: Ratelimit.slidingWindow(5,"120s"),
 });
 
 const createPlayer = async (formData: FormData) => {
