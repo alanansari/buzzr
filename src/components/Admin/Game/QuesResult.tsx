@@ -3,14 +3,14 @@
 import { ScreenStatus, setScreenStatus } from "@/state/admin/screenSlice";
 import { BarPlot, ChartContainer } from "@mui/x-charts";
 import { useEffect } from "react";
-import { FcCheckmark, FcApproval } from "react-icons/fc";
 import { RxCross2 } from "react-icons/rx";
 import { TiTick } from "react-icons/ti";
 import { useDispatch, useSelector } from "react-redux";
-import { optionColors,cssOptionColors } from "@/utils/optionColors"
+import { cssOptionColors } from "@/utils/optionColors"
 import { Option } from "@prisma/client";
 import { RootState } from "@/state/store";
 import { setLeaderboard } from "@/state/admin/playersSlice";
+import ShowLeaderboard from "@/actions/ShowLeaderboardAction";
 
 export default function QuesResult(props: any) {
     const { currentQues, quizQuestions, gameCode } = props
@@ -20,11 +20,9 @@ export default function QuesResult(props: any) {
     const question = allQuestions[currIndex]
     const result = useSelector((state: RootState) => state.player.quesResult)
     const socket = props.socket
-    const options = question.options
 
-    function handleNext() {
+    async function handleNext() {
 
-        // socket event to leaderboard screen 
         if (currIndex == allQuestions.length - 1) {
             socket.emit("final-leaderboard", gameCode)
             socket.on("displaying-final-leaderboard", (leaderboard: any[]) => {
@@ -34,10 +32,11 @@ export default function QuesResult(props: any) {
             })
         }
         else {
+            const leaderboard = await ShowLeaderboard(gameCode)
+            dispatch(setLeaderboard(leaderboard))
             socket.emit("display-leaderboard", gameCode)
-            socket.on("displaying-leaderboard", (leaderboard: any[]) => {
+            socket.on("displaying-leaderboard", () => {
                 console.log("Leaderboard")
-                dispatch(setLeaderboard(leaderboard))
                 dispatch(setScreenStatus(ScreenStatus.leaderboard))
             })
         }
@@ -78,7 +77,6 @@ function Barchart(params: { result: number[], options: Option[] }) {
                 <ChartContainer
                     width={550}
                     height={300}
-                    // series={seriesData as AllSeriesType[]}
                     series={[{ data: uData, label: '', type: 'bar' }]}
                     xAxis={[{ scaleType: 'band', data: xLabels }]}
                 >
@@ -89,14 +87,12 @@ function Barchart(params: { result: number[], options: Option[] }) {
             <div className="flex flex-row justify-around w-[450px] text-lg ml-12">
                 {params.result.length > 0 && params.result.map((opt: any, index: number) => {
                     const isCorrect = params.options[index].isCorrect === true;
-                    return <div key={index} className="w-20"><p  className={`text-black text-sm p-2 rounded shadow flex flex-row items-center`} style={{backgroundColor:cssOptionColors[index]}}>{opt}
+                    return <div key={index} className="w-20"><p className={`text-black text-sm p-2 rounded shadow flex flex-row items-center`} style={{ backgroundColor: cssOptionColors[index] }}>{opt}
                         {isCorrect ? <TiTick size={20} color="#fff" className="text-white font-extrabold m-auto ml-2" /> : <RxCross2 size={20} color="#fff" className="text-white font-extrabold m-auto ml-2" />}</p>
                         <p className="text-sm">{params.options[index].title}</p>
-                        </div>
+                    </div>
                 })}
             </div>
         </div>
     </>
 }
-
-// modify css if needed as like in kahoot

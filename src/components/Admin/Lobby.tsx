@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { io, Socket } from "socket.io-client";
+import { io } from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/state/store";
 import { createConnection } from "@/state/socket/socketSlice";
@@ -33,12 +33,10 @@ const Lobby = (params: {
             router.push(`/admin/game/${params.roomId}`);
         }
 
-        // fetch all players
         dispatch(setPlayers(params.players))
     }, [dispatch, params.players, params.gameStarted, params.roomId, router])
 
     useEffect(() => {
-        // establish a socket connection using io function
         if (window !== undefined) {
             const socket = io(`${process.env.NEXT_PUBLIC_SOCKET_URL}/?userType=admin&adminId=${params.userId}&gameCode=${params.gameCode}`);
             socket.on("connect", () => {
@@ -84,11 +82,11 @@ const Lobby = (params: {
 
     return <>
         <div>
-            <div className="h-fit w-[70vw] mx-auto max-h-[60vh] flex flex-wrap gap-2">
+            <div className="h-fit mt-2 w-[70vw] mx-auto max-h-[60vh] flex flex-wrap gap-y-4 gap-x-2">
                 {(players.length === 0) ? <div className="p-2 mx-auto w-fit bg-slate-200 rounded-md text-sm">Waiting for players to join...</div> : players.map((player: any) => {
                     return (
                         <div key={player.id} className="p-1 mx-auto w-fit bg-slate-200 rounded-md text-md flex justify-center items-center">
-                            <Image className="rounded-sm" src={player.profilePic} alt="player-avtr" width={30} height={30} />
+                            <Image className="rounded-sm" src={player.profilePic as string || "/avatar-1577909_1280.webp"} alt="player-avtr" width={36} height={36} />
                             <div className="mx-1 font-bold">{player.name}</div>
                             <div className="text-red-600 font-bold cursor-pointer px-1" title="Remove" onClick={() => handlePlayerRemove(player)}>X</div>
                         </div>

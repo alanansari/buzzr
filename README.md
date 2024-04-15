@@ -1,6 +1,9 @@
+![Banner](https://socialify.git.ci/alanansari/buzzr/image?language=1&name=1&theme=Light)
 # BUZZR
 
 **Check the Website [here](https://buzzr-one.vercel.app/)**.
+
+**Check the socket server repository [here](https://github.com/alanansari/buzzr-server)**.
 
 ## TABLE OF CONTENTS
 
@@ -65,7 +68,8 @@ NEXT_PUBLIC_SOCKET_URL="<websocket_server_url>"
 
 5. Connect to the Server for websockets:
     - Go through this: https://github.com/alanansari/buzzr-server
-    - Add the NEXT_PUBLIC_SOCKET_URL variable in .env the localhost ports this is running on
+    - Add the NEXT_PUBLIC_SOCKET_URL=http://localhost:\[PORT\] 
+    - PORT is where the socket server is running 
 
 
 6. Run on localhost:
@@ -97,7 +101,14 @@ http://localhost:3000
 ![LeaderBoard](https://res.cloudinary.com/dov6iolx4/image/upload/v1713009080/Buzzr/Screenshot_2024-04-13_171509_wx4rif.png)
 
 ## Gameplay (Player Side)
-
-![Enter Username](https://res.cloudinary.com/dov6iolx4/image/upload/v1713009730/Buzzr/WhatsApp_Image_2024-04-13_at_17.19.56_7f8b8bbc_dlp73u.jpg) ![Enter GamePin](https://res.cloudinary.com/dov6iolx4/image/upload/v1713009730/Buzzr/WhatsApp_Image_2024-04-13_at_17.19.56_b1a3ed0f_ephkmh.jpg) ![Lobby](https://res.cloudinary.com/dov6iolx4/image/upload/v1713009729/Buzzr/WhatsApp_Image_2024-04-13_at_17.19.55_39c71e75_buyhcm.jpg) ![Ready for question](https://res.cloudinary.com/dov6iolx4/image/upload/v1713009734/Buzzr/WhatsApp_Image_2024-04-13_at_17.19.54_0ee899f5_joymlv.jpg) ![Question](https://res.cloudinary.com/dov6iolx4/image/upload/v1713009735/Buzzr/WhatsApp_Image_2024-04-13_at_17.19.54_a6adcdbc_ol7kbe.jpg) ![Result-Correct](https://res.cloudinary.com/dov6iolx4/image/upload/v1713009736/Buzzr/WhatsApp_Image_2024-04-13_at_17.19.53_331fa9f5_wwk14h.jpg) ![Result-Timeout](https://res.cloudinary.com/dov6iolx4/image/upload/v1713009732/Buzzr/WhatsApp_Image_2024-04-13_at_17.19.53_81e762aa_e7usk5.jpg)
+<div>
+    <img src="https://res.cloudinary.com/dov6iolx4/image/upload/v1713009730/Buzzr/WhatsApp_Image_2024-04-13_at_17.19.56_7f8b8bbc_dlp73u.jpg" width="250px">
+    <img src="https://res.cloudinary.com/dov6iolx4/image/upload/v1713009730/Buzzr/WhatsApp_Image_2024-04-13_at_17.19.56_b1a3ed0f_ephkmh.jpg" width="250px">
+    <img src="https://res.cloudinary.com/dov6iolx4/image/upload/v1713009729/Buzzr/WhatsApp_Image_2024-04-13_at_17.19.55_39c71e75_buyhcm.jpg" width="250px" alt="lobby">
+    <img src="https://res.cloudinary.com/dov6iolx4/image/upload/v1713009734/Buzzr/WhatsApp_Image_2024-04-13_at_17.19.54_0ee899f5_joymlv.jpg" width="250px" alt="ready-for-next-event">
+    <img src="https://res.cloudinary.com/dov6iolx4/image/upload/v1713009735/Buzzr/WhatsApp_Image_2024-04-13_at_17.19.54_a6adcdbc_ol7kbe.jpg" width="250px" alt="question">
+    <img src="https://res.cloudinary.com/dov6iolx4/image/upload/v1713009736/Buzzr/WhatsApp_Image_2024-04-13_at_17.19.53_331fa9f5_wwk14h.jpg" width="250px" alt="result-correct">
+    <img src="https://res.cloudinary.com/dov6iolx4/image/upload/v1713009732/Buzzr/WhatsApp_Image_2024-04-13_at_17.19.53_81e762aa_e7usk5.jpg" width="250px" alt="result-timeout">
+</div>
 
 

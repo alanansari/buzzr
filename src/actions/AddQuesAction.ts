@@ -55,14 +55,13 @@ export default async function addQues(formData: FormData) {
           create: options,
         },
         quizId: quizId,
-        timeOut: parseInt(time),
+        timeOut: parseInt(time) || 15,
         media: fileLink,
         mediaType: fileType,
       },
     });
     revalidatePath("/quiz/[quizId]");
   } catch (err:any) {
-    console.log("77", err);
     return {
       error: err.message,
     };

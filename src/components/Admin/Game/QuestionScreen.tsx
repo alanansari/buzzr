@@ -3,7 +3,6 @@
 import { RootState } from '@/state/store';
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import { useEffect, useState } from "react";
-import { Socket } from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
 import { ScreenStatus, setScreenStatus } from "@/state/admin/screenSlice";
 import { cssOptionColors } from "@/utils/optionColors";
@@ -77,6 +76,3 @@ function Countdown(params: { timer: number, setTime: any }) {
         </CountdownCircleTimer>
     </div>
 }
-
-// vertically align components
-// show answer count through socket

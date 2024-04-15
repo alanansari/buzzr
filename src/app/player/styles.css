@@ -7,11 +7,7 @@
 }
 
 body {
-  height: 100vh;
-  /* background-color: #46178f !important; */
-  /* background: url("../../../public/gameBg.jpg");
-  background: cover no-repeat center fixed;
-  background-position: fixed; */
+  /* height: 100vh; */
 }
 
 .profileName {

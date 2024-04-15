@@ -38,7 +38,3 @@ async function JoinRoom({ params }: { params: { playerId: string } }) {
 }
 
 export default JoinRoom
-
-
-// if room already joined
-// handle ondisconnect

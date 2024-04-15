@@ -1,11 +1,11 @@
 "use client";
-import { useEffect, useState } from "react";
-import { io, Socket } from "socket.io-client";
+import { useEffect } from "react";
+import { io } from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/state/store";
 import { createConnection } from "@/state/socket/socketSlice";
 import { addPlayer, removePlayer, setPlayers } from "@/state/admin/playersSlice";
-import { ScreenStatus, setScreenStatus } from "@/state/admin/screenSlice";
+import { ScreenStatus } from "@/state/admin/screenSlice";
 import WaitScreen from "./WaitScreen";
 import QuestionScreen from "./QuestionScreen";
 import QuesResult from "./QuesResult";
@@ -26,12 +26,10 @@ const GameLobby = (params: {
     const currIndex = useSelector((state: RootState) => state.player.currentIndex)
 
     useEffect(() => {
-        // fetch all players
         dispatch(setPlayers(params.players))
     }, [dispatch, params.players])
 
     useEffect(() => {
-        // establish a socket connection using io function
         if (window !== undefined) {
             const socket = io(`${process.env.NEXT_PUBLIC_SOCKET_URL}/?userType=admin&adminId=${params.userId}&gameCode=${params.gameCode}`);
             socket.on("connect", () => {
@@ -48,24 +46,6 @@ const GameLobby = (params: {
                 console.log(`Player ${player.id} removed`);
                 dispatch(removePlayer(player));
             });
-
-            // start timer
-            // socket.on("timer-starts", () => {
-            //     console.log("Timer started");
-            //     dispatch(setScreenStatus(ScreenStatus.wait))
-
-            //     setTimeout(() => {
-            //         // console.log(currIndex)
-            //         socket.emit("set-question-index", params.gameCode, currIndex);
-            //         socket.on("get-question-index", () => {
-            //             dispatch(setScreenStatus(ScreenStatus.question))
-            //         })
-            //     }, 4000);
-            // });
-
-            // socket.on("get-question-index", () => {
-            //     dispatch(setScreenStatus(ScreenStatus.question))
-            // })
 
             return () => {
                 socket.disconnect();

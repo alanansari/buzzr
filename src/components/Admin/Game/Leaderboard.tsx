@@ -11,16 +11,14 @@ export default function LeaderBoard(props: any) {
     const dispatch = useDispatch()
     const currIndex = useSelector((state: RootState) => state.player.currentIndex)
     const leaderboard = useSelector((state: RootState) => state.player.leaderboard)
-    const { currentQues, gameCode, quizQuestions } = props
+    const { gameCode, quizQuestions } = props
     const socket = props.socket
     const router = useRouter()
 
     function handleNext() {
-        console.log("next")
         dispatch(resetTimer(3))
         socket.emit("change-question", gameCode, currIndex + 1)
         socket.on("question-changed", (index: number) => {
-            console.log("22")
             dispatch(setCurrIndex(index))
             dispatch(setScreenStatus(ScreenStatus.wait))
             socket.emit("start-timer", gameCode)
@@ -28,7 +26,6 @@ export default function LeaderBoard(props: any) {
     }
 
     function handleEnd() {
-        // emit socket to close quiz
         socket.emit("end-game-session", gameCode);
         router.push(`/admin/quiz/${quizQuestions?.id}`)
     }
@@ -48,7 +45,7 @@ export default function LeaderBoard(props: any) {
                 {leaderboard?.length > 0 ? leaderboard.map((lead, index) => {
                     return <div key={index} className={`${index === 0 ? "bg-yellow-600 border-none" : index === 1 ? "bg-gray-600 border-none" : index === 2 ? "bg-orange-900 border-none" : "bg-white text-slate-900"} flex justify-between px-4 py-2 flex-row shadow rounded-md border w-full items-center`}>
                         <div className="flex flex-row items-center gap-x-2">
-                            #{index+1}
+                            #{index + 1}
                             <Image src={lead.Player.profilePic} className="w-12 h-12 rounded-full" width={50} height={50} alt="profile pic" />
                             <p>{lead.Player.name}</p>
                         </div>
@@ -61,5 +58,3 @@ export default function LeaderBoard(props: any) {
     </>
 
 }
-
-// changes at last question -> final leaderboard
