@@ -1,13 +1,14 @@
 import React from 'react'
+import { ResultStatus } from '@/state/player/resultSlice'
 
 const Result = (params:{
-    result: string,
+    result: ResultStatus,
     points?: number
 }) => {
   return (
     <>
         {
-        (params.result === 'timeout')?
+        (params.result === ResultStatus.timeout)?
         <>
             <div className="p-4 rounded-md font-bold text-3xl text-slate-200">Time Out</div>
             <svg className="h-32 w-32 text-slate-200 my-8 bg-red-400 rounded-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  
@@ -17,7 +18,7 @@ const Result = (params:{
             </svg>
             <p className="text-white bg-black opacity-60 px-4 py-2 flex items-center rounded">No worries. We believe in you!</p>
         </>:
-        (params.result === 'correct')?
+        (params.result === ResultStatus.correct)?
         <>
             <div className="p-4 rounded-md font-bold text-3xl text-slate-200">Correct</div>
             <svg className="h-32 w-32 text-slate-200 my-8 bg-green-400 rounded-full"  fill="none" viewBox="0 0 24 24" stroke="currentColor">

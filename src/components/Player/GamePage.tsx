@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { GameSession } from "@prisma/client";
 import { WaitGameStart, Question, Loader, Result, LeaderBoard } from "./GameScreens";
 import { ScreenStatus, setScreenStatus } from "@/state/player/screenSlice";
+import { ResultStatus, setResultStatus } from "@/state/player/resultSlice";
 
 const GamePage = (params: {
     player: any,
@@ -14,11 +15,11 @@ const GamePage = (params: {
 }) => {
     const game = params.game as any;
     const [question, setQuestion] = useState(game.quiz.questions[game.currentQuestion]);
-    const [result, setResult] = useState('timeout');
     const [socketState, setSocketState] = useState<Socket>({} as Socket);
     const [stats, setStats] = useState<{position:number | null,score:number}>({position:null,score:0});
 
     const screen = useSelector((state: RootState) => state.screen.screenStatus);
+    const result = useSelector((state: RootState) => state.playerResult.resultStatus);
     const dispatch = useDispatch();
 
     const router = useRouter()
@@ -63,13 +64,13 @@ const GamePage = (params: {
 
                 playerAnswers.forEach((player: any) => {
                     if (player.playerId === params.player.id) {
-                        setResult((player.isCorrect) ? 'correct' : 'incorrect');
+                        dispatch(setResultStatus((player.isCorrect)? ResultStatus.correct : ResultStatus.incorrect));
                         playerAnswered = true;
                         return;
                     }
                 });
 
-                if (!playerAnswered) setResult('timeout');
+                if (!playerAnswered) dispatch(setResultStatus(ResultStatus.timeout));
 
                 dispatch(setScreenStatus(ScreenStatus.result));
             });
