@@ -16,13 +16,15 @@ async function QuizInfoSection(props: { quizId: string }) {
             id: props.quizId as string,
         },
         include: {
-            questions: true
+            questions: true,
+            gameSessions: true
         }
     });
 
     const user = await prisma.user.findUnique({
         where: {
             email: session.user.email as string,
+<<<<<<< Updated upstream
         },
         include: {
             GameSessions: {
@@ -34,6 +36,12 @@ async function QuizInfoSection(props: { quizId: string }) {
     });
 
     const allQuiz = user?.GameSessions ? user?.GameSessions : [];
+=======
+        }
+    });
+
+    const allQuiz = quiz?.gameSessions ? quiz?.gameSessions : [];
+>>>>>>> Stashed changes
     
     return <>
         <form className="flex flex-row justify-between pb-12 border-dashed border-b" action={createRoom}>
