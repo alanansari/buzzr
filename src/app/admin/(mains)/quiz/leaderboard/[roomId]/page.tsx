@@ -3,6 +3,7 @@ import { prisma } from "@/utils/prisma"
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 import { redirect } from "next/navigation";
+import { cssOptionColors } from "@/utils/optionColors";
 
 export default async function QuizLeaderboard({ params }: { params: { roomId: string } }) {
 
@@ -28,15 +29,19 @@ export default async function QuizLeaderboard({ params }: { params: { roomId: st
         },
     });
 
-    return <>
-        <div className="flex flex-col items-center m-auto w-full px-4 my-8">
-            <p className="w-full py-2 px-3 text-2xl text-center bg-white text-slate-900 font-semibold rounded max-w-fit capitalize">Leaderboard</p>
+    const colors = cssOptionColors
 
-            <div className="flex flex-col gap-4 my-6">
+    const value = Math.floor(Math.random() * 8);
+
+    return <>
+        <div className="flex flex-col items-center m-auto w-full px-4 my-8 gap-4 overflow-x-visible">
+            <p className="w-full py-2 px-3 text-2xl text-center bg-white text-slate-900 font-semibold rounded max-w-fit capitalize overflow-x-visible">Leaderboard</p>
+
+            <div className="flex flex-col gap-4 my-6 overflow-x-visible">
                 {leaderboard?.length > 0 ? leaderboard.map((lead, index) => {
-                    return <div key={index} className={`${index === 0 ? "bg-yellow-600 border-none" : index === 1 ? "bg-gray-600 border-none" : index === 2 ? "bg-orange-900 border-none" : "bg-white text-slate-900"} flex justify-between px-4 py-2 flex-row shadow rounded-md border w-[60vw] items-center`}>
-                        #{index + 1}
-                        <div className="flex flex-row items-center gap-x-2">
+                    return <div key={index} style={{ backgroundColor: colors[Math.floor(Math.random() * 8)] }} className="shadow-xl flex justify-between px-4 py-2 flex-row w-[60vw] items-center z-10">
+                        {index == 0 ? <span className="text-3xl overflow-hidden">🥇</span> : index == 1 ? <span className="text-3xl overflow-hidden">🥈</span> : index == 2 ? <span className="text-3xl overflow-hidden">🥉</span> : `#${index + 1}`}
+                        <div className="flex flex-row items-center gap-x-2 z-20">
                             <Image src={lead.Player.profilePic || "/avatar-1577909_1280.webp"} className="w-12 h-12 rounded-full" width={50} height={50} alt="profile pic" />
                             <p>{lead.Player.name}</p>
                         </div>
@@ -48,3 +53,4 @@ export default async function QuizLeaderboard({ params }: { params: { roomId: st
         </div>
     </>
 }
+

@@ -16,25 +16,17 @@ async function QuizInfoSection(props: { quizId: string }) {
             id: props.quizId as string,
         },
         include: {
-            questions: true
-        }
-    });
-
-    const user = await prisma.user.findUnique({
-        where: {
-            email: session.user.email as string,
-        },
-        include: {
-            GameSessions: {
-                orderBy: {
+            questions: true,
+            gameSessions: {
+                orderBy:{
                     createdAt: 'desc'
                 }
             }
         }
     });
 
-    const allQuiz = user?.GameSessions ? user?.GameSessions : [];
-    
+    const allQuiz = quiz?.gameSessions ? quiz?.gameSessions : [];
+
     return <>
         <form className="flex flex-row justify-between pb-12 border-dashed border-b" action={createRoom}>
             <div className="flex flex-col w-full">

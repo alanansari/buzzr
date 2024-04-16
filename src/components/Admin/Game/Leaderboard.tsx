@@ -5,6 +5,7 @@ import { resetTimer } from "@/state/timer/timerSlice";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
+import { cssOptionColors } from "@/utils/optionColors";
 
 export default function LeaderBoard(props: any) {
 
@@ -14,6 +15,7 @@ export default function LeaderBoard(props: any) {
     const { gameCode, quizQuestions } = props
     const socket = props.socket
     const router = useRouter()
+    const colors = cssOptionColors
 
     function handleNext() {
         dispatch(resetTimer(3))
@@ -41,12 +43,12 @@ export default function LeaderBoard(props: any) {
                 }
             </div>
 
-            <div className="flex flex-col gap-4 my-6 p-4 w-[80vw] max-h-[60vh] overflow-y-scroll">
+            <div className="flex flex-col gap-4 my-6 p-4 w-[80vw] max-h-[60vh] overflow-y-scroll overflow-x-visible">
                 {leaderboard?.length > 0 ? leaderboard.map((lead, index) => {
-                    return <div key={index} className={`${index === 0 ? "bg-yellow-600 border-none" : index === 1 ? "bg-gray-600 border-none" : index === 2 ? "bg-orange-900 border-none" : "bg-white text-slate-900"} flex justify-between px-4 py-2 flex-row shadow rounded-md border w-full items-center`}>
-                        <div className="flex flex-row items-center gap-x-2">
-                            #{index + 1}
-                            <Image src={lead.Player.profilePic} className="w-12 h-12 rounded-full" width={50} height={50} alt="profile pic" />
+                    return <div key={index} style={{ backgroundColor: colors[Math.floor(Math.random() * 8)] }} className="flex justify-between px-4 py-2 flex-row w-[60vw] items-center z-10 overflow-x-visible shadow-xl">
+                        {index == 0 ? <span className="text-3xl overflow-hidden">🥇</span> : index == 1 ? <span className="text-3xl overflow-hidden">🥈</span> : index == 2 ? <span className="text-3xl overflow-hidden">🥉</span> : `#${index + 1}`}
+                        <div className="flex flex-row items-center gap-x-2 z-20">
+                            <Image src={lead.Player.profilePic || "/avatar-1577909_1280.webp"} className="w-12 h-12 rounded-full" width={50} height={50} alt="profile pic" />
                             <p>{lead.Player.name}</p>
                         </div>
                         <p>{lead.score}</p>

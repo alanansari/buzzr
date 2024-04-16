@@ -18,4 +18,8 @@ export const cssOptionColors = [
     "hotpink",
     "rebeccapurple",
     "gray",
+    "white",
+    "green",
+    "beize",
+    "silver",
 ];
