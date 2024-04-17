@@ -46,7 +46,7 @@ const Question = (params: {
     return (
         <>
             <div className="bg-slate-200 p-4 rounded-md font-semibold text-xl">{params.question.title}</div>
-            {params.question.mediaType === "image" && <Image src={params.question.media} className="w-4/5 md:w-1/2 mt-6 mb-0" alt="media Image" height={300} width={300} />
+            {params.question.mediaType === "image" && <Image src={params.question.media} className="h-[25vh] mt-6 mb-0" alt="media Image" height={300} width={300} />
             }
             <div className="mt-6 w-[80vw]">
                 {options.map((option: any, index: number) => {

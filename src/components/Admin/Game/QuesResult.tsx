@@ -84,7 +84,7 @@ function Barchart(params: { result: number[], options: Option[] }) {
                 </ChartContainer>
             </div>
 
-            <div className="flex flex-row justify-around w-[450px] text-lg ml-12">
+            <div className="flex flex-row justify-around w-[450px] text-lg ml-12 mt-1">
                 {params.result.length > 0 && params.result.map((opt: any, index: number) => {
                     const isCorrect = params.options[index].isCorrect === true;
                     return <div key={index} className="w-20"><p className={`text-black text-sm p-2 rounded shadow flex flex-row items-center`} style={{ backgroundColor: cssOptionColors[index] }}>{opt}
