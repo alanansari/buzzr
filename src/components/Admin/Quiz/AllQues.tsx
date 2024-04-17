@@ -33,7 +33,7 @@ export default async function AllQues(props: { quizId: string }) {
     }
 
     return <>
-        <div className="flex flex-col justify-between pb-12 pt-4">
+        <div className="flex flex-col justify-between pb-12 pt-4 text-slate-200">
             <h2 className="text-2xl mb-4 text-blue-300">All Questions : </h2>
             {questions.length > 0 ? questions.map((ques, index) => {
                 return <div key={ques.id} className="relative w-full flex flex-row border-b border-gray-200 my-3">

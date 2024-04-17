@@ -2,13 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  color: black;
-}
-
-body {
-  /* height: 100vh; */
-}
 
 .profileName {
   width: 100% !important;

@@ -29,7 +29,7 @@ async function QuizInfoSection(props: { quizId: string }) {
 
     return <>
         <form className="flex flex-row justify-between pb-12 border-dashed border-b" action={createRoom}>
-            <div className="flex flex-col w-full">
+            <div className="flex flex-col w-full text-slate-200">
                 <h2 className="text-3xl mb-4 font-bold">{quiz?.title}</h2>
                 <p className="capitalize mb-4">{quiz?.description}</p>
                 <p className="text-xl text-gray-200">Number of Questions : <span className="font-semibold text-gray-50">{quiz?.questions?.length}</span></p>
