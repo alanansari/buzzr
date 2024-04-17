@@ -8,16 +8,18 @@ const rateLimit = new Ratelimit({
   redis,
   limiter: Ratelimit.slidingWindow(5,"120s"),
 });
-const ip = headers().get('x-forwarded-for');
 
 const createPlayer = async (formData: FormData) => {
   try{
-    const {remaining, limit, success} = await rateLimit.limit(ip as string);
+    if(process.env.RATELIMIT === "ON"){
+      const ip = headers().get('x-forwarded-for');
+      const {remaining, limit, success} = await rateLimit.limit(ip as string);
 
-    console.log(remaining, limit, success);
+      console.log(remaining, limit, success);
 
-    if(!success) {
-      throw new Error("Rate limit reached wait for some time and try again.");
+      if(!success) {
+        throw new Error("Rate limit reached wait for some time and try again.");
+      }
     }
 
     const name = formData.get("username") as string;
