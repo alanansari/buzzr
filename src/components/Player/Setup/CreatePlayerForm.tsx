@@ -1,6 +1,5 @@
 "use client";
 import createPlayer from "@/actions/CreatePlayerAction"
-import InputField from "@/components/InputField"
 import SubmitButton from "@/components/SubmitButton"
 import SelectProfile from "@/components/Player/selectProfile"
 import { toast } from 'react-toastify';

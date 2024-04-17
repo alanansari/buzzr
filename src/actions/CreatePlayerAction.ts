@@ -8,13 +8,10 @@ const rateLimit = new Ratelimit({
   redis,
   limiter: Ratelimit.slidingWindow(5,"120s"),
 });
+const ip = headers().get('x-forwarded-for');
 
 const createPlayer = async (formData: FormData) => {
   try{
-
-    const ip = headers().get('x-forwarded-for');
-    console.log(ip);
-
     const {remaining, limit, success} = await rateLimit.limit(ip as string);
 
     console.log(remaining, limit, success);

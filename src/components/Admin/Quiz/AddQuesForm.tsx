@@ -38,7 +38,7 @@ const AddQuesForm = (props: { quizId: string }) => {
             <FormLabel className="text-white mt-2" >Upload Image / Video / Audio</FormLabel>
             <InputField type="file" accept="image/*" className="text-white rounded-full p-2 w-full" name="file" placeholder="Select file" autoComplete="off" />
             <p className="text-xs mt-[-8px] text-gray-400">Choose any image or gif of size &lt; 10MB </p>
-            <FormLabel className="text-white mt-2">Enter options</FormLabel>
+            <FormLabel>Enter options</FormLabel>
             <div className="grid grid-cols-2 gap-x-2">
                 <div>
                     <InputField
