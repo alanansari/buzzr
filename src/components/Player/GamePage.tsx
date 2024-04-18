@@ -16,7 +16,7 @@ const GamePage = (params: {
     const game = params.game as any;
     const [question, setQuestion] = useState(game.quiz.questions[game.currentQuestion]);
     const [socketState, setSocketState] = useState<Socket>({} as Socket);
-    const [stats, setStats] = useState<{position:number | null,score:number}>({position:null,score:0});
+    const [stats, setStats] = useState<{ position: number | null, score: number }>({ position: null, score: 0 });
 
     const screen = useSelector((state: RootState) => state.screen.screenStatus);
     const result = useSelector((state: RootState) => state.playerResult.resultStatus);
@@ -34,7 +34,7 @@ const GamePage = (params: {
             });
 
             socket.on("player-removed", (player: any) => {
-                if(player.id === params.player.id){
+                if (player.id === params.player.id) {
                     window.localStorage.removeItem("playerId");
                     router.push("/player");
                 }
@@ -64,7 +64,7 @@ const GamePage = (params: {
 
                 playerAnswers.forEach((player: any) => {
                     if (player.playerId === params.player.id) {
-                        dispatch(setResultStatus((player.isCorrect)? ResultStatus.correct : ResultStatus.incorrect));
+                        dispatch(setResultStatus((player.isCorrect) ? ResultStatus.correct : ResultStatus.incorrect));
                         playerAnswered = true;
                         return;
                     }
@@ -81,9 +81,9 @@ const GamePage = (params: {
             });
 
             socket.on("displaying-final-leaderboard", (leaderboard: any) => {
-                leaderboard.map((player:any)=>{
-                    if(player.playerId === params.player.id){
-                        setStats({position:player.position,score:player.score})
+                leaderboard.map((player: any) => {
+                    if (player.playerId === params.player.id) {
+                        setStats({ position: player.position, score: player.score })
                     }
                 })
                 dispatch(setScreenStatus(ScreenStatus.leaderboard));
@@ -102,7 +102,7 @@ const GamePage = (params: {
                 (screen === ScreenStatus.lobby) ? <WaitGameStart />
                     : (screen === ScreenStatus.question) ? <Question question={question} gameSessionId={params.game.id} playerId={params.player.id} socket={socketState} />
                         : (screen === ScreenStatus.result) ? <Result result={result} />
-                            : (screen === ScreenStatus.wait)? <Loader />
+                            : (screen === ScreenStatus.wait) ? <Loader />
                                 : <LeaderBoard position={stats.position} score={stats.score} />
             }
         </div>

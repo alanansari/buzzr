@@ -51,7 +51,7 @@ const Question = (params: {
             <div className="mt-6 w-[85vw]">
                 {options.map((option: any, index: number) => {
                     return (
-                        <div key={option.id} className="p-4 rounded-md font-semibold text-xl mt-3" style={{ backgroundColor: colors[index] }} onClick={() => { submitAnswer(option.id) }}>{option.title}</div>
+                        <div key={option.id} className="p-4 rounded-md font-semibold text-xl text-slate-900 mt-3" style={{ backgroundColor: colors[index] }} onClick={() => { submitAnswer(option.id) }}>{option.title}</div>
                     )
                 })}
             </div>

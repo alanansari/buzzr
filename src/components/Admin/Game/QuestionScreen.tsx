@@ -37,7 +37,7 @@ export default function QuestionScreen(props: any) {
     return <>
         <div className="flex flex-col items-center m-auto w-full px-4">
             <div className=''></div>
-            <p className="w-full py-2 px-3 text-2xl text-center bg-white font-semibold rounded max-w-fit capitalize">{question?.title}</p>
+            <p className="w-[70%] md:w-4/5 py-2 px-3 text-2xl text-center bg-white font-semibold rounded max-w-fit capitalize">{question?.title}</p>
             <div className="absolute right-4 mt-1">
                 <button className="w-24 h-10 shadow hover:bg-slate-200 transition-all bg-white border rounded" onClick={handleNext} >Next</button>
             </div>

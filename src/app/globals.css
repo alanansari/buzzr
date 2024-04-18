@@ -16,19 +16,19 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px rgb(53, 51, 51); 
+  box-shadow: inset 0 0 5px rgb(53, 51, 51);
   border-radius: 10px;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: grey; 
+  background: grey;
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: darkgrey; 
+  background: darkgrey;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -39,7 +39,7 @@
   }
 }
 
-html{
+html {
   overscroll-behavior: contain;
 }
 
