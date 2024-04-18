@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { TiTick } from "react-icons/ti";
 import { useDispatch, useSelector } from "react-redux";
-import { cssOptionColors } from "@/utils/optionColors"
 import { Option } from "@prisma/client";
 import { RootState } from "@/state/store";
 import { setLeaderboard } from "@/state/admin/playersSlice";
@@ -54,7 +53,6 @@ export default function QuesResult(props: any) {
 
 function Barchart(params: { result: number[], options: Option[] }) {
     const uData = params?.result ? params?.result : [0, 0, 0, 0];
-    // const uData = [20, 3, 150, 1];
     const xLabels = [
         'Page A',
         'Page B',
@@ -78,10 +76,6 @@ function Barchart(params: { result: number[], options: Option[] }) {
                 else
                     bars[i].style.fill = "#ff3333"
             }
-            // bars[0].style.fill = "tomato"
-            // bars[1].style.fill = "dodgerblue"
-            // bars[2].style.fill = "mediumseagreen"
-            // bars[3].style.fill = "gold"
         }
     }, [bars])
 
@@ -101,13 +95,11 @@ function Barchart(params: { result: number[], options: Option[] }) {
             <div className="flex flex-row justify-around w-[450px] text-lg ml-12 relative z-20 ">
                 {params.result.length > 0 && params.result.map((opt: any, index: number) => {
                     const isCorrect = params.options[index].isCorrect === true;
-                    return <div className="flex flex-col">
+                    return <div className="flex flex-col" key={index}>
                         <p className="flex flex-row items-center justify-center w-full">{opt}
                             {isCorrect ? <TiTick size={20} color="#fff" className="text-white font-extrabold ml-2" /> : <RxCross2 size={20} color="#fff" className="text-white font-extrabold ml-2" />}</p>
                         <div key={index} className="w-20 border-t">
                             <p className="text-sm text-white font-semibold w-full text-center">{`${String.fromCharCode(65 + index)})`} {params.options[index].title.length > 15 ? `${params.options[index].title.slice(0, 15)}...` : params.options[index].title}</p>
-                            {/* <p className={`text-black text-sm p-2 rounded shadow flex flex-row items-center`} style={{ backgroundColor: cssOptionColors[index] }}>{params.options[index].title}</p> */}
-                            {/* <p className="text-sm bg-slate-200 text-slate-900 rounded-md">{params.options[index].title}</p> */}
                         </div>
                     </div>
                 })}
