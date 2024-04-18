@@ -12,15 +12,17 @@ const rateLimit = new Ratelimit({
 export default async function joinRoom(formData: FormData){
     try {
 
-        const ip = headers().get('x-forwarded-for');
-        console.log(ip);
+        if(process.env.RATELIMIT === "ON"){
 
-        const {remaining, limit, success} = await rateLimit.limit(ip as string);
+            const ip = headers().get('x-forwarded-for');
+            console.log(ip);
 
-        console.log(remaining, limit, success);
+            const {remaining, limit, success} = await rateLimit.limit(ip as string);
 
-        if(!success) {
-            throw new Error("Rate limit reached wait for some time and try again.");
+            if(!success) {
+                throw new Error("Rate limit reached wait for some time and try again.");
+            }
+
         }
 
         const gameCode = formData.get('gameCode') as string;
