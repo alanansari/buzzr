@@ -59,7 +59,9 @@ function Barchart(params: { result: number[], options: Option[] }) {
         'Page C',
         'Page D',
     ];
-    const bars = document.getElementsByClassName("css-1vuxth3-MuiBarElement-root") as HTMLCollectionOf<HTMLElement>;
+    // const bars = document.getElementsByClassName("css-1vuxth3-MuiBarElement-root") as HTMLCollectionOf<HTMLElement>;
+    const bars = document.getElementsByClassName("MuiBarElement-root") as HTMLCollectionOf<HTMLElement>;
+    console.log(bars)
 
     useEffect(() => {
         if (bars.length >= 4) {

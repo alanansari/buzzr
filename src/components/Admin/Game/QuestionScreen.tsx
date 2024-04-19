@@ -28,11 +28,11 @@ export default function QuestionScreen(props: any) {
             dispatch(setScreenStatus(ScreenStatus.result))
         })
     }
-    useEffect(() => {
-        if (time == 0) {
-            handleNext()
-        }
-    }, [time])
+    // useEffect(() => {
+    //     if (time == 0) {
+    //         handleNext()
+    //     }
+    // }, [time])
 
     return <>
         <div className="flex flex-col items-center m-auto w-full px-4">
@@ -45,6 +45,9 @@ export default function QuestionScreen(props: any) {
                 <Countdown timer={question?.timeOut} setTime={setTime} />
                 {question.mediaType === "image" && <Image src={question.media} className="h-[25vh]" alt="media Image" height={300} width={300} />
                 }
+                <span className="rounded-full bg-white w-12 h-12 justify-center items-center invisible">
+                    0 <span className="text-[10px] mt-[-5px]"> Ans</span>
+                </span>
             </div>
             <div className="absolute bottom-16 w-4/5">
                 <div className="grid grid-cols-2 w-full gap-5 h-full">
