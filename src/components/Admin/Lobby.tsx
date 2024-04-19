@@ -82,7 +82,7 @@ const Lobby = (params: {
 
     return <>
         <div>
-            <div className="h-fit mt-2 w-[70vw] mx-auto max-h-[60vh] flex flex-wrap gap-y-4 gap-x-2">
+            <div className="h-fit mt-2 w-[75vw] mx-auto max-h-[60vh] flex flex-wrap overflow-y-scroll gap-y-4 gap-x-2">
                 {(players.length === 0) ? <div className="p-2 mx-auto w-fit bg-slate-200 rounded-md text-sm">Waiting for players to join...</div> : players.map((player: any) => {
                     return (
                         <div key={player.id} className="p-1 mx-auto w-fit bg-slate-200 rounded-md text-md flex justify-center items-center">

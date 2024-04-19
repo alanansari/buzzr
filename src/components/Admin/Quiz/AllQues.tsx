@@ -42,16 +42,16 @@ export default async function AllQues(props: { quizId: string }) {
                         <button type="submit"><MdDeleteOutline size={24} className="absolute right-1 top-0 cursor-pointer" /></button>
                     </form>
                     <div className="flex flex-col w-1/2">
-                        <p className="text-xl mb-2 font-semibold">Question {index + 1}. {ques.title}</p>
+                        <p className="text-xl mb-2 font-semibold text-slate-200">Question {index + 1}. {ques.title}</p>
                         <p className="text-sm text-gray-300 mb-4">Timeout : {ques.timeOut}</p>
                         {ques.media && <ShowMedia media={ques.media} mediaType={ques.mediaType || ""} />}
                     </div>
                     <div className="grid grid-cols-2 w-1/2">
                         {ques?.options?.map((op, index) => {
-                            return <p key={index} className="block text-lg my-2">Option {index + 1}: {op.title} <br /></p>
+                            return <p key={index} className="block text-lg my-2 text-slate-200">Option {index + 1}: {op.title} <br /></p>
                         })}
 
-                        <p className="my-2"><span className="font-semibold text-blue-400">Correct Option: </span>{ques?.options?.map((op) => {
+                        <p className="my-2 text-slate-200"><span className="font-semibold text-blue-400">Correct Option: </span>{ques?.options?.map((op) => {
                             if (op.isCorrect === true)
                                 return op.title
                         })}</p>

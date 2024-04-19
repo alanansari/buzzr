@@ -30,13 +30,13 @@ async function QuizInfoSection(props: { quizId: string }) {
     return <>
         <form className="flex flex-row justify-between pb-12 border-dashed border-b" action={createRoom}>
             <div className="flex flex-col w-full text-slate-200">
-                <h2 className="text-3xl mb-4 font-bold">{quiz?.title}</h2>
-                <p className="capitalize mb-4">{quiz?.description}</p>
+                <h2 className="text-3xl mb-4 font-bold text-slate-200">{quiz?.title}</h2>
+                <p className="capitalize mb-4 text-slate-200">{quiz?.description}</p>
                 <p className="text-xl text-gray-200">Number of Questions : <span className="font-semibold text-gray-50">{quiz?.questions?.length}</span></p>
                 <input type="hidden" name="quizId" value={props.quizId} />
                 <SubmitButton text="Host" isQuiz={true} />
                 {allQuiz.length > 0 &&
-                    <div className="my-2">
+                    <div className="my-2 text-slate-200">
                         Previous Game Sessions :
                         <div className="grid grid-cols-2 my-2">
                             {allQuiz?.length > 0 ? allQuiz.map((quiz) => {
