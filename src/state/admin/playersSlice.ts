@@ -25,7 +25,7 @@ const playerSlice = createSlice({
       if (existingPlayer) {
         return;
       }
-      state.players = [action.payload, ...state.players];
+      state.players = [...state.players, action.payload];
     },
     removePlayer: (state, action) => {
       state.players = state.players.filter(
