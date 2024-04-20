@@ -38,7 +38,7 @@ export default function Navbar() {
         height={40}
       />
       <button
-        className="border-[1.5px] text-sm rounded-full py-2 px-4 mx-2 hover:bg-white hover:text-slate-950 transition-colors duration-200 ease-in-out"
+        className="border-[1.5px] text-sm text-slate-200 rounded-full py-2 px-4 mx-2 hover:bg-white hover:text-slate-950 transition-colors duration-200 ease-in-out"
         onClick={() => signOut()}
       >
         Sign out

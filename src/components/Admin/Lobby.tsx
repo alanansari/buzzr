@@ -85,10 +85,9 @@ const Lobby = (params: {
             <div className="h-fit mt-2 w-[75vw] mx-auto max-h-[60vh] flex flex-wrap overflow-y-scroll gap-y-4 gap-x-2">
                 {(players.length === 0) ? <div className="p-2 mx-auto w-fit bg-slate-200 rounded-md text-sm">Waiting for players to join...</div> : players.map((player: any) => {
                     return (
-                        <div key={player.id} className="p-1 mx-auto w-fit bg-slate-200 rounded-md text-md flex justify-center items-center">
-                            <Image className="rounded-sm" src={player.profilePic as string || "/avatar-1577909_1280.webp"} alt="player-avtr" width={36} height={36} />
+                        <div key={player.id} className="p-1 mx-auto w-fit bg-slate-200 rounded-md text-md flex justify-center items-center hover:line-through hover:cursor-pointer" onClick={() => handlePlayerRemove(player)}>
+                            <Image className="rounded-sm h-8 w-auto" src={player.profilePic as string || "/avatar-1577909_1280.webp"} alt="player-avtr" width={36} height={36} />
                             <div className="mx-1 font-bold">{player.name}</div>
-                            <div className="text-red-600 font-bold cursor-pointer px-1" title="Remove" onClick={() => handlePlayerRemove(player)}>X</div>
                         </div>
                     )
                 })

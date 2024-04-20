@@ -10,10 +10,10 @@ export const optionColors = [
 ];
 
 export const cssOptionColors = [
-    "tomato",
-    "dodgerblue",
-    "mediumseagreen",
-    "gold",
+    "coral",
+    "aqua",
+    "aquamarine",
+    "cornsilk",
     "slateblue",
     "hotpink",
     "rebeccapurple",
