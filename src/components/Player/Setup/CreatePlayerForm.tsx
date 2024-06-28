@@ -40,7 +40,7 @@ const CreatePlayerForm = (props:{
                 ...props.data,
                 err: false
             })
-    }, [props.data.name, props])
+    }, [props.data.name])
 
   return (
     <form className="flex flex-col w-[90%] md:w-[70%] m-4"
