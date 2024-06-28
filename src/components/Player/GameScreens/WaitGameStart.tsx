@@ -16,7 +16,7 @@ const WaitGameStart = (params:{
             <div className="w-full md:w-full p-4 hidden md:flex md:flex-col">
               <BackNavButton />
               <h1 className="text-5xl py-2 font-extrabold dark:text-white">{game.quiz.title}</h1>
-              <h2 className="text-sm mt-8 p-2 dark:text-white">You've joined as</h2>
+              <h2 className="text-sm mt-8 p-2 dark:text-white">You&apos;ve joined as</h2>
               <div className='flex justify-between items-center w-fit gap-2 rounded-full p-3 bg-off-white dark:bg-off-dark font-bold text-dark dark:text-white'>
                 <Image
                   src={`${(params.player.profilePic)?params.player.profilePic:"\avatar-1577909_1280.webp"}`}
@@ -45,7 +45,7 @@ const WaitGameStart = (params:{
             </div>
             <div className="md:w-[45vw] w-[99vw] flex flex-col p-2 md:p-4">
               <h1 className="text-2xl py-2 font-extrabold dark:text-white md:hidden">{game.quiz.title}</h1>
-              <h2 className="text-xs p-2 dark:text-white md:hidden">You've joined as</h2>
+              <h2 className="text-xs p-2 dark:text-white md:hidden">You&apos;ve joined as</h2>
               <div className='text-xs flex justify-between items-center w-fit gap-2 rounded-full p-2 mb-2 bg-off-white dark:bg-off-dark font-bold text-dark dark:text-white md:hidden'>
                 <Image
                   src={`${(params.player.profilePic)?params.player.profilePic:"\avatar-1577909_1280.webp"}`}
