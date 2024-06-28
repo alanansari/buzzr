@@ -96,10 +96,10 @@ const GamePage = (params: {
     }, [dispatch, params.game.gameCode, params.player, game.quiz.questions, router]);
 
     return (
-        <div className="flex flex-col justify-center items-center h-full w-fit p-4 mx-auto my-4">
+        <div className="flex flex-col justify-center items-center h-full w-full px-4 mx-auto my-4">
             {/* Screens */}
             {
-                (screen === ScreenStatus.lobby) ? <WaitGameStart />
+                (screen === ScreenStatus.lobby) ? <WaitGameStart player={params.player} game={params.game} />
                     : (screen === ScreenStatus.question) ? <Question question={question} gameSessionId={params.game.id} playerId={params.player.id} socket={socketState} />
                         : (screen === ScreenStatus.result) ? <Result result={result} />
                             : (screen === ScreenStatus.wait) ? <Loader />

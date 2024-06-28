@@ -6,6 +6,7 @@ const Game = () => {
         src='https://alanansari.github.io/TetrisJS/'
         width='100%'
         height='100%'
+        className='rounded-xl'
     >
         Oops! Your browser doesn&apos;t support iframes.
         <br />
