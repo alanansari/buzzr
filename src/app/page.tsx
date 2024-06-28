@@ -2,13 +2,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="p-8 h-full mt-[15vh]">
-      <div className="flex justify-center items-center w-full">
-        <div className="text">
-          BUZZR
-        </div>
-      </div>
-
+    <div className="p-8 h-full">
       <div className="flex flex-row w-full items-center justify-center mt-8 overflow-hidden">
         <Link href={"/player"}>
           <button className="w-44 md:w-48 sm:w-44 py-4 sm:py-[14px] bg-gradient-to-r from-indigo-700 via-indigo-600 to-indigo-800 text-white text-lg transition-all rounded shadow-lg">Play</button>

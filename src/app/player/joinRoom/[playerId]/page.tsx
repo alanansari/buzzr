@@ -2,7 +2,8 @@ import { prisma } from "@/utils/prisma"
 import SetLocalItem from "@/components/Player/setLocalItem"
 import ResetReduxStates from "@/components/Player/ResetReduxStates"
 import JoinRoomForm from "@/components/Player/Setup/JoinRoomForm"
-import { ToastContainer } from "react-toastify"
+import Image from "next/image"
+import BackNavButton from "@/components/BackNavButton"
 
 async function JoinRoom({ params }: { params: { playerId: string } }) {
 
@@ -24,17 +25,26 @@ async function JoinRoom({ params }: { params: { playerId: string } }) {
             }
         })
     }
-    return <>
-        <div className="flex flex-col justify-center items-center max-h-full">
-            <h1 className="text-3xl font-semibold uppercase mt-12 text-white">Buzzr !</h1>
-            <div className="flex flex-col justify-center items-center px-4 py-6 mx-2 md:mx-0 w-11/12 md:w-2/5 my-6 bg-white rounded-lg">
-                <SetLocalItem mapKey='playerId' value={params.playerId} />
-                <ResetReduxStates />
+    return (
+        <>
+        <SetLocalItem mapKey='playerId' value={params.playerId} />
+        <ResetReduxStates />
+        <div className="p-4 flex justify-between">
+            <Image
+            src="/logo.svg"
+            width={80}
+            height={80}
+            alt="Logo"
+            />
+        </div>
+        <div className="w-full h-full flex gap-4 p-4 [&>*]:bg-white dark:[&>*]:bg-dark [&>*]:rounded-xl">
+            <div className="w-full md:w-fit py-4">
                 <JoinRoomForm playerId={params.playerId}/>
             </div>
+            <div className="w-[40vw] hidden md:block"></div>
         </div>
-        <ToastContainer />
-    </>
+        </>
+    )
 }
 
 export default JoinRoom

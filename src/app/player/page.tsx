@@ -1,18 +1,35 @@
-import { ToastContainer } from "react-toastify";
+"use client";
 import CheckLocalPlayer from "@/components/Player/checkLocalPlayer";
 import CreatePlayerForm from "@/components/Player/Setup/CreatePlayerForm";
+import Image from "next/image";
+import { useState } from "react";
+import BackNavButton from "@/components/BackNavButton";
 
 function Player() {
 
+    const [data, setData] = useState({
+        name: "",
+        err: false
+    })
+
     return <>
-        <div className="flex flex-col justify-center items-center max-h-full">
             <CheckLocalPlayer />
-            <h1 className="text-3xl font-semibold uppercase mt-12 text-white">Buzzr !</h1>
-            <div className="flex flex-col justify-center items-center px-4 py-6 mx-2 md:mx-0 w-11/12 md:w-2/5 my-6 bg-white rounded-lg">
-                <CreatePlayerForm />
+            <div className="p-4 flex justify-between">
+                <Image
+                src="/logo.svg"
+                width={80}
+                height={80}
+                alt="Logo"
+                />
+
             </div>
-        </div>
-        <ToastContainer />
+            <div className="w-full h-full flex gap-4 p-4 [&>*]:bg-white dark:[&>*]:bg-dark [&>*]:rounded-xl">
+                <div className="w-fit">
+                    <BackNavButton />
+                    <CreatePlayerForm data={data} setData={setData} />
+                </div>
+                <div className="w-[40vw] hidden md:block"></div>
+            </div>
     </>
 }
 

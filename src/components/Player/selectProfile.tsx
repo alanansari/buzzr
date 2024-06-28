@@ -7,12 +7,12 @@ import { useFormStatus } from "react-dom"
 export default function SelectProfile() {
 
     const profiles = [
-        "/player_profile/profile1.png", "/player_profile/profile2.png", "/player_profile/profile3.png", "/player_profile/profile4.png", "/player_profile/profile5.jpg", "/player_profile/profile6.png", "/player_profile/profile7.jpg", "/player_profile/profile9.jpg", "/player_profile/profile10.jpg", "/player_profile/profile11.jpg"
+        "/player_profile/profile1.png", "/player_profile/profile2.png", "/player_profile/profile3.png", "/player_profile/profile4.png", "/player_profile/profile5.jpg", "/player_profile/profile6.png", "/player_profile/profile7.jpg", "/player_profile/profile9.jpg", "/player_profile/profile10.jpg", "/player_profile/profile11.jpg", "/player_profile/profile12.png"
     ]
 
     const [avatar, setAvatar] = useState({
-        profile: "",
-        index: -1
+        profile: profiles[0],
+        index: 0
     })
     function handleProfile(src: string, index: number) {
         setAvatar({ index, profile: src })
@@ -30,13 +30,13 @@ export default function SelectProfile() {
 
 
     return <>
-        <div className="flex flex-row flex-wrap w-full gap-4 items-center justify-center mt-2 bg-transparent mb-6 max-h-[30vh] overflow-y-scroll">
+        <div className="whitespace-nowrap items-center mt-2 bg-transparent mb-6 max-h-[25vh] overflow-x-scroll overflow-y-hidden">
             {profiles.map((pr, index) => {
                 return <>
-                    <div className="" key={index}>
-                        <input name="profile" id="profile" value={avatar.profile} className="hidden" />
+                    <div className="inline-block p-3" key={index}>
+                        <input name="profile" id="profile" value={avatar.profile} className="hidden"/>
                         <label htmlFor="profile" className="bg-transparent">
-                            <Image key={index} alt="image" width={64} height={64} src={pr} className={` ${avatar.index === index && "border-[5px] border-blue-500 ease-linear duration-150 scale-95 shadow-lg"} rounded-full w-24 h-24 border-black border-[1.4px] cursor-pointer`} onClick={() => { handleProfile(pr, index) }} />
+                            <Image key={index} alt="image" width={128} height={128} src={pr} className={` ${avatar.index === index && "border-[3px] border-lprimary ease-linear duration-150 scale-[1.2] shadow-lg"} rounded-full w-20 h-20 border-black cursor-pointer`}  onClick={() => { handleProfile(pr, index) }} />
                         </label>
                     </div>
                 </>

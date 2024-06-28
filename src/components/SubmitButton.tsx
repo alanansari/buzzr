@@ -24,10 +24,10 @@ const SubmitButton = (params: {
     <button
       disabled={params.error || pending}
       value="submit"
-      className={`${params.style === "game" ? "rounded w-full" : "rounded-full w-[60%]"} text-slate-100 bg-blue-500 my-2 p-2 hover:cursor-pointer hover:bg-blue-600 transition-all duration-300 ease-in-out disabled:cursor-none disabled:bg-gray-500`}
+      className="rounded-xl text-white dark:text-dark w-full bg-lprimary dark:bg-dprimary px-5 py-3 hover:cursor-pointer transition-all duration-300 ease-in-out disabled:cursor-none font-bold disabled:bg-gray"
       onClick={handleRedux}
     >
-      {(pending) ? 'Loading...' : params.text || 'Submit'}
+      {(pending) ? 'Loading...' : params.text || 'Next'}
     </button>
   )
 }

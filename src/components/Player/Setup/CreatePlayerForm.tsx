@@ -5,9 +5,15 @@ import SelectProfile from "@/components/Player/selectProfile"
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 import 'react-toastify/dist/ReactToastify.css';
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
-const CreatePlayerForm = () => {
+const CreatePlayerForm = (props:{
+    data: {
+        name: string;
+        err: boolean;
+    };
+    setData: (data: any) => void;
+}) => {
 
     const router = useRouter();
 
@@ -21,52 +27,44 @@ const CreatePlayerForm = () => {
         }
     }
 
-    const [data, setData] = useState({
-        name: "",
-        errMsg: "",
-        err: false
-    })
 
     useEffect(() => {
         const rightName = /^[a-z,0-9,.'-]{1,20}$/i;
-        if (data.name && !rightName.test(data.name))
-            setData({
-                ...data,
-                errMsg: "Name must be alphanumeric with a max of 20 characters",
+        if (props.data.name && !rightName.test(props.data.name))
+            props.setData({
+                ...props.data,
                 err: true
             })
         else
-            setData({
-                ...data,
-                errMsg: "",
+            props.setData({
+                ...props.data,
                 err: false
             })
-    }, [data.name])
+    }, [props.data.name])
 
   return (
-    <form className="flex flex-col justify-center items-center w-full "
+    <form className="flex flex-col w-[90%] md:w-[70%] m-4"
         action={clientAction}
     >
-        <label className="text-lg text-center bg-transparent ">Enter Username</label>
+        <h1 className="text-3xl md:text-5xl py-2 font-extrabold dark:text-white">Create a custom profile</h1>
+        <h2 className="md:text-lg py-2 dark:text-white">Join a private quiz</h2>
+        <SelectProfile />
         <input
             type="text"
             name="username"
-            placeholder="Enter your username"
-            className="w-full border-black border-2 focus:border-blue-600 rounded-lg outline-none md:w-4/5 text-slate-900 my-2 p-2"
+            placeholder="Enter Display Name"
+            className="w-full border-gray border focus:border-blue-600 rounded-lg outline-none md:w-4/5 text-dark dark:text-gray dark:bg-dark-bg my-2 px-4 py-3"
             required
             autoComplete="off"
-            value={data.name}
-            onChange={(e) => setData({
-                ...data,
+            value={props.data.name}
+            onChange={(e) => props.setData({
+                ...props.data,
                 name: e.target.value
             })}
         />
-        {data.err && <span className="text-center text-red-500 font-Roboto text-xs">{data.errMsg}</span>}
-
-        <label className="text-lg text-center mt-3 w-full bg-transparent">Select Profile Picture</label>
-        <SelectProfile />
-        <div className="w-full md:w-4/5">
-            <SubmitButton style="game" error={data.err} />
+        <span className={` ${props.data.err?'':'invisible'} text-red-500 px-2 text-xs`}>Name must be alphanumeric with a max of 20 characters</span>
+        <div className="w-full md:w-[40%] mt-10">
+            <SubmitButton style="game" error={props.data.err} />
         </div>
     </form>
   )

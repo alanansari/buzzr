@@ -1,5 +1,7 @@
 import "../globals.css";
 import "./styles.css";
+import { ToastContainer } from "react-toastify";
+import Footer from "@/components/Footer";
 
 export default function RootLayout({
   children,
@@ -7,22 +9,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-      <>
+      <div className="flex flex-col h-full">
         {children}
-        <div className="area">
-          <ul className="circles">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul>
-        </div>
-      </>
+        <ToastContainer />
+        <Footer />
+      </div>
   );
 }

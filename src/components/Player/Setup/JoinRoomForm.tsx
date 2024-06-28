@@ -19,11 +19,11 @@ const JoinRoomForm = (params:{
         }
     }
   return (
-    <form className="flex flex-col justify-center items-center px-2 py-4 w-full md:w-4/5"
+    <form className="flex flex-col justify-center px-2 py-4 m-4 w-[85%] md:w-[55vw]"
         action={clientAction}
     >
-        <label className="text-lg text-center text-slate-800">Enter the Code to join the quiz</label>
-        <p className="text-sm text-slate-600 mt-2 mb-3 text-center">It is on the screen in front of you</p>
+        <h1 className="text-3xl md:text-5xl py-2 font-extrabold dark:text-white">Enter room code</h1>
+        <h2 className="text-md md:text-lg py-2 dark:text-white">Enter room code provided by the admin</h2>
         <input
             type="hidden"
             name="playerId"
@@ -32,12 +32,14 @@ const JoinRoomForm = (params:{
         <input
             type="text"
             name="gameCode"
-            placeholder="Enter Room Code To Join"
-            className="w-full border-black border-2 focus:border-blue-600 outline-none text-slate-900 my-2 rounded p-2 mb-6 focus:shadow-md"
+            placeholder="Enter Code"
+            className="w-full border-gray dark:bg-dark-bg dark:text-white border focus:border-blue-600 rounded-lg outline-none md:w-4/5 text-slate-900 my-12 px-4 py-3"
             autoComplete="off"
             required
         />
-        <SubmitButton style='game' />
+        <div className='w-full md:w-[40%] mt-10'>
+            <SubmitButton text="Join"/>
+        </div>
     </form>
   )
 }
