@@ -15,6 +15,7 @@ const GamePage = (params: {
 }) => {
     const game = params.game as any;
     const [question, setQuestion] = useState(game.quiz.questions[game.currentQuestion]);
+    const [questionIndex, setQuestionIndex] = useState(game.quiz.questions[game.currentQuestion]);
     const [socketState, setSocketState] = useState<Socket>({} as Socket);
     const [stats, setStats] = useState<{ position: number | null, score: number }>({ position: null, score: 0 });
 
@@ -50,6 +51,7 @@ const GamePage = (params: {
 
             socket.on("get-question-index", (index: number) => {
                 console.log("Question index", index);
+                setQuestionIndex(index)
                 setQuestion(game.quiz.questions[index]);
                 dispatch(setScreenStatus(ScreenStatus.question));
             });
@@ -95,12 +97,14 @@ const GamePage = (params: {
         }
     }, [dispatch, params.game.gameCode, params.player, game.quiz.questions, router]);
 
+    console.log(game)
+
     return (
         <div className="flex flex-col justify-center items-center h-full w-full px-4 mx-auto my-4">
             {/* Screens */}
             {
                 (screen === ScreenStatus.lobby) ? <WaitGameStart player={params.player} game={params.game} />
-                    : (screen === ScreenStatus.question) ? <Question question={question} gameSessionId={params.game.id} playerId={params.player.id} socket={socketState} />
+                    : (screen === ScreenStatus.question) ? <Question question={question} gameSessionId={params.game.id} playerId={params.player.id} socket={socketState} currentQuestion={questionIndex} quizTitle={game.quiz.title} />
                         : (screen === ScreenStatus.result) ? <Result result={result} />
                             : (screen === ScreenStatus.wait) ? <Loader />
                                 : <LeaderBoard position={stats.position} score={stats.score} />

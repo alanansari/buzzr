@@ -2,7 +2,7 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div className="flex p-2 justify-center items-center text-sm dark:text-white">
+    <div className="flex p-2 justify-center items-center text-sm dark:text-white absolute bottom-0 mx-auto w-full">
         &copy; Software Incubator
     </div>
   )

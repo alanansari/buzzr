@@ -20,6 +20,8 @@ const config: Config = {
       "gray":"#c4c6c9",
       "lprimary":"#7d49f8",
       "dprimary":"#a589fc",
+      "red-dark":"#E84B4B",
+      "red-light":"#C92929"
     },
     extend: {
       backgroundImage: {

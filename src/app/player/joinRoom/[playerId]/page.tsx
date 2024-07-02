@@ -13,11 +13,11 @@ async function JoinRoom({ params }: { params: { playerId: string } }) {
         }
     })
 
-    if (!player) {
-        throw new Error('Player not found')
-    }
+    // if (!player) {
+    //     throw new Error('Player not found')
+    // }
 
-    if (player.gameId) {
+    if (player?.gameId) {
         await prisma.player.update({
             where: { id: params.playerId },
             data: {
