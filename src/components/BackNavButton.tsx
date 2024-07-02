@@ -1,15 +1,21 @@
 "use client"
+import { RootState } from "@/state/store"
 import Image from "next/image"
+import { useSelector } from "react-redux"
+import {pageTheme} from "@/state/pageThemeSlice"
 
 const BackNavButton = () => {
+
+  const theme = useSelector((state: RootState) => state.pageTheme.theme)
+
   return (
     <>
         <Image
-            src="/arrow-back.svg"
+            src={`${(theme === pageTheme.light)?"/arrow-back.svg":"/arrow-back-light.svg"}`}
             width={30}
             height={30}
             alt="Logo"
-            className="m-4 hover:cursor-pointer dark:text-white"
+            className="hover:cursor-pointer dark:text-white"
             onClick={() => { window.history.back() }}
         />
     </>

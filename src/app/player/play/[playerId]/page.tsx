@@ -34,22 +34,29 @@ const page = async ({ params }: { params: { playerId: string } }) => {
                         }
                     }
                 }
+            },
+            creator: {
+                select: {
+                    name: true,
+                    image: true
+                }
             }
         }
     });
 
     return (
-        <div>
+        <>
             <ValidatePlayer playerId={player.id} />
-            <div className='flex items-center justify-between bg-indigo-300 opacity-80 w-[100vw] rounded-b-2xl'>
-                <div className='text-md mx-2 font-bold text-slate-900'>Game Code: {game?.gameCode}</div>
-                <div className='p-1 flex justify-center items-center'>
-                    <Image className='rounded-full border border-b-slate-900' src={player.profilePic as string || "/avatar-1577909_1280.webp"} alt='player-avatar' width={50} height={50} />
-                    <div className='text-md text-slate-900 mx-2 font-bold'>Player: {player.name}</div>
-                </div>
+            <div className="p-4 pb-2 flex justify-between">
+                <Image
+                    src="/logo.svg"
+                    width={80}
+                    height={80}
+                    alt="Logo"
+                />
             </div>
             <GamePage player={player} game={game as GameSession} />
-        </div>
+        </>
     )
 }
 

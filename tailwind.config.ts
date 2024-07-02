@@ -14,6 +14,8 @@ const config: Config = {
       "light-bg": "#f5f3ff",
       "dark-bg": "#1e1e1e",
       "white": "#ffffff",
+      "off-white": "#f5f3ff",
+      "off-dark": "#434349",
       "dark": "#2c2c2c",
       "gray":"#c4c6c9",
       "lprimary":"#7d49f8",
