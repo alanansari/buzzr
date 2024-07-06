@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
+import ClientImage from "@/components/ClientImage";
 
 const Buzzrs = async () => {
   const session = await getServerSession(authOptions);
@@ -25,43 +25,55 @@ const Buzzrs = async () => {
     },
   });
 
-  const total = quizzes.length;
-
-  quizzes = quizzes.slice(0, 3);
-
   return (
-    <div className="mt-4 w-[50vw] mx-auto border-[1.5px] rounded-2xl flex flex-col items-center">
-      <h1>Your Buzzrs</h1>
-      <div className="flex flex-wrap justify-evenly p-4 w-full">
+      <div className="flex flex-wrap gap-3 w-full mt-4 md:max-h-[70vh] overflow-y-auto">
+        <Link 
+          href="#"
+          className="p-2 border border-[#c2b4fe] dark:border-transparent h-[50vh] w-full md:h-44 md:w-40 bg-card-light hover:bg-cardhover-light dark:bg-card-dark hover:dark:bg-cardhover-dark text-dark dark:text-white rounded flex flex-col justify-center items-center"
+        >
+          <div className="h-full w-full flex justify-center items-center">
+            <ClientImage
+              props={{
+                src: "/add.svg",
+                darksrc: "/add-dark.svg",
+                alt: "Create Quiz",
+                width: 45,
+                height: 45
+              }}
+            />
+          </div>
+          <div className="text-xs font-bold w-full">Create a new quiz</div>
+          <div className="text-xs w-full">Build from the ground up</div>
+        </Link>
+        <Link 
+          href="#"
+          className="p-2 border border-[#c2b4fe] dark:border-transparent h-[50vh] w-full md:h-44 md:w-40 bg-card-light hover:bg-cardhover-light dark:bg-card-dark hover:dark:bg-cardhover-dark text-dark dark:text-white rounded flex flex-col justify-center items-center"
+        >
+          <div className="h-full w-full flex justify-center items-center">
+            <ClientImage
+              props={{
+                src: "/download.svg",
+                darksrc: "/download-dark.svg",
+                alt: "Import Quiz",
+                width: 45,
+                height: 45
+              }}
+            />
+          </div>
+          <div className="text-xs font-bold w-full">Import an existing quiz</div>
+          <div className="text-xs w-full">Coming soon...</div>
+        </Link>
         {quizzes.map((quiz) => (
           <Link
             href={`/admin/quiz/${quiz.id}`}
             key={quiz.id}
-            className="m-2 p-2 bg-slate-100 text-slate-950 rounded-md shadow-md"
+            className="p-2 border border-[#c2b4fe] dark:border-transparent h-[50vh] w-full md:h-44 md:w-40 bg-card-light hover:bg-cardhover-light dark:bg-card-dark hover:dark:bg-cardhover-dark text-dark dark:text-white rounded"
           >
-            <Image
-              src={quiz.thumbnail ? quiz.thumbnail : "/card_placeholder.png"}
-              alt={quiz.title}
-              width={100}
-              height={100}
-              className="w-[90px] h-auto rounded-md"
-            />
-            <h2 className="text-md">{quiz.title}</h2>
-            <p className="text-xs">{quiz.description}</p>
+            <h2 className="text-md font-bold dark:text-white">{quiz.title}</h2>
+            <p className="text-xs text-off-dark dark:text-off-white">{quiz.description}</p>
           </Link>
         ))}
-        {total != 0 ? (
-          <Link
-            href="/admin/library"
-            className="h-[24vh] w-[18vh] border-2 border-blue-600 text-blue-600 text-sm m-2 p-2 rounded-md flex justify-center items-center"
-          >
-            <u>{`See All(${total})`}</u>
-          </Link>
-        ) : (
-          <p className="text-slate-500">No Buzzrs yet..</p>
-        )}
       </div>
-    </div>
   );
 };
 

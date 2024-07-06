@@ -21,7 +21,11 @@ const config: Config = {
       "lprimary":"#7d49f8",
       "dprimary":"#a589fc",
       "red-dark":"#E84B4B",
-      "red-light":"#C92929"
+      "red-light":"#C92929",
+      "card-light":"#ede9fe",
+      "cardhover-light":"#ddd5ff",
+      "card-dark":"#3d3c3e",
+      "cardhover-dark":"#4c4c4c",
     },
     extend: {
       backgroundImage: {

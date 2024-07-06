@@ -6,6 +6,8 @@ import screenReducer from "./player/screenSlice";
 import adminScreenReducer from "./admin/screenSlice";
 import playerResultReducer from "./player/resultSlice";
 import pageThemeReducer from "./pageThemeSlice";
+import navToggleReducer from "./admin/navtoggleSlice";
+
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import persistStore from "redux-persist/es/persistStore";
@@ -16,6 +18,7 @@ const rootReducer = combineReducers({
   timer: timerReducer,
   screen: screenReducer,
   pageTheme: pageThemeReducer,
+  navToggle: navToggleReducer,
   adminscreen: adminScreenReducer,
   playerResult: playerResultReducer,
 });

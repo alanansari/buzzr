@@ -18,8 +18,10 @@ export default async function RootLayout({
       <>
         <SessionProvider>
           <ReduxProvider>
+            <div className="flex">
             <Navbar />
             {children}
+            </div>
           </ReduxProvider>
         </SessionProvider>
       </>
