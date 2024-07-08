@@ -3,8 +3,8 @@ import { getServerSession } from "next-auth"
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth"
 import { redirect } from "next/navigation"
 import ShowMedia from "./ShowMediaComp";
-import { MdDeleteOutline } from "react-icons/md";
 import { revalidatePath } from "next/cache";
+import Image from "next/image";
 
 export default async function AllQues(props: { quizId: string }) {
     const session = await getServerSession(authOptions);
@@ -33,28 +33,46 @@ export default async function AllQues(props: { quizId: string }) {
     }
 
     return <>
-        <div className="flex flex-col justify-between pb-12 pt-4 text-slate-200">
-            <h2 className="text-2xl mb-4 text-blue-300">All Questions : </h2>
+        <div className="flex flex-col justify-between h-[90vh] overflow-auto">
             {questions.length > 0 ? questions.map((ques, index) => {
-                return <div key={ques.id} className="relative w-full flex flex-row border-b border-gray-200 my-3">
-                    <form action={handleDeleteQues}>
+                return <div key={ques.id} className="w-full my-2 flex items-center">
+                    {/* <form action={handleDeleteQues}>
                         <input type="text" className="hidden" name="ques_id" value={ques.id} />
-                        <button type="submit"><MdDeleteOutline size={24} className="absolute right-1 top-0 cursor-pointer" /></button>
-                    </form>
-                    <div className="flex flex-col w-1/2">
-                        <p className="text-xl mb-2 font-semibold text-slate-200">Question {index + 1}. {ques.title}</p>
-                        <p className="text-sm text-gray-300 mb-4">Timeout : {ques.timeOut}</p>
-                        {ques.media && <ShowMedia media={ques.media} mediaType={ques.mediaType || ""} />}
+                        <button type="submit">Delete</button>
+                    </form> */}
+                    <div className="p-2 cursor-move">
+                        <Image
+                            src="/selection-indicator.svg"
+                            alt="selection-indicator"
+                            width={20}
+                            height={20}
+                        />
                     </div>
-                    <div className="grid grid-cols-2 w-1/2">
-                        {ques?.options?.map((op, index) => {
-                            return <p key={index} className="block text-lg my-2 text-slate-200">Option {index + 1}: {op.title} <br /></p>
-                        })}
-
-                        <p className="my-2 text-slate-200"><span className="font-semibold text-blue-400">Correct Option: </span>{ques?.options?.map((op) => {
-                            if (op.isCorrect === true)
-                                return op.title
-                        })}</p>
+                    <div className="bg-[#f5f5f5] dark:bg-[#3b3c3f] rounded-t-xl w-full">
+                        <div className="p-3">
+                            <div className="flex flex-col">
+                                <div className="flex justify-between items-center">
+                                    <p className="text-md font-semibold flex items-center w-[70%] break-words">{index + 1}. {ques.title}</p>
+                                    <p className="text-sm text-dark font-black p-1 rounded-md bg-[#dadadd] w-fit">{ques.timeOut} sec</p>
+                                </div>
+                            </div>
+                            <div className="grid grid-cols-4">
+                                {ques?.options?.map((op, index) => {
+                                    return (
+                                        <p key={index} className="break-word text-md my-2 flex items-center">
+                                            {op.isCorrect ? <Image src="/radio-btn-selected.svg" alt="option" width={25} height={25} /> : <Image src="/radio-btn.svg" alt="option" width={25} height={25} />}
+                                            <span>{op.title}</span>
+                                        </p>)
+                                })}
+                            </div>
+                        </div>
+                        <div className="bg-[#ede9fe] p-2 px-3 rounded-b-xl">
+                            <div className="flex [&>*]:text-xs [&>*]:font-semibold">
+                                <button className="p-1 mr-1 text-red-light">Delete</button>
+                                <button className="p-1 text-lprimary mr-1">Edit question</button>
+                                {ques.media && <ShowMedia media={ques.media} mediaType={ques.mediaType || ""} />}
+                            </div>        
+                        </div>
                     </div>
                 </div>
             }) : <p>No Questions added</p>}

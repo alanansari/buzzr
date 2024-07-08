@@ -35,7 +35,7 @@ export default function ShowMedia(props: { media: string, mediaType: string }) {
     const mediaType = props.mediaType
 
     return <>
-        <button className="w-32 h-8 shadow hover:bg-slate-200 transition-all text-black bg-white border rounded" onClick={handleOpen}>View Media</button>
+        <button className="p-1 ml-auto text-xs text-white bg-lprimary dark:bg-dprimary rounded-md" onClick={handleOpen}>View image</button>
 
         <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description">
