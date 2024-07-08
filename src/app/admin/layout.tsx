@@ -18,7 +18,7 @@ export default async function RootLayout({
       <>
         <SessionProvider>
           <ReduxProvider>
-            <div className="flex">
+            <div className="flex w-[100vw]">
             {children}
             </div>
           </ReduxProvider>
