@@ -28,34 +28,39 @@ async function QuizInfoSection(props: { quizId: string }) {
     const allQuiz = quiz?.gameSessions ? quiz?.gameSessions : [];
 
     return <>
-        <form className="flex flex-row justify-between pb-12 border-dashed border-b" action={createRoom}>
-            <div className="flex flex-col w-full text-slate-200">
-                <h2 className="text-3xl mb-4 font-bold text-slate-200">{quiz?.title}</h2>
-                <p className="capitalize mb-4 text-slate-200">{quiz?.description}</p>
-                <p className="text-xl text-gray-200">Number of Questions : <span className="font-semibold text-gray-50">{quiz?.questions?.length}</span></p>
+        <form className="w-[40vw] h-[92vh] bg-white dark:bg-off-dark mr-2" action={createRoom}>
+            <div className="flex flex-col w-[90%] mx-auto text-dark dark:text-white">
+                <div className="text-sm">
+                    <span className="p-1 py-2 underline underline-offset-1"><Link href={'/admin'}>Home</Link></span>
+                    <span className="p-1 py-2">&gt;</span>
+                    <span className="p-1 py-2">Quizzes</span>
+                </div>
+                <h2 className="text-3xl my-3 font-bold">{quiz?.title}</h2>
+                <p className="capitalize mb-4">{quiz?.description}</p>
+                <p className="text-xs p-1 border border-[#8FB72E] bg-[#C4F849] rounded w-fit my-1 dark:text-dark">Total number of questions : <span className="font-semibold text-gray-50">{quiz?.questions?.length}</span></p>
                 <input type="hidden" name="quizId" value={props.quizId} />
-                <SubmitButton text="Host" isQuiz={true} />
-                {allQuiz.length > 0 &&
-                    <div className="my-2 text-slate-200">
-                        Previous Game Sessions :
-                        <div className="grid grid-cols-2 my-2">
-                            {allQuiz?.length > 0 ? allQuiz.map((quiz) => {
-                                return <Link key={quiz.id} href={`/admin/quiz/leaderboard/${quiz.id}`}><li className="cursor-pointer text-sm underline text-blue-300 hover:text-blue-400 transition-all mb-1" >{quiz.gameCode}</li>
-                                </Link>
-                            })
-                                : ""}
-                        </div>
+                <div className="w-full mt-4">
+                    <SubmitButton text="Host quiz" isQuiz={true} error={(quiz?.questions.length===0)} />
+                </div>
+            </div>
+            {allQuiz.length > 0 &&
+                <div className="my-2">
+                    <div className="font-black p-4">Previously used</div>
+                    <div className="my-2 h-[48vh] overflow-auto">
+                        {allQuiz?.length > 0 ? allQuiz.map((quiz) => {
+                            return <div key={quiz.id}>
+                                <div className="bg-card-light dark:bg-card-dark p-4 mt-2">
+                                <div className="text-xs w-full flex justify-between">
+                                    <div>{quiz.createdAt.toLocaleString('en-US', { timeZoneName: 'short' }).toString()}</div><div className="text-lprimary dark:text-dprimary font-black">{quiz.gameCode}</div>
+                                </div>
+                                <div className="text-xs mt-3 [&>*]:bg-[#f87d49] [&>*]:text-white [&>*]:font-black [&>*]:rounded-md [&>*]:p-[6px] [&>*]:ml-1"><Link href="#">Import Questions</Link><Link href={`/admin/quiz/leaderboard/${quiz.id}`}>See leaderboard</Link></div>
+                                </div>
+                            </div>
+                        })
+                            : ""}
                     </div>
-                }
-            </div>
-            <div className="w-full">
-                <Image src={`${quiz?.thumbnail ? quiz.thumbnail : "/card_placeholder.png"}`}
-                    alt="Quiz Thumbnail"
-                    width={300}
-                    height={300}
-                    className="w-3/5 h-auto rounded-md mx-auto"
-                />
-            </div>
+                </div>
+            }
         </form>
     </>
 }

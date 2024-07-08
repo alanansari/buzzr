@@ -3,23 +3,35 @@ import AddQuesForm from "@/components/Admin/Quiz/AddQuesForm"
 import AllQues from "@/components/Admin/Quiz/AllQues"
 import QuizInfoSection from "@/components/Admin/Quiz/QuizInfoSection"
 import { ToastContainer } from "react-toastify"
+import ClientImage from "@/components/ClientImage"
 
 function Quiz({ params }: { params: { quizId: string } }) {
 
-    return <>
-        <div className="px-12 py-12 text-slate-200">
+    return (
+    <div className="w-full bg-off-white dark:bg-dark h-full">
+        <div className="p-2 px-4">
+            <ClientImage
+                props={{
+                    src: "/logo.svg",
+                    darksrc: "/logo-dark.svg",
+                    alt: "Buzzr Logo",
+                    width: 80,
+                    height: 80
+                }}
+            />
+        </div>
+        <div className="text-dark dark:text-white w-full h-full flex">
             <QuizInfoSection quizId={params.quizId} />
-            <div className="py-4 relative pb-12 border-dashed border-b">
-                <h2 className="text-2xl mb-3 text-blue-300">Do you Want to add more questions to the Quiz ?</h2>
-                <p className="text-sm text-gray-200 mb-4">Click <b className="mx-1 text-slate-200">+ Add Question </b> button to add question</p>
-                <BasicModal btnTitle="+Add Question">
+            <div className="bg-white dark:bg-off-dark w-full p-2">
+                {/* <BasicModal btnTitle="+Add Question">
                     <AddQuesForm quizId={params.quizId} />
-                </BasicModal>
+                </BasicModal> */}
+                <AllQues quizId={params.quizId} />
             </div>
-            <AllQues quizId={params.quizId} />
         </div>
         <ToastContainer />
-    </>
+    </div>
+    )
 }
 
 export default Quiz
