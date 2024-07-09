@@ -34,9 +34,9 @@ export default function SelectProfile() {
             {profiles.map((pr, index) => {
                 return <>
                     <div className="inline-block p-3" key={index}>
-                        <input name="profile" id="profile" value={avatar.profile} className="hidden"/>
+                        <input name="profile" id="profile" value={avatar.profile} className="hidden" />
                         <label htmlFor="profile" className="bg-transparent">
-                            <Image key={index} alt="image" width={128} height={128} src={pr} className={` ${avatar.index === index && "border-[3px] border-lprimary ease-linear duration-150 scale-[1.2] shadow-lg"} rounded-full w-20 h-20 border-black cursor-pointer`}  onClick={() => { handleProfile(pr, index) }} />
+                            <Image key={index} alt="image" width={128} height={128} src={pr} className={` ${avatar.index === index && "border-[3px] border-lprimary ease-linear duration-150 scale-[1.2] shadow-lg"} rounded-full w-20 h-20 border-black cursor-pointer`} onClick={() => { handleProfile(pr, index) }} />
                         </label>
                     </div>
                 </>

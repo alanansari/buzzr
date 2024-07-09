@@ -28,7 +28,7 @@ const Buzzrs = async () => {
   return (
       <div className="flex flex-wrap gap-3 w-full mt-4 md:max-h-[70vh] overflow-y-auto">
         <Link 
-          href="#"
+          href="/admin/quiz/createQuiz"
           className="p-2 border border-[#c2b4fe] dark:border-transparent h-[50vh] w-full md:h-44 md:w-40 bg-card-light hover:bg-cardhover-light dark:bg-card-dark hover:dark:bg-cardhover-dark text-dark dark:text-white rounded flex flex-col justify-center items-center"
         >
           <div className="h-full w-full flex justify-center items-center">

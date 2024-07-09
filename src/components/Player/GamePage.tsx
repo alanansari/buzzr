@@ -99,18 +99,18 @@ const GamePage = (params: {
 
     console.log(game)
 
-    return (
-        <div className="flex flex-col justify-center items-center h-full w-full px-4 mx-auto my-4">
-            {/* Screens */}
-            {
-                (screen === ScreenStatus.lobby) ? <WaitGameStart player={params.player} game={params.game} />
-                    : (screen === ScreenStatus.question) ? <Question question={question} gameSessionId={params.game.id} playerId={params.player.id} socket={socketState} currentQuestion={questionIndex} quizTitle={game.quiz.title} />
-                        : (screen === ScreenStatus.result) ? <Result result={result} />
-                            : (screen === ScreenStatus.wait) ? <Loader />
-                                : <LeaderBoard position={stats.position} score={stats.score} />
-            }
-        </div>
-    )
+    return <>
+        {/* <div className="flex flex-col justify-center items-center h-full w-full md:px-4 mx-auto md:my-4"> */}
+        {
+            (screen === ScreenStatus.lobby) ? <WaitGameStart player={params.player} game={params.game} />
+                : (screen === ScreenStatus.question) ? <Question question={question} gameSessionId={params.game.id} playerId={params.player.id} socket={socketState} currentQuestion={questionIndex} quizTitle={game.quiz.title} gameCode={params.game.gameCode} />
+                    : (screen === ScreenStatus.result) ? <Result result={result} gameCode={params.game.gameCode} quizTitle={game.quiz.title} />
+                        : (screen === ScreenStatus.wait) ? <Loader />
+                            : <LeaderBoard position={stats.position} score={stats.score} />
+        }
+        {/* </div> */}
+    </>
+
 }
 
 export default GamePage

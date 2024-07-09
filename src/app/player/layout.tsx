@@ -12,7 +12,7 @@ export default function RootLayout({
       <div className="flex flex-col h-full">
         {children}
         <ToastContainer />
-        <Footer />
+        {/* <Footer /> */}
       </div>
   );
 }
