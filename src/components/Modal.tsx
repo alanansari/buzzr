@@ -1,7 +1,6 @@
 "use client";
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 
@@ -32,9 +31,7 @@ export default function BasicModal(props:{
 
   return (
     <div className="flex justify-center">
-      <span className="border-[1.5px] border-slate-100 rounded-full mb-3">
-        <Button onClick={handleOpen}>{props.btnTitle}</Button>
-      </span>
+      <button onClick={handleOpen} className="text-white font-sm bg-dark-bg rounded-lg w-[95%] ml-5 p-2">{props.btnTitle}</button>
       <Modal
         open={open}
         onClose={handleClose}

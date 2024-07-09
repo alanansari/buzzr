@@ -33,27 +33,31 @@ export default async function AllQues(props: { quizId: string }) {
     }
 
     return <>
-        <div className="flex flex-col justify-between h-[90vh] overflow-auto">
+        <div className="flex flex-col justify-between h-[85vh] overflow-auto">
             {questions.length > 0 ? questions.map((ques, index) => {
-                return <div key={ques.id} className="w-full my-2 flex items-center">
+                return <div
+                    key={ques.id} className="w-full my-2 flex items-center" 
+                    draggable
+                >
                     {/* <form action={handleDeleteQues}>
                         <input type="text" className="hidden" name="ques_id" value={ques.id} />
-                        <button type="submit">Delete</button>
+                        <button className="p-1 mr-1 text-red-light hover:bg-[#fccccc] rounded-md">Delete</button>
                     </form> */}
-                    <div className="p-2 cursor-move">
+                    <div className="p-2 cursor-grab">
                         <Image
                             src="/selection-indicator.svg"
                             alt="selection-indicator"
                             width={20}
                             height={20}
+                            draggable="false"
                         />
                     </div>
-                    <div className="bg-[#f5f5f5] dark:bg-[#3b3c3f] rounded-t-xl w-full">
+                    <div className="bg-[#f5f5f5] dark:bg-[#3b3c3f] rounded-xl w-full">
                         <div className="p-3">
                             <div className="flex flex-col">
                                 <div className="flex justify-between items-center">
                                     <p className="text-md font-semibold flex items-center w-[70%] break-words">{index + 1}. {ques.title}</p>
-                                    <p className="text-sm text-dark font-black p-1 rounded-md bg-[#dadadd] w-fit">{ques.timeOut} sec</p>
+                                    <p className="text-sm text-dark font-black p-1 rounded-md bg-[#dadadd] dark:text-white dark:bg-transparent w-fit">{ques.timeOut} sec</p>
                                 </div>
                             </div>
                             <div className="grid grid-cols-4">
@@ -66,10 +70,13 @@ export default async function AllQues(props: { quizId: string }) {
                                 })}
                             </div>
                         </div>
-                        <div className="bg-[#ede9fe] p-2 px-3 rounded-b-xl">
+                        <div className="bg-[#ede9fe] dark:bg-[#332d40] p-2 px-3 rounded-b-xl">
                             <div className="flex [&>*]:text-xs [&>*]:font-semibold">
-                                <button className="p-1 mr-1 text-red-light">Delete</button>
-                                <button className="p-1 text-lprimary mr-1">Edit question</button>
+                                <form action={handleDeleteQues}>
+                                    <input type="text" className="hidden" name="ques_id" value={ques.id} />
+                                    <button className="p-1 mr-1 text-red-light hover:bg-[#fccccc] rounded-md">Delete</button>
+                                </form>
+                                <button className="p-1 text-lprimary mr-1 hover:bg-[#ddd5ff] rounded-md">Edit question</button>
                                 {ques.media && <ShowMedia media={ques.media} mediaType={ques.mediaType || ""} />}
                             </div>        
                         </div>

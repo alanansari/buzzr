@@ -23,9 +23,9 @@ function Quiz({ params }: { params: { quizId: string } }) {
         <div className="text-dark dark:text-white w-full h-full flex">
             <QuizInfoSection quizId={params.quizId} />
             <div className="bg-white dark:bg-off-dark w-full p-2">
-                {/* <BasicModal btnTitle="+Add Question">
+                <BasicModal btnTitle="+Add Question">
                     <AddQuesForm quizId={params.quizId} />
-                </BasicModal> */}
+                </BasicModal>
                 <AllQues quizId={params.quizId} />
             </div>
         </div>

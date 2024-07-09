@@ -53,7 +53,7 @@ async function QuizInfoSection(props: { quizId: string }) {
                                 <div className="text-xs w-full flex justify-between">
                                     <div>{quiz.createdAt.toLocaleString('en-US', { timeZoneName: 'short' }).toString()}</div><div className="text-lprimary dark:text-dprimary font-black">{quiz.gameCode}</div>
                                 </div>
-                                <div className="text-xs mt-3 [&>*]:bg-[#f87d49] [&>*]:text-white [&>*]:font-black [&>*]:rounded-md [&>*]:p-[6px] [&>*]:ml-1"><Link href="#">Import Questions</Link><Link href={`/admin/quiz/leaderboard/${quiz.id}`}>See leaderboard</Link></div>
+                                <div className="text-xs mt-3 [&>*]:bg-[#f87d49] [&>*]:text-white [&>*]:dark:text-dark [&>*]:font-black [&>*]:rounded-md [&>*]:p-[6px] [&>*]:ml-1"><Link href="#">Import Questions</Link><Link href={`/admin/quiz/leaderboard/${quiz.id}`}>See leaderboard</Link></div>
                                 </div>
                             </div>
                         })
