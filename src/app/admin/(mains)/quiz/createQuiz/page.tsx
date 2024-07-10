@@ -32,7 +32,7 @@ export default function CreateQuiz() {
                 />
             </div>
             <div className="flex md:py-12 md:px-8 mx-8 bg-white dark:bg-dark rounded-lg my-2 min-h-full overflow-auto">
-                <div className="w-full md:w-1/2 px-4 sm:px-8 md:px-0 flex flex-col justify-center bg-white dark:bg-dark pt-4">
+                <div className="w-full md:w-1/2 px-4 sm:px-8 md:px-0 flex flex-col justify-center bg-white dark:bg-dark">
                     <p className="dark:text-white leading-[40px] sm:leading-[48px] md:leading-[56px] text-3xl sm:text-4xl md:text-5xl font-extrabold">Give your quiz title<br /> and description</p>
                     <CreateBuzzrForm setTitle={setTitle} />
                 </div>
