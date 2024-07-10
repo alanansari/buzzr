@@ -74,9 +74,9 @@ function Barchart(params: { result: number[], options: Option[] }) {
             }
             for (var i = 0; i < 4; i++) {
                 if (i == index)
-                    bars[i].style.fill = "#1aff1a"
+                    bars[i].style.background = "#1aff1a"
                 else
-                    bars[i].style.fill = "#ff3333"
+                    bars[i].style.background = "linear-gradient(to bottom, #7D49F8, #A589FC)";
             }
         }
     }, [bars])
@@ -93,8 +93,7 @@ function Barchart(params: { result: number[], options: Option[] }) {
                     <BarPlot className="barplot" />
                 </ChartContainer>
             </div>
-
-            <div className="flex flex-row justify-around w-[450px] text-lg ml-12 relative z-20 ">
+            <div className="flex flex-row justify-around w-[450px] text-lg ml-12 relative z-20">
                 {params.result.length > 0 && params.result.map((opt: any, index: number) => {
                     const isCorrect = params.options[index].isCorrect === true;
                     return <div className="flex flex-col" key={index}>

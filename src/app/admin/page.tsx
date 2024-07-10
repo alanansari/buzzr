@@ -6,7 +6,7 @@ import Navbar from "@/components/Admin/Navbar";
 
 export default function Home() {
   return (
-    <>
+    <div className="flex">
       <Navbar />
       <div className="p-6 w-full md:w-[75%]">
         <div className="flex">
@@ -23,6 +23,6 @@ export default function Home() {
           <CreateBuzzrForm />
         </Modal> */}
       </div>
-    </>
+    </div>
   );
 }

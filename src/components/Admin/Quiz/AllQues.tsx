@@ -33,7 +33,7 @@ export default async function AllQues(props: { quizId: string }) {
     }
 
     return <>
-        <div className="flex flex-col justify-between h-[85vh] overflow-auto">
+        <div className="flex flex-col justify-between w-full h-[85vh] overflow-auto overflow-x-hidden">
             {questions.length > 0 ? questions.map((ques, index) => {
                 return <div
                     key={ques.id} className="w-full my-2 flex items-center" 
@@ -43,7 +43,7 @@ export default async function AllQues(props: { quizId: string }) {
                         <input type="text" className="hidden" name="ques_id" value={ques.id} />
                         <button className="p-1 mr-1 text-red-light hover:bg-[#fccccc] rounded-md">Delete</button>
                     </form> */}
-                    <div className="p-2 cursor-grab">
+                    <div className="p-2 cursor-grab hidden md:block">
                         <Image
                             src="/selection-indicator.svg"
                             alt="selection-indicator"
@@ -60,7 +60,7 @@ export default async function AllQues(props: { quizId: string }) {
                                     <p className="text-sm text-dark font-black p-1 rounded-md bg-[#dadadd] dark:text-white dark:bg-transparent w-fit">{ques.timeOut} sec</p>
                                 </div>
                             </div>
-                            <div className="grid grid-cols-4">
+                            <div className="flex flex-col md:grid md:grid-cols-4">
                                 {ques?.options?.map((op, index) => {
                                     return (
                                         <p key={index} className="break-word text-md my-2 flex items-center">
@@ -82,7 +82,20 @@ export default async function AllQues(props: { quizId: string }) {
                         </div>
                     </div>
                 </div>
-            }) : <p>No Questions added</p>}
+            }) : 
+            <div className="border-2 border-gray rounded-2xl border-dashed w-[95%] p-6 py-16 mt-8 mx-auto flex flex-col justify-center items-center">
+                <div className="w-full py-2 flex justify-center">
+                <Image
+                    src="/no-questions.svg"
+                    alt="no-questions"
+                    width={200}
+                    height={200}
+                />
+                </div>
+                <div className="font-black text-lg">No Questions Added Yet!</div>
+                <div className="text-md w-[40%] text-center">It looks like there are no questions for this quiz. Start adding questions to engage your students and make learning fun!</div>
+            </div>
+            }
 
         </div>
     </>

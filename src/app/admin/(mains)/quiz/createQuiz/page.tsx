@@ -22,15 +22,6 @@ export default function CreateQuiz() {
 
     const [title, setTitle] = useState("")
     return <>
-        <div className="flex flex-col w-full">
-            <div className="py-4 px-8 flex justify-between">
-                <Image
-                    src="/logo.svg"
-                    width={80}
-                    height={80}
-                    alt="Logo"
-                />
-            </div>
             <div className="flex md:py-12 md:px-8 mx-8 bg-white dark:bg-dark rounded-lg my-2 min-h-full overflow-auto">
                 <div className="w-full md:w-1/2 px-4 sm:px-8 md:px-0 flex flex-col justify-center bg-white dark:bg-dark pt-4">
                     <p className="dark:text-white leading-[40px] sm:leading-[48px] md:leading-[56px] text-3xl sm:text-4xl md:text-5xl font-extrabold">Give your quiz title<br /> and description</p>
@@ -54,6 +45,5 @@ export default function CreateQuiz() {
                     </div>
                 </div>
             </div>
-        </div>
-    </>
+        </>
 }

@@ -8,6 +8,7 @@ const style = {
   position: "absolute" as "absolute",
   top: "50%",
   left: "50%",
+  color:"white",
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "#202020",
@@ -31,7 +32,7 @@ export default function BasicModal(props:{
 
   return (
     <div className="flex justify-center">
-      <button onClick={handleOpen} className="text-white font-sm bg-dark-bg rounded-lg w-[95%] ml-5 p-2">{props.btnTitle}</button>
+      <button onClick={handleOpen} className="text-white font-sm bg-dark-bg rounded-lg w-[95%] mx-auto md:ml-5 p-2">{props.btnTitle}</button>
       <Modal
         open={open}
         onClose={handleClose}

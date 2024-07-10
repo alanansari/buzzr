@@ -54,13 +54,13 @@ const GameLobby = (params: {
     }, [dispatch, params.gameCode, params.userId, params.currentQues, players, currIndex]);
 
     return <>
-        <div className="flex flex-col justify-center items-center h-full w-full p-4 mx-auto my-4">
+        <>
             {
                 (screen === ScreenStatus.wait) ? <WaitScreen currentQues={params.currentQues} socket={socket} gameCode={params.gameCode} />
                     : (screen === ScreenStatus.question) ? <QuestionScreen {...params} socket={socket} />
                         : (screen === ScreenStatus.result) ? <QuesResult {...params} socket={socket} />
                             : (screen === ScreenStatus.leaderboard) && <LeaderBoard {...params} socket={socket} />}
-        </div>
+        </>
     </>
 }
 
