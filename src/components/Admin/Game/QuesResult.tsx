@@ -37,7 +37,7 @@ export default function QuesResult(props: any) {
         })
     }
     return <>
-        <div className="grid gap-y-4 md:grid-cols-2 md:gap-y-0 md:gap-x-4 w-full">
+        <div className="grid gap-y-4 md:grid-cols-2 md:gap-y-0 md:gap-x-4 w-full m-auto md:mx-4 h-[90vh]">
             <div className="flex flex-col p-6 rounded-xl bg-white dark:bg-dark ">
                 <p className="font-extrabold text-2xl mb-3 dark:text-white">{response} Responses<span className="font-normal ml-1 text-base">/{players?.length}</span> </p>
                 <p className="capitalize"><span className="font-semibold">Question:</span> {question?.title}</p>
@@ -51,7 +51,7 @@ export default function QuesResult(props: any) {
                         {leaderboard?.length > 0 ? leaderboard.map((lead, index) => {
                             return <div className="flex justify-between items-center mb-3" key={index}>
                                 <div className="flex gap-x-3 items-center">
-                                    <span>1. </span>
+                                    <span>{index+1}. </span>
                                     <span> <Image src={lead.Player.profilePic || "/avatar-1577909_1280.webp"} className="w-12 h-12 rounded-full" width={40} height={40} alt="profile pic" /></span>
                                     <span className="font-bold">{lead.Player.name}</span>
                                 </div>
@@ -98,7 +98,7 @@ function Barchart(params: { result: number[], options: Option[] }) {
                 </linearGradient>
             </defs>
         </svg>
-        <div className="overflow-hidden flex flex-col items-center">
+        <div className="overflow-hidden flex flex-col items-center ">
             <div className="relative top-[74px] z-10 w-fit">
                 <ChartContainer
                     width={550}
@@ -110,7 +110,7 @@ function Barchart(params: { result: number[], options: Option[] }) {
                 </ChartContainer>
             </div>
 
-            <div className="flex flex-row justify-around w-[450px] text-lg relative z-20">
+            <div className="flex flex-row justify-around w-[450px] text-lg relative z-20 ">
                 {params.result.length > 0 && params.result.map((opt: any, index: number) => {
                     const isCorrect = params.options[index].isCorrect === true;
                     return <div className="flex flex-col" key={index}>

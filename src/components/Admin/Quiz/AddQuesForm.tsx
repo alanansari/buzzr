@@ -23,10 +23,10 @@ const AddQuesForm = (props: { quizId: string }) => {
     return <>
         <form
             action={clientAction}
-            className="flex flex-col justify-center mx-auto px-1"
+            className="flex flex-col justify-center mx-auto px-1 text-white"
         >
             <input type="text" className="hidden" name="quiz_id" value={props.quizId} />
-            <FormLabel className="text-white mt-2">Question</FormLabel>
+            <FormLabel className="mt-2">Question</FormLabel>
             <InputField
                 type="text"
                 name="title"
