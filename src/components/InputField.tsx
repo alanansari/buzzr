@@ -13,7 +13,7 @@ const InputField = (props: {
   accept?: string,
   textarea?: boolean,
   onTitleChange?: any,
-  label: string
+  label?: string
 }) => {
   const { pending } = useFormStatus()
   const [value, setValue] = useState('');
