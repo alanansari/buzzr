@@ -22,6 +22,7 @@ const ClientImage = ({props}:{
             alt={props.alt}
             width={props.width}
             height={props.height}
+            className="inline"
         />
     </>
   )

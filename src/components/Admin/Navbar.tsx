@@ -22,7 +22,7 @@ export default function Navbar() {
 
   return (
     <div 
-      className={`p-6 px-8 md:flex bg-light-bg dark:bg-dark-bg md:flex-col h-[100vh] ${(toggle===navToggle.collapse)?"hidden":"absolute md:relative w-[80vw] md:w-[25%] left-0"}`}
+      className={`p-6 px-8 md:flex bg-light-bg dark:bg-dark-bg md:flex-col h-[90vh] ${(toggle===navToggle.collapse)?"hidden":"absolute md:relative w-[80vw] md:w-[25%] left-0"}`}
     >
       <div className="flex flex-col">
         <div className="p-2">

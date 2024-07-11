@@ -5,6 +5,7 @@ import ClientImage from "@/components/ClientImage";
 
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/auth";
+import Link from "next/link";
 
 export default async function RootLayout({
   children,
@@ -21,6 +22,7 @@ export default async function RootLayout({
           <ReduxProvider>
             <div className="flex flex-col w-[100vw]">
                 <div className="p-2 px-4">
+                  <Link href="/admin">
                   <ClientImage
                       props={{
                           src: "/logo.svg",
@@ -30,6 +32,7 @@ export default async function RootLayout({
                           height: 80
                       }}
                   />
+                  </Link>
                 </div>
             {children}
             </div>

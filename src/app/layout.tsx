@@ -18,7 +18,7 @@ export default async function RootLayout({
   
   return (
     <html lang="en">
-      <body className={`${sans.className} bg-light-bg dark:bg-dark-bg overflow-hidden`}>
+      <body className={`${sans.className} bg-light-bg dark:bg-dark-bg`}>
             <ReduxProvider>
               <ThemeToggle />
               {children}
