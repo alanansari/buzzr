@@ -64,9 +64,7 @@ const Buzzrs = async () => {
         <div className="text-xs font-bold w-full">Import an existing quiz</div>
         <div className="text-xs w-full">Coming soon...</div>
       </Link>
-      <CreateAIQuiz>
-      
-      </CreateAIQuiz>
+      <CreateAIQuiz />
       {quizzes.map((quiz) => (
         <Link
           href={`/admin/quiz/${quiz.id}`}

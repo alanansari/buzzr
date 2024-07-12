@@ -10,7 +10,7 @@ import { navToggle, setNavToggle } from "@/state/admin/navtoggleSlice";
 
 const NavLinks = [
   { href: "/admin", label: "Quizzes" },
-  { href: "/admin/library", label: "Settings" }
+  { href: "/admin/settings", label: "Settings" }
 ];
 
 export default function Navbar() {
@@ -22,7 +22,7 @@ export default function Navbar() {
 
   return (
     <div 
-      className={`p-6 px-8 md:flex bg-light-bg dark:bg-dark-bg md:flex-col h-[90vh] ${(toggle===navToggle.collapse)?"hidden":"absolute md:relative w-[80vw] md:w-[25%] left-0"}`}
+      className={`p-6 px-8 md:flex bg-light-bg dark:bg-dark-bg md:flex-col h-[90vh] absolute md:relative w-[80vw] md:w-[25%] left-0 ${(toggle===navToggle.collapse)?"hidden":""}`}
     >
       <div className="flex flex-col">
         <div className="p-2">

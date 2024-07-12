@@ -1,6 +1,4 @@
 import Buzzrs from "@/components/Admin/Home/Buzzrs";
-// import Modal from "@/components/Modal";
-// import CreateBuzzrForm from "@/components/Admin/Home/CreateBuzzrForm";
 import NavbarToggle from "@/components/Admin/NavbarToggle";
 import Navbar from "@/components/Admin/Navbar";
 
@@ -19,9 +17,6 @@ export default function Home() {
           </span>
         </div>
         <Buzzrs />
-        {/* <Modal btnTitle="Create Buzzr">
-          <CreateBuzzrForm />
-        </Modal> */}
       </div>
     </div>
   );

@@ -28,7 +28,7 @@ const CreateBuzzrForm = (params: {
         type="text"
         name="title"
         placeholder="Enter quiz title"
-        className="text-slate-900 my-2 rounded-xl mt-1 border"
+        className="text-dark dark:text-white dark:bg-dark my-2 rounded-xl mt-1 border"
         required
         autoComplete="off"
         onTitleChange={params.setTitle}
@@ -40,7 +40,7 @@ const CreateBuzzrForm = (params: {
         name="description"
         placeholder="Description"
         autoComplete="off"
-        className="text-slate-900 mt-1 border rounded-xl "
+        className="text-dark dark:text-white dark:bg-dark mt-1 border rounded-xl "
         textarea={true}
         label="Description (Optional)"
       />
