@@ -1,3 +1,4 @@
+import { ToastContainer } from "react-toastify";
 
 export default async function RootLayout({
   children,
@@ -6,8 +7,10 @@ export default async function RootLayout({
 }>) {
 
   return (
-      <>
-        {children}
-      </>
+    <>
+      {children}
+
+      <ToastContainer />
+    </>
   );
 }

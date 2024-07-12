@@ -18,7 +18,7 @@ async function QuizInfoSection(props: { quizId: string }) {
         include: {
             questions: true,
             gameSessions: {
-                orderBy:{
+                orderBy: {
                     createdAt: 'desc'
                 }
             }
@@ -40,7 +40,7 @@ async function QuizInfoSection(props: { quizId: string }) {
                 <p className="text-xs p-1 border border-[#8FB72E] bg-[#C4F849] rounded w-fit my-1 dark:text-dark">Total number of questions : <span className="font-semibold text-gray-50">{quiz?.questions?.length}</span></p>
                 <input type="hidden" name="quizId" value={props.quizId} />
                 <div className="w-full mt-4">
-                    <SubmitButton text="Host quiz" isQuiz={true} error={(quiz?.questions.length===0)} />
+                    <SubmitButton text="Host quiz" isQuiz={true} error={(quiz?.questions.length === 0)} />
                 </div>
             </div>
                 <div className="my-2">

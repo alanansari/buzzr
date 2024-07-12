@@ -8,45 +8,60 @@ import { TiTick } from "react-icons/ti";
 import { useDispatch, useSelector } from "react-redux";
 import { Option } from "@prisma/client";
 import { RootState } from "@/state/store";
-import { setLeaderboard } from "@/state/admin/playersSlice";
-import ShowLeaderboard from "@/actions/ShowLeaderboardAction";
+import { setCurrIndex } from "@/state/admin/playersSlice";
+import Image from "next/image";
+import { resetTimer } from "@/state/timer/timerSlice";
 
 export default function QuesResult(props: any) {
-    const { currentQues, quizQuestions, gameCode } = props
+    const { currentQues, quizQuestions, gameCode, players } = props
     const dispatch = useDispatch()
     const currIndex = useSelector((state: RootState) => state.player.currentIndex)
+    const leaderboard = useSelector((state: RootState) => state.player.leaderboard)
     const allQuestions = quizQuestions?.questions
     const question = allQuestions[currIndex]
     const result = useSelector((state: RootState) => state.player.quesResult)
+    var response = 0;
+
+    for (var i = 0; i < result.length; i++)
+        response += result[i];
+
     const socket = props.socket
 
-    async function handleNext() {
-
-        if (currIndex == allQuestions.length - 1) {
-            socket.emit("final-leaderboard", gameCode)
-            socket.on("displaying-final-leaderboard", (leaderboard: any[]) => {
-                console.log("Final Leaderboard")
-                dispatch(setLeaderboard(leaderboard))
-                dispatch(setScreenStatus(ScreenStatus.leaderboard))
-            })
-        }
-        else {
-            const leaderboard = await ShowLeaderboard(gameCode)
-            dispatch(setLeaderboard(leaderboard))
-            socket.emit("display-leaderboard", gameCode)
-            socket.on("displaying-leaderboard", () => {
-                console.log("Leaderboard")
-                dispatch(setScreenStatus(ScreenStatus.leaderboard))
-            })
-        }
+    function handleNext() {
+        dispatch(resetTimer(3))
+        socket.emit("change-question", gameCode, currIndex + 1)
+        socket.on("question-changed", (index: number) => {
+            dispatch(setCurrIndex(index))
+            dispatch(setScreenStatus(ScreenStatus.wait))
+            socket.emit("start-timer", gameCode)
+        })
     }
     return <>
-        <div className="flex flex-col items-center m-auto w-full px-4">
-            <p className="w-[70%] md:w-4/5  py-2 px-3 text-2xl text-center bg-white font-semibold rounded max-w-fit capitalize">{question?.title}</p>
-            <div className="absolute right-4 mt-1">
-                <button className="w-24 h-10 shadow hover:bg-slate-200 transition-all bg-white border rounded" onClick={handleNext} >Next</button>
+        <div className="grid gap-y-4 md:grid-cols-2 md:gap-y-0 md:gap-x-4 w-full m-auto md:mx-4 h-[90vh]">
+            <div className="flex flex-col p-6 rounded-xl bg-white dark:bg-dark ">
+                <p className="font-extrabold text-2xl mb-3 dark:text-white">{response} Responses<span className="font-normal ml-1 text-base">/{players?.length}</span> </p>
+                <p className="capitalize"><span className="font-semibold">Question:</span> {question?.title}</p>
+                <Barchart result={result} options={question?.options} />
             </div>
-            <Barchart result={result} options={question?.options} />
+
+            <div className="md:rounded-xl ">
+                <div className="bg-white dark:bg-dark p-6 w-full h-[80vh] mb-4 rounded-xl">
+                    <p className="font-extrabold text-2xl mb-5 dark:text-white">Leaderboard</p>
+                    <div className="h-[90%] overflow-y-auto">
+                        {leaderboard?.length > 0 ? leaderboard.map((lead, index) => {
+                            return <div className="flex justify-between items-center mb-3" key={index}>
+                                <div className="flex gap-x-3 items-center">
+                                    <span>{index+1}. </span>
+                                    <span> <Image src={lead.Player.profilePic || "/avatar-1577909_1280.webp"} className="w-12 h-12 rounded-full" width={40} height={40} alt="profile pic" /></span>
+                                    <span className="font-bold">{lead.Player.name}</span>
+                                </div>
+                                <p>{lead.score}</p>
+                            </div>
+                        }) : null}
+                    </div>
+                </div>
+                <button className="rounded-xl text-white dark:text-dark w-full bg-lprimary dark:bg-dprimary px-5 py-3 hover:cursor-pointer transition-all duration-300 ease-in-out disabled:cursor-default font-bold disabled:bg-gray" onClick={handleNext} >Next Question</button>
+            </div>
         </div>
     </>
 }
@@ -59,31 +74,32 @@ function Barchart(params: { result: number[], options: Option[] }) {
         'Page C',
         'Page D',
     ];
-    // const bars = document.getElementsByClassName("css-1vuxth3-MuiBarElement-root") as HTMLCollectionOf<HTMLElement>;
     const bars = document.getElementsByClassName("MuiBarElement-root") as HTMLCollectionOf<HTMLElement>;
-    console.log(bars)
 
     useEffect(() => {
         if (bars.length >= 4) {
-            console.log(bars)
-
             var index = 0;
             for (var i = 0; i < params.options.length; i++) {
                 if (params.options[i].isCorrect === true)
                     index = i;
             }
             for (var i = 0; i < 4; i++) {
-                if (i == index)
-                    bars[i].style.background = "#1aff1a"
-                else
-                    bars[i].style.background = "linear-gradient(to bottom, #7D49F8, #A589FC)";
+                bars[i].style.fill = "url(#gradient)";
             }
         }
     }, [bars])
 
     return <>
-        <div className="absolute bottom-16 overflow-hidden">
-            <div className="relative top-[74px] z-10">
+        <svg width="0" height="0">
+            <defs>
+                <linearGradient id="gradient" gradientTransform="rotate(90)">
+                    <stop offset="0%" stopColor="#7D49F8" />
+                    <stop offset="100%" stopColor="#A589FC" />
+                </linearGradient>
+            </defs>
+        </svg>
+        <div className="overflow-hidden flex flex-col items-center ">
+            <div className="relative top-[74px] z-10 w-fit">
                 <ChartContainer
                     width={550}
                     height={300}
@@ -93,14 +109,15 @@ function Barchart(params: { result: number[], options: Option[] }) {
                     <BarPlot className="barplot" />
                 </ChartContainer>
             </div>
-            <div className="flex flex-row justify-around w-[450px] text-lg ml-12 relative z-20">
+
+            <div className="flex flex-row justify-around w-[450px] text-lg relative z-20 ">
                 {params.result.length > 0 && params.result.map((opt: any, index: number) => {
                     const isCorrect = params.options[index].isCorrect === true;
                     return <div className="flex flex-col" key={index}>
                         <p className="flex flex-row items-center justify-center w-full">{opt}
                             {isCorrect ? <TiTick size={20} color="#fff" className="text-white font-extrabold ml-2" /> : <RxCross2 size={20} color="#fff" className="text-white font-extrabold ml-2" />}</p>
                         <div key={index} className="w-20 border-t">
-                            <p className="text-sm text-white font-semibold w-full text-center">{`${String.fromCharCode(65 + index)})`} {params.options[index].title.length > 15 ? `${params.options[index].title.slice(0, 15)}...` : params.options[index].title}</p>
+                            <p className="text-sm dark:text-white font-semibold w-full text-center">{index}. {params.options[index].title.length > 15 ? `${params.options[index].title.slice(0, 15)}...` : params.options[index].title} option</p>
                         </div>
                     </div>
                 })}
@@ -108,3 +125,5 @@ function Barchart(params: { result: number[], options: Option[] }) {
         </div>
     </>
 }
+
+// {`${String.fromCharCode(65 + index)})`}

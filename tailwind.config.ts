@@ -28,6 +28,9 @@ const config: Config = {
       "cardhover-dark":"#4c4c4c",
     },
     extend: {
+      screens: {
+        'medium':'860px',
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

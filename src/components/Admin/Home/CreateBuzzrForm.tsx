@@ -24,29 +24,26 @@ const CreateBuzzrForm = (params: {
       action={clientAction}
       className="flex flex-col w-full md:w-4/5 mt-8"
     >
-      <div className="flex flex-col">
-        <label className="text-sm dark:text-white mb-0">Quiz title</label>
-        <InputField
-          type="text"
-          name="title"
-          placeholder="Enter quiz title"
-          className="text-slate-900 my-2 rounded-xl mt-1 border"
-          required
-          autoComplete="off"
-          onTitleChange={params.setTitle}
-        />
-      </div>
-      <div className="flex flex-col my-5">
-        <label className="text-sm dark:text-white mb-0">Description (Optional)</label>
-        <InputField
-          type="text"
-          name="description"
-          placeholder="Description"
-          autoComplete="off"
-          className="text-slate-900 mt-1 border rounded-xl "
-          textarea={true}
-        />
-      </div>
+      <InputField
+        type="text"
+        name="title"
+        placeholder="Enter quiz title"
+        className="text-slate-900 my-2 rounded-xl mt-1 border"
+        required
+        autoComplete="off"
+        onTitleChange={params.setTitle}
+        label="Quiz title"
+      />
+
+      <InputField
+        type="text"
+        name="description"
+        placeholder="Description"
+        autoComplete="off"
+        className="text-slate-900 mt-1 border rounded-xl "
+        textarea={true}
+        label="Description (Optional)"
+      />
       <SubmitButton />
     </form>
   );

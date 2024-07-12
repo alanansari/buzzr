@@ -45,15 +45,13 @@ async function Play({ params }: { params: { roomId: string } }) {
     }
   });
 
+  const quiz = await prisma.quiz.findUnique({
+    where: { id: room?.quizId },
+  })
+
   return (
     <>
-      <div className="mx-auto my-4 bg-slate-200 p-2 border rounded-md w-fit flex flex-row">
-        <div className="border-r-2 border-slate-400 p-2 text-sm">Join at <br /> buzzr.silive.in</div>
-        <div className="p-2 flex flex-col justify-center items-center">Game PIN:<br />
-          <span className="text-3xl">{room?.gameCode}</span>
-        </div>
-      </div>
-      <Lobby roomId={params.roomId} userId={user.id} gameCode={room?.gameCode} players={players} quizQuestions={quizQuestions} gameStarted={room?.isPlaying} currentQues={room?.currentQuestion} />
+      <Lobby quizId={room?.quizId} quizTitle={quiz?.title ? quiz.title : ""} roomId={params.roomId} userId={user.id} gameCode={room?.gameCode} players={players} quizQuestions={quizQuestions} gameStarted={room?.isPlaying} currentQues={room?.currentQuestion} />
     </>
   )
 }

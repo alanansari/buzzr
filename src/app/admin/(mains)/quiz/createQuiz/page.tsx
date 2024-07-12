@@ -2,7 +2,9 @@
 
 import CreateBuzzrForm from "@/components/Admin/Home/CreateBuzzrForm";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { FaArrowLeft } from "react-icons/fa";
 
 export default function CreateQuiz() {
 
@@ -20,14 +22,23 @@ export default function CreateQuiz() {
         { image: "/player_profile/profile12.png", name: "Karen" }
     ];
 
+    const router = useRouter()
+
+    function handleBack() {
+        router.push("/admin")
+    }
+
     const [title, setTitle] = useState("")
     return <>
-            <div className="flex md:py-12 md:px-8 mx-8 bg-white dark:bg-dark rounded-lg my-2 min-h-full overflow-auto">
-                <div className="w-full md:w-1/2 px-4 sm:px-8 md:px-0 flex flex-col justify-center bg-white dark:bg-dark pt-4">
-                    <p className="dark:text-white leading-[40px] sm:leading-[48px] md:leading-[56px] text-3xl sm:text-4xl md:text-5xl font-extrabold">Give your quiz title<br /> and description</p>
+        <div className="md:mx-8 my-6 md:max-h-[84vh] h-[84vh]">
+            <div className="flex md:px-8 bg-white dark:bg-dark rounded-lg w-full overflow-y-auto m-auto py-4 h-full">
+                <div className="mt-4 w-full md:w-1/2 px-4 sm:px-8 md:px-0 flex flex-col bg-white dark:bg-dark">
+                    <p className="cursor-pointer flex items-center dark:text-white" onClick={handleBack}><FaArrowLeft className="inline mr-1" />
+                        Back to home</p>
+                    <p className="mt-4 dark:text-white leading-[40px] sm:leading-[48px] md:leading-[56px] text-3xl sm:text-4xl md:text-5xl font-extrabold">Give your quiz title<br /> and description</p>
                     <CreateBuzzrForm setTitle={setTitle} />
                 </div>
-                <div className="w-1/2 bg-light-bg dark:bg-dark-bg p-8 min-h-full h-full overflow-y-auto rounded-3xl hidden md:block">
+                <div className="my-12 w-1/2 bg-light-bg dark:bg-dark-bg p-8 rounded-3xl hidden md:block">
                     <p className="text-3xl italic font-extrabold dark:text-white mb-6 w-11/12">{title ? title : "Quiz Title"}</p>
                     <div className="flex flex-row gap-4 flex-wrap">
                         {profiles.map((file, index) => {
@@ -45,5 +56,6 @@ export default function CreateQuiz() {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
+    </>
 }

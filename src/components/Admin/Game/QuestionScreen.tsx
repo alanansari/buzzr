@@ -6,8 +6,9 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ScreenStatus, setScreenStatus } from "@/state/admin/screenSlice";
 import { cssOptionColors } from "@/utils/optionColors";
-import { setResult } from '@/state/admin/playersSlice';
+import { setLeaderboard, setResult } from '@/state/admin/playersSlice';
 import Image from 'next/image';
+import ShowLeaderboard from '@/actions/ShowLeaderboardAction';
 
 export default function QuestionScreen(props: any) {
 
@@ -21,13 +22,25 @@ export default function QuestionScreen(props: any) {
     const [time, setTime] = useState(question?.timeOut)
     const colors = cssOptionColors
 
-    function handleNext() {
-        socket.emit("display-result", gameCode, question?.id, question?.options);
-        socket.on("displaying-result", (data: any) => {
-            console.log("Displaying result", JSON.stringify(data))
-            dispatch(setResult(data?.presenter))
-            dispatch(setScreenStatus(ScreenStatus.result))
-        })
+    async function handleNext() {
+        if (currIndex == allQuestions.length - 1) {
+            socket.emit("final-leaderboard", gameCode)
+            socket.on("displaying-final-leaderboard", (leaderboard: any[]) => {
+                console.log("Final Leaderboard")
+                dispatch(setLeaderboard(leaderboard))
+                dispatch(setScreenStatus(ScreenStatus.leaderboard))
+            })
+        }
+        else {
+            const leaderboard = await ShowLeaderboard(gameCode)
+            dispatch(setLeaderboard(leaderboard))
+            socket.emit("display-result", gameCode, question?.id, question?.options);
+            socket.on("displaying-result", (data: any) => {
+                console.log("Displaying result", JSON.stringify(data))
+                dispatch(setResult(data?.presenter))
+                dispatch(setScreenStatus(ScreenStatus.result))
+            })
+        }
     }
     useEffect(() => {
         // if (time == 0) {
