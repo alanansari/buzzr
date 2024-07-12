@@ -5,19 +5,7 @@ import SubmitButton from "@/components/SubmitButton";
 import { Box, Modal } from "@mui/material";
 import Image from "next/image";
 import { useState } from "react";
-
-const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '50%',
-    bgcolor: 'background.paper',
-    boxShadow: 24,
-    borderRadius: '24px',
-    border: 0,
-    outline:0
-};
+import style from "@/utils/modalStyle"
 
 export default function CreateAIQuiz(props: { children?: React.ReactNode }) {
 
@@ -35,7 +23,7 @@ export default function CreateAIQuiz(props: { children?: React.ReactNode }) {
                     height={45} />
             </div>
             <div className="text-xs font-bold w-full text-white">Create a quiz with AI</div>
-            <div className="text-xs w-full text-white">Let's get your quiz ready</div>
+            <div className="text-xs w-full text-white">Let&apos;s get your quiz ready</div>
         </div>
 
         <Modal
@@ -44,9 +32,9 @@ export default function CreateAIQuiz(props: { children?: React.ReactNode }) {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
-            <Box sx={style}>
+            <Box sx={style} className="dark:bg-[#27272A] rounded-xl w-4/5 md:w-1/2">
                 <div className="p-6">
-                    <p className="text-xl font-bold mb-2">Hey there! I'm your AI quiz buddy.</p>
+                    <p className="text-xl font-bold mb-2">Hey there! I&apos;m your AI quiz buddy.</p>
                     <p className="text-[#4E4E56] mb-4">Ready to get started? Just jot down your requirements below to begin the quiz!</p>
                     <form>
                         <InputField type="text"

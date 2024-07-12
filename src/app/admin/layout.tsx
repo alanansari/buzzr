@@ -20,7 +20,7 @@ export default async function RootLayout({
         <SessionProvider>
           <ReduxProvider>
             <div className="flex flex-col w-[100vw]">
-                <div className="p-2 px-4">
+                <div className="p-2 px-4 md:px-8">
                   <ClientImage
                       props={{
                           src: "/logo.svg",

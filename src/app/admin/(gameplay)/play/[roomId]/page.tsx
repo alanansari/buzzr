@@ -51,7 +51,7 @@ async function Play({ params }: { params: { roomId: string } }) {
 
   return (
     <>
-      <Lobby quizTitle={quiz?.title ? quiz.title : ""} roomId={params.roomId} userId={user.id} gameCode={room?.gameCode} players={players} quizQuestions={quizQuestions} gameStarted={room?.isPlaying} currentQues={room?.currentQuestion} />
+      <Lobby quizId={room?.quizId} quizTitle={quiz?.title ? quiz.title : ""} roomId={params.roomId} userId={user.id} gameCode={room?.gameCode} players={players} quizQuestions={quizQuestions} gameStarted={room?.isPlaying} currentQues={room?.currentQuestion} />
     </>
   )
 }

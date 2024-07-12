@@ -30,18 +30,10 @@ export default function CreateQuiz() {
 
     const [title, setTitle] = useState("")
     return <>
-        <div className="flex flex-col w-full">
-            <div className="py-4 px-8 flex justify-between">
-                <Image
-                    src="/logo.svg"
-                    width={80}
-                    height={80}
-                    alt="Logo"
-                />
-            </div>
-            <div className="flex md:pb-12 md:px-8 mx-8 bg-white dark:bg-dark rounded-lg my-2 h-[90vh]">
+        <div className="md:mx-8 my-6 md:max-h-[84vh] h-[84vh]">
+            <div className="flex md:px-8 bg-white dark:bg-dark rounded-lg w-full overflow-y-auto m-auto py-4 h-full">
                 <div className="mt-4 w-full md:w-1/2 px-4 sm:px-8 md:px-0 flex flex-col bg-white dark:bg-dark">
-                    <p className="cursor-pointer flex items-center" onClick={handleBack}><FaArrowLeft className="inline mr-1" />
+                    <p className="cursor-pointer flex items-center dark:text-white" onClick={handleBack}><FaArrowLeft className="inline mr-1" />
                         Back to home</p>
                     <p className="mt-4 dark:text-white leading-[40px] sm:leading-[48px] md:leading-[56px] text-3xl sm:text-4xl md:text-5xl font-extrabold">Give your quiz title<br /> and description</p>
                     <CreateBuzzrForm setTitle={setTitle} />
