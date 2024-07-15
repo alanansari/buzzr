@@ -7,6 +7,7 @@ import adminScreenReducer from "./admin/screenSlice";
 import playerResultReducer from "./player/resultSlice";
 import pageThemeReducer from "./pageThemeSlice";
 import navToggleReducer from "./admin/navtoggleSlice";
+import gridListToggleReducer from "./admin/gridListSlice";
 
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   navToggle: navToggleReducer,
   adminscreen: adminScreenReducer,
   playerResult: playerResultReducer,
+  gridListToggle: gridListToggleReducer,
 });
 
 const persistConfig = {

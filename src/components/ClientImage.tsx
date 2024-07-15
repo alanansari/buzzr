@@ -11,6 +11,7 @@ const ClientImage = ({props}:{
         alt: string
         width: number
         height: number
+        classname?:string
     }
 }) => {
     const theme = useSelector((state: RootState) => state.pageTheme.theme)
@@ -22,7 +23,7 @@ const ClientImage = ({props}:{
             alt={props.alt}
             width={props.width}
             height={props.height}
-            className="inline"
+            className={` ${props.classname} inline`}
         />
     </>
   )
