@@ -43,7 +43,7 @@ const CreatePlayerForm = (props:{
     }, [props.data.name])
 
   return (
-    <form className="flex flex-col w-[90%] md:w-[70%] m-4"
+    <form className="flex flex-col w-[90%] m-4"
         action={clientAction}
     >
         <h1 className="text-3xl md:text-5xl py-2 font-extrabold dark:text-white">Create a custom profile</h1>

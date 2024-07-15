@@ -40,7 +40,7 @@ export default function QuesResult(props: any) {
         <div className="grid gap-y-4 md:grid-cols-2 md:gap-y-0 md:gap-x-4 w-full m-auto md:mx-4 h-[90vh]">
             <div className="flex flex-col p-6 rounded-xl bg-white dark:bg-dark ">
                 <p className="font-extrabold text-2xl mb-3 dark:text-white">{response} Responses<span className="font-normal ml-1 text-base">/{players?.length}</span> </p>
-                <p className="capitalize"><span className="font-semibold">Question:</span> {question?.title}</p>
+                <p className="capitalize text-dark dark:text-white"><span className="font-semibold">Question:</span> {question?.title}</p>
                 <Barchart result={result} options={question?.options} />
             </div>
 
@@ -49,7 +49,7 @@ export default function QuesResult(props: any) {
                     <p className="font-extrabold text-2xl mb-5 dark:text-white">Leaderboard</p>
                     <div className="h-[90%] overflow-y-auto">
                         {leaderboard?.length > 0 ? leaderboard.map((lead, index) => {
-                            return <div className="flex justify-between items-center mb-3" key={index}>
+                            return <div className="flex justify-between items-center mb-3 text-dark dark:text-white" key={index}>
                                 <div className="flex gap-x-3 items-center">
                                     <span>{index+1}. </span>
                                     <span> <Image src={lead.Player.profilePic || "/avatar-1577909_1280.webp"} className="w-12 h-12 rounded-full" width={40} height={40} alt="profile pic" /></span>
@@ -85,6 +85,7 @@ function Barchart(params: { result: number[], options: Option[] }) {
             }
             for (var i = 0; i < 4; i++) {
                 bars[i].style.fill = "url(#gradient)";
+                bars[i].style.borderRadius = "15px 0";
             }
         }
     }, [bars])

@@ -22,7 +22,7 @@ export default function SelectProfile() {
     useEffect(() => {
         if (pending) {
             setAvatar({
-                profile: "", index: -1
+                profile: profiles[0], index: 0
             })
         }
 

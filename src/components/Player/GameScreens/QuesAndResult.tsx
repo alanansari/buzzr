@@ -77,7 +77,7 @@ const QuestionAndResult = (params: {
                     <div className={`grid grid-cols-1 ${params.question.mediaType === "image" && "lg:grid-cols-2 my-2"} gap-x-4 my-4`}>
                         {options.map((option: any, index: number) => {
                             return (
-                                <div key={option.id} className={`cursor-pointer p-4 rounded-xl text-lg dark:text-white mt-4 capitalize ${option.id === params.optionId ? "dark:bg-dprimary bg-lprimary" : "bg-light-bg dark:bg-[#434349]"}`} onClick={() => { handleSubmit(option.id) }}>{index + 1}. {option.title}</div>
+                                <div key={option.id} className={`cursor-pointer p-4 rounded-xl text-lg dark:text-white mt-4 ${option.id === params.optionId ? "dark:bg-dprimary bg-lprimary" : "bg-light-bg dark:bg-[#434349]"}`} onClick={() => { handleSubmit(option.id) }}>{index + 1}. {option.title}</div>
                             )
                         })}
                     </div>

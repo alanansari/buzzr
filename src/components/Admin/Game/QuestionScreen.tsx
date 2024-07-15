@@ -43,9 +43,9 @@ export default function QuestionScreen(props: any) {
         }
     }
     useEffect(() => {
-        // if (time == 0) {
-        //     handleNext()
-        // }
+        if (time == 0) {
+            handleNext()
+        }
     }, [time])
 
     return <>
@@ -69,7 +69,7 @@ export default function QuestionScreen(props: any) {
                     <div className='text-2xl font-black'>{props.gameCode}</div>
                 </div>
                 <div className="w-fit mx-auto rounded overflow-hidden">
-                    {question.mediaType === "image" && <Image src={question.media} className="h-[25vh]" alt="media Image" height={300} width={300} />}
+                    {question.mediaType === "image" && <Image src={question.media} className="h-[25vh] w-auto" alt="media Image" height={300} width={300} />}
                 </div>
                 <div className='pl-4'>Question</div>
                 <h1 className="pb-6 pl-4 text-2xl font-black capitalize">{question?.title}</h1>

@@ -99,7 +99,7 @@ const Lobby = (params: {
     }
 
     return <>
-        <button className="text-white dark:text-dark bg-red-light dark:bg-red-dark p-2 w-fit rounded-lg absolute text-sm hover:bg-red-dark right-4 md:right-8 top-4 transition-all" onClick={handleModalOpen}>Stop Hosting</button>
+        <button className="text-white dark:text-dark bg-red-light dark:bg-red-dark p-2 w-fit rounded-lg absolute text-sm font-black hover:bg-red-dark right-4 md:right-8 top-4 transition-all" onClick={handleModalOpen}>Stop Hosting</button>
         <div className="bg-white dark:bg-dark md:rounded-xl md:mx-8 py-8 my-4 h-[84vh] px-6 relative">
             <div className="grid medium:flex md:gap-x-3 gap-y-4 medium:gap-y-0 mb-8 items-center">
                 <span className="font-extrabold text-5xl italic mr-4 dark:text-white">{params?.quizTitle}</span>
@@ -112,16 +112,16 @@ const Lobby = (params: {
             <div className="h-fit mt-2 mx-auto max-h-[60vh] flex flex-wrap overflow-y-auto gap-y-4 gap-x-3">
                 {(players.length === 0) ? <div className="p-2 mx-auto w-fit dark:text-white">Waiting for players to join...</div> : players.map((player: any) => {
                     return (
-                        <div key={player.id} className='border flex justify-between items-center w-fit gap-2 rounded-full py-2 px-3 text-dark dark:text-white text-lg' >
+                        <div key={player.id} className='border flex justify-between items-center w-fit gap-2 rounded-full py-1 px-2 text-dark dark:text-white text-base' >
                             <Image
                                 src={player.profilePic as string || "/avatar-1577909_1280.webp"}
-                                width={50}
-                                height={50}
+                                width={40}
+                                height={40}
                                 alt="Profile"
                                 className="rounded-full h-10 w-10"
                             />
                             {player.name}
-                            <span className="cursor-pointer font-bold text-lg" onClick={() => handlePlayerRemove(player)}><RxCross2 size={22} /></span>
+                            <span className="cursor-pointer font-bold text-lg" onClick={() => handlePlayerRemove(player)}><RxCross2 size={20} /></span>
                         </div>
                     )
                 })

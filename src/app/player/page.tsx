@@ -1,6 +1,7 @@
 "use client";
 import CheckLocalPlayer from "@/components/Player/checkLocalPlayer";
 import CreatePlayerForm from "@/components/Player/Setup/CreatePlayerForm";
+import ClientImage from "@/components/ClientImage";
 import Image from "next/image";
 import { useState } from "react";
 import BackNavButton from "@/components/BackNavButton";
@@ -15,20 +16,55 @@ function Player() {
     return <>
             <CheckLocalPlayer />
             <div className="p-4 flex justify-between">
-                <Image
-                src="/logo.svg"
-                width={80}
-                height={80}
-                alt="Logo"
-                />
-
+            <ClientImage
+                props={{
+                    src: "/logo.svg",
+                    darksrc: "/logo-dark.svg",
+                    alt: "Buzzr Logo",
+                    width: 80,
+                    height: 80
+                }}
+            />
             </div>
             <div className="w-full h-full flex gap-4 p-4 [&>*]:bg-white dark:[&>*]:bg-dark [&>*]:rounded-xl">
-                <div className="w-fit">
+                <div className="w-[95vw] mx-auto md:mx-0 md:w-[60vw]">
                     <BackNavButton />
                     <CreatePlayerForm data={data} setData={setData} />
                 </div>
-                <div className="w-[40vw] hidden md:block"></div>
+                <div className="w-[40vw] hidden md:flex justify-center items-center">
+                    <div className="flex flex-col justify-center items-center">
+                        <ClientImage
+                            props={{
+                                src: "/top-cards.svg",
+                                darksrc: "/top-cards-dark.svg",
+                                alt: "Top Card",
+                                width: 350,
+                                height: 350
+                            }}
+                        />
+                        <div className="flex items-center w-[105%] my-2 p-1 px-2 border dark:border-white rounded-lg">
+                            <span className="text-lg font-bold mr-2 text-dark dark:text-white">2<sup>nd</sup></span>
+                            <Image
+                                src="/avatar-1577909_1280.webp"
+                                alt="Card 2"
+                                width={50}
+                                height={50}
+                                className="rounded-full"
+                            />
+                            <span className="mx-3 font-bold text-dark dark:text-white">{(data.name)?data.name:"Your Name"}</span>
+                            <span className="mx-1 ml-auto text-off-dark dark:text-off-white">1250 pt.</span>
+                        </div>
+                        <ClientImage
+                            props={{
+                                src: "/bottom-cards.svg",
+                                darksrc: "/bottom-cards-dark.svg",
+                                alt: "Top Card",
+                                width: 350,
+                                height: 350
+                            }}
+                        />
+                    </div>
+                </div>
             </div>
     </>
 }

@@ -24,7 +24,7 @@ export default function LeaderBoard(props: any) {
     const leaderboardRest = leaderboard?.slice(3)
 
     return <>
-        <div className="flex flex-col h-full w-full px-4 pt-6">
+        <div className="flex flex-col h-full w-full px-4 pt-6 text-dark dark:text-white">
             <p className="text-2xl font-black">Thank you for joining!</p>
             <div className="absolute top-2 right-10">
                 <button className="px-3 py-2 bg-red-light rounded text-sm text-white font-black" onClick={handleEnd} >End Quiz</button>
@@ -37,7 +37,7 @@ export default function LeaderBoard(props: any) {
                             <Image src={lead.Player.profilePic || "/avatar-1577909_1280.webp"} className="w-12 h-12 rounded-full" width={50} height={50} alt="profile pic" />
                             <p className="text-base md:text-xl font-black break-words md:w-fit w-[40%]">{lead.Player.name}</p>
                         </div>
-                        <p className="text-xs md:text-sm text-slate-600 ml-auto md:ml-0">Total Points: {lead.score}</p>
+                        <p className="text-xs md:text-sm text-off-dark dark:text-off-white ml-auto md:ml-0">Total Points: {lead.score}</p>
                     </div>
                 } ) : ''}
             </div>

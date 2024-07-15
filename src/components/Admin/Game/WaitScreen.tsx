@@ -56,9 +56,9 @@ export default function WaitScreen(params: { currentQues: number, socket: Socket
 
     return <>
         {currIndex == 0 && <button onClick={() => handleSocket()} className="w-24 h-10 shadow hover:bg-slate-200 transition-all bg-white border rounded" >Start Quiz</button>}
-        {(start || currIndex != 0) && <div className="flex flex-col justify-center items-center w-full container h-32 m-auto">
-            <span className="overflow-hidden animate-ping text-6xl font-semibold overscroll-none text-[#040]" id="countdown">{time === 0 && 'LESGOOO'}</span>
-            <span className="overflow-hidden animate-ping text-6xl font-semibold overscroll-none text-[#040]" id="countdown">{time > 0 && time}</span>
+        {(start || currIndex != 0) && <div className="flex flex-col justify-center items-center text-dark dark:text-white w-full container h-32 m-auto">
+            <span className="overflow-hidden animate-ping text-6xl font-semibold overscroll-none" id="countdown">{time === 0 && 'LESGOOO'}</span>
+            <span className="overflow-hidden animate-ping text-6xl font-semibold overscroll-none" id="countdown">{time > 0 && time}</span>
         </div>}
     </>
 }
