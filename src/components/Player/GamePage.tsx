@@ -97,8 +97,6 @@ const GamePage = (params: {
         }
     }, [dispatch, params.game.gameCode, params.player, game.quiz.questions, router]);
 
-    console.log(game)
-
     return <>
         {/* <div className="flex flex-col justify-center items-center h-full w-full md:px-4 mx-auto md:my-4"> */}
         {

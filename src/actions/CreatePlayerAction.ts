@@ -15,8 +15,6 @@ const createPlayer = async (formData: FormData) => {
       const ip = headers().get('x-forwarded-for');
       const {remaining, limit, success} = await rateLimit.limit(ip as string);
 
-      console.log(remaining, limit, success);
-
       if(!success) {
         throw new Error("Rate limit reached wait for some time and try again.");
       }

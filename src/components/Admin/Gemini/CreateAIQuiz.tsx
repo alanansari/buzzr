@@ -6,24 +6,31 @@ import { Box, Modal } from "@mui/material";
 import Image from "next/image";
 import { useState } from "react";
 import style from "@/utils/modalStyle"
+import { useSelector } from "react-redux";
+import { RootState } from "@/state/store";
 
 export default function CreateAIQuiz() {
 
     const [open, setOpen] = useState(false)
+    const view = useSelector((state: RootState) => state.gridListToggle.view)
+
     return <>
         <div
-            className="p-2 border-2 border-[#c2b4fe] dark:border-transparent h-[50vh] w-full md:h-44 md:w-40 text-dark dark:text-white rounded flex flex-col justify-center items-center bg-gradient-to-b from-[#8D6DDD] to-[#AD56D6] cursor-pointer hover:border-transparent hover:from-[#8D6DDD] hover:to-[#AD56D6] transition-all duration-300 ease-in-out"
+            className={`p-2 border-2 border-[#c2b4fe] dark:border-transparent w-full text-dark dark:text-white rounded flex justify-center items-center bg-gradient-to-b from-[#8D6DDD] to-[#AD56D6] cursor-pointer hover:border-transparent hover:from-[#8D6DDD] hover:to-[#AD56D6] transition-all duration-300 ease-in-out ${view === "list" ? "md:w-full flex-row gap-x-3 md:gap-x-1 py-4 px-2" : "p-2 flex-col md:w-40 h-[50vh] md:h-44"}`}
             onClick={() => setOpen(true)}
         >
-            <div className="h-full w-full flex justify-center items-center">
+            <div className="h-full w-full flex gap-x-4 justify-center items-center">
                 <Image
                     src="/AIQuiz.svg"
                     alt="AI Quiz"
                     width={45}
-                    height={45} />
+                    height={45}
+                    className={`${view === "grid" ? "w-11 h-11" : "w-6 h-6"}`}
+                />
+                {view === "list" && <div className="text-base font-bold w-full text-white">Create a quiz with AI</div>}
             </div>
-            <div className="text-xs font-bold w-full text-white">Create a quiz with AI</div>
-            <div className="text-xs w-full text-white">Let&apos;s get your quiz ready</div>
+            {view === "grid" && <div className="text-xs font-bold w-full text-white">Create a quiz with AI</div>}
+            <div className={`${view === "grid" ? "text-xs" : "text-base"} w-full text-white`}>Let&apos;s get your quiz ready</div>
         </div>
 
         <Modal

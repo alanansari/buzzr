@@ -37,15 +37,15 @@ export default function QuesResult(props: any) {
         })
     }
     return <>
-        <div className="grid gap-y-4 md:grid-cols-2 md:gap-y-0 md:gap-x-4 w-full m-auto md:mx-4 h-[90vh]">
-            <div className="flex flex-col p-6 rounded-xl bg-white dark:bg-dark ">
+        <div className="grid gap-y-4 md:grid-cols-2 md:gap-y-0 md:gap-x-4 w-full m-auto md:mx-4 h-full">
+            <div className="flex flex-col p-6 rounded-xl bg-white dark:bg-dark h-[87vh]">
                 <p className="font-extrabold text-2xl mb-3 dark:text-white">{response} Responses<span className="font-normal ml-1 text-base">/{players?.length}</span> </p>
                 <p className="capitalize text-dark dark:text-white"><span className="font-semibold">Question:</span> {question?.title}</p>
                 <Barchart result={result} options={question?.options} />
             </div>
 
             <div className="md:rounded-xl ">
-                <div className="bg-white dark:bg-dark p-6 w-full h-[80vh] mb-4 rounded-xl">
+                <div className="bg-white dark:bg-dark p-6 w-full h-[76vh] mb-4 rounded-xl">
                     <p className="font-extrabold text-2xl mb-5 dark:text-white">Leaderboard</p>
                     <div className="h-[90%] overflow-y-auto">
                         {leaderboard?.length > 0 ? leaderboard.map((lead, index) => {

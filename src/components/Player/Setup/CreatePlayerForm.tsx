@@ -11,6 +11,7 @@ const CreatePlayerForm = (props:{
     data: {
         name: string;
         err: boolean;
+        image:string;
     };
     setData: (data: any) => void;
 }) => {
@@ -48,7 +49,7 @@ const CreatePlayerForm = (props:{
     >
         <h1 className="text-3xl md:text-5xl py-2 font-extrabold dark:text-white">Create a custom profile</h1>
         <h2 className="md:text-lg py-2 dark:text-white">Join a private quiz</h2>
-        <SelectProfile />
+        <SelectProfile {...props} />
         <input
             type="text"
             name="username"
