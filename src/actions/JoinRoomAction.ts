@@ -15,7 +15,6 @@ export default async function joinRoom(formData: FormData){
         if(process.env.RATELIMIT === "ON"){
 
             const ip = headers().get('x-forwarded-for');
-            console.log(ip);
 
             const {remaining, limit, success} = await rateLimit.limit(ip as string);
 

@@ -3,7 +3,6 @@ import AddQuesForm from "@/components/Admin/Quiz/AddQuesForm"
 import AllQues from "@/components/Admin/Quiz/AllQues"
 import QuizInfoSection from "@/components/Admin/Quiz/QuizInfoSection"
 import { ToastContainer } from "react-toastify"
-import ClientImage from "@/components/ClientImage"
 import { prisma } from "@/utils/prisma"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth"
@@ -22,7 +21,7 @@ async function Quiz({ params }: { params: { quizId: string } }) {
         include: {
             questions: true,
             gameSessions: {
-                orderBy:{
+                orderBy: {
                     createdAt: 'desc'
                 }
             }
@@ -30,21 +29,21 @@ async function Quiz({ params }: { params: { quizId: string } }) {
     });
 
     return (
-    <div className="w-full bg-off-white dark:bg-dark h-full">
-        <div className="text-dark dark:text-white w-full h-full flex">
-            <QuizInfoSection quizId={params.quizId} />
-            <div className="bg-white dark:bg-off-dark w-full p-2">
-                <div className="w-[95%] mx-auto my-2 md:hidden">
-                    <SubmitButton text="Host quiz" isQuiz={true} error={(quiz?.questions.length===0)} />
+        <div className="w-full bg-off-white dark:bg-dark h-full">
+            <div className="text-dark dark:text-white w-full h-full flex">
+                <QuizInfoSection quizId={params.quizId} />
+                <div className="bg-white dark:bg-off-dark w-full p-2">
+                    <div className="w-[95%] mx-auto my-2 md:hidden">
+                        <SubmitButton text="Host quiz" isQuiz={true} error={(quiz?.questions.length === 0)} />
+                    </div>
+                    <BasicModal btnTitle="+Add Question">
+                        <AddQuesForm quizId={params.quizId} />
+                    </BasicModal>
+                    <AllQues quizId={params.quizId} />
                 </div>
-                <BasicModal btnTitle="+Add Question">
-                    <AddQuesForm quizId={params.quizId} />
-                </BasicModal>
-                <AllQues quizId={params.quizId} />
             </div>
+            <ToastContainer />
         </div>
-        <ToastContainer />
-    </div>
     )
 }
 
