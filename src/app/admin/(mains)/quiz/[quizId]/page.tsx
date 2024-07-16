@@ -8,6 +8,7 @@ import { getServerSession } from "next-auth"
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth"
 import { redirect } from "next/navigation"
 import SubmitButton from "@/components/SubmitButton"
+import createRoom from "@/actions/CreateRoomAction"
 
 async function Quiz({ params }: { params: { quizId: string } }) {
 
@@ -34,7 +35,10 @@ async function Quiz({ params }: { params: { quizId: string } }) {
                 <QuizInfoSection quizId={params.quizId} />
                 <div className="bg-white dark:bg-off-dark w-full p-2">
                     <div className="w-[95%] mx-auto my-2 md:hidden">
-                        <SubmitButton text="Host quiz" isQuiz={true} error={(quiz?.questions.length === 0)} />
+                        <form className="" action={createRoom}>
+                            <input type="hidden" name="quizId" value={params.quizId} />
+                            <SubmitButton text="Host quiz" isQuiz={true} error={(quiz?.questions.length === 0)} />
+                        </form>
                     </div>
                     <BasicModal btnTitle="+Add Question">
                         <AddQuesForm quizId={params.quizId} />
