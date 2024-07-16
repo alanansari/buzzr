@@ -43,7 +43,7 @@ export default function CreateAIQuiz() {
                 <div className="p-6">
                     <p className="text-xl font-bold mb-2 text-dark dark:text-white">Hey there! I&apos;m your AI quiz buddy.</p>
                     <p className="text-[#4E4E56] dark:text-off-white mb-4">Ready to get started? Just jot down your requirements below to begin the quiz!</p>
-                    <form>
+                    {/* <form>
                         <InputField type="text"
                             name="quiz"
                             placeholder="Example: “My 20th Bday Quiz”"
@@ -79,7 +79,8 @@ export default function CreateAIQuiz() {
                         </div>
 
                         <SubmitButton />
-                    </form>
+                    </form> */}
+                    <div>Coming Soon...</div>
                 </div>
             </Box>
         </Modal>
