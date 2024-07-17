@@ -33,7 +33,7 @@ export default async function AllQues(props: { quizId: string }) {
     }
 
     return <>
-        <div className="flex flex-col justify-between w-full h-[85vh] overflow-auto overflow-x-hidden">
+        <div className="flex flex-col justify-between w-full h-[75vh] overflow-auto overflow-x-hidden">
             {questions.length > 0 ? questions.map((ques, index) => {
                 return <div
                     key={ques.id} className="w-full my-2 flex items-center" 

@@ -28,7 +28,7 @@ async function QuizInfoSection(props: { quizId: string }) {
     const allQuiz = quiz?.gameSessions ? quiz?.gameSessions : [];
 
     return <>
-        <form className="w-[40vw] h-[92vh] bg-white dark:bg-dark mr-2 hidden md:block" action={createRoom}>
+        <form className="w-[40vw] h-[85vh] bg-white dark:bg-dark mr-2 hidden md:block" action={createRoom}>
             <div className="flex flex-col w-[90%] mx-auto text-dark dark:text-white">
                 <div className="text-sm">
                     <span className="p-1 py-2 underline underline-offset-1"><Link href={'/admin'}>Home</Link></span>
