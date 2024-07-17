@@ -15,7 +15,7 @@ export const RadioField1 = () => {
     }, [pending])
 
     return (
-        <input required id="a" type="radio" className="mx-2" name="choose_option" value={value} onChange={() => setValue('a')} />
+        <input required id="a" type="radio" className="absolute top-5 right-2" name="choose_option" value={value} onChange={() => setValue('a')} />
     )
 }
 
@@ -32,7 +32,7 @@ export const RadioField2 = () => {
     }, [pending])
 
     return (
-        <input id="b" required type="radio" className="mx-2" name="choose_option" value={value} onChange={() => setValue("b")} />
+        <input id="b" required type="radio" className="absolute top-5 right-2" name="choose_option" value={value} onChange={() => setValue("b")} />
     )
 }
 
@@ -49,7 +49,7 @@ export const RadioField3 = () => {
     }, [pending])
 
     return (
-        <input id="c" required type="radio" className="mx-2" name="choose_option" value={value} onChange={() => setValue("c")} />
+        <input id="c" required type="radio" className="absolute top-5 right-2" name="choose_option" value={value} onChange={() => setValue("c")} />
     )
 }
 
@@ -66,7 +66,7 @@ export const RadioField4 = () => {
     }, [pending])
 
     return (
-        <input id="d" required type="radio" className="mx-2" name="choose_option" value={value} onChange={() => setValue("d")} />
+        <input id="d" required type="radio" className="absolute top-5 right-2" name="choose_option" value={value} onChange={() => setValue("d")} />
     )
 }
 

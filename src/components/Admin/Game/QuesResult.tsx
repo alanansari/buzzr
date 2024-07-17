@@ -28,6 +28,7 @@ export default function QuesResult(props: any) {
     const socket = props.socket
 
     function handleNext() {
+        console.log("123")
         dispatch(resetTimer(3))
         if (currIndex == allQuestions.length - 1) {
             socket.emit("final-leaderboard", gameCode)
@@ -70,7 +71,7 @@ export default function QuesResult(props: any) {
                         }) : null}
                     </div>
                 </div>
-                <button className="rounded-xl text-white dark:text-dark w-full bg-lprimary dark:bg-dprimary px-5 py-3 hover:cursor-pointer transition-all duration-300 ease-in-out disabled:cursor-default font-bold disabled:bg-gray" onClick={handleNext} >Next Question</button>
+                <button className="rounded-xl text-white dark:text-dark w-full bg-lprimary dark:bg-dprimary px-5 py-3 hover:cursor-pointer transition-all duration-300 ease-in-out disabled:cursor-default font-bold disabled:bg-gray" onClick={handleNext} >{currIndex == allQuestions.length - 1 ? "Final Leaderboard" : "Next Question"}</button>
             </div>
         </div>
     </>

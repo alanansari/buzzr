@@ -39,7 +39,7 @@ const Links = [
 
 const Footer = () => {
   return (
-    <div className="hidden md:flex p-2 px-8 justify-start items-center text-sm text-[#94959c] dark:text-off-white w-full">
+    <div className="flex p-2 px-8 justify-start z-50 items-center text-sm text-[#94959c] dark:text-off-white w-full absolute bottom-0">
       {Links.map((link, index) => (
         <Link href={link.link} key={index}>
           <div className="flex items-center justify-center mr-2">
@@ -49,7 +49,7 @@ const Footer = () => {
               width={18}
               height={18} 
             />
-            <span className="text-xs px-1">{link.name}</span>
+            <span className="text-xs px-1 hidden md:inline">{link.name}</span>
           </div>
         </Link>
       ))}

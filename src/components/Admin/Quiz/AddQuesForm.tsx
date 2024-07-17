@@ -26,81 +26,75 @@ const AddQuesForm = (props: { quizId: string }) => {
             className="flex flex-col justify-center mx-auto px-1 text-white"
         >
             <input type="text" className="hidden" name="quiz_id" value={props.quizId} />
-            <FormLabel className="mt-2">Question</FormLabel>
-            <InputField
-                type="text"
+            <InputField type="text"
                 name="title"
                 placeholder="Title"
-                className="text-slate-900 my-2 rounded-full p-2 outline-none"
+                className="text-dark dark:text-white dark:bg-dark my-2 rounded-xl mt-1 border"
                 required
                 autoComplete="off"
-            />
-            <FormLabel className="text-white mt-2" >Upload Image / Video / Audio</FormLabel>
-            <InputField type="file" accept="image/*" className="text-white rounded-full p-2 w-full" name="file" placeholder="Select file" autoComplete="off" />
-            <p className="text-xs mt-[-8px] text-gray-400">Choose any image or gif of size &lt; 10MB </p>
-            <FormLabel>Enter options</FormLabel>
-            <div className="grid grid-cols-2 gap-x-2">
-                <div>
+                label="Question"
+                labelClass="text-lg" />
+            <InputField label="Upload Image / Video / Audio" type="file" accept="image/*" className="text-dark dark:text-white dark:bg-dark my-2 rounded-xl mt-1 border border-dark dark:border-white" name="file" placeholder="Select file" autoComplete="off" />
+            <p className="text-xs mt-[-12px] text-gray-400 text-dark dark:text-white mb-2">Choose any image or gif of size &lt; 10MB </p>
+            <FormLabel style={{fontSize:'14px', marginBottom:'4px'}} className="text-sm dark:text-white">Enter options</FormLabel>
+            <div className="grid grid-cols-2 gap-x-4 gap-y-2 mt-0">
+                <div className="relative">
                     <InputField
                         type="text"
                         name="option1"
                         placeholder="Enter option 1"
                         autoComplete="off"
-                        className="text-slate-900 my-2 rounded-full p-2 outline-none w-1/2"
+                        className="text-dark dark:text-white dark:bg-dark rounded-xl outline-none border w-full my-0 pr-4"
                         style="question"
                         required
                     />
                     <RadioField1 />
-                    {/* <input required type="radio" className="mx-2" name="choose_option" value="a" /> */}
                 </div>
-                <div>
+                <div className="relative">
                     <InputField
                         type="text"
                         name="option2"
                         placeholder="Enter option 2"
                         autoComplete="off"
-                        className="text-slate-900 my-2 rounded-full p-2"
+                        className="text-dark dark:text-white dark:bg-dark rounded-xl outline-none my-0 border w-full pr-4"
                         style="question"
                         required
                     />
                     <RadioField2 />
-                    {/* <input required type="radio" className="mx-2" id="two" name="choose_option" value="b" /> */}
                 </div>
-                <div>
+                <div className="relative">
                     <InputField
                         type="text"
                         name="option3"
                         placeholder="Enter option 3"
                         autoComplete="off"
-                        className="text-slate-900 my-2 rounded-full p-2"
+                        className="text-dark dark:text-white dark:bg-dark rounded-xl outline-none border my-0 w-full pr-4"
                         style="question"
                         required
                     />
                     <RadioField3 />
-                    {/* <input required type="radio" className="mx-2" name="choose_option" value="c" /> */}
                 </div>
-                <div>
+                <div className="relative">
                     <InputField
                         type="text"
                         name="option4"
                         placeholder="Enter option 4"
                         autoComplete="off"
-                        className="text-slate-900 my-2 rounded-full p-2"
+                        className="text-dark dark:text-white dark:bg-dark rounded-xl outline-none border my-0 w-full pr-4"
                         style="question"
                         required
                     />
                     <RadioField4 />
-                    {/* <input required type="radio" className="mx-2" name="choose_option" value="d" /> */}
                 </div>
             </div>
-            <FormLabel className="text-white mt-2">Question Time</FormLabel>
             <InputField
                 type="number"
                 name="time"
                 placeholder="question time"
-                className="text-slate-900 my-2 rounded-full p-2 outline-none"
+                className="text-dark dark:text-white my-2 rounded-xl border dark:bg-dark"
                 required={false}
                 autoComplete="off"
+                label="Question Time"
             />
 
             <div className="text-center mt-2">
