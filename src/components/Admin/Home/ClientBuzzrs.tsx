@@ -1,5 +1,4 @@
 "use client"
-
 import Link from "next/link";
 import CreateAIQuiz from "../Gemini/CreateAIQuiz";
 import ClientImage from "@/components/ClientImage";
@@ -12,10 +11,10 @@ export default function ClientBuzzr({ quizzes }: { quizzes: any }) {
     const className = view === "grid" ? "w-11 h-11" : "w-6 h-6";
 
     return <>
-        <div className={`flex ${view === "list" ? "flex-col" : "flex-row flex-wrap"} gap-3 w-full mt-4 md:max-h-[70vh] overflow-y-auto`}>
+        <div className={`flex ${view === "list" ? "flex-col" : "flex-row flex-wrap"} gap-3 w-full mt-4 md:max-h-[60vh] overflow-y-auto`}>
             <Link
                 href="/admin/quiz/createQuiz"
-                className={` border border-[#c2b4fe] dark:border-transparent w-full bg-card-light hover:bg-cardhover-light dark:bg-card-dark hover:dark:bg-cardhover-dark text-dark dark:text-white rounded flex justify-center items-center ${view === "list" ? "md:w-full flex-row gap-x-3 md:gap-x-1 py-4 px-2" : "p-2 flex-col md:w-40 h-[50vh] md:h-44"}`}
+                className={` border border-[#c2b4fe] dark:border-transparent w-full bg-card-light hover:bg-cardhover-light dark:bg-card-dark hover:dark:bg-cardhover-dark transition-all duration-300 ease-in-out text-dark dark:text-white rounded flex justify-center items-center ${view === "list" ? "md:w-full flex-row gap-x-3 md:gap-x-1 py-4 px-2" : "p-2 flex-col md:w-40 h-[50vh] md:h-44"}`}
             >
                 <div className="h-full w-full flex gap-x-4 justify-center items-center">
                     <ClientImage
@@ -36,7 +35,7 @@ export default function ClientBuzzr({ quizzes }: { quizzes: any }) {
             </Link>
             <Link
                 href="#"
-                className={` border border-[#c2b4fe] dark:border-transparent w-full bg-card-light hover:bg-cardhover-light dark:bg-card-dark hover:dark:bg-cardhover-dark text-dark dark:text-white rounded flex justify-center items-center ${view === "list" ? "md:w-full flex-row gap-x-3 md:gap-x-1 py-4 px-2" : "p-2 flex-col md:w-40 h-[50vh] md:h-44"}`}
+                className={` border border-[#c2b4fe] dark:border-transparent w-full bg-card-light hover:bg-cardhover-light dark:bg-card-dark hover:dark:bg-cardhover-dark transition-all duration-300 ease-in-out text-dark dark:text-white rounded flex justify-center items-center ${view === "list" ? "md:w-full flex-row gap-x-3 md:gap-x-1 py-4 px-2" : "p-2 flex-col md:w-40 h-[50vh] md:h-44"}`}
             >
                 <div className="h-full w-full flex gap-x-4 justify-center items-center">
                     <ClientImage
@@ -60,7 +59,7 @@ export default function ClientBuzzr({ quizzes }: { quizzes: any }) {
                 <Link
                     href={`/admin/quiz/${quiz.id}`}
                     key={quiz.id}
-                    className={` border border-[#c2b4fe] dark:border-transparent w-full bg-card-light hover:bg-cardhover-light dark:bg-card-dark hover:dark:bg-cardhover-dark text-dark dark:text-white rounded flex items-center ${view === "list" ? "md:w-full flex-row gap-x-3 md:gap-x-1 py-4 px-2" : "p-2 flex-col md:w-40 h-[50vh] md:h-44"}`}
+                    className={`border border-[#c2b4fe] dark:border-transparent w-full bg-card-light hover:bg-cardhover-light dark:bg-card-dark hover:dark:bg-cardhover-dark transition-all duration-300 ease-in-out text-dark dark:text-white rounded flex items-center ${view === "list" ? "md:w-full flex-row gap-x-3 md:gap-x-1 py-4 px-2" : "p-2 flex-col md:w-40 h-[50vh] md:h-44"}`}
                 >
                     <h2 className="text-md font-bold dark:text-white w-full">{quiz.title}</h2>
                     <p className={` ${view === "grid" ? "text-xs" : "text-base"} w-full text-off-dark dark:text-off-white`}>{quiz.description}</p>

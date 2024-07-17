@@ -24,7 +24,7 @@ const SubmitButton = (params: {
     <button
       disabled={params.error || pending}
       value="submit"
-      className="rounded-xl text-white dark:text-dark w-full bg-lprimary dark:bg-dprimary px-5 py-3 hover:cursor-pointer transition-all duration-300 ease-in-out disabled:cursor-default font-bold disabled:bg-gray"
+      className="rounded-xl text-white dark:text-dark w-full bg-lprimary dark:bg-dprimary px-5 py-3 hover:cursor-pointer transition-all duration-300 ease-in-out disabled:cursor-default font-bold disabled:bg-gray dark:disabled:bg-gray"
       onClick={handleRedux}
     >
       {(pending) ? 'Loading...' : params.text || 'Next'}

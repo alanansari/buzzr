@@ -21,8 +21,8 @@ export default async function RootLayout({
         <SessionProvider>
           <ReduxProvider>
             <div className="flex flex-col w-[100vw]">
-                <div className="p-2 px-4 md:px-8">
-                  <Link href="/admin">
+                <div className="p-2 px-4 md:px-8 bg-light-bg dark:bg-dark-bg hidden md:block">
+                  <Link href="/">
                   <ClientImage
                       props={{
                           src: "/logo.svg",

@@ -30,10 +30,10 @@ async function Quiz({ params }: { params: { quizId: string } }) {
     });
 
     return (
-        <div className="w-full bg-off-white dark:bg-dark h-full">
+        <div className="w-full bg-light-bg dark:bg-dark-bg h-full">
             <div className="text-dark dark:text-white w-full h-full flex">
                 <QuizInfoSection quizId={params.quizId} />
-                <div className="bg-white dark:bg-off-dark w-full p-2">
+                <div className="bg-white dark:bg-dark w-full p-2">
                     <div className="w-[95%] mx-auto my-2 md:hidden">
                         <form className="" action={createRoom}>
                             <input type="hidden" name="quizId" value={params.quizId} />

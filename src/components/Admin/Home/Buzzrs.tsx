@@ -2,9 +2,6 @@ import { prisma } from "@/utils/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
 import { redirect } from "next/navigation";
-import Link from "next/link";
-import ClientImage from "@/components/ClientImage";
-import CreateAIQuiz from "../Gemini/CreateAIQuiz";
 import ClientBuzzr from "./ClientBuzzrs";
 
 const Buzzrs = async () => {
