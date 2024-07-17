@@ -8,7 +8,7 @@ import { TiTick } from "react-icons/ti";
 import { useDispatch, useSelector } from "react-redux";
 import { Option } from "@prisma/client";
 import { RootState } from "@/state/store";
-import { setCurrIndex } from "@/state/admin/playersSlice";
+import { setCurrIndex, setLeaderboard } from "@/state/admin/playersSlice";
 import Image from "next/image";
 import { resetTimer } from "@/state/timer/timerSlice";
 
@@ -29,12 +29,22 @@ export default function QuesResult(props: any) {
 
     function handleNext() {
         dispatch(resetTimer(3))
-        socket.emit("change-question", gameCode, currIndex + 1)
-        socket.on("question-changed", (index: number) => {
-            dispatch(setCurrIndex(index))
-            dispatch(setScreenStatus(ScreenStatus.wait))
-            socket.emit("start-timer", gameCode)
-        })
+        if (currIndex == allQuestions.length - 1) {
+            socket.emit("final-leaderboard", gameCode)
+            socket.on("displaying-final-leaderboard", (leaderboard: any[]) => {
+                console.log("Final Leaderboard")
+                dispatch(setLeaderboard(leaderboard))
+                dispatch(setScreenStatus(ScreenStatus.leaderboard))
+            })
+        }
+        else {
+            socket.emit("change-question", gameCode, currIndex + 1)
+            socket.on("question-changed", (index: number) => {
+                dispatch(setCurrIndex(index))
+                dispatch(setScreenStatus(ScreenStatus.wait))
+                socket.emit("start-timer", gameCode)
+            })
+        }
     }
     return <>
         <div className="grid gap-y-4 md:grid-cols-2 md:gap-y-0 md:gap-x-4 w-full m-auto md:mx-4 h-full">
@@ -51,7 +61,7 @@ export default function QuesResult(props: any) {
                         {leaderboard?.length > 0 ? leaderboard.map((lead, index) => {
                             return <div className="flex justify-between items-center mb-3 text-dark dark:text-white" key={index}>
                                 <div className="flex gap-x-3 items-center">
-                                    <span>{index+1}. </span>
+                                    <span>{index + 1}. </span>
                                     <span> <Image src={lead.Player.profilePic || "/avatar-1577909_1280.webp"} className="w-12 h-12 rounded-full" width={40} height={40} alt="profile pic" /></span>
                                     <span className="font-bold">{lead.Player.name}</span>
                                 </div>
