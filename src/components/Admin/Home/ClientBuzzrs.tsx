@@ -11,7 +11,7 @@ export default function ClientBuzzr({ quizzes }: { quizzes: any }) {
     const className = view === "grid" ? "w-11 h-11" : "w-6 h-6";
 
     return <>
-        <div className={`flex ${view === "list" ? "flex-col" : "flex-row flex-wrap"} gap-3 w-full mt-4 md:max-h-[70vh] overflow-y-auto`}>
+        <div className={`flex ${view === "list" ? "flex-col" : "flex-row flex-wrap"} gap-3 w-full mt-4 md:max-h-[60vh] overflow-y-auto`}>
             <Link
                 href="/admin/quiz/createQuiz"
                 className={` border border-[#c2b4fe] dark:border-transparent w-full bg-card-light hover:bg-cardhover-light dark:bg-card-dark hover:dark:bg-cardhover-dark transition-all duration-300 ease-in-out text-dark dark:text-white rounded flex justify-center items-center ${view === "list" ? "md:w-full flex-row gap-x-3 md:gap-x-1 py-4 px-2" : "p-2 flex-col md:w-40 h-[50vh] md:h-44"}`}
