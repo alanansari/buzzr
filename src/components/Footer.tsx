@@ -39,10 +39,10 @@ const Links = [
 
 const Footer = () => {
   return (
-    <div className="hidden md:flex p-2 px-4 justify-start items-center text-sm text-[#94959c] dark:text-off-white w-full">
+    <div className="hidden md:flex p-2 px-8 justify-start items-center text-sm text-[#94959c] dark:text-off-white w-full">
       {Links.map((link, index) => (
         <Link href={link.link} key={index}>
-          <div className="flex items-center justify-center ml-2">
+          <div className="flex items-center justify-center mr-2">
             <Image 
               src={link.icon} 
               alt={link.name}

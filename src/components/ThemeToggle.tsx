@@ -25,7 +25,7 @@ const ThemeToggle = () => {
             onClick={() => { dispatch(setpageTheme((theme === pageTheme.light) ? pageTheme.dark : pageTheme.light))}}
         >
             <div
-                className="w-3 h-3 bg-white dark:ml-[50%] rounded-full transition-all duration-300 ease-in-out"
+                className="w-3 h-3 bg-white dark:ml-[50%] rounded-full transition-all duration-200 ease-in-out"
             >
             </div>
         </div>
