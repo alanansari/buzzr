@@ -13,10 +13,19 @@ const InputField = (props: {
   accept?: string,
   textarea?: boolean,
   onTitleChange?: any,
-  label?: string
+  label?: string,
+  labelClass?: string
+  fieldValue?: string
 }) => {
   const { pending } = useFormStatus()
   const [value, setValue] = useState('');
+
+  useEffect(() => {
+    if (props.fieldValue)
+      setValue(props.fieldValue);
+    else
+      setValue('')
+  },[props.fieldValue])
 
   useEffect(() => {
     if (pending)
@@ -28,11 +37,10 @@ const InputField = (props: {
       props.onTitleChange(e.target.value)
     }
     setValue(e.target.value)
-
   }
 
   return <div className="flex flex-col mb-3">
-    <label className="text-sm dark:text-white mb-0">{props.label}</label>
+    <label className={`text-sm text-dark dark:text-white mb-0 ${props.labelClass}`}>{props.label}</label>
     {props.textarea ? <textarea
       name={props.name}
       value={value}

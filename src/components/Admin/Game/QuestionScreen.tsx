@@ -23,24 +23,14 @@ export default function QuestionScreen(props: any) {
     const colors = cssOptionColors
 
     async function handleNext() {
-        if (currIndex == allQuestions.length - 1) {
-            socket.emit("final-leaderboard", gameCode)
-            socket.on("displaying-final-leaderboard", (leaderboard: any[]) => {
-                console.log("Final Leaderboard")
-                dispatch(setLeaderboard(leaderboard))
-                dispatch(setScreenStatus(ScreenStatus.leaderboard))
-            })
-        }
-        else {
-            const leaderboard = await ShowLeaderboard(gameCode)
-            dispatch(setLeaderboard(leaderboard))
-            socket.emit("display-result", gameCode, question?.id, question?.options);
-            socket.on("displaying-result", (data: any) => {
-                console.log("Displaying result", JSON.stringify(data))
-                dispatch(setResult(data?.presenter))
-                dispatch(setScreenStatus(ScreenStatus.result))
-            })
-        }
+        const leaderboard = await ShowLeaderboard(gameCode)
+        dispatch(setLeaderboard(leaderboard))
+        socket.emit("display-result", gameCode, question?.id, question?.options);
+        socket.on("displaying-result", (data: any) => {
+            console.log("Displaying result", JSON.stringify(data))
+            dispatch(setResult(data?.presenter))
+            dispatch(setScreenStatus(ScreenStatus.result))
+        })
     }
     useEffect(() => {
         if (time == 0) {
@@ -49,7 +39,7 @@ export default function QuestionScreen(props: any) {
     }, [time])
 
     return <>
-        <div className="flex items-center m-auto h-fit md:h-[80vh] w-full md:mx-4 dark:text-white [&>*]:bg-white dark:[&>*]:bg-dark">
+        <div className="flex items-center m-auto h-fit w-full md:mx-4 dark:text-white [&>*]:bg-white dark:[&>*]:bg-dark">
             <div className='h-full w-[30vw] mx-2 hidden pt-8 md:block rounded-xl'>
                 <div className='flex justify-center'>
                     <Countdown timer={question?.timeOut} setTime={setTime} />
@@ -78,7 +68,7 @@ export default function QuestionScreen(props: any) {
                 </div>
                 <div className="flex flex-col md:grid md:grid-cols-2 gap-6 w-full p-8 pl-4 h-fit">
                     {question.options.length > 0 && question.options.map((opt: any, index: number) => {
-                        return <p key={index} className="text-dark dark:text-white bg-light-bg dark:bg-dark-bg  p-4 rounded-xl">{index+1}{". "}{opt.title}</p>
+                        return <p key={index} className="text-dark dark:text-white bg-light-bg dark:bg-dark-bg  p-4 rounded-xl">{index + 1}{". "}{opt.title}</p>
                     })}
                 </div>
             </div>

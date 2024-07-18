@@ -28,7 +28,7 @@ async function QuizInfoSection(props: { quizId: string }) {
     const allQuiz = quiz?.gameSessions ? quiz?.gameSessions : [];
 
     return <>
-        <form className="w-[40vw] h-[85vh] bg-white dark:bg-dark mr-2 hidden md:block" action={createRoom}>
+        <form className="w-[40vw] h-[83vh] bg-white dark:bg-dark mr-2 hidden md:block" action={createRoom}>
             <div className="flex flex-col w-[90%] mx-auto text-dark dark:text-white">
                 <div className="text-sm">
                     <span className="p-1 py-2 underline underline-offset-1"><Link href={'/admin'}>Home</Link></span>
@@ -45,7 +45,7 @@ async function QuizInfoSection(props: { quizId: string }) {
             </div>
                 <div className="my-2">
                     <div className="font-black p-4">Previously used</div>
-                    <div className="my-2 h-[48vh] overflow-auto">
+                    <div className="my-2 h-[33.6vh] overflow-auto">
                         {allQuiz?.length > 0 ? allQuiz.map((quiz) => {
                             return <div key={quiz.id}>
                                 <div className="bg-card-light dark:bg-card-dark p-4 mt-2">

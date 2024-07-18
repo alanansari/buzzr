@@ -44,7 +44,7 @@ const QuestionAndResult = (params: {
                 width: `${percent}%`,
                 transition: 'width 1s linear',
             }} className="w-full h-2 dark:bg-dprimary bg-lprimary block md:hidden"></div>}
-            <div className="w-full h-full flex gap-4 md:py-4 md:px-8 [&>*]:bg-white dark:[&>*]:bg-dark md:[&>*]:rounded-xl overflow-y-auto">
+            <div className="w-full h-[85vh] flex gap-4 md:py-4 md:px-8 [&>*]:bg-white dark:[&>*]:bg-dark md:[&>*]:rounded-xl overflow-y-auto">
                 <div className="hidden md:w-1/3 md:flex flex-col justify-between py-6 px-5 h-full">
                     <div className="border-[12px] dark:border-lprimary border-dprimary light: rounded-full w-32 h-32 flex items-center justify-center mx-auto">
                         <span className="font-semibold text-3xl dark:text-white">{quesTime}</span>

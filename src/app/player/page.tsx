@@ -27,7 +27,7 @@ function Player() {
                 }}
             />
         </div>
-        <div className="w-full h-full flex gap-4 p-4 [&>*]:bg-white dark:[&>*]:bg-dark [&>*]:rounded-xl">
+        <div className="w-full h-[81vh] flex gap-4 px-4 [&>*]:bg-white dark:[&>*]:bg-dark [&>*]:rounded-xl">
             <div className="w-[95vw] mx-auto md:mx-0 md:w-[60vw]">
                 <BackNavButton />
                 <CreatePlayerForm data={data} setData={setData} />
@@ -46,7 +46,7 @@ function Player() {
                     <div className="flex items-center w-[105%] my-2 p-1 px-2 border dark:border-white rounded-lg">
                         <span className="text-lg font-bold mr-2 text-dark dark:text-white">2<sup>nd</sup></span>
                         <Image
-                            src={`${data?.image ? data.image : "/avatar-1577909_1280.webp"}`}
+                            src={`${data?.image ? data.image : "/player_profile/profile1.png"}`}
                             alt="Card 2"
                             width={50}
                             height={50}

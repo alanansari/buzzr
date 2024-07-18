@@ -5,6 +5,8 @@ import { redirect } from "next/navigation"
 import ShowMedia from "./ShowMediaComp";
 import { revalidatePath } from "next/cache";
 import Image from "next/image";
+import AddQuesForm from "./AddQuesForm";
+import BasicModal from "@/components/Modal";
 
 export default async function AllQues(props: { quizId: string }) {
     const session = await getServerSession(authOptions);
@@ -33,10 +35,10 @@ export default async function AllQues(props: { quizId: string }) {
     }
 
     return <>
-        <div className="flex flex-col justify-between w-full h-[75vh] overflow-auto overflow-x-hidden">
+        <div className="flex flex-col w-full h-[73vh] overflow-auto overflow-x-hidden">
             {questions.length > 0 ? questions.map((ques, index) => {
                 return <div
-                    key={ques.id} className="w-full my-2 flex items-center" 
+                    key={ques.id} className="w-full my-2 flex items-center"
                     draggable
                 >
                     {/* <form action={handleDeleteQues}>
@@ -76,25 +78,27 @@ export default async function AllQues(props: { quizId: string }) {
                                     <input type="text" className="hidden" name="ques_id" value={ques.id} />
                                     <button className="p-1 mr-1 text-red-light hover:bg-[#fccccc] rounded-md">Delete</button>
                                 </form>
-                                <button className="p-1 text-lprimary mr-1 hover:bg-[#ddd5ff] rounded-md">Edit question</button>
+                                <BasicModal isEdit={true} btnTitle="Edit Question">
+                                    <AddQuesForm quizId={props.quizId} question={ques} />
+                                </BasicModal>
                                 {ques.media && <ShowMedia media={ques.media} mediaType={ques.mediaType || ""} />}
-                            </div>        
+                            </div>
                         </div>
                     </div>
                 </div>
-            }) : 
-            <div className="border-2 border-gray rounded-2xl border-dashed w-[95%] p-6 py-16 mt-8 mx-auto flex flex-col justify-center items-center">
-                <div className="w-full py-2 flex justify-center">
-                <Image
-                    src="/no-questions.svg"
-                    alt="no-questions"
-                    width={200}
-                    height={200}
-                />
+            }) :
+                <div className="border-2 border-gray rounded-2xl border-dashed w-[95%] p-6 py-16 mt-8 mx-auto flex flex-col justify-center items-center">
+                    <div className="w-full py-2 flex justify-center">
+                        <Image
+                            src="/no-questions.svg"
+                            alt="no-questions"
+                            width={200}
+                            height={200}
+                        />
+                    </div>
+                    <div className="font-black text-lg">No Questions Added Yet!</div>
+                    <div className="text-md w-[40%] text-center">It looks like there are no questions for this quiz. Start adding questions to engage your students and make learning fun!</div>
                 </div>
-                <div className="font-black text-lg">No Questions Added Yet!</div>
-                <div className="text-md w-[40%] text-center">It looks like there are no questions for this quiz. Start adding questions to engage your students and make learning fun!</div>
-            </div>
             }
 
         </div>

@@ -37,7 +37,7 @@ async function JoinRoom({ params }: { params: { playerId: string } }) {
             alt="Logo"
             />
         </div>
-        <div className="w-full h-full flex gap-4 p-4 [&>*]:bg-white dark:[&>*]:bg-dark [&>*]:rounded-xl">
+        <div className="w-full h-[81vh] flex gap-4 px-4 [&>*]:bg-white dark:[&>*]:bg-dark [&>*]:rounded-xl">
             <div className="w-full md:w-fit py-4">
                 <JoinRoomForm playerId={params.playerId}/>
             </div>
