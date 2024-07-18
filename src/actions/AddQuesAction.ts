@@ -11,6 +11,15 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
+
+// Function to extract public ID from the URL
+function getPublicIdFromUrl(url: string) {
+  const parts = url.split("/");
+  const publicIdWithExtension = parts[parts.length - 1];
+  const [publicId] = publicIdWithExtension.split(".");
+  return publicId;
+}
+
 export default async function addQues(formData: FormData) {
   try {
     const title = formData.get("title") as string;
@@ -28,11 +37,28 @@ export default async function addQues(formData: FormData) {
       { title: option3, isCorrect: correct_option === "c" ? true : false },
       { title: option4, isCorrect: correct_option === "d" ? true : false },
     ];
+
+    const file = formData.get("file") as File;
+    const file_link = formData.get("file_link") as string;
+    const file_type = formData.get("media_type") as string;
     var fileLink = "",
       fileType = "";
-    const file = formData.get("file") as File;
-    
+
     if (file.size != 0) {
+      if (file_link) {
+        const oldPublicId = getPublicIdFromUrl(file_link);
+        await cloudinary.uploader.destroy(
+          oldPublicId,
+          function (error, result) {
+            if (error) {
+              console.log("Error deleting old file:", error);
+            } else {
+              console.log("Old file deleted:", result);
+            }
+          }
+        );
+      }
+
       const arrayBuffer = await file.arrayBuffer();
       const buffer = Buffer.from(arrayBuffer);
       await new Promise((resolve, reject) => {
@@ -47,7 +73,11 @@ export default async function addQues(formData: FormData) {
           })
           .end(buffer);
       });
+    } else if (file.size == 0 && file_link) {
+      fileLink = file_link;
+      fileType = file_type;
     }
+
     const session = await getServerSession(authOptions);
     if (!session || !session.user) redirect("/api/auth/signin");
 

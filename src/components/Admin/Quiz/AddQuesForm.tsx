@@ -7,6 +7,8 @@ import { RadioField } from "@/components/RadioField";
 import addQues from "@/actions/AddQuesAction";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { RxCross2 } from "react-icons/rx";
+import { useEffect, useState } from "react";
 
 interface Option {
     id: string;
@@ -30,6 +32,18 @@ interface Question {
 const AddQuesForm = (props: { quizId: string, question?: Question }) => {
 
     const { question } = props;
+    const [file, setFile] = useState<File | null>()
+    const [fileLink, setFileLink] = useState(question?.media ? question.media : "")
+
+    function handleFile(e: any) {
+        const selectedFile = e.target.files?.[0] || null;
+        setFile(selectedFile);
+    }
+
+    function deleteFile() {
+        setFile(null);
+        setFileLink("")
+    };
 
     async function clientAction(formData: FormData) {
         const result = await addQues(formData)
@@ -43,7 +57,6 @@ const AddQuesForm = (props: { quizId: string, question?: Question }) => {
     }
 
     const options = question?.options;
-
     return <>
         <form
             action={clientAction}
@@ -60,10 +73,21 @@ const AddQuesForm = (props: { quizId: string, question?: Question }) => {
                 label="Question"
                 labelClass="text-lg"
                 fieldValue={question?.title} />
-            <InputField label="Upload Image / Video / Audio" type="file" accept="image/*" className="text-dark dark:text-white dark:bg-dark my-2 rounded-xl mt-1 border border-dark dark:border-white" name="file" placeholder="Select file" autoComplete="off" fieldValue='' />
+            <div className="flex flex-col mb-3">
+                <label className="text-sm text-dark dark:text-white mb-0">Upload Image / Video / Audio</label>
+                <input type="file" accept="image/*" className="text-dark dark:text-white dark:bg-dark my-2 rounded-xl mt-1 border border-dark dark:border-white focus:bg-[#EEEEF0] focus:outline-none focus:dark:bg-[#27272A] px-4 py-2 " name="file" placeholder="Select file" autoComplete="off" onChange={handleFile} />
+                <input type="text" className="hidden" name="file_link" value={fileLink} />
+                <input type="text" className="hidden" name="media_type" value={question?.mediaType ? question.mediaType : ""} />
+            </div>
             <p className="text-xs mt-[-12px] text-gray-400 text-dark dark:text-white mb-2">Choose any image or gif of size &lt; 10MB </p>
-            <FormLabel style={{ fontSize: '14px', marginBottom: '4px' }} className="text-sm dark:text-white">Enter options</FormLabel>
-            <div className="grid grid-cols-2 gap-x-4 gap-y-2 mt-0">
+
+            {(fileLink || file) ? <div className="relative">
+                <img src={file ? URL.createObjectURL(file) : fileLink} className="w-40 h-20 mb-3 mt-1" />
+                <RxCross2 size={24} className="text-red-500 absolute top-0 left-36 font-bold cursor-pointer" onClick={deleteFile} />
+            </div> : ""}
+
+            <FormLabel style={{ fontSize: '14px', marginBottom: '4px' }} className="text-sm dark:text-white mb-0">Enter options</FormLabel>
+            <div className="grid grid-cols-2 gap-x-4 gap-y-1 mt-0">
                 <div className="relative">
                     <InputField
                         type="text"
