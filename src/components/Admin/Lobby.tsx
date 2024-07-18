@@ -100,7 +100,7 @@ const Lobby = (params: {
 
     return <>
         <button className="text-white dark:text-dark bg-red-light dark:bg-red-dark p-2 w-fit rounded-lg absolute text-sm font-black hover:bg-red-dark right-4 md:right-8 top-4 transition-all" onClick={handleModalOpen}>Stop Hosting</button>
-        <div className="bg-white dark:bg-dark md:rounded-xl md:mx-8 py-8 my-4 h-[84vh] px-6 relative">
+        <div className="bg-white dark:bg-dark md:rounded-xl md:mx-8 py-8 my-4 h-[81vh] px-6 relative">
             <div className="grid medium:flex md:gap-x-3 gap-y-4 medium:gap-y-0 mb-8 items-center">
                 <span className="font-extrabold text-5xl italic mr-4 dark:text-white">{params?.quizTitle}</span>
                 <div className="flex-wrap flex gap-4 w-fit">

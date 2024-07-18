@@ -27,7 +27,7 @@ function Player() {
                 }}
             />
         </div>
-        <div className="w-full h-full flex gap-4 p-4 [&>*]:bg-white dark:[&>*]:bg-dark [&>*]:rounded-xl">
+        <div className="w-full h-[81vh] flex gap-4 px-4 [&>*]:bg-white dark:[&>*]:bg-dark [&>*]:rounded-xl">
             <div className="w-[95vw] mx-auto md:mx-0 md:w-[60vw]">
                 <BackNavButton />
                 <CreatePlayerForm data={data} setData={setData} />

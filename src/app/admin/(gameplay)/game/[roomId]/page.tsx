@@ -46,7 +46,7 @@ const page = async ({ params }: { params: { roomId: string } }) => {
     });
 
     return (
-        <div className="flex justify-center items-center h-fit md:h-[90vh] w-full bg-light-bg dark:bg-dark-bg">
+        <div className="flex justify-center items-center h-fit md:h-[85vh] w-full bg-light-bg dark:bg-dark-bg">
             <GameLobby roomId={params.roomId} userId={user.id} gameCode={room?.gameCode} players={players} quizQuestions={quizQuestions} currentQues={room?.currentQuestion} />
         </div>
     )
