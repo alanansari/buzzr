@@ -34,8 +34,12 @@ async function Quiz({ params }: { params: { quizId: string } }) {
             <div className="text-dark dark:text-white w-full h-full flex">
                 <QuizInfoSection quizId={params.quizId} />
                 <div className="bg-white dark:bg-dark w-full p-2">
+                    <div className="p-3 flex justify-start md:hidden">
+                        <span className="text-dark dark:text-white font-black">{quiz?.title}</span>
+                        <span className="ml-auto text-xs bg-[#c4f849] border border-[#9dc048] p-1 text-dark rounded-lg">Total number of questions: {quiz?.questions.length}</span>
+                    </div>
                     <div className="w-[95%] mx-auto my-2 md:hidden">
-                        <form className="" action={createRoom}>
+                        <form action={createRoom}>
                             <input type="hidden" name="quizId" value={params.quizId} />
                             <SubmitButton text="Host quiz" isQuiz={true} error={(quiz?.questions.length === 0)} />
                         </form>

@@ -7,32 +7,32 @@ import ThemeToggle from "./ThemeToggle"
 const Links = [
   {
     name: "Donate",
-    link: "/donate",
+    link: "#",
     icon: "/donate.svg",
   },
   {
     name: "Instagram",
-    link: "/instagram",
+    link: "https://www.instagram.com/_buzzr/",
     icon: "/instagram.svg",
   },
   {
     name: "Discord",
-    link: "/discord",
+    link: "#",
     icon: "/discord.svg",
   },
   {
     name: "Youtube",
-    link: "/youtube",
+    link: "https://www.youtube.com/@BuzznoldBuzzenegger",
     icon: "/youtube.svg",
   },
   {
     name: "Github",
-    link: "/github",
+    link: "https://github.com/alanansari/buzzr",
     icon: "/github.svg",
   },
   {
     name: "Software Incubator",
-    link: "/incubator",
+    link: "https://silive.in/",
     icon: "/incubator.svg",
   }
 ]
@@ -41,8 +41,8 @@ const Footer = () => {
   return (
     <div className="flex p-2 px-8 justify-start z-50 items-center text-sm text-[#94959c] dark:text-off-white w-full absolute bottom-0">
       {Links.map((link, index) => (
-        <Link href={link.link} key={index}>
-          <div className="flex items-center justify-center mr-2">
+        <Link href={link.link} key={index} target="_blank">
+          <div className="hidden md:flex items-center justify-center mr-2">
             <Image 
               src={link.icon} 
               alt={link.name}
