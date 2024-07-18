@@ -8,7 +8,7 @@ import addQues from "@/actions/AddQuesAction";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { RxCross2 } from "react-icons/rx";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface Option {
     id: string;
@@ -34,6 +34,7 @@ const AddQuesForm = (props: { quizId: string, question?: Question }) => {
     const { question } = props;
     const [file, setFile] = useState<File | null>()
     const [fileLink, setFileLink] = useState(question?.media ? question.media : "")
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
     function handleFile(e: any) {
         const selectedFile = e.target.files?.[0] || null;
@@ -43,6 +44,9 @@ const AddQuesForm = (props: { quizId: string, question?: Question }) => {
     function deleteFile() {
         setFile(null);
         setFileLink("")
+        if (fileInputRef.current) {
+            fileInputRef.current.value = ""; 
+          }
     };
 
     async function clientAction(formData: FormData) {
@@ -75,7 +79,7 @@ const AddQuesForm = (props: { quizId: string, question?: Question }) => {
                 fieldValue={question?.title} />
             <div className="flex flex-col mb-3">
                 <label className="text-sm text-dark dark:text-white mb-0">Upload Image / Video / Audio</label>
-                <input type="file" accept="image/*" className="text-dark dark:text-white dark:bg-dark my-2 rounded-xl mt-1 border border-dark dark:border-white focus:bg-[#EEEEF0] focus:outline-none focus:dark:bg-[#27272A] px-4 py-2 " name="file" placeholder="Select file" autoComplete="off" onChange={handleFile} />
+                <input type="file" accept="image/*" className="text-dark dark:text-white dark:bg-dark my-2 rounded-xl mt-1 border border-dark dark:border-white focus:bg-[#EEEEF0] focus:outline-none focus:dark:bg-[#27272A] px-4 py-2 " name="file" placeholder="Select file" autoComplete="off" ref={fileInputRef} onChange={handleFile} />
                 <input type="text" className="hidden" name="file_link" value={fileLink} />
                 <input type="text" className="hidden" name="media_type" value={question?.mediaType ? question.mediaType : ""} />
             </div>
@@ -148,7 +152,7 @@ const AddQuesForm = (props: { quizId: string, question?: Question }) => {
                 className="text-dark dark:text-white my-2 rounded-xl border dark:bg-dark"
                 required={false}
                 autoComplete="off"
-                label="Question Time"
+                label="Question Time (in seconds)"
                 fieldValue={question?.timeOut ? question.timeOut.toString() : ''}
             />
 
