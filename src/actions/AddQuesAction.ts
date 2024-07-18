@@ -20,6 +20,7 @@ export default async function addQues(formData: FormData) {
     const option4 = formData.get("option4") as string;
     const time = formData.get("time") as string;
     const quizId = formData.get("quiz_id") as string;
+    const quesId = formData.get("ques_id") as string;
     const correct_option = formData.get("choose_option") as string;
     var options = [
       { title: option1, isCorrect: correct_option === "a" ? true : false },
@@ -30,6 +31,7 @@ export default async function addQues(formData: FormData) {
     var fileLink = "",
       fileType = "";
     const file = formData.get("file") as File;
+    
     if (file.size != 0) {
       const arrayBuffer = await file.arrayBuffer();
       const buffer = Buffer.from(arrayBuffer);
@@ -48,20 +50,50 @@ export default async function addQues(formData: FormData) {
     }
     const session = await getServerSession(authOptions);
     if (!session || !session.user) redirect("/api/auth/signin");
-    await prisma.question.create({
-      data: {
-        title,
-        options: {
-          create: options,
+
+    if (quesId) {
+      const question = await prisma.question.findUnique({
+        where: { id: quesId },
+        include: { options: true },
+      });
+
+      const ques_options = question?.options || [];
+
+      await prisma.question.update({
+        where: {
+          id: quesId,
         },
-        quizId: quizId,
-        timeOut: parseInt(time) || 15,
-        media: fileLink,
-        mediaType: fileType,
-      },
-    });
+        data: {
+          title,
+          quizId: quizId,
+          timeOut: parseInt(time) || 15,
+          media: fileLink,
+          mediaType: fileType,
+          options: {
+            upsert: options.map((option, index) => ({
+              where: { id: ques_options[index]?.id || "" },
+              create: option,
+              update: option,
+            })),
+          },
+        },
+      });
+    } else {
+      await prisma.question.create({
+        data: {
+          title,
+          options: {
+            create: options,
+          },
+          quizId: quizId,
+          timeOut: parseInt(time) || 15,
+          media: fileLink,
+          mediaType: fileType,
+        },
+      });
+    }
     revalidatePath("/quiz/[quizId]");
-  } catch (err:any) {
+  } catch (err: any) {
     return {
       error: err.message,
     };

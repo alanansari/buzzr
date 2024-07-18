@@ -15,10 +15,17 @@ const InputField = (props: {
   onTitleChange?: any,
   label?: string,
   labelClass?: string
-
+  fieldValue?: string
 }) => {
   const { pending } = useFormStatus()
   const [value, setValue] = useState('');
+
+  useEffect(() => {
+    if (props.fieldValue)
+      setValue(props.fieldValue);
+    else
+      setValue('')
+  },[props.fieldValue])
 
   useEffect(() => {
     if (pending)
@@ -30,7 +37,6 @@ const InputField = (props: {
       props.onTitleChange(e.target.value)
     }
     setValue(e.target.value)
-
   }
 
   return <div className="flex flex-col mb-3">
