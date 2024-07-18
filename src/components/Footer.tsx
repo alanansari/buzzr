@@ -42,7 +42,7 @@ const Footer = () => {
     <div className="flex p-2 px-8 justify-start z-50 items-center text-sm text-[#94959c] dark:text-off-white w-full absolute bottom-0">
       {Links.map((link, index) => (
         <Link href={link.link} key={index} target="_blank">
-          <div className="flex items-center justify-center mr-2">
+          <div className="hidden md:flex items-center justify-center mr-2">
             <Image 
               src={link.icon} 
               alt={link.name}
