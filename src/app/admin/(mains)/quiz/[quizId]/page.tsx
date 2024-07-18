@@ -35,7 +35,7 @@ async function Quiz({ params }: { params: { quizId: string } }) {
                 <QuizInfoSection quizId={params.quizId} />
                 <div className="bg-white dark:bg-dark w-full p-2">
                     <div className="p-3 flex justify-start md:hidden">
-                        <span>{quiz?.title}</span>
+                        <span className="text-dark dark:text-white font-black">{quiz?.title}</span>
                         <span className="ml-auto text-xs bg-[#c4f849] border border-[#9dc048] p-1 text-dark rounded-lg">Total number of questions: {quiz?.questions.length}</span>
                     </div>
                     <div className="w-[95%] mx-auto my-2 md:hidden">
