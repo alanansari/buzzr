@@ -6,6 +6,32 @@ import { prisma } from "@/utils/prisma";
 import { redirect } from "next/navigation";
 import {GoogleGenerativeAI} from "@google/generative-ai";
 
+function parseQuestions(content: string) {
+    const questions:any = [];
+    const questionBlocks = content.split('\n\n').filter(block => block.trim() !== '');
+
+    questionBlocks.forEach(block => {
+        const lines = block.split('\n').filter(line => line.trim() !== '');
+        let question = '';
+        const options:any = [];
+
+        lines.forEach(line => {
+            if (line.startsWith('Question:')) {
+                question = line.replace('Question: ', '').trim();
+            } else if (line.startsWith('Option')) {
+                const option = line.split(': ').slice(1).join(': ').trim();
+                options.push(option);
+            }
+        });
+
+        if (question && options.length > 0) {
+            questions.push({ question, options });
+        }
+    });
+
+    return questions;
+}
+
 const addQuestionsByAI = async (formData: FormData) => {
     try {
         console.log("hit");
@@ -34,9 +60,7 @@ const addQuestionsByAI = async (formData: FormData) => {
         const result = await model.generateContent(prompt);
         const response = result.response.text();
 
-        console.log(response, "39")
-
-        const questionsArray = [];
+        const questionsArray = parseQuestions(response);
         // for (let i = 0; i < questions; i++) {
         //     const result = await model.generateContent(prompt);
         //     const response = result.response.text();
@@ -48,7 +72,7 @@ const addQuestionsByAI = async (formData: FormData) => {
         //     // questionsArray.push({question, options, correctAnswer, time: defaultTime});
         // }
 
-        return { questions: response };
+        return { result: questionsArray };
     } catch (err: any) {
         return { error: err.message };
     }
