@@ -6,6 +6,13 @@ import { prisma } from "@/utils/prisma";
 import { redirect } from "next/navigation";
 import {GoogleGenerativeAI} from "@google/generative-ai";
 
+function shuffleArray(array:any) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
 function parseQuestions(content: string) {
     const questions:any = [];
     const questionBlocks = content.split('\n\n').filter(block => block.trim() !== '');
@@ -20,11 +27,13 @@ function parseQuestions(content: string) {
                 question = line.replace('Question: ', '').trim();
             } else if (line.startsWith('Option')) {
                 const option = line.split(': ').slice(1).join(': ').trim();
-                options.push(option);
+                options.push({ title: option, isCorrect: false });
             }
         });
 
         if (question && options.length > 0) {
+            options[0].isCorrect = true;
+            shuffleArray(options);
             questions.push({ question, options });
         }
     });
@@ -32,7 +41,7 @@ function parseQuestions(content: string) {
     return questions;
 }
 
-const addQuestionsByAI = async (formData: FormData) => {
+const addQuestionsByAI = async (quizId: string,formData: FormData) => {
     try {
         console.log("hit");
 
@@ -61,18 +70,21 @@ const addQuestionsByAI = async (formData: FormData) => {
         const response = result.response.text();
 
         const questionsArray = parseQuestions(response);
-        // for (let i = 0; i < questions; i++) {
-        //     const result = await model.generateContent(prompt);
-        //     const response = result.response.text();
-        //     questionsArray.push(response);
-        //     // const responseArray = response.choices[0].text.split("\n");
-        //     // const question = responseArray[0].split(":")[1].trim();
-        //     // const options = responseArray.slice(1).map((option) => option.split(":")[1].trim());
-        //     // const correctAnswer = options[0];
-        //     // questionsArray.push({question, options, correctAnswer, time: defaultTime});
-        // }
 
-        return { result: questionsArray };
+        questionsArray.forEach(async (question: any) => {
+            await prisma.question.create({
+                data: {
+                    title: question.question,
+                    options: {
+                        create: question.options,
+                    },
+                    quizId: quizId,
+                    timeOut: time,
+                },
+            });
+        });
+
+        return { msg: "Questions added successfully", questionsArray };
     } catch (err: any) {
         return { error: err.message };
     }

@@ -10,32 +10,30 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/state/store";
 import addBuzzr from "@/actions/AddBuzzrAction";
 import addQuestionsByAI from "@/actions/CreateQuestionsAI";
+import { useRouter } from "next/navigation";
 
 export default function CreateAIQuiz() {
-
+    const router = useRouter();
     const [open, setOpen] = useState(false)
     const view = useSelector((state: RootState) => state.gridListToggle.view)
 
     async function clientAction(formData: FormData) {
-        const description = formData.get("description") as string;
-        const questions = Number(formData.get("questions"));
-        const time = Number(formData.get("time"));
-        // const result = await addBuzzr(formData)
-        // if (result?.error) {
-        //     const errorMsg = result.error || "Something went wrong";
-        //     console.log(errorMsg)
-        // }
-        // else {
-        //     console.log("Successfully created the quiz")
-        // }
-        console.log(description, questions, time);
-        const result = await addQuestionsByAI(formData);
-        if(result?.error) {
-            const errorMsg = result.error || "Something went wrong";
+        const res = await addBuzzr(formData)
+        if (res?.error) {
+            const errorMsg = res.error || "Something went wrong";
             console.log(errorMsg)
-        } else {
-            console.log("result:",result);
         }
+        else {
+            console.log("Successfully created the quiz")
+            const result = await addQuestionsByAI(res.quizId as string,formData);
+            if(result?.error) {
+                const errorMsg = result.error || "Something went wrong";
+                console.log(errorMsg)
+            } else {
+                router.push(`/admin/quiz/${res.quizId}`);
+            }
+        }
+        
     }
 
     return <>
@@ -69,7 +67,7 @@ export default function CreateAIQuiz() {
                     <p className="text-[#4E4E56] dark:text-off-white mb-4">Ready to get started? Just jot down your requirements below to begin the quiz!</p>
                     <form action={clientAction}>
                         <InputField type="text"
-                            name="quiz"
+                            name="title"
                             placeholder="Example: “My 20th Bday Quiz”"
                             className="text-dark dark:text-white dark:bg-dark my-2 rounded-xl mt-1 border"
                             required
