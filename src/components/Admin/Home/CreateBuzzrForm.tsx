@@ -40,7 +40,7 @@ const CreateBuzzrForm = (params: {
         name="description"
         placeholder="Description"
         autoComplete="off"
-        className="text-dark dark:text-white dark:bg-dark mt-1 border rounded-xl "
+        className="text-dark dark:text-white dark:bg-dark mt-1 border rounded-xl"
         textarea={true}
         label="Description (Optional)"
       />

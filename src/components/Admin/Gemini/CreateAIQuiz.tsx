@@ -8,11 +8,35 @@ import { useState } from "react";
 import style from "@/utils/modalStyle"
 import { useSelector } from "react-redux";
 import { RootState } from "@/state/store";
+import addBuzzr from "@/actions/AddBuzzrAction";
+import addQuestionsByAI from "@/actions/CreateQuestionsAI";
 
 export default function CreateAIQuiz() {
 
     const [open, setOpen] = useState(false)
     const view = useSelector((state: RootState) => state.gridListToggle.view)
+
+    async function clientAction(formData: FormData) {
+        const description = formData.get("description") as string;
+        const questions = Number(formData.get("questions"));
+        const time = Number(formData.get("time"));
+        // const result = await addBuzzr(formData)
+        // if (result?.error) {
+        //     const errorMsg = result.error || "Something went wrong";
+        //     console.log(errorMsg)
+        // }
+        // else {
+        //     console.log("Successfully created the quiz")
+        // }
+        console.log(description, questions, time);
+        const result = await addQuestionsByAI(formData);
+        if(result?.error) {
+            const errorMsg = result.error || "Something went wrong";
+            console.log(errorMsg)
+        } else {
+            console.log("result:",result);
+        }
+    }
 
     return <>
         <div
@@ -43,7 +67,7 @@ export default function CreateAIQuiz() {
                 <div className="p-6">
                     <p className="text-xl font-bold mb-2 text-dark dark:text-white">Hey there! I&apos;m your AI quiz buddy.</p>
                     <p className="text-[#4E4E56] dark:text-off-white mb-4">Ready to get started? Just jot down your requirements below to begin the quiz!</p>
-                    {/* <form>
+                    <form action={clientAction}>
                         <InputField type="text"
                             name="quiz"
                             placeholder="Example: “My 20th Bday Quiz”"
@@ -54,7 +78,7 @@ export default function CreateAIQuiz() {
                         <InputField
                             type="text"
                             name="description"
-                            placeholder="Description"
+                            placeholder="Example: quiz on gravitational forces."
                             autoComplete="off"
                             className="text-dark dark:text-white dark:bg-dark mt-1 border rounded-xl "
                             textarea={true}
@@ -63,24 +87,23 @@ export default function CreateAIQuiz() {
 
                         <div className="grid grid-cols-2 gap-x-3">
                             <InputField type="number"
-                                name="quiz"
+                                name="questions"
                                 placeholder="Example: 15"
                                 className="text-dark dark:text-white dark:bg-dark my-2 rounded-xl mt-1 border"
                                 required
                                 autoComplete="off"
                                 label="Write number of quiz questions." />
                             <InputField type="number"
-                                name="quiz"
+                                name="time"
                                 placeholder="Example: 15"
                                 className="text-dark dark:text-white dark:bg-dark my-2 rounded-xl mt-1 border"
                                 required
                                 autoComplete="off"
                                 label="Write down default question time (in seconds)" />
                         </div>
-
-                        <SubmitButton />
-                    </form> */}
-                    <div>Coming Soon...</div>
+                        <SubmitButton text='Generate' />
+                    </form>
+                    {/* <div>Coming Soon...</div> */}
                 </div>
             </Box>
         </Modal>
