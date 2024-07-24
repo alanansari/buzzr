@@ -28,21 +28,27 @@ const addQuestionsByAI = async (formData: FormData) => {
         Option 2: option2-text
         Option 3: option3-text
         Option 4: option4-text
-        don't add any extra text other than the question and options.`;
+        don't add any extra text other than the question and options.
+        Generate a total of ${questions} questions only`;
+
+        const result = await model.generateContent(prompt);
+        const response = result.response.text();
+
+        console.log(response, "39")
 
         const questionsArray = [];
-        for (let i = 0; i < questions; i++) {
-            const result = await model.generateContent(prompt);
-            const response = result.response.text();
-            questionsArray.push(response);
-            // const responseArray = response.choices[0].text.split("\n");
-            // const question = responseArray[0].split(":")[1].trim();
-            // const options = responseArray.slice(1).map((option) => option.split(":")[1].trim());
-            // const correctAnswer = options[0];
-            // questionsArray.push({question, options, correctAnswer, time: defaultTime});
-        }
+        // for (let i = 0; i < questions; i++) {
+        //     const result = await model.generateContent(prompt);
+        //     const response = result.response.text();
+        //     questionsArray.push(response);
+        //     // const responseArray = response.choices[0].text.split("\n");
+        //     // const question = responseArray[0].split(":")[1].trim();
+        //     // const options = responseArray.slice(1).map((option) => option.split(":")[1].trim());
+        //     // const correctAnswer = options[0];
+        //     // questionsArray.push({question, options, correctAnswer, time: defaultTime});
+        // }
 
-        return { questions: questionsArray };
+        return { questions: response };
     } catch (err: any) {
         return { error: err.message };
     }

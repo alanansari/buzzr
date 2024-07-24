@@ -49,7 +49,7 @@ const InputField = (props: {
       autoComplete={props.autoComplete}
       required={props.required || false}
       className={`${props.className} text-slate-900 my-2 rounded-lg px-4 py-3 focus:bg-[#EEEEF0] focus:outline-none focus:dark:bg-[#27272A] max-h-40 min-h-20`}
-      maxLength={20}
+      // maxLength={20}
 
     />
       :
