@@ -70,6 +70,7 @@ export default function CreateAIQuiz() {
                             name="description"
                             placeholder="Example: quiz on gravitational forces."
                             autoComplete="off"
+                            required
                             className="text-dark dark:text-white dark:bg-dark mt-1 border rounded-xl "
                             textarea={true}
                             label="Quiz questions description"
