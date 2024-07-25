@@ -4,7 +4,6 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/auth"
 import { redirect } from "next/navigation"
 import createRoom from "@/actions/CreateRoomAction"
 import SubmitButton from "@/components/SubmitButton"
-import Image from "next/image";
 import Link from "next/link"
 
 async function QuizInfoSection(props: { quizId: string }) {
@@ -57,7 +56,7 @@ async function QuizInfoSection(props: { quizId: string }) {
                             </div>
                         })
                         :
-                        <div className="h-fit w-[95%] mx-auto border border-gray border-dashed rounded-lg p-4 text-dark">
+                        <div className="h-fit w-[95%] mx-auto border border-gray border-dashed rounded-lg p-4 text-dark dark:text-white">
                             <div className="p-2 text-lg font-black text-center">No Previously Used Quizzes</div>
                             <p className="p-2 text-sm text-center">It looks like there are no previously used quizzes for this session. Start adding questions to create an engaging quiz for your students.</p>
                         </div>    

@@ -43,8 +43,6 @@ function parseQuestions(content: string) {
 
 const addQuestionsByAI = async (quizId: string,formData: FormData) => {
     try {
-        console.log("hit");
-
         const description = formData.get("description") as string;
         const questions = Number(formData.get("questions"));
         const time = Number(formData.get("time"));
@@ -71,18 +69,22 @@ const addQuestionsByAI = async (quizId: string,formData: FormData) => {
 
         const questionsArray = parseQuestions(response);
 
-        questionsArray.forEach(async (question: any) => {
-            await prisma.question.create({
-                data: {
-                    title: question.question,
-                    options: {
-                        create: question.options,
-                    },
-                    quizId: quizId,
-                    timeOut: time,
-                },
-            });
-        });
+        const questionsData = questionsArray.map((question: any) => ({
+            title: question.question,
+            options: {
+              create: question.options,
+            },
+            quizId: quizId,
+            timeOut: time,
+        }));
+
+        await prisma.$transaction(
+            questionsData.map((question: any) =>
+              prisma.question.create({
+                data: question,
+              })
+            )
+        );
 
         return { msg: "Questions added successfully", questionsArray };
     } catch (err: any) {
