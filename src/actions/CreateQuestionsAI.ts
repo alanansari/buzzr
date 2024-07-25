@@ -5,6 +5,14 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
 import { prisma } from "@/utils/prisma";
 import { redirect } from "next/navigation";
 import {GoogleGenerativeAI} from "@google/generative-ai";
+import { Ratelimit } from "@upstash/ratelimit";
+import { redis } from "@/server/upstash";
+import { headers } from "next/headers";
+
+const rateLimit = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(3,"300s"),
+});
 
 function shuffleArray(array:any) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -41,8 +49,18 @@ function parseQuestions(content: string) {
     return questions;
 }
 
-const addQuestionsByAI = async (quizId: string,formData: FormData) => {
+const addQuestionsByAI = async (formData: FormData) => {
     try {
+        if(process.env.RATELIMIT === "ON"){
+            const ip = headers().get('x-forwarded-for');
+            const {remaining, limit, success} = await rateLimit.limit(ip as string);
+      
+            if(!success) {
+              throw new Error("Rate limit reached wait for some time and try again.");
+            }
+        }
+        
+        const title = formData.get("title") as string;
         const description = formData.get("description") as string;
         const questions = Number(formData.get("questions"));
         const time = Number(formData.get("time"));
@@ -69,12 +87,34 @@ const addQuestionsByAI = async (quizId: string,formData: FormData) => {
 
         const questionsArray = parseQuestions(response);
 
+        if(questionsArray.length < questions) {
+            throw new Error("Couldn't generate enough questions. Try again with different parameters.");
+        }
+
+        const user = await prisma.user.findUnique({
+            where: {
+              email: session.user.email as string,
+            },
+        });
+
+        const quiz = await prisma.quiz.create({
+            data: {
+              title,
+              description,
+              userId: user?.id as string,
+            },
+        });
+
+        if (!quiz) {
+            throw new Error("Couldn't create quiz");
+        }
+
         const questionsData = questionsArray.map((question: any) => ({
             title: question.question,
             options: {
               create: question.options,
             },
-            quizId: quizId,
+            quizId: quiz.id,
             timeOut: time,
         }));
 
@@ -86,7 +126,7 @@ const addQuestionsByAI = async (quizId: string,formData: FormData) => {
             )
         );
 
-        return { msg: "Questions added successfully", questionsArray };
+        return { msg: "Quiz created successfully", quizId: quiz.id };
     } catch (err: any) {
         return { error: err.message };
     }

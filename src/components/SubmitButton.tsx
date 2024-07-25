@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux"
 
 const SubmitButton = (params: {
   text?: string,
+  loader?: string,
   style?: string,
   isQuiz?: boolean,
   error?: boolean
@@ -27,7 +28,7 @@ const SubmitButton = (params: {
       className="rounded-xl text-white dark:text-dark w-full bg-lprimary dark:bg-dprimary px-5 py-3 hover:cursor-pointer transition-all duration-300 ease-in-out disabled:cursor-default font-bold disabled:bg-gray dark:disabled:bg-gray"
       onClick={handleRedux}
     >
-      {(pending) ? 'Loading...' : params.text || 'Next'}
+      {(pending) ? params.loader || 'Loading...' : params.text || 'Next'}
     </button>
   )
 }

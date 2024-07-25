@@ -5,6 +5,7 @@ import { useFormStatus } from "react-dom"
 const InputField = (props: {
   type: string,
   name: string,
+  maxNum?: number,
   placeholder: string,
   autoComplete: string,
   className: string,
@@ -49,7 +50,7 @@ const InputField = (props: {
       autoComplete={props.autoComplete}
       required={props.required || false}
       className={`${props.className} text-slate-900 my-2 rounded-lg px-4 py-3 focus:bg-[#EEEEF0] focus:outline-none focus:dark:bg-[#27272A] max-h-40 min-h-20`}
-      // maxLength={20}
+      maxLength={80}
 
     />
       :
@@ -63,6 +64,8 @@ const InputField = (props: {
         required={props.required || false}
         className={`${props.style === "playerName" && "w-full border-black border-2 focus:border-blue-600 rounded-lg outline-none md:w-4/5"} text-slate-900 my-2 rounded-full px-4 py-3 ${props.style === "question" ? "w-4/5" : "w-full"}  ${props.accept && "text-white"} ${props.className} focus:bg-[#EEEEF0] focus:outline-none focus:dark:bg-[#27272A]`}
         accept={props.accept}
+        min={props.type === "number" ? 1 : undefined}
+        max={props.maxNum}
         maxLength={40}
       />
     }

@@ -6,9 +6,10 @@ import { Box, Modal } from "@mui/material";
 import Image from "next/image";
 import { useState } from "react";
 import style from "@/utils/modalStyle"
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from "react-redux";
 import { RootState } from "@/state/store";
-import addBuzzr from "@/actions/AddBuzzrAction";
 import addQuestionsByAI from "@/actions/CreateQuestionsAI";
 import { useRouter } from "next/navigation";
 
@@ -18,22 +19,13 @@ export default function CreateAIQuiz() {
     const view = useSelector((state: RootState) => state.gridListToggle.view)
 
     async function clientAction(formData: FormData) {
-        const res = await addBuzzr(formData)
-        if (res?.error) {
-            const errorMsg = res.error || "Something went wrong";
-            console.log(errorMsg)
-        }
-        else {
-            console.log("Successfully created the quiz")
-            const result = await addQuestionsByAI(res.quizId as string,formData);
+            const result = await addQuestionsByAI(formData);
             if(result?.error) {
                 const errorMsg = result.error || "Something went wrong";
-                console.log(errorMsg)
+                toast.error(errorMsg)
             } else {
-                router.push(`/admin/quiz/${res.quizId}`);
+                router.push(`/admin/quiz/${result.quizId}`);
             }
-        }
-        
     }
 
     return <>
@@ -86,6 +78,7 @@ export default function CreateAIQuiz() {
                         <div className="grid grid-cols-2 gap-x-3">
                             <InputField type="number"
                                 name="questions"
+                                maxNum={20}
                                 placeholder="Example: 15"
                                 className="text-dark dark:text-white dark:bg-dark my-2 rounded-xl mt-1 border"
                                 required
@@ -99,7 +92,7 @@ export default function CreateAIQuiz() {
                                 autoComplete="off"
                                 label="Write down default question time (in seconds)" />
                         </div>
-                        <SubmitButton text='Generate' />
+                        <SubmitButton text='Generate' loader="Generating..." />
                     </form>
                     {/* <div>Coming Soon...</div> */}
                 </div>
