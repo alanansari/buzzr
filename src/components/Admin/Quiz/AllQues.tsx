@@ -1,45 +1,82 @@
-import { prisma } from "@/utils/prisma"
-import { getServerSession } from "next-auth"
-import { authOptions } from "@/app/api/auth/[...nextauth]/auth"
-import { redirect } from "next/navigation"
+"use client"
+
 import ShowMedia from "./ShowMediaComp";
 import { revalidatePath } from "next/cache";
 import Image from "next/image";
 import AddQuesForm from "./AddQuesForm";
 import BasicModal from "@/components/Modal";
+import dltQuestion from "@/actions/DltQuesAction";
+import { toast } from "react-toastify";
+import { useEffect, useState } from "react"
+import getAllQuestion from "@/actions/GetAllQues"
 
-export default async function AllQues(props: { quizId: string }) {
-    const session = await getServerSession(authOptions);
+export default function AllQues(props: { quizId: string }) {
 
-    if (!session || !session.user) redirect("/api/auth/signin");
-    const questions = await prisma.question.findMany({
-        where: {
-            quizId: props.quizId as string,
-        },
-        include: {
-            options: true
+    const [questions, setQuestions] = useState<any[]>([])
+
+    useEffect(() => {
+        async function fetchQues() {
+            try {
+                const result: any = await getAllQuestion(props.quizId);
+                if (result.status == 200) {
+                    const ques = result?.questions?.map((res: any, index: number) => {
+                        return { ...res, order: index + 1 }
+                    })
+                    setQuestions(ques)
+                }
+            }
+            catch (err) {
+            }
         }
-    });
+        fetchQues()
+    }, [props.quizId])
 
-    async function handleDeleteQues(formData: FormData) {
-        "use server"
-        const quesId = formData.get("ques_id") as string;
+    async function clientDltAction(formData: FormData) {
+        const result = await dltQuestion(formData);
+        if (result?.error) {
+            const errorMsg = result.error || "Something went wrong";
+            toast.error(errorMsg)
+        } else {
+            toast.success("Question deleted successfully")
+        }
+    }
 
-        await prisma.question.delete({
-            where: {
-                id: quesId,
-            },
+    const [dragId, setDragId] = useState();
+
+    const handleDrag = (ev: any) => {
+        setDragId(ev.currentTarget.id);
+    };
+
+    const handleDrop = (ev: any) => {
+        const dragBox = questions.find((box: any) => box?.id === dragId);
+        const dropBox = questions.find((box: any) => box.id === ev.currentTarget.id);
+
+        const dragBoxOrder = dragBox?.order;
+        const dropBoxOrder = dropBox?.order;
+
+        const newBoxState = questions.map((box: any) => {
+            if (box.id === dragId) {
+                box.order = dropBoxOrder;
+            }
+            if (box.id === ev.currentTarget.id) {
+                box.order = dragBoxOrder;
+            }
+            return box;
         });
 
-        revalidatePath("/quiz/[quizId]");
-    }
+        setQuestions(newBoxState);
+    };
 
     return <>
         <div className="flex flex-col w-full h-[73vh] overflow-auto overflow-x-hidden">
-            {questions.length > 0 ? questions.map((ques, index) => {
+            {questions.length > 0 ? questions.sort((a, b) => a.order - b.order).map((ques: any, index) => {
                 return <div
-                    key={ques.id} className="w-full my-2 flex items-center"
+                    key={ques?.id} className="w-full my-2 flex items-center"
                     draggable
+                    onDragOver={(ev) => ev.preventDefault()}
+                    onDragStart={handleDrag}
+                    onDrop={handleDrop}
+                    id={ques?.id}
                 >
                     {/* <form action={handleDeleteQues}>
                         <input type="text" className="hidden" name="ques_id" value={ques.id} />
@@ -58,12 +95,12 @@ export default async function AllQues(props: { quizId: string }) {
                         <div className="p-3">
                             <div className="flex flex-col">
                                 <div className="flex justify-between items-center">
-                                    <p className="text-md font-semibold flex items-center w-[70%] break-words">{index + 1}. {ques.title}</p>
-                                    <p className="text-sm text-dark font-black p-1 rounded-md bg-[#dadadd] dark:text-white dark:bg-transparent w-fit">{ques.timeOut} sec</p>
+                                    <p className="text-md font-semibold flex items-center w-[70%] break-words">{ques?.order}. {ques?.title}</p>
+                                    <p className="text-sm text-dark font-black p-1 rounded-md bg-[#dadadd] dark:text-white dark:bg-transparent w-fit">{ques?.timeOut} sec</p>
                                 </div>
                             </div>
                             <div className="flex flex-col md:grid md:grid-cols-4">
-                                {ques?.options?.map((op, index) => {
+                                {ques?.options?.map((op: any, index: number) => {
                                     return (
                                         <p key={index} className="break-word text-md my-2 flex items-center">
                                             {op.isCorrect ? <Image src="/radio-btn-selected.svg" alt="option" width={25} height={25} /> : <Image src="/radio-btn.svg" alt="option" width={25} height={25} />}
@@ -74,7 +111,7 @@ export default async function AllQues(props: { quizId: string }) {
                         </div>
                         <div className="bg-[#ede9fe] dark:bg-[#332d40] p-2 px-3 rounded-b-xl">
                             <div className="flex [&>*]:text-xs [&>*]:font-semibold">
-                                <form action={handleDeleteQues}>
+                                <form action={clientDltAction}>
                                     <input type="text" className="hidden" name="ques_id" value={ques.id} />
                                     <button className="p-1 mr-1 text-red-light hover:bg-[#fccccc] rounded-md">Delete</button>
                                 </form>

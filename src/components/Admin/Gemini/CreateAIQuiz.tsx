@@ -19,13 +19,13 @@ export default function CreateAIQuiz() {
     const view = useSelector((state: RootState) => state.gridListToggle.view)
 
     async function clientAction(formData: FormData) {
-            const result = await addQuestionsByAI(formData);
-            if(result?.error) {
-                const errorMsg = result.error || "Something went wrong";
-                toast.error(errorMsg)
-            } else {
-                router.push(`/admin/quiz/${result.quizId}`);
-            }
+        const result = await addQuestionsByAI(formData);
+        if (result?.error) {
+            const errorMsg = result.error || "Something went wrong";
+            toast.error(errorMsg)
+        } else {
+            router.push(`/admin/quiz/${result.quizId}`);
+        }
     }
 
     return <>
