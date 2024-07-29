@@ -1,11 +1,18 @@
 import SessionProvider from "@/components/SessionProvider";
-import { redirect } from "next/navigation";
+import { signIn } from "next-auth/react";
 import ReduxProvider from "@/state/ReduxProvider";
 import ClientImage from "@/components/ClientImage";
+import { ToastContainer } from "react-toastify";
+import type { Metadata } from "next";
 
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/auth";
 import Link from "next/link";
+
+export const metadata : Metadata = {
+  title: "Buzzr Admin",
+  description: "Buzzr Admin Panel",
+};
 
 export default async function RootLayout({
   children,
@@ -14,7 +21,7 @@ export default async function RootLayout({
 }>) {
   const session = await getServerSession(authOptions);
   if(!session||!session.user){
-    redirect('/api/auth/signin');
+    signIn("google", { callbackUrl: "/admin" });
   }
   return (
       <>
@@ -35,6 +42,7 @@ export default async function RootLayout({
                   </Link>
                 </div>
             {children}
+            <ToastContainer />
             </div>
           </ReduxProvider>
         </SessionProvider>
