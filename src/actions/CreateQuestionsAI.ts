@@ -110,13 +110,14 @@ const addQuestionsByAI = async (formData: FormData) => {
             throw new Error("Couldn't create quiz");
         }
 
-        const questionsData = questionsArray.map((question: any) => ({
+        const questionsData = questionsArray.map((question: any, index:number) => ({
             title: question.question,
             options: {
               create: question.options,
             },
             quizId: quiz.id,
             timeOut: time,
+            order:index+1
         }));
 
         await prisma.$transaction(
