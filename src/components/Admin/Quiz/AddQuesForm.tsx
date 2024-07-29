@@ -76,7 +76,8 @@ const AddQuesForm = (props: { quizId: string, question?: Question }) => {
                 autoComplete="off"
                 label="Question"
                 labelClass="text-lg"
-                fieldValue={question?.title} />
+                fieldValue={question?.title}
+                maxLength={150} />
             <div className="flex flex-col mb-3">
                 <label className="text-sm text-dark dark:text-white mb-0">Upload Image / Video / Audio</label>
                 <input type="file" accept="image/*" className="text-dark dark:text-white dark:bg-dark my-2 rounded-xl mt-1 border border-dark dark:border-white focus:bg-[#EEEEF0] focus:outline-none focus:dark:bg-[#27272A] px-4 py-2 " name="file" placeholder="Select file" autoComplete="off" ref={fileInputRef} onChange={handleFile} />

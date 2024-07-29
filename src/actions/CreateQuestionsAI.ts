@@ -8,6 +8,7 @@ import {GoogleGenerativeAI} from "@google/generative-ai";
 import { Ratelimit } from "@upstash/ratelimit";
 import { redis } from "@/server/upstash";
 import { headers } from "next/headers";
+import { revalidatePath } from "next/cache";
 
 const rateLimit = new Ratelimit({
   redis,
@@ -127,6 +128,7 @@ const addQuestionsByAI = async (formData: FormData) => {
             )
         );
 
+        revalidatePath("/admin", "page");
         return { msg: "Quiz created successfully", quizId: quiz.id };
     } catch (err: any) {
         return { error: err.message };

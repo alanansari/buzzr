@@ -6,6 +6,7 @@ const InputField = (props: {
   type: string,
   name: string,
   maxNum?: number,
+  maxLength?: number,
   placeholder: string,
   autoComplete: string,
   className: string,
@@ -15,7 +16,7 @@ const InputField = (props: {
   textarea?: boolean,
   onTitleChange?: any,
   label?: string,
-  labelClass?: string
+  labelClass?: string,
   fieldValue?: string
 }) => {
   const { pending } = useFormStatus()
@@ -50,8 +51,7 @@ const InputField = (props: {
       autoComplete={props.autoComplete}
       required={props.required || false}
       className={`${props.className} text-slate-900 my-2 rounded-lg px-4 py-3 focus:bg-[#EEEEF0] focus:outline-none focus:dark:bg-[#27272A] max-h-40 min-h-20`}
-      maxLength={80}
-
+      maxLength={props.maxLength || 100}
     />
       :
       <input
@@ -66,7 +66,7 @@ const InputField = (props: {
         accept={props.accept}
         min={props.type === "number" ? 1 : undefined}
         max={props.maxNum}
-        maxLength={40}
+        maxLength={props.maxLength || 50}
       />
     }
   </div>
