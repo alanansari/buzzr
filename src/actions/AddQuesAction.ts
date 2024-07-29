@@ -109,6 +109,11 @@ export default async function addQues(formData: FormData) {
         },
       });
     } else {
+
+      const total_questions = await prisma.question.findMany({
+        where: { quizId: quizId },
+      });
+
       await prisma.question.create({
         data: {
           title,
@@ -119,6 +124,7 @@ export default async function addQues(formData: FormData) {
           timeOut: parseInt(time) || 15,
           media: fileLink,
           mediaType: fileType,
+          order: total_questions.length+1,
         },
       });
     }

@@ -1,7 +1,6 @@
 "use client"
 
 import ShowMedia from "./ShowMediaComp";
-import { revalidatePath } from "next/cache";
 import Image from "next/image";
 import AddQuesForm from "./AddQuesForm";
 import BasicModal from "@/components/Modal";
@@ -9,6 +8,7 @@ import dltQuestion from "@/actions/DltQuesAction";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react"
 import getAllQuestion from "@/actions/GetAllQues"
+import reOrderQuestion from "@/actions/ReorderQuesAction";
 
 export default function AllQues(props: { quizId: string }) {
 
@@ -19,10 +19,7 @@ export default function AllQues(props: { quizId: string }) {
             try {
                 const result: any = await getAllQuestion(props.quizId);
                 if (result.status == 200) {
-                    const ques = result?.questions?.map((res: any, index: number) => {
-                        return { ...res, order: index + 1 }
-                    })
-                    setQuestions(ques)
+                    setQuestions(result.questions)
                 }
             }
             catch (err) {
@@ -41,30 +38,39 @@ export default function AllQues(props: { quizId: string }) {
         }
     }
 
-    const [dragId, setDragId] = useState();
+    const [dragId, setDragId] = useState("");
 
     const handleDrag = (ev: any) => {
         setDragId(ev.currentTarget.id);
     };
 
-    const handleDrop = (ev: any) => {
-        const dragBox = questions.find((box: any) => box?.id === dragId);
-        const dropBox = questions.find((box: any) => box.id === ev.currentTarget.id);
+    const handleDrop = async (ev: any) => {
 
-        const dragBoxOrder = dragBox?.order;
-        const dropBoxOrder = dropBox?.order;
-
-        const newBoxState = questions.map((box: any) => {
-            if (box.id === dragId) {
-                box.order = dropBoxOrder;
-            }
-            if (box.id === ev.currentTarget.id) {
-                box.order = dragBoxOrder;
-            }
-            return box;
+        const dropId = ev.currentTarget?.id;
+        reOrderQuestion({
+            dragQuesId: dragId,
+            dropQuesId: dropId
         });
+        // if (result?.status == 200) {
 
-        setQuestions(newBoxState);
+            const dragBox = questions.find((box: any) => box?.id === dragId);
+            const dropBox = questions.find((box: any) => box.id === dropId);
+
+            const dragBoxOrder = dragBox?.order;
+            const dropBoxOrder = dropBox?.order;
+
+            const newBoxState = questions.map((box: any) => {
+                if (box.id === dragId) {
+                    box.order = dropBoxOrder;
+                }
+                if (box.id === dropId) {
+                    box.order = dragBoxOrder;
+                }
+                return box;
+            });
+
+            setQuestions(newBoxState);
+        // }
     };
 
     return <>
@@ -78,10 +84,6 @@ export default function AllQues(props: { quizId: string }) {
                     onDrop={handleDrop}
                     id={ques?.id}
                 >
-                    {/* <form action={handleDeleteQues}>
-                        <input type="text" className="hidden" name="ques_id" value={ques.id} />
-                        <button className="p-1 mr-1 text-red-light hover:bg-[#fccccc] rounded-md">Delete</button>
-                    </form> */}
                     <div className="p-2 cursor-grab hidden md:block">
                         <Image
                             src="/selection-indicator.svg"

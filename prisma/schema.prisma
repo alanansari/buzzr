@@ -5,6 +5,7 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model Account {
@@ -83,6 +84,7 @@ model Question {
   options   Option[]
   answers   PlayerAnswer[]
   quiz      Quiz           @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  order     Int            @default(1)
 }
 
 model Option {
