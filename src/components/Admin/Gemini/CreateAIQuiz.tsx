@@ -79,12 +79,12 @@ export default function CreateAIQuiz() {
                         <div className="grid grid-cols-2 gap-x-3">
                             <InputField type="number"
                                 name="questions"
-                                maxNum={20}
+                                maxNum={15}
                                 placeholder="Example: 15"
                                 className="text-dark dark:text-white dark:bg-dark my-2 rounded-xl mt-1 border"
                                 required
                                 autoComplete="off"
-                                label="Write number of quiz questions." />
+                                label="Write number of quiz questions.(max 15)" />
                             <InputField type="number"
                                 name="time"
                                 placeholder="Example: 15"
