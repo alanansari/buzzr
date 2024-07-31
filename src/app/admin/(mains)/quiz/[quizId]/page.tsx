@@ -2,7 +2,6 @@ import BasicModal from "@/components/Modal"
 import AddQuesForm from "@/components/Admin/Quiz/AddQuesForm"
 import AllQues from "@/components/Admin/Quiz/AllQues"
 import QuizInfoSection from "@/components/Admin/Quiz/QuizInfoSection"
-import { ToastContainer } from "react-toastify"
 import { prisma } from "@/utils/prisma"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth"
@@ -50,7 +49,6 @@ async function Quiz({ params }: { params: { quizId: string } }) {
                     <AllQues quizId={params.quizId} />
                 </div>
             </div>
-            <ToastContainer />
         </div>
     )
 }

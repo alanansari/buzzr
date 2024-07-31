@@ -1,8 +1,13 @@
 import { Inter,IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 import ReduxProvider from "@/state/ReduxProvider";
-import ThemeToggle from "@/components/ThemeToggle";
 import Footer from "@/components/Footer";
+import type { Metadata } from "next";
+
+export const metadata : Metadata = {
+  title: "Buzzr",
+  description: "Buzzr is a platform for hosting quizzes and games",
+};
 
 const inter = Inter({ subsets: ["latin"] });
 
