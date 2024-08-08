@@ -129,7 +129,7 @@ function Barchart(params: { result: number[], options: Option[] }) {
                     const isCorrect = params.options[index].isCorrect === true;
                     return <div className="flex flex-col" key={index}>
                         <p className="flex flex-row items-center justify-center w-full">{opt}
-                            {isCorrect ? <TiTick size={20} color="#fff" className="text-white font-extrabold ml-2" /> : <RxCross2 size={20} color="#fff" className="text-white font-extrabold ml-2" />}</p>
+                            {isCorrect ? <TiTick size={20} color="#000"  className="text-dark dark:text-white font-extrabold ml-2" /> : <RxCross2 size={20} color="#000"  className="text-white font-extrabold ml-2" />}</p>
                         <div key={index} className="w-20 border-t">
                             <p className="text-sm dark:text-white font-semibold w-full text-center">{index}. {params.options[index].title.length > 15 ? `${params.options[index].title.slice(0, 15)}...` : params.options[index].title} option</p>
                         </div>

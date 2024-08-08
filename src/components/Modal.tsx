@@ -7,6 +7,7 @@ import style from "@/utils/modalStyle";
 
 export default function BasicModal(props: {
   btnTitle: string,
+  btnStyle?: string,
   children: React.ReactNode,
   isEdit?: boolean
 }) {
@@ -16,7 +17,7 @@ export default function BasicModal(props: {
 
   return <>
     <div className="flex justify-center">
-      <button onClick={handleOpen} className={`${props.isEdit ? "p-1 text-lprimary mr-1 hover:bg-[#ddd5ff] rounded-md" : "text-white font-sm bg-dark-bg rounded-lg w-full  mb-2 mx-auto md:ml-5 p-2"}`}>{props.btnTitle}</button>
+      <button onClick={handleOpen} className={`${props.btnStyle?props.btnStyle:(props.isEdit ? "p-1 text-lprimary mr-1 hover:bg-[#ddd5ff] rounded-md" : "text-white font-sm bg-dark-bg rounded-lg w-full  mb-2 mx-auto md:ml-5 p-2")}`}>{props.btnTitle}</button>
     </div>
 
     <Modal
