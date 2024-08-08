@@ -39,7 +39,7 @@ const Links = [
 
 const Footer = () => {
   return (
-    <div className="flex p-2 md:px-8 justify-start z-50 items-center text-sm text-[#94959c] dark:text-off-white w-fit md:w-full absolute bottom-0 right-6 md:right-0">
+    <div className="flex p-2 md:px-8 justify-start z-50 items-center text-sm text-[#94959c] dark:text-off-white w-fit md:w-full fixed bottom-0 right-3 md:right-0">
       {Links.map((link, index) => (
         <Link href={link.link} key={index} target="_blank">
           <div className="hidden md:flex items-center justify-center mr-2">

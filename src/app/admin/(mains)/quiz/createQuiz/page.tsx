@@ -38,7 +38,7 @@ export default function CreateQuiz() {
                     <p className="mt-4 dark:text-white leading-[40px] sm:leading-[48px] md:leading-[56px] text-3xl sm:text-4xl md:text-5xl font-extrabold">Give your quiz title<br /> and description</p>
                     <CreateBuzzrForm setTitle={setTitle} />
                 </div>
-                <div className="my-12 w-1/2 bg-light-bg dark:bg-dark-bg p-8 rounded-3xl hidden md:block">
+                <div className=" mt-4 w-1/2 bg-light-bg dark:bg-dark-bg p-8 rounded-3xl hidden md:block">
                     <p className="text-3xl italic font-extrabold dark:text-white mb-6 w-11/12">{title ? title : "Quiz Title"}</p>
                     <div className="flex flex-row gap-4 flex-wrap">
                         {profiles.map((file, index) => {

@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { RootState } from "@/state/store";
 import { useSelector, useDispatch } from "react-redux";
 import { navToggle, setNavToggle } from "@/state/admin/navtoggleSlice";
+import BasicModal from "../Modal";
 
 const NavLinks = [
   { href: "/admin", label: "Quizzes" },
@@ -68,12 +69,17 @@ export default function Navbar() {
           <span className="text-dark text-md dark:text-white">{session?.user?.name}</span>
         </div>
         <div className="p-2 px-4">
-          <button
-            className="text-sm text-white dark:text-dark dark:font-bold rounded-lg py-2 px-4 my-2 bg-red-light dark:bg-red-dark w-full"
-            onClick={() => signOut()}
-          >
-            Sign out
-          </button>
+          <BasicModal btnTitle="Sign out" btnStyle="text-sm text-white dark:text-dark dark:font-bold rounded-lg py-2 px-4 my-2 bg-red-light dark:bg-red-dark w-full">
+            <div className="text-center">
+              <p className="text-dark dark:text-white">Are you sure you want to sign out?</p>
+              <button
+                className="text-sm text-white dark:text-dark dark:font-bold rounded-lg py-2 px-4 my-2 bg-red-light dark:bg-red-dark w-full"
+                onClick={() => signOut()}
+              >
+                Sign out
+              </button>
+            </div>
+          </BasicModal>
           <div className="text-xs text-off-dark dark:text-off-white mt-2">Licenced under &copy; Software Incubator
             <br />
             <Link href="#" className="underline underline-offset-1">Donate Us</Link>
