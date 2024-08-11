@@ -10,10 +10,13 @@ import { useEffect, useState } from "react"
 import getAllQuestion from "@/actions/GetAllQues"
 import reOrderQuestion from "@/actions/ReorderQuesAction";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
+import ConfirmationModal from "../ConfirmationModal";
 
 export default function AllQues(props: { quizId: string }) {
 
     const [questions, setQuestions] = useState<any[]>([])
+    const [delQuesModalOpen, setDelQuesModalOpen] = useState(false);
+    const [delQuesId, setDelQuesId] = useState("");
 
     useEffect(() => {
         async function fetchQues() {
@@ -29,14 +32,15 @@ export default function AllQues(props: { quizId: string }) {
         fetchQues()
     }, [props.quizId])
 
-    async function clientDltAction(formData: FormData) {
-        const result = await dltQuestion(formData);
+    async function clientDltAction(quesId: string) {
+        const result = await dltQuestion(quesId);
         if (result?.error) {
             const errorMsg = result.error || "Something went wrong";
             toast.error(errorMsg)
         } else {
             toast.success("Question deleted successfully")
-            const newQuestions = questions.filter((ques) => ques.id !== formData.get("ques_id"));
+            setDelQuesModalOpen(false);
+            const newQuestions = questions.filter((ques) => ques.id !== quesId);
             setQuestions(newQuestions)
         }
     }
@@ -136,10 +140,16 @@ export default function AllQues(props: { quizId: string }) {
                                             </div>
                                             <div className="bg-[#ede9fe] dark:bg-[#332d40] p-2 px-3 rounded-b-xl">
                                                 <div className="flex [&>*]:text-xs [&>*]:font-semibold">
-                                                    <form action={clientDltAction}>
+                                                    {/* <form action={clientDltAction}>
                                                         <input type="text" className="hidden" name="ques_id" value={ques.id} />
                                                         <button className="p-1 mr-1 text-red-light hover:bg-[#fccccc] rounded-md">Delete</button>
-                                                    </form>
+                                                    </form> */}
+                                                    <button className="p-1 mr-1 text-red-light hover:bg-[#fccccc] rounded-md"
+                                                        onClick={() => {
+                                                            setDelQuesId(ques.id);
+                                                            setDelQuesModalOpen(true);
+                                                        }}
+                                                    >Delete</button>
                                                     <BasicModal isEdit={true} btnTitle="Edit Question">
                                                         <AddQuesForm quizId={props.quizId} question={ques} />
                                                     </BasicModal>
@@ -169,5 +179,11 @@ export default function AllQues(props: { quizId: string }) {
                 )}
             </Droppable>
         </DragDropContext>
+        <ConfirmationModal 
+            open={delQuesModalOpen} 
+            setOpen={setDelQuesModalOpen} 
+            onClick={()=>{clientDltAction(delQuesId)}}
+            desc="Are you sure you want to delete this question?" 
+        />
     </>
 }

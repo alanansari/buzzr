@@ -128,7 +128,7 @@ export default async function addQues(formData: FormData) {
         },
       });
     }
-    revalidatePath("/quiz/[quizId]");
+    revalidatePath(`/quiz/${quizId}`);
   } catch (err: any) {
     return {
       error: err.message,

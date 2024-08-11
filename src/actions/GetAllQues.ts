@@ -4,7 +4,6 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
 import { prisma } from "@/utils/prisma";
 import { redirect } from "next/navigation";
-import { revalidatePath } from "next/cache";
 
 async function getAllQuestion(quizId: string) {
   try {

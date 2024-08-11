@@ -12,7 +12,7 @@ import { resetTimer } from "@/state/timer/timerSlice";
 import { RxCross2 } from "react-icons/rx";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import EndGame from "./Game/EndGame";
+import ConfirmationModal from "./ConfirmationModal";
 
 const Lobby = (params: {
     roomId: string,
@@ -130,7 +130,7 @@ const Lobby = (params: {
             <button className="mt-8 rounded-xl text-white dark:text-dark bg-lprimary dark:bg-dprimary px-5 py-3 hover:cursor-pointer transition-all duration-300 ease-in-out disabled:cursor-default font-bold disabled:bg-gray dark:disabled:bg-gray w-64 sm:w-96 absolute bottom-10" disabled={players.length === 0 || load} onClick={handleGameStart} >{load === true ? "Loading..." : "Start"}</button>
         </div>
 
-        <EndGame open={endGame} setOpen={setEndGame} onClick={handleStopQuiz} />
+        <ConfirmationModal open={endGame} setOpen={setEndGame} onClick={handleStopQuiz} desc="Do you really want to stop this quiz session ? This action cannot be undone." />
     </>
 }
 

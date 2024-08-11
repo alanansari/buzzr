@@ -43,7 +43,7 @@ async function Quiz({ params }: { params: { quizId: string } }) {
                             <SubmitButton text="Host quiz" isQuiz={true} error={(quiz?.questions.length === 0)} />
                         </form>
                     </div>
-                    <BasicModal btnTitle="+Add Question">
+                    <BasicModal btnTitle="+ Add Question">
                         <AddQuesForm quizId={params.quizId} />
                     </BasicModal>
                     <AllQues quizId={params.quizId} />

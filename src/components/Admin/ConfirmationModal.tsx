@@ -2,7 +2,12 @@ import { Box, Modal } from "@mui/material"
 import style from "@/utils/modalStyle"
 import ClientImage from "@/components/ClientImage"
 
-export default function EndGame({ open, setOpen, onClick }: { open: boolean, setOpen: any, onClick: any }) {
+export default function ConfirmationModal({ open, setOpen, onClick, desc }: { 
+    open: boolean,
+    setOpen: any,
+    onClick: any,
+    desc?: string
+}) {
     return <>
         <Modal
             open={open}
@@ -14,8 +19,7 @@ export default function EndGame({ open, setOpen, onClick }: { open: boolean, set
                 <div className="p-6 flex flex-col justify-center items-center">
                     <ClientImage props={{ src: "/endGame.svg", alt: "End game", width: 140, height: 140 }} />
                     <p className="text-xl font-bold mb-2 dark:text-white">Are you sure?</p>
-                    <p className="text-[#4E4E56] mb-4 dark:text-white text-center">Do you really want to stop this quiz session ? This action cannot be undone.</p>
-
+                    <p className="text-[#4E4E56] mb-4 dark:text-white text-center">{desc}</p>
                     <div className="w-full grid md:grid-cols-2 md:gap-x-4 gap-y-4 md:gap-y-0">
                         <button onClick={() => { setOpen(false) }} className="text-white bg-red-light rounded-lg py-2">
                             Cancel
@@ -25,7 +29,6 @@ export default function EndGame({ open, setOpen, onClick }: { open: boolean, set
                         </button>
                     </div>
                 </div>
-                {/* {props.children} */}
             </Box>
         </Modal>
     </>
