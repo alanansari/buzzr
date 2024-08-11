@@ -36,6 +36,8 @@ export default function AllQues(props: { quizId: string }) {
             toast.error(errorMsg)
         } else {
             toast.success("Question deleted successfully")
+            const newQuestions = questions.filter((ques) => ques.id !== formData.get("ques_id"));
+            setQuestions(newQuestions)
         }
     }
 
@@ -146,17 +148,6 @@ export default function AllQues(props: { quizId: string }) {
                                             </div>
                                         </div>
                                     </div>
-                                    // <div
-                                    //     ref={provided.innerRef}
-                                    //     {...provided.draggableProps}
-                                    //     {...provided.dragHandleProps}
-                                    //     style={getItemStyle(
-                                    //         snapshot.isDragging,
-                                    //         provided.draggableProps.style
-                                    //     )}
-                                    // >
-                                    //     {item.content}
-                                    // </div>
                                 )}
                             </Draggable>
                         )) :
