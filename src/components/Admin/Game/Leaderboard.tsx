@@ -34,7 +34,7 @@ export default function LeaderBoard(props: any) {
                     return <div key={index} className={`flex md:flex-col md:justify-center items-center w-full md:w-[25vw] p-2 md:p-4 my-2 rounded-lg border-2 [&>*]:my-1 ${(index == 0) ? 'md:order-2 order-0 border-yellow-500 ' : (index == 1) ? 'md:order-1 order-0 border-gray' : (index == 2) ? 'md:order-3 order-0 border-[#ec7070e8]' : ''}`}>
                         {index == 0 ? <span className="text-xl md:text-3xl overflow-hidden text-[#F2AB53]">1<sup className="bg-gradient-to-b from-[#FFFF00] to-[#FFA800] text-transparent bg-clip-text">st</sup></span> : index == 1 ? <span className="text-xl md:text-3xl overflow-hidden bg-gradient-to-b from-[#27272A] to-[#A6A6A6] text-transparent bg-clip-text">2<sup className="bg-gradient-to-b from-[#27272A] to-[#A6A6A6] text-transparent bg-clip-text">nd</sup></span> : index == 2 ? <span className="text-xl md:text-3xl overflow-hidden bg-gradient-to-b from-[#EC7070F0] to-[#6D1E1EE5] text-transparent bg-clip-text">3<sup className="bg-gradient-to-b from-[#EC7070F0] to-[#6D1E1EE5] text-transparent bg-clip-text">rd</sup></span> : `#${index + 1}`}
                         <div className="flex flex-row items-center gap-x-2 ml-3">
-                            <Image src={lead.Player.profilePic || "/avatar-1577909_1280.webp"} className="w-12 h-12 rounded-full" width={50} height={50} alt="profile pic" />
+                            <Image src={lead.Player.profilePic || "images/avatar-1577909_1280.webp"} className="w-12 h-12 rounded-full" width={50} height={50} alt="profile pic" />
                             <p className="text-base md:text-xl font-black break-words md:w-fit w-[40%]">{lead.Player.name}</p>
                         </div>
                         <p className="text-xs md:text-sm text-off-dark dark:text-off-white ml-auto md:ml-0">Total Points: {lead.score}</p>
@@ -46,7 +46,7 @@ export default function LeaderBoard(props: any) {
                     return <div key={index} className="flex items-center w-full py-2 px-6 bg-white rounded-lg">
                         <span className="text-3xl mr-3">{index + 4}</span>
                         <div className="flex flex-row items-center gap-x-2 z-20">
-                            <Image src={lead.Player.profilePic || "/avatar-1577909_1280.webp"} className="w-12 h-12 rounded-full" width={50} height={50} alt="profile pic" />
+                            <Image src={lead.Player.profilePic || "images/avatar-1577909_1280.webp"} className="w-12 h-12 rounded-full" width={50} height={50} alt="profile pic" />
                             <p>{lead.Player.name}</p>
                         </div>
                         <p className="ml-auto">{lead.score}</p>

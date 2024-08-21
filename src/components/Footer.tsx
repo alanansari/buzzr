@@ -6,34 +6,29 @@ import ThemeToggle from "./ThemeToggle"
 
 const Links = [
   {
-    name: "Donate",
-    link: "#",
-    icon: "/donate.svg",
-  },
-  {
     name: "Instagram",
     link: "https://www.instagram.com/_buzzr/",
-    icon: "/instagram.svg",
+    icon: "images/instagram.svg",
   },
   {
     name: "Discord",
     link: "#",
-    icon: "/discord.svg",
+    icon: "images/discord.svg",
   },
   {
     name: "Youtube",
     link: "https://www.youtube.com/@BuzznoldBuzzenegger",
-    icon: "/youtube.svg",
+    icon: "images/youtube.svg",
   },
   {
     name: "Github",
     link: "https://github.com/alanansari/buzzr",
-    icon: "/github.svg",
+    icon: "images/github.svg",
   },
   {
     name: "Software Incubator",
     link: "https://silive.in/",
-    icon: "/incubator.svg",
+    icon: "images/incubator.svg",
   }
 ]
 

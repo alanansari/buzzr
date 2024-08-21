@@ -3,6 +3,7 @@ import Image from 'next/image';
 import GamePage from '@/components/Player/GamePage';
 import { GameSession } from '@prisma/client';
 import ValidatePlayer from '@/components/Player/ValidatePlayer';
+import ClientImage from '@/components/ClientImage';
 
 const page = async ({ params }: { params: { playerId: string } }) => {
 
@@ -48,11 +49,14 @@ const page = async ({ params }: { params: { playerId: string } }) => {
         <>
             <ValidatePlayer playerId={player.id} />
             <div className="p-4 pb-2 flex justify-between">
-                <Image
-                    src="/logo.svg"
-                    width={80}
-                    height={80}
-                    alt="Logo"
+                <ClientImage
+                    props={{
+                        src: "images/logo.svg",
+                        darksrc: "images/logo-dark.svg",
+                        alt: "Buzzr Logo",
+                        width: 80,
+                        height: 80
+                    }}
                 />
             </div>
             <GamePage player={player} game={game as GameSession} />

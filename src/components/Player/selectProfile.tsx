@@ -14,7 +14,7 @@ export default function SelectProfile(props: {
 }) {
 
     const profiles = [
-        "/player_profile/profile1.png", "/player_profile/profile2.png", "/player_profile/profile3.png", "/player_profile/profile4.png", "/player_profile/profile5.jpg", "/player_profile/profile6.png", "/player_profile/profile7.jpg", "/player_profile/profile9.jpg", "/player_profile/profile10.jpg", "/player_profile/profile11.jpg", "/player_profile/profile12.png"
+        "images/player_profile/profile1.png", "images/player_profile/profile2.png", "images/player_profile/profile3.png", "images/player_profile/profile4.png", "images/player_profile/profile5.jpg", "images/player_profile/profile6.png", "images/player_profile/profile7.jpg", "images/player_profile/profile9.jpg", "images/player_profile/profile10.jpg", "images/player_profile/profile11.jpg", "images/player_profile/profile12.png"
     ]
 
     const [avatar, setAvatar] = useState({

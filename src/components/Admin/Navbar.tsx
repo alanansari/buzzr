@@ -32,8 +32,8 @@ export default function Navbar() {
       <div className="flex justify-center items-center md:hidden p-5 mb-2 border-b border-gray">
       <ClientImage
         props={{
-            src: "/logo.svg",
-            darksrc: "/logo-dark.svg",
+            src: "images/logo.svg",
+            darksrc: "images/logo-dark.svg",
             alt: "Buzzr Logo",
             width: 90,
             height: 90
@@ -60,7 +60,7 @@ export default function Navbar() {
       <div className="mt-auto mb-2 pt-6 border-t border-t-gray">
         <div className="flex items-center p-2 px-4 hover:cursor-pointer hover:bg-card-light dark:hover:bg-card-dark rounded-md">
           <Image
-            src={session?.user?.image || "/avatar-1577909_1280.webp"}
+            src={session?.user?.image || "images/avatar-1577909_1280.webp"}
             className="rounded-full mr-2"
             alt="Profile Picture"
             width={40}

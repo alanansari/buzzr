@@ -2,8 +2,7 @@ import { prisma } from "@/utils/prisma"
 import SetLocalItem from "@/components/Player/setLocalItem"
 import ResetReduxStates from "@/components/Player/ResetReduxStates"
 import JoinRoomForm from "@/components/Player/Setup/JoinRoomForm"
-import Image from "next/image"
-import BackNavButton from "@/components/BackNavButton"
+import ClientImage from "@/components/ClientImage"
 
 async function JoinRoom({ params }: { params: { playerId: string } }) {
 
@@ -30,11 +29,14 @@ async function JoinRoom({ params }: { params: { playerId: string } }) {
         <SetLocalItem mapKey='playerId' value={params.playerId} />
         <ResetReduxStates />
         <div className="p-4 flex justify-between">
-            <Image
-            src="/logo.svg"
-            width={80}
-            height={80}
-            alt="Logo"
+            <ClientImage
+                props={{
+                    src: "images/logo.svg",
+                    darksrc: "images/logo-dark.svg",
+                    alt: "Buzzr Logo",
+                    width: 80,
+                    height: 80
+                }}
             />
         </div>
         <div className="w-full h-[81vh] flex gap-4 px-4 [&>*]:bg-white dark:[&>*]:bg-dark [&>*]:rounded-xl">

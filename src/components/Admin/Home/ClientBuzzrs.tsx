@@ -43,8 +43,8 @@ export default function ClientBuzzr({ quizzes }: { quizzes: any }) {
                 <div className="h-full w-full flex gap-x-4 justify-center items-center">
                     <ClientImage
                         props={{
-                            src: "/add.svg",
-                            darksrc: "/add-dark.svg",
+                            src: "images/add.svg",
+                            darksrc: "images/add-dark.svg",
                             alt: "Create Quiz",
                             width: 45,
                             height: 45,

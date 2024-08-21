@@ -113,7 +113,7 @@ export default function AllQues(props: { quizId: string }) {
                                     >
                                         <div className="p-2 cursor-grab hidden md:block">
                                             <Image
-                                                src="/selection-indicator.svg"
+                                                src="images/selection-indicator.svg"
                                                 alt="selection-indicator"
                                                 width={20}
                                                 height={20}
@@ -160,7 +160,7 @@ export default function AllQues(props: { quizId: string }) {
                             <div className="border-2 border-gray rounded-2xl border-dashed w-[95%] p-6 py-16 mt-8 mx-auto flex flex-col justify-center items-center">
                                 <div className="w-full py-2 flex justify-center">
                                     <Image
-                                        src="/no-questions.svg"
+                                        src="images/no-questions.svg"
                                         alt="no-questions"
                                         width={200}
                                         height={200}

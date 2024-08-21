@@ -35,7 +35,7 @@ export default function CreateAIQuiz() {
         >
             <div className="h-full w-full flex gap-x-4 justify-center items-center">
                 <Image
-                    src="/AIQuiz.svg"
+                    src="images/AIQuiz.svg"
                     alt="AI Quiz"
                     width={45}
                     height={45}

@@ -60,7 +60,7 @@ const QuestionAndResult = (params: {
 
                         <div className="flex gap-2 items-center">
                             <Image
-                                src="/SI.svg"
+                                src="images/SI.svg"
                                 width={48}
                                 height={48}
                                 alt="Logo"
@@ -86,8 +86,8 @@ const QuestionAndResult = (params: {
                 </div> : <div className="w-full p-6 flex flex-col">
                     <div className="flex flex-col justify-center items-center">
                         <Image
-                            src={`${params.status === "correct" ? "/correct.svg"
-                                : params.status === "incorrect" ? "/incorrect.svg" : "/timesOut.svg"}`}
+                            src={`${params.status === "correct" ? "images/correct.svg"
+                                : params.status === "incorrect" ? "images/incorrect.svg" : "images/timesOut.svg"}`}
                             width={160}
                             height={160}
                             alt="Logo"

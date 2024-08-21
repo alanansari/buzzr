@@ -19,8 +19,8 @@ function Player() {
         <div className="p-4 flex justify-between">
             <ClientImage
                 props={{
-                    src: "/logo.svg",
-                    darksrc: "/logo-dark.svg",
+                    src: "images/logo.svg",
+                    darksrc: "images/logo-dark.svg",
                     alt: "Buzzr Logo",
                     width: 80,
                     height: 80
@@ -36,8 +36,8 @@ function Player() {
                 <div className="flex flex-col justify-center items-center">
                     <ClientImage
                         props={{
-                            src: "/top-cards.svg",
-                            darksrc: "/top-cards-dark.svg",
+                            src: "images/top-cards.svg",
+                            darksrc: "images/top-cards-dark.svg",
                             alt: "Top Card",
                             width: 350,
                             height: 350
@@ -46,7 +46,7 @@ function Player() {
                     <div className="flex items-center w-[105%] my-2 p-1 px-2 border dark:border-white rounded-lg">
                         <span className="text-lg font-bold mr-2 text-dark dark:text-white">2<sup>nd</sup></span>
                         <Image
-                            src={`${data?.image ? data.image : "/player_profile/profile1.png"}`}
+                            src={`${data?.image ? data.image : "images/player_profile/profile1.png"}`}
                             alt="Card 2"
                             width={50}
                             height={50}
@@ -57,8 +57,8 @@ function Player() {
                     </div>
                     <ClientImage
                         props={{
-                            src: "/bottom-cards.svg",
-                            darksrc: "/bottom-cards-dark.svg",
+                            src: "images/bottom-cards.svg",
+                            darksrc: "images/bottom-cards-dark.svg",
                             alt: "Top Card",
                             width: 350,
                             height: 350

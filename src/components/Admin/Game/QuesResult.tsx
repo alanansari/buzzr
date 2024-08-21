@@ -64,7 +64,7 @@ export default function QuesResult(props: any) {
                                 return <div className="flex justify-between items-center mb-3 text-dark dark:text-white" key={index}>
                                     <div className="flex gap-x-3 items-center">
                                         <span>{index + 1}. </span>
-                                        <span> <Image src={lead.Player.profilePic || "/avatar-1577909_1280.webp"} className="w-12 h-12 rounded-full" width={40} height={40} alt="profile pic" /></span>
+                                        <span> <Image src={lead.Player.profilePic || "images/avatar-1577909_1280.webp"} className="w-12 h-12 rounded-full" width={40} height={40} alt="profile pic" /></span>
                                         <span className="font-bold">{lead.Player.name}</span>
                                     </div>
                                     <p>{lead.score}</p>

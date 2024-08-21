@@ -8,8 +8,8 @@ export default function Home() {
         <Link href="/">
         <ClientImage
             props={{
-                src: "/logo.svg",
-                darksrc: "/logo-dark.svg",
+                src: "images/logo.svg",
+                darksrc: "images/logo-dark.svg",
                 alt: "Buzzr Logo",
                 width: 80,
                 height: 80

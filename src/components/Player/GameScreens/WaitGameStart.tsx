@@ -19,7 +19,7 @@ const WaitGameStart = (params: {
           <h2 className="text-sm mt-8 p-2 dark:text-white">You&apos;ve joined as</h2>
           <div className='flex justify-between items-center w-fit gap-2 rounded-full p-3 bg-off-white dark:bg-off-dark font-bold text-dark dark:text-white'>
             <Image
-              src={`${(params.player.profilePic) ? params.player.profilePic : "\avatar-1577909_1280.webp"}`}
+              src={`${(params.player.profilePic) ? params.player.profilePic : "images\avatar-1577909_1280.webp"}`}
               width={50}
               height={50}
               alt="Profile"
@@ -34,7 +34,7 @@ const WaitGameStart = (params: {
           <div className='mt-auto'>
             <p className='text-sm dark:text-off-white py-2'>Quiz By</p>
             <Image
-              src={`${(game.creator.image) ? game.creator.image : "\avatar-1577909_1280.webp"}`}
+              src={`${(game.creator.image) ? game.creator.image : "images\avatar-1577909_1280.webp"}`}
               width={50}
               height={50}
               alt="Profile"
@@ -48,7 +48,7 @@ const WaitGameStart = (params: {
           <h2 className="text-xs p-2 dark:text-white md:hidden">You&apos;ve joined as</h2>
           <div className='text-xs flex justify-between items-center w-fit gap-2 rounded-full p-2 mb-2 bg-off-white dark:bg-off-dark font-bold text-dark dark:text-white md:hidden'>
             <Image
-              src={`${(params.player.profilePic) ? params.player.profilePic : "\avatar-1577909_1280.webp"}`}
+              src={`${(params.player.profilePic) ? params.player.profilePic : "images\avatar-1577909_1280.webp"}`}
               width={50}
               height={50}
               alt="Profile"
