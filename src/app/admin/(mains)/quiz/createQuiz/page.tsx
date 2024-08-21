@@ -8,17 +8,17 @@ import { FaArrowLeft } from "react-icons/fa";
 
 export default function CreateQuiz() {
   const profiles = [
-    { image: "/player_profile/profile1.png", name: "Alice" },
-    { image: "/player_profile/profile2.png", name: "Bob cdjk" },
-    { image: "/player_profile/profile3.png", name: "Charlie" },
-    { image: "/player_profile/profile4.png", name: "David" },
-    { image: "/player_profile/profile5.jpg", name: "Eve" },
-    { image: "/player_profile/profile6.png", name: "Frank" },
-    { image: "/player_profile/profile7.jpg", name: "Grace" },
-    { image: "/player_profile/profile9.jpg", name: "Hank" },
-    { image: "/player_profile/profile10.jpg", name: "Ivy" },
-    { image: "/player_profile/profile11.jpg", name: "Jack" },
-    { image: "/player_profile/profile12.png", name: "Karen" },
+    { image: "/images/player_profile/profile1.png", name: "LesgooVroomVroom" },
+    { image: "/images/player_profile/profile2.png", name: "SayItLoudlyBro" },
+    { image: "/images/player_profile/profile3.png", name: "AlanOP" },
+    { image: "/images/player_profile/profile4.png", name: "TuHaiKaaliya" },
+    { image: "/images/player_profile/profile5.jpg", name: "Sanika" },
+    { image: "/images/player_profile/profile6.png", name: "Pikachu" },
+    { image: "/images/player_profile/profile7.jpg", name: "LakshayBansal" },
+    { image: "/images/player_profile/profile9.jpg", name: "Deadass" },
+    { image: "/images/player_profile/profile10.jpg", name: "HarshPanchal" },
+    { image: "/images/player_profile/profile11.jpg", name: "Jack" },
+    { image: "/images/player_profile/profile12.png", name: "KavitaYadav" },
   ];
 
   const router = useRouter();
