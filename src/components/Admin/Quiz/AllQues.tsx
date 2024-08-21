@@ -140,10 +140,6 @@ export default function AllQues(props: { quizId: string }) {
                                             </div>
                                             <div className="bg-[#ede9fe] dark:bg-[#332d40] p-2 px-3 rounded-b-xl">
                                                 <div className="flex [&>*]:text-xs [&>*]:font-semibold">
-                                                    {/* <form action={clientDltAction}>
-                                                        <input type="text" className="hidden" name="ques_id" value={ques.id} />
-                                                        <button className="p-1 mr-1 text-red-light hover:bg-[#fccccc] rounded-md">Delete</button>
-                                                    </form> */}
                                                     <button className="p-1 mr-1 text-red-light hover:bg-[#fccccc] rounded-md"
                                                         onClick={() => {
                                                             setDelQuesId(ques.id);

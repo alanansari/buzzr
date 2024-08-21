@@ -1,5 +1,5 @@
 import SessionProvider from "@/components/SessionProvider";
-import { signIn } from "next-auth/react";
+import { redirect } from "next/navigation";
 import ReduxProvider from "@/state/ReduxProvider";
 import ClientImage from "@/components/ClientImage";
 import { ToastContainer } from "react-toastify";
@@ -21,7 +21,7 @@ export default async function RootLayout({
 }>) {
   const session = await getServerSession(authOptions);
   if(!session||!session.user){
-    signIn("google", { callbackUrl: "/admin" });
+    redirect("api/auth/signin");
   }
   return (
       <>
