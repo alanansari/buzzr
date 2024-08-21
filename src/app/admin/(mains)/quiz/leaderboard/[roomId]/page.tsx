@@ -1,56 +1,84 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
-import { prisma } from "@/utils/prisma"
+import { prisma } from "@/utils/prisma";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import { cssOptionColors } from "@/utils/optionColors";
 
-export default async function QuizLeaderboard({ params }: { params: { roomId: string } }) {
+export default async function QuizLeaderboard({
+  params,
+}: {
+  params: { roomId: string };
+}) {
+  const session = await getServerSession(authOptions);
 
-    const session = await getServerSession(authOptions);
+  if (!session || !session.user) redirect("/api/auth/signin");
 
-    if (!session || !session.user) redirect("/api/auth/signin");
+  const user = await prisma.user.findUnique({
+    where: {
+      email: session.user.email as string,
+    },
+  });
 
-    const user = await prisma.user.findUnique({
-        where: {
-            email: session.user.email as string,
-        },
-    });
+  const leaderboard = await prisma.gameLeaderboard.findMany({
+    where: {
+      gameSessionId: params?.roomId,
+    },
+    include: {
+      Player: true,
+    },
+    orderBy: {
+      score: "desc",
+    },
+  });
 
-    const leaderboard = await prisma.gameLeaderboard.findMany({
-        where: {
-            gameSessionId: params?.roomId,
-        },
-        include: {
-            Player: true,
-        },
-        orderBy: {
-            score: "desc",
-        },
-    });
+  const colors = cssOptionColors;
 
-    const colors = cssOptionColors
+  const value = Math.floor(Math.random() * 8);
 
-    const value = Math.floor(Math.random() * 8);
+  return (
+    <>
+      <div className="flex flex-col items-center m-auto w-full px-4 my-8 gap-4 overflow-x-visible">
+        <p className="w-full py-2 px-3 text-2xl text-center bg-white text-slate-900 font-semibold rounded max-w-fit capitalize overflow-x-visible">
+          Leaderboard
+        </p>
 
-    return <>
-        <div className="flex flex-col items-center m-auto w-full px-4 my-8 gap-4 overflow-x-visible">
-            <p className="w-full py-2 px-3 text-2xl text-center bg-white text-slate-900 font-semibold rounded max-w-fit capitalize overflow-x-visible">Leaderboard</p>
-
-            <div className="flex flex-col gap-4 my-6 overflow-x-visible">
-                {leaderboard?.length > 0 ? leaderboard.map((lead, index) => {
-                    return <div key={index}  className="shadow-xl flex justify-between px-4 py-2 flex-row w-[60vw] items-center z-10 bg-white text-black">
-                        {index == 0 ? <span className="text-3xl overflow-hidden">🥇</span> : index == 1 ? <span className="text-3xl overflow-hidden">🥈</span> : index == 2 ? <span className="text-3xl overflow-hidden">🥉</span> : `#${index + 1}`}
-                        <div className="flex flex-row items-center gap-x-2 z-20">
-                            <Image src={lead.Player.profilePic || "/avatar-1577909_1280.webp"} className="w-12 h-12 rounded-full" width={50} height={50} alt="profile pic" />
-                            <p>{lead.Player.name}</p>
-                        </div>
-                        <p>{lead.score}</p>
+        <div className="flex flex-col gap-4 my-6 overflow-x-visible">
+          {leaderboard?.length > 0
+            ? leaderboard.map((lead, index) => {
+                return (
+                  <div
+                    key={index}
+                    className="shadow-xl flex justify-between px-4 py-2 flex-row w-[60vw] items-center z-10 bg-white text-black"
+                  >
+                    {index == 0 ? (
+                      <span className="text-3xl overflow-hidden">🥇</span>
+                    ) : index == 1 ? (
+                      <span className="text-3xl overflow-hidden">🥈</span>
+                    ) : index == 2 ? (
+                      <span className="text-3xl overflow-hidden">🥉</span>
+                    ) : (
+                      `#${index + 1}`
+                    )}
+                    <div className="flex flex-row items-center gap-x-2 z-20">
+                      <Image
+                        src={
+                          lead.Player.profilePic || "/avatar-1577909_1280.webp"
+                        }
+                        className="w-12 h-12 rounded-full"
+                        width={50}
+                        height={50}
+                        alt="profile pic"
+                      />
+                      <p>{lead.Player.name}</p>
                     </div>
-                }) : null}
-
-            </div>
+                    <p>{lead.score}</p>
+                  </div>
+                );
+              })
+            : null}
         </div>
+      </div>
     </>
+  );
 }
-

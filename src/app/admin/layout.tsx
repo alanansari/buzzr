@@ -9,7 +9,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/auth";
 import Link from "next/link";
 
-export const metadata : Metadata = {
+export const metadata: Metadata = {
   title: "Buzzr Admin",
   description: "Buzzr Admin Panel",
 };
@@ -20,32 +20,32 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await getServerSession(authOptions);
-  if(!session||!session.user){
+  if (!session || !session.user) {
     redirect("api/auth/signin");
   }
   return (
-      <>
-        <SessionProvider>
-          <ReduxProvider>
-            <div className="flex flex-col w-[100vw]">
-                <div className="p-2 px-4 md:px-8 bg-light-bg dark:bg-dark-bg hidden md:block">
-                  <Link href="/">
-                  <ClientImage
-                      props={{
-                          src: "images/logo.svg",
-                          darksrc: "images/logo-dark.svg",
-                          alt: "Buzzr Logo",
-                          width: 80,
-                          height: 80
-                      }}
-                  />
-                  </Link>
-                </div>
+    <>
+      <SessionProvider>
+        <ReduxProvider>
+          <div className="flex flex-col w-[100vw]">
+            <div className="p-2 px-4 md:px-8 bg-light-bg dark:bg-dark-bg hidden md:block">
+              <Link href="/">
+                <ClientImage
+                  props={{
+                    src: "/images/logo.svg",
+                    darksrc: "/images/logo-dark.svg",
+                    alt: "Buzzr Logo",
+                    width: 80,
+                    height: 80,
+                  }}
+                />
+              </Link>
+            </div>
             {children}
             <ToastContainer />
-            </div>
-          </ReduxProvider>
-        </SessionProvider>
-      </>
+          </div>
+        </ReduxProvider>
+      </SessionProvider>
+    </>
   );
 }

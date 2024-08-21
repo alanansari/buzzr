@@ -35,12 +35,12 @@
 //           { id: "1", title: "Quiz 1", description: "Description 1" },
 //           { id: "2", title: "Quiz 2", description: "Description 2" },
 //         ];
-    
+
 //         // Mocking session and user
 //         getServerSession.mockResolvedValueOnce(mockSession);
 //         prisma.user.findUnique.mockResolvedValueOnce(mockUser);
 //         prisma.quiz.findMany.mockResolvedValueOnce(mockQuizzes);
-    
+
 //         render(<Buzzrs />);
 
 //     })

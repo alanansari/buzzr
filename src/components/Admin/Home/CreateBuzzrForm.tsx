@@ -1,16 +1,14 @@
 import addBuzzr from "../../../actions/AddBuzzrAction";
 import SubmitButton from "../../SubmitButton";
 import InputField from "../../InputField";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 
-const CreateBuzzrForm = (params: {
-  setTitle: any
-}) => {
+const CreateBuzzrForm = (params: { setTitle: any }) => {
   const router = useRouter();
   async function clientAction(formData: FormData) {
-    const result = await addBuzzr(formData)
+    const result = await addBuzzr(formData);
     if (result?.error) {
       const errorMsg = result.error || "Something went wrong";
       toast.error(errorMsg);
@@ -20,10 +18,7 @@ const CreateBuzzrForm = (params: {
   }
 
   return (
-    <form
-      action={clientAction}
-      className="flex flex-col w-full md:w-4/5 mt-8"
-    >
+    <form action={clientAction} className="flex flex-col w-full md:w-4/5 mt-8">
       <InputField
         type="text"
         name="title"

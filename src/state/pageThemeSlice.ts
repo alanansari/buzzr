@@ -26,4 +26,3 @@ const pageThemeSlice = createSlice({
 export const { setpageTheme } = pageThemeSlice.actions;
 
 export default pageThemeSlice.reducer;
-

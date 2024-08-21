@@ -1,4 +1,5 @@
 ![Banner](https://socialify.git.ci/alanansari/buzzr/image?language=1&name=1&theme=Light)
+
 # BUZZR
 
 **Check the Website [here](https://buzzr-one.vercel.app/)**.
@@ -48,16 +49,14 @@ Welcome to Buzzr, where learning meets excitement! Join live quiz battles, creat
 ```CMD
 git clone https://github.com/alanansari/buzzr.git
 ```
+
 To run the server, you need to have NodeJS installed on your machine. If you don't have it installed, you can follow the instructions [here](https://nodejs.org/en//) to install it.
 
-
-
-2. Install the dependencies: 
+2. Install the dependencies:
 
 ```CMD
 npm install
 ```
-
 
 4. Setup .env file in base directory:
 
@@ -80,10 +79,10 @@ RATELIMIT="<ON/OFF>"
 ```
 
 5. Connect to the Server for websockets:
-    - Go through this: https://github.com/alanansari/buzzr-server
-    - Add the NEXT_PUBLIC_SOCKET_URL=http://localhost:[PORT] 
-    - PORT is where the socket server is running 
 
+   - Go through this: https://github.com/alanansari/buzzr-server
+   - Add the NEXT_PUBLIC_SOCKET_URL=http://localhost:[PORT]
+   - PORT is where the socket server is running
 
 6. Run on localhost:
 
@@ -91,8 +90,8 @@ RATELIMIT="<ON/OFF>"
 npm run dev
 ```
 
-
 You can access the endpoints from your web browser following this url
+
 ```url
 http://localhost:3000
 ```

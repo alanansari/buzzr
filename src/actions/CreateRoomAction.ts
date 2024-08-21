@@ -12,7 +12,7 @@ const createRoom = async (formData: FormData) => {
 
   const user = await prisma.user.findUnique({
     where: {
-        email: session.user.email as string,
+      email: session.user.email as string,
     },
   });
 
@@ -20,13 +20,13 @@ const createRoom = async (formData: FormData) => {
 
   const room = await prisma.gameSession.create({
     data: {
-        gameCode,
-        quizId: formData.get('quizId') as string,
-        creatorId: user?.id as string,
+      gameCode,
+      quizId: formData.get("quizId") as string,
+      creatorId: user?.id as string,
     },
   });
 
-  redirect(`/admin/play/${room?.id}`)
+  redirect(`/admin/play/${room?.id}`);
 };
 
 export default createRoom;

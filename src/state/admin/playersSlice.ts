@@ -2,16 +2,16 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface InitialState {
   players: any[];
-  quesResult:number[];
-  currentIndex:number,
-  leaderboard:any[]
+  quesResult: number[];
+  currentIndex: number;
+  leaderboard: any[];
 }
 
 const initialState: InitialState = {
   players: [],
-  quesResult:[],
-  currentIndex:0,
-  leaderboard:[]
+  quesResult: [],
+  currentIndex: 0,
+  leaderboard: [],
 };
 
 const playerSlice = createSlice({
@@ -20,7 +20,7 @@ const playerSlice = createSlice({
   reducers: {
     addPlayer: (state, action) => {
       const existingPlayer = state.players.find(
-        (player: any) => player.id === action.payload.id
+        (player: any) => player.id === action.payload.id,
       );
       if (existingPlayer) {
         return;
@@ -29,7 +29,7 @@ const playerSlice = createSlice({
     },
     removePlayer: (state, action) => {
       state.players = state.players.filter(
-        (player) => player.id !== action.payload.id
+        (player) => player.id !== action.payload.id,
       );
     },
     setPlayers: (state, action) => {
@@ -47,7 +47,13 @@ const playerSlice = createSlice({
   },
 });
 
-export const { addPlayer, removePlayer, setPlayers, setResult, setCurrIndex, setLeaderboard } =
-  playerSlice.actions;
+export const {
+  addPlayer,
+  removePlayer,
+  setPlayers,
+  setResult,
+  setCurrIndex,
+  setLeaderboard,
+} = playerSlice.actions;
 
 export default playerSlice.reducer;

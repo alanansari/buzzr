@@ -29,7 +29,6 @@ const addBuzzr = async (formData: FormData) => {
 
     revalidatePath("/admin", "page");
     return { quizId: quiz.id };
-
   } catch (err: any) {
     return { error: err.message };
   }

@@ -24,14 +24,12 @@ async function Play({ params }: { params: { roomId: string } }) {
   const players = await prisma.player.findMany({
     where: {
       gameId: params.roomId,
-    }
+    },
   });
 
-  if (!room)
-    throw new Error("Room not found");
+  if (!room) throw new Error("Room not found");
 
-  if (room.creatorId !== user?.id)
-    throw new Error("Unauthorized");
+  if (room.creatorId !== user?.id) throw new Error("Unauthorized");
 
   // fetch quiz
   const quizQuestions = await prisma.quiz.findUnique({
@@ -39,21 +37,31 @@ async function Play({ params }: { params: { roomId: string } }) {
     include: {
       questions: {
         include: {
-          options: true
-        }
-      }
-    }
+          options: true,
+        },
+      },
+    },
   });
 
   const quiz = await prisma.quiz.findUnique({
     where: { id: room?.quizId },
-  })
+  });
 
   return (
     <>
-      <Lobby quizId={room?.quizId} quizTitle={quiz?.title ? quiz.title : ""} roomId={params.roomId} userId={user.id} gameCode={room?.gameCode} players={players} quizQuestions={quizQuestions} gameStarted={room?.isPlaying} currentQues={room?.currentQuestion} />
+      <Lobby
+        quizId={room?.quizId}
+        quizTitle={quiz?.title ? quiz.title : ""}
+        roomId={params.roomId}
+        userId={user.id}
+        gameCode={room?.gameCode}
+        players={players}
+        quizQuestions={quizQuestions}
+        gameStarted={room?.isPlaying}
+        currentQues={room?.currentQuestion}
+      />
     </>
-  )
+  );
 }
 
-export default Play
+export default Play;

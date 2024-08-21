@@ -4,10 +4,4 @@ import Loader from "./Loader";
 import Result from "./Result";
 import LeaderBoard from "./Leaderboard";
 
-export {
-    WaitGameStart,
-    Question,
-    Loader,
-    Result,
-    LeaderBoard
-}
+export { WaitGameStart, Question, Loader, Result, LeaderBoard };

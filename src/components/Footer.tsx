@@ -1,36 +1,36 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import Link from "next/link"
-import ThemeToggle from "./ThemeToggle"
+import Image from "next/image";
+import Link from "next/link";
+import ThemeToggle from "./ThemeToggle";
 
 const Links = [
   {
     name: "Instagram",
     link: "https://www.instagram.com/_buzzr/",
-    icon: "images/instagram.svg",
+    icon: "/images/instagram.svg",
   },
   {
     name: "Discord",
     link: "#",
-    icon: "images/discord.svg",
+    icon: "/images/discord.svg",
   },
   {
     name: "Youtube",
     link: "https://www.youtube.com/@BuzznoldBuzzenegger",
-    icon: "images/youtube.svg",
+    icon: "/images/youtube.svg",
   },
   {
     name: "Github",
     link: "https://github.com/alanansari/buzzr",
-    icon: "images/github.svg",
+    icon: "/images/github.svg",
   },
   {
     name: "Software Incubator",
     link: "https://silive.in/",
-    icon: "images/incubator.svg",
-  }
-]
+    icon: "/images/incubator.svg",
+  },
+];
 
 const Footer = () => {
   return (
@@ -38,12 +38,7 @@ const Footer = () => {
       {Links.map((link, index) => (
         <Link href={link.link} key={index} target="_blank">
           <div className="hidden md:flex items-center justify-center mr-2">
-            <Image 
-              src={link.icon} 
-              alt={link.name}
-              width={18}
-              height={18} 
-            />
+            <Image src={link.icon} alt={link.name} width={18} height={18} />
             <span className="text-xs px-1 hidden md:inline">{link.name}</span>
           </div>
         </Link>
@@ -52,7 +47,7 @@ const Footer = () => {
         <ThemeToggle />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

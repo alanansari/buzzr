@@ -6,16 +6,16 @@ import { headers } from "next/headers";
 
 const rateLimit = new Ratelimit({
   redis,
-  limiter: Ratelimit.slidingWindow(50,"120s"),
+  limiter: Ratelimit.slidingWindow(50, "120s"),
 });
 
 const createPlayer = async (formData: FormData) => {
-  try{
-    if(process.env.RATELIMIT === "ON"){
-      const ip = headers().get('x-forwarded-for');
-      const {remaining, limit, success} = await rateLimit.limit(ip as string);
+  try {
+    if (process.env.RATELIMIT === "ON") {
+      const ip = headers().get("x-forwarded-for");
+      const { remaining, limit, success } = await rateLimit.limit(ip as string);
 
-      if(!success) {
+      if (!success) {
         throw new Error("Rate limit reached wait for some time and try again.");
       }
     }
@@ -31,8 +31,8 @@ const createPlayer = async (formData: FormData) => {
     });
 
     return { playerId: player.id };
-  } catch(err:any) {
-    return {error: err.message}
+  } catch (err: any) {
+    return { error: err.message };
   }
 };
 

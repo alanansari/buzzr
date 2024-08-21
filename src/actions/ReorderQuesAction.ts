@@ -51,12 +51,12 @@ async function reOrderQuestion({
     });
 
     return {
-      status:200,
-      message:"Success"
+      status: 200,
+      message: "Success",
     };
   } catch (err: any) {
     return {
-      status:500,
+      status: 500,
       error: err.message,
     };
   }
