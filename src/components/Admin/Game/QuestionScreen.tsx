@@ -5,7 +5,6 @@ import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ScreenStatus, setScreenStatus } from "@/state/admin/screenSlice";
-import { cssOptionColors } from "@/utils/optionColors";
 import { setLeaderboard, setResult } from "@/state/admin/playersSlice";
 import Image from "next/image";
 import ShowLeaderboard from "@/actions/ShowLeaderboardAction";
@@ -21,7 +20,6 @@ export default function QuestionScreen(props: any) {
   const socket = props.socket;
   const question = allQuestions[currIndex];
   const [time, setTime] = useState(question?.timeOut);
-  const colors = cssOptionColors;
 
   async function handleNext() {
     const leaderboard = await ShowLeaderboard(gameCode);

@@ -3,8 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
 
@@ -41,9 +41,9 @@ model User {
   id            String        @id @default(cuid())
   name          String?
   email         String?       @unique
-  password      String?
   emailVerified DateTime?     @map("email_verified")
   image         String?
+  password      String?
   GameSessions  GameSession[]
   quizzes       Quiz[]
   accounts      Account[]
@@ -82,10 +82,10 @@ model Question {
   timeOut   Int            @default(15)
   media     String?
   mediaType String?
+  order     Int            @default(1)
   options   Option[]
   answers   PlayerAnswer[]
   quiz      Quiz           @relation(fields: [quizId], references: [id], onDelete: Cascade)
-  order     Int            @default(1)
 }
 
 model Option {
@@ -126,12 +126,12 @@ model GameSession {
 }
 
 model GameLeaderboard {
-  id            String      @id @default(cuid())
+  id            String       @id @default(cuid())
   playerId      String
-  gameSessionId String
-  score         Int         @default(0)
-  GameSession   GameSession @relation(fields: [gameSessionId], references: [id], onDelete: Cascade)
-  Player        Player      @relation(fields: [playerId], references: [id])
+  gameSessionId String?
+  score         Int          @default(0)
+  GameSession   GameSession? @relation(fields: [gameSessionId], references: [id])
+  Player        Player       @relation(fields: [playerId], references: [id])
 
   @@unique([playerId, gameSessionId])
 }

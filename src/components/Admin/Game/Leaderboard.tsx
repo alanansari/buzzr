@@ -1,14 +1,9 @@
-import { setCurrIndex } from "@/state/admin/playersSlice";
-import { ScreenStatus, setScreenStatus } from "@/state/admin/screenSlice";
 import { RootState } from "@/state/store";
-import { resetTimer } from "@/state/timer/timerSlice";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useDispatch, useSelector } from "react-redux";
-import { cssOptionColors } from "@/utils/optionColors";
+import { useSelector } from "react-redux";
 
 export default function LeaderBoard(props: any) {
-  const dispatch = useDispatch();
   const leaderboard = useSelector(
     (state: RootState) => state.player.leaderboard,
   );
