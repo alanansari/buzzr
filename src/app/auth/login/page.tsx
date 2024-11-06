@@ -11,7 +11,7 @@ const LoginPage = () => {
           <h1 className="text-3xl font-black py-2">Login</h1>
           <p className="">
             Dive back into your learning journey by exploring our latest
-            quizzes. Let's pick up where you left off.
+            quizzes. Let&apos;s pick up where you left off.
           </p>
         </div>
       </SplitWrapper>
