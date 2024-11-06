@@ -8,6 +8,7 @@ import addQues from "@/actions/AddQuesAction";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { RxCross2 } from "react-icons/rx";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 interface Option {
@@ -124,8 +125,11 @@ const AddQuesForm = (props: { quizId: string; question?: Question }) => {
 
         {fileLink || file ? (
           <div className="relative">
-            <img
+            <Image
               src={file ? URL.createObjectURL(file) : fileLink}
+              alt="media"
+              width={160}
+              height={80}
               className="w-40 h-20 mb-3 mt-1"
             />
             <RxCross2

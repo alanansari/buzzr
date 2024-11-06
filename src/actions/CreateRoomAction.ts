@@ -1,5 +1,4 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
+import { auth } from "@/auth";
 import { prisma } from "@/utils/prisma";
 import { redirect } from "next/navigation";
 import { customAlphabet } from "nanoid";
@@ -7,7 +6,7 @@ import { customAlphabet } from "nanoid";
 const createRoom = async (formData: FormData) => {
   "use server";
 
-  const session = await getServerSession(authOptions);
+  const session = await auth();
   if (!session || !session.user) redirect("/api/auth/signin");
 
   const user = await prisma.user.findUnique({

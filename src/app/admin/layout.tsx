@@ -5,8 +5,7 @@ import ClientImage from "@/components/ClientImage";
 import { ToastContainer } from "react-toastify";
 import type { Metadata } from "next";
 
-import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/auth";
+import { auth } from "@/auth";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -19,7 +18,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
   if (!session || !session.user) {
     redirect("api/auth/signin");
   }

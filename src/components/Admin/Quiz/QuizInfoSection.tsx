@@ -1,13 +1,12 @@
 import { prisma } from "@/utils/prisma";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
+import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import createRoom from "@/actions/CreateRoomAction";
 import SubmitButton from "@/components/SubmitButton";
 import Link from "next/link";
 
 async function QuizInfoSection(props: { quizId: string }) {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
 
   if (!session || !session.user) redirect("/api/auth/signin");
   const quiz = await prisma.quiz.findUnique({

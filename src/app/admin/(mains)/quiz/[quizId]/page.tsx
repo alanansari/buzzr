@@ -3,14 +3,13 @@ import AddQuesForm from "@/components/Admin/Quiz/AddQuesForm";
 import AllQues from "@/components/Admin/Quiz/AllQues";
 import QuizInfoSection from "@/components/Admin/Quiz/QuizInfoSection";
 import { prisma } from "@/utils/prisma";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
+import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import SubmitButton from "@/components/SubmitButton";
 import createRoom from "@/actions/CreateRoomAction";
 
 async function Quiz({ params }: { params: { quizId: string } }) {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
 
   if (!session || !session.user) redirect("/api/auth/signin");
   const quiz = await prisma.quiz.findUnique({

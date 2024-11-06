@@ -154,7 +154,8 @@ export default function AllQues(props: { quizId: string }) {
                                           <ClientImage
                                             props={{
                                               src: "/images/radio-btn-selected.svg",
-                                              darksrc:"/images/radio-btn-dark-selected.svg",
+                                              darksrc:
+                                                "/images/radio-btn-dark-selected.svg",
                                               alt: "option",
                                               width: 25,
                                               height: 25,
@@ -164,7 +165,8 @@ export default function AllQues(props: { quizId: string }) {
                                           <ClientImage
                                             props={{
                                               src: "/images/radio-btn.svg",
-                                              darksrc: "/images/radio-btn-dark.svg",
+                                              darksrc:
+                                                "/images/radio-btn-dark.svg",
                                               alt: "option",
                                               width: 25,
                                               height: 25,

@@ -1,11 +1,10 @@
 import { prisma } from "@/utils/prisma";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
+import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import ClientBuzzr from "./ClientBuzzrs";
 
 const Buzzrs = async () => {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
 
   if (!session || !session.user) redirect("/api/auth/signin");
 

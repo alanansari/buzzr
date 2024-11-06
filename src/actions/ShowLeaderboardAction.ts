@@ -1,12 +1,11 @@
 "use server";
 
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
+import { auth } from "@/auth";
 import { prisma } from "@/utils/prisma";
 import { redirect } from "next/navigation";
 
 export default async function ShowLeaderboard(gameCode: string) {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
   if (!session || !session.user) redirect("/api/auth/signin");
   const room = await prisma.gameSession.findUnique({
     where: {

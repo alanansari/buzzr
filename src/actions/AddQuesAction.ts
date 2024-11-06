@@ -1,6 +1,5 @@
 "use server";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
+import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { prisma } from "@/utils/prisma";
 import { revalidatePath } from "next/cache";
@@ -78,7 +77,7 @@ export default async function addQues(formData: FormData) {
       fileType = file_type;
     }
 
-    const session = await getServerSession(authOptions);
+    const session = await auth();
     if (!session || !session.user) redirect("/api/auth/signin");
 
     if (quesId) {

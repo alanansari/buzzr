@@ -1,11 +1,10 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
+import { auth } from "@/auth";
 import GameLobby from "@/components/Admin/Game/GameLobby";
 import { prisma } from "@/utils/prisma";
-import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
 const page = async ({ params }: { params: { roomId: string } }) => {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
 
   if (!session || !session.user) redirect("/api/auth/signin");
 

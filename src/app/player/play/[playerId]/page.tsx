@@ -1,5 +1,4 @@
 import { prisma } from "@/utils/prisma";
-import Image from "next/image";
 import GamePage from "@/components/Player/GamePage";
 import { GameSession } from "@prisma/client";
 import ValidatePlayer from "@/components/Player/ValidatePlayer";
