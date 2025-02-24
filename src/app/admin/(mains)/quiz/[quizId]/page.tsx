@@ -7,6 +7,7 @@ import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import SubmitButton from "@/components/SubmitButton";
 import createRoom from "@/actions/CreateRoomAction";
+import HideQuestions from "@/components/Admin/Quiz/HideQuestions";
 
 async function Quiz({ params }: { params: { quizId: string } }) {
   const session = await auth();
@@ -49,9 +50,12 @@ async function Quiz({ params }: { params: { quizId: string } }) {
               />
             </form>
           </div>
-          <BasicModal btnTitle="+ Add Question">
-            <AddQuesForm quizId={params.quizId} />
-          </BasicModal>
+          <div className="flex justify-center items-center gap-2">
+            <BasicModal btnTitle="+ Add Question">
+              <AddQuesForm quizId={params.quizId} />
+            </BasicModal>
+            <HideQuestions />
+          </div>
           <AllQues quizId={params.quizId} />
         </div>
       </div>

@@ -38,7 +38,13 @@ const Footer = () => {
       {Links.map((link, index) => (
         <Link href={link.link} key={index} target="_blank">
           <div className="hidden md:flex items-center justify-center mr-2">
-            <Image src={link.icon} alt={link.name} width={18} height={18} />
+            <Image
+              className="w-auto h-auto"
+              src={link.icon}
+              alt={link.name}
+              width={18}
+              height={18}
+            />
             <span className="text-xs px-1 hidden md:inline">{link.name}</span>
           </div>
         </Link>

@@ -12,6 +12,9 @@ import reOrderQuestion from "@/actions/ReorderQuesAction";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import ConfirmationModal from "../ConfirmationModal";
 import ClientImage from "@/components/ClientImage";
+import { RootState } from "@/state/store";
+import { useSelector } from "react-redux";
+import { hideQuestions } from "@/state/hideQuestionsSlice";
 
 export default function AllQues(props: { quizId: string }) {
   const [questions, setQuestions] = useState<any[]>([]);
@@ -55,7 +58,6 @@ export default function AllQues(props: { quizId: string }) {
       dropQuesId: dropId,
     });
 
-    // if (res.status == 200) {
     const dragBox = questions.find((box: any) => box?.id === dragId);
     const dropBox = questions.find((box: any) => box.id === dropId);
 
@@ -73,7 +75,6 @@ export default function AllQues(props: { quizId: string }) {
     });
 
     return result;
-    // }
   };
 
   function onDragEnd(result: any) {
@@ -95,6 +96,10 @@ export default function AllQues(props: { quizId: string }) {
     setQuestions(items);
   }
 
+  const visibility = useSelector(
+    (state: RootState) => state.hideQuestions.visibility,
+  );
+
   return (
     <>
       <DragDropContext onDragEnd={onDragEnd}>
@@ -103,7 +108,7 @@ export default function AllQues(props: { quizId: string }) {
             <div
               {...provided.droppableProps}
               ref={provided.innerRef}
-              className="overflow-x-auto h-[90%]"
+              className= {`overflow-x-auto h-[90%] ${visibility === hideQuestions.hide ? "blur-lg pointer-events-none" : ""}`}
             >
               {questions.length > 0 ? (
                 questions

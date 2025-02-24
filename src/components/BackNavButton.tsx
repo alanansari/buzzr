@@ -8,9 +8,9 @@ const BackNavButton = () => {
   const theme = useSelector((state: RootState) => state.pageTheme.theme);
 
   return (
-    <>
+    <div className="m-2 mx-3">
       <Image
-        src={`${theme === pageTheme.light ? "/arrow-back.svg" : "/arrow-back-light.svg"}`}
+        src={`${theme === pageTheme.light ? "images/arrow-back.svg" : "images/arrow-back-light.svg"}`}
         width={30}
         height={30}
         alt="Logo"
@@ -19,7 +19,7 @@ const BackNavButton = () => {
           window.history.back();
         }}
       />
-    </>
+    </div>
   );
 };
 

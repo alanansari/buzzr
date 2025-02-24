@@ -6,6 +6,7 @@ import screenReducer from "./player/screenSlice";
 import adminScreenReducer from "./admin/screenSlice";
 import playerResultReducer from "./player/resultSlice";
 import pageThemeReducer from "./pageThemeSlice";
+import hideQuestionsReducer from "./hideQuestionsSlice";
 import navToggleReducer from "./admin/navtoggleSlice";
 import gridListToggleReducer from "./admin/gridListSlice";
 
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   timer: timerReducer,
   screen: screenReducer,
   pageTheme: pageThemeReducer,
+  hideQuestions: hideQuestionsReducer,
   navToggle: navToggleReducer,
   adminscreen: adminScreenReducer,
   playerResult: playerResultReducer,

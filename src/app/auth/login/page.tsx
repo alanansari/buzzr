@@ -1,4 +1,5 @@
 import SplitWrapper from "@/components/Auth/SplitWrapper";
+import LoginForm from "@/components/Auth/LoginForm";
 
 const LoginPage = () => {
   return (
@@ -13,6 +14,7 @@ const LoginPage = () => {
             Dive back into your learning journey by exploring our latest
             quizzes. Let&apos;s pick up where you left off.
           </p>
+          <LoginForm />
         </div>
       </SplitWrapper>
     </>

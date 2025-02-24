@@ -17,14 +17,12 @@ export default function BasicModal(props: {
 
   return (
     <>
-      <div className="flex justify-center">
-        <button
-          onClick={handleOpen}
-          className={`${props.btnStyle ? props.btnStyle : props.isEdit ? "p-1 text-lprimary mr-1 hover:bg-[#ddd5ff] rounded-md" : "text-white font-sm bg-dark-bg rounded-lg w-full  mb-2 mx-auto md:ml-5 p-2"}`}
-        >
-          {props.btnTitle}
-        </button>
-      </div>
+      <button
+        onClick={handleOpen}
+        className={`${props.btnStyle ? props.btnStyle : props.isEdit ? "p-1 text-lprimary mr-1 hover:bg-[#ddd5ff] rounded-md" : "text-white font-sm bg-dark-bg rounded-lg w-full mx-auto md:ml-5 p-2"}`}
+      >
+        {props.btnTitle}
+      </button>
 
       <Modal
         open={open}
