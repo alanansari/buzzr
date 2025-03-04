@@ -1,7 +1,9 @@
-import Buzzrs from "@/components/Admin/Home/Buzzrs";
+import { Suspense } from "react";
 import NavbarToggle from "@/components/Admin/NavbarToggle";
 import Navbar from "@/components/Admin/Navbar";
 import GridListToggle from "@/components/Admin/GridListToggle";
+import Buzzrs from "@/components/Admin/Home/Buzzrs";
+import LoaderBuzzrs from "@/components/Admin/Home/LoaderBuzzrs";
 
 export default function Home() {
   return (
@@ -22,7 +24,9 @@ export default function Home() {
           </span>
           <GridListToggle />
         </div>
-        <Buzzrs />
+        <Suspense fallback={<LoaderBuzzrs cardCount={3} />}>
+          <Buzzrs />
+        </Suspense>
       </div>
     </div>
   );

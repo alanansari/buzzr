@@ -2,7 +2,6 @@ import { auth } from "@/auth";
 import { prisma } from "@/utils/prisma";
 import Image from "next/image";
 import { redirect } from "next/navigation";
-import { cssOptionColors } from "@/utils/optionColors";
 
 export default async function QuizLeaderboard({
   params,
@@ -13,15 +12,10 @@ export default async function QuizLeaderboard({
 
   if (!session || !session.user) redirect("/api/auth/signin");
 
-  const user = await prisma.user.findUnique({
-    where: {
-      email: session.user.email as string,
-    },
-  });
 
   const leaderboard = await prisma.gameLeaderboard.findMany({
     where: {
-      gameSessionId: params?.roomId,
+      gameSessionId: params.roomId,
     },
     include: {
       Player: true,
@@ -30,10 +24,6 @@ export default async function QuizLeaderboard({
       score: "desc",
     },
   });
-
-  const colors = cssOptionColors;
-
-  const value = Math.floor(Math.random() * 8);
 
   return (
     <>
