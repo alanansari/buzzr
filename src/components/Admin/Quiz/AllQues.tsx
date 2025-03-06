@@ -108,7 +108,7 @@ export default function AllQues(props: { quizId: string }) {
             <div
               {...provided.droppableProps}
               ref={provided.innerRef}
-              className= {`overflow-x-auto h-[90%] ${visibility === hideQuestions.hide ? "blur-lg pointer-events-none" : ""}`}
+              className={`overflow-x-auto h-[90%] ${visibility === hideQuestions.hide ? "blur-lg pointer-events-none" : ""}`}
             >
               {questions.length > 0 ? (
                 questions

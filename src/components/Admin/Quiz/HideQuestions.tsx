@@ -11,11 +11,11 @@ const HideQuestions = () => {
     (state: RootState) => state.hideQuestions.visibility,
   );
 
-  useEffect(()=>{
-    if(visibility===hideQuestions.show){
+  useEffect(() => {
+    if (visibility === hideQuestions.show) {
       dispatch(setHideQuestions(hideQuestions.hide));
     }
-  },[]);
+  }, []);
 
   const handle = () => {
     dispatch(

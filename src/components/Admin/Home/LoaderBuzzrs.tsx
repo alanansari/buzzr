@@ -30,7 +30,9 @@ const LoaderBuzzrs = ({ cardCount }: { cardCount: number }) => {
     cards.push(<CardSkeleton />);
   }
   return (
-    <div className={`flex gap-x-3 ${view === "list" ? "flex-col gap-y-3" : ""} `}>
+    <div
+      className={`flex gap-x-3 ${view === "list" ? "flex-col gap-y-3" : ""} `}
+    >
       {cards}
     </div>
   );

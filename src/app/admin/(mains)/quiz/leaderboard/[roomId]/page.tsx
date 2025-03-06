@@ -12,7 +12,6 @@ export default async function QuizLeaderboard({
 
   if (!session || !session.user) redirect("/api/auth/signin");
 
-
   const leaderboard = await prisma.gameLeaderboard.findMany({
     where: {
       gameSessionId: params.roomId,

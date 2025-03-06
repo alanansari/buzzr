@@ -23,7 +23,6 @@ const Buzzrs = async () => {
     },
   });
 
-
   return <ClientBuzzr quizzes={quizzes} />;
 };
 
