@@ -201,5 +201,3 @@ function Barchart(params: { result: number[]; options: Option[] }) {
     </>
   );
 }
-
-// {`${String.fromCharCode(65 + index)})`}

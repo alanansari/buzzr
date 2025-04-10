@@ -13,7 +13,7 @@ const Leaderboard = (params: Stats) => {
         <br /> You have completed the quiz
       </div>
       <div className="p-2 my-2 bg-black opacity-70 rounded-md text-2xl text-slate-200">
-        Positon: {params.position ? params.position : "NA"}
+        Position: {params.position ? params.position : "NA"}
       </div>
       <div className="p-2 my-2 bg-black opacity-70 rounded-md text-xl text-slate-200">
         Score: {params.score}

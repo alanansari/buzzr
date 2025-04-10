@@ -74,23 +74,21 @@ const GameLobby = (params: {
 
   return (
     <>
-      <>
-        {screen === ScreenStatus.wait ? (
-          <WaitScreen
-            currentQues={params.currentQues}
-            socket={socket}
-            gameCode={params.gameCode}
-          />
-        ) : screen === ScreenStatus.question ? (
-          <QuestionScreen {...params} socket={socket} />
-        ) : screen === ScreenStatus.result ? (
-          <QuesResult {...params} socket={socket} />
-        ) : (
-          screen === ScreenStatus.leaderboard && (
-            <LeaderBoard {...params} socket={socket} />
-          )
-        )}
-      </>
+      {screen === ScreenStatus.wait ? (
+        <WaitScreen
+          currentQues={params.currentQues}
+          socket={socket}
+          gameCode={params.gameCode}
+        />
+      ) : screen === ScreenStatus.question ? (
+        <QuestionScreen {...params} socket={socket} />
+      ) : screen === ScreenStatus.result ? (
+        <QuesResult {...params} socket={socket} />
+      ) : (
+        screen === ScreenStatus.leaderboard && (
+          <LeaderBoard {...params} socket={socket} />
+        )
+      )}
     </>
   );
 };

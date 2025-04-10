@@ -5,7 +5,7 @@ import ClientImage from "@/components/ClientImage";
 import { ToastContainer } from "react-toastify";
 import type { Metadata } from "next";
 
-import { auth } from "@/auth";
+import { auth } from "@/utils/auth";
 import Link from "next/link";
 
 export const metadata: Metadata = {

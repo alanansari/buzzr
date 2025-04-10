@@ -118,5 +118,3 @@ export default function LeaderBoard(props: any) {
     </>
   );
 }
-
-// style={{ backgroundColor: colors[Math.floor(Math.random() * 8)] }}

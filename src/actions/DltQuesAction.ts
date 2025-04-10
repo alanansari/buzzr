@@ -1,6 +1,6 @@
 "use server";
 
-import { auth } from "@/auth";
+import { auth } from "@/utils/auth";
 import { prisma } from "@/utils/prisma";
 import { redirect } from "next/navigation";
 

@@ -1,4 +1,4 @@
-import { auth } from "@/auth";
+import { auth } from "@/utils/auth";
 import GameLobby from "@/components/Admin/Game/GameLobby";
 import { prisma } from "@/utils/prisma";
 import { redirect } from "next/navigation";

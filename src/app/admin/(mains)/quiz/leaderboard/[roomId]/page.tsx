@@ -1,4 +1,4 @@
-import { auth } from "@/auth";
+import { auth } from "@/utils/auth";
 import { prisma } from "@/utils/prisma";
 import Image from "next/image";
 import { redirect } from "next/navigation";

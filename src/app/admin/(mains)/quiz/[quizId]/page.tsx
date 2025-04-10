@@ -3,7 +3,7 @@ import AddQuesForm from "@/components/Admin/Quiz/AddQuesForm";
 import AllQues from "@/components/Admin/Quiz/AllQues";
 import QuizInfoSection from "@/components/Admin/Quiz/QuizInfoSection";
 import { prisma } from "@/utils/prisma";
-import { auth } from "@/auth";
+import { auth } from "@/utils/auth";
 import { redirect } from "next/navigation";
 import SubmitButton from "@/components/SubmitButton";
 import createRoom from "@/actions/CreateRoomAction";
