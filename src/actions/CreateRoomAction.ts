@@ -15,7 +15,7 @@ const createRoom = async (formData: FormData) => {
     },
   });
 
-  const gameCode = customAlphabet("ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890", 6)();
+  const gameCode = customAlphabet("ABCDEFGHIJKLMNPQRSTUVWXYZ123456789", 6)();
 
   const room = await prisma.gameSession.create({
     data: {
